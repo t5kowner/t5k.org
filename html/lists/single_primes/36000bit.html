@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Historic Example Prime</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/lists/index.html">Lists</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Single Primes</a></li>
+          <li class="breadcrumb-item active">Historic Example</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->
+        A 36,007 bit "nearly random" prime
+        <!-- #EndEditable -->
+      </h1>
+      <!-- #BeginEditable "content" -->
+
+      <div class="row m-3">
+        <div class="col-3 col-md-6 col-lg-9"></div>
+        <div class="col col-9 col-md-6 col-lg-3 alert alert-dismissible alert-primary text-center z-depth-1-half">This
+          is a prime that had historic value.&nbsp; Creating primes like this is easier now.</div>
+      </div>
+
+      <p>This 10,839 digit prime does not have a nice short description!&nbsp; <a
+          href="/bios/page.php?lastname=Mihailescu">Preda Mihailescu</a> formed
+        it by computing a sequence of primes <i>p<sub>i</sub></i> where prime is a
+        "random" number times twice the proceeding prime plus one (see [<a
+          href="/references/refs.cgi/Mihailescu94">Mihailescu94</a>] and our
+        pages on <a href="/prove/">proving primality</a>).&nbsp;
+        Below you will find one of his notes announcing this prime and the
+        complete expansion in hexadecimal.</p>
+
+      <blockquote class="blockquote">
+        From: Preda Mihailescu<br>
+        Date: Mon, 29 Dec 1997 21:10:12 +0100 (MET)<br>
+        To: caldwell@utm.EdU<br>
+        Subject: Re: Mersenne cofactors, personal note, etc.<br>
+
+        <p>While new records with <a href="/glossary/page.php?sort=Cyclotomy" class="glossary">cyclotomy</a>
+          are being boiled, I have another kind
+          of large prime for you: a 36007 bits almost random, proved prime.
+          Obviously, it does not look nice at all and you cannot describe by any
+          other short cut than its value itself: I built it for this very purpose,
+          to get away from the very specially shaped primes in the larger size
+          domain. The prime was built and proved using AP, my algorithm for building
+          cryptographic provable primes (CRYPTO94). I attach the file.</p>
+      </blockquote>
+
+      <p>Here is the 36007 bit number in hexadecimal:</p>
+
+      <blockquote class="blockquote">
+        <pre>                            51614D4F13CE0B4085FF242E9D585C206B81736923
+71ADC5422904A86A637091A5C610A8A1217D1DB80106889CFCE3410219DEE806721687
+13AFD3862A77F05458EE6FD784896AD4B3F1A2A089BA678688D9F7B3DC335B0556F61D
+E63590D840AF4E6971DE367E1782E9599C31E311839ACDF8134104652C4689D13C7EF3
+CA1B39C3EFCF912946064171BF19626457E0A9B8C4A5530A751000B1D9CB27C527D177
+1117BC41E31B48F9BE45CE405FA33384EAAA8A3F7647AAED3671EBF0D5FE549440869B
+86DE218C7EF34A4992F698A1F1936E4F5830555152D29EB4ABD299DCFD2B587FEF40B9
+49CAE35205355DB0521200CE181858D4A91E3260EC5AEC654181008B12B6D6F34469B2
+DDAEEE2FCC6D8B9C2BB6AA61F26451CBDC9F355DDB3867A4F31BD618331AAD641E7E7F
+290474E62971DAD3F0C066306F5EE6A815F903DA8E778A3422A8E0C30658F79377CD43
+B2763FA86EF90CA84F8339468202D5DBBA64EE6003DC9782DD6BE855E227F14F7AAF98
+D2B520C3B04E364F4F33703C1100286625CD0414CD260BA53E6026DEF13F0F8088FB29
+5DE93842223C6D3CFDB9D3163DA091483BB93A87C74A6A3DD3C90D20188EDF9777B9B4
+884719BE73CE519E53C38B14D18C53457C4772FB2BA03A39B48E0187325CBCED38548A
+E41ECDB14A1FE45F910B5702A915945367CB5ACCE86BC46C9B36624E6BC2D50D14A985
+0C7159FD5896D894EB5707937D9CF876189AAADAEC88D561EF1BC48884F66627F2B147
+B7E3E21399BE7FAF44DE54CDB8A292D572C10CD24A498097624E4098485C52FF89AB03
+024A34D2FE8CCCE5B3A55C268824D17E4D837C65A99E3C6911FB277954C0ACAB0C15ED
+9E2EFD3661EE6A40B71CC5E09856B1E91258A258F62E8AD7BA99F820648471EAAEFCEE
+C338413FA02EF8087914C80D492C97C7FEBF8D9DF1AF369CA5CAB0D48052E01153D7C3
+43D57ACCB3CCFE492F172467935DF8872D0A6B730A4A37320B97DFB6514B99D24C03ED
+99C17353E934313A009783305BECE8A3890A475001F963814CB9D63616539C0E2C75E2
+2F00DF4E136906098C63642A7DFFCD2037A2BB01C3B0C7883DBF8AD2AF87A922C365A9
+1CF64621BC320ADF5FFAA363EBB53F1051D79340CEF1344165776D1654A1897D2E144F
+0EA50E462896455C11078B156496206242B6886CED27651E124F4EE4D8371306FFFA60
+12C23D69FE80A5323B5D8639A2ACAE9366C9243558AD13E1F3518C2324C4E0FE264F94
+ADDF44D9B53F7100C7748764D412FB059FBA9FCF607F59A2DDFF39C85E4660B26628EB
+83F52BE637B895E2B2F0F4E64DB3372E6E24BAE4084CBE038DF84E3A66F96F64449B10
+28620694F6BE5B1B60E7B0F66FC233BFDAF833D31BFCFED61E46C995F770994F740C48
+EA516125BFD1CE5A258FCFE1D1F7195BB308867A9629E63793702B0D4FC1259B34B3B3
+0FC170FC0169EE69A32DFBA2DB96DD94AA86EA836BA4D65CF902691663115B6CC06F50
+3AAE1A2F86C34410ECD2D9A0AE43BD1F5733388498BC8B6B0D134701D710EE1D9CB5B0
+E4F1F8107213655E0E57B3647AF36D8A531101E5F273E3DC6BB7BDBA51CBBD7440F7FA
+A864C4D1F54347C14A51680D6686E70984AAE1559BE7AE649F85DE807D8C5C3F672CA6
+A2D4304541B5475CAF50819E47173005D1E5730DF8A542F88C304E01EEFAB9390BBBC1
+526F9E782F70A69BBC9B1CE6A566978E6A12305CAF34E97CE88DAC7BD49B315AF61F5D
+12117B1EDA5924C18627C0B3D061190A5CFA358F365CEC7195A0D2C8E9BC318B2C9ECD
+DEE6226B3E15F12F3A5CC13554543DCE8D2CFD732D9E76BCEF50C67E16F68B098B4EF8
+A8A673A6E88AC920B54E5AD5A8D394771E94E43E715DE0257FB691DC33AF352F237116
+E8C23E7DCD72866DA7FD3BA4E09C98B53E3C9B21224819256BE374BD148E9AF7D35D97
+9B531CAB7A74588E5FDF28972F88BF8CB4A4B97C21FF2F8B7015BA8FEDFF44B4E0EB9D
+7F89C7E3CB3360E494E11F05F75D692DE787A4F79C15F2B472142463EC3CF99F343040
+EEA789CA411E12BAAF8130F065F4713CAF1ADD6696F699E035AD6000320FDD1C1AD8F8
+B02C10E70756B64C5243CD36326A2D8654662E5DC6F2E1CCD372ADA4448C601CAA7247
+F06523D8B2C0EFCEA7749F8B3B080FAEEF164790EB2213FB48FA55E7A9AD1376D38FB3
+300F2F9C97B7C445D5240E1425AFE673426BD8EBB384F6B02B8452F70B2BA694DC078A
+EDCC4F44DE4476AF6E33AEE4C0D8C60124B4D71E9B960DF5CD7634452BBE3C079AD8CF
+41A2B54A6631822F530A341D6BEF601AC7DB3B05136A615E3B6A20C8CAEABFFD46D1C0
+904CF459A9DFE973932A5FE22347E5E076972AF04ABAB6BB99BD27AB5B720C09957AD7
+AA0E2C1B2470014CC6C6A8E96242581248BA84B89F1993CF57B8083C6E2C77958F1DE5
+34D0188AC0C89136755C46EC448D17B17BEF87BA64832A47140D8151EF7A695DED5C8E
+F794A8F54688AF3DE8A87A622FB8219FD0E4F917246D7161D764A53696FFC0FDFC2CC5
+6BC64F338558347AF6BC9C9E784CED079A34B9F78AE7E4632ADC1DD3A9F67B00D8F449
+CBEDEFE86AEB89E5725BEA82C5917EDD754F4D321D505C5DB098A228056BC0BBBF6701
+3C46AD92CCE121A72F141DC79AB486AB2B7466C42F603F3D22EC726A6217CF3A87973C
+2A4F600DD0F034576AB8690C8FE3F3C0D69376AEE71B24AA3E656F045319B572199C4A
+A1BA7A39687A6A6185D3ABD7AE514200DE5BBCDAFC37A5C7D9C20FC4997EF3899C6126
+6105F1BB0DD2A76A6E8B57A00C14A1BB18E5F9F0461601A24802CC721784D71CE2FD7E
+869C9DB3280073E7BBD6310C0FF5524D274BBE683A2A612974476C5E2A0AE72094D663
+69679058F579133F527F6F39EF06777880F4A23B2E79EC560ECDB3DA861E5442B4BF0A
+6D5200FF595188B7055D98E788D7C6B40D1B04BDCFF98D9E41078CFF714B2150A21041
+466955F103DABFF257D64E2CD29C5251B1BC5C2E2A507C460955BE7AB235BBD069B3B1
+26C88FC313659FFF74650EC8DC998C8F27DE9455FB38036093CAED3230C614264BA526
+9EF3A58BB2D7C3FDF64DA88000EDB03A38E8095F2FBFB552B1C96C1D3E4D56DCB1F01A
+4BCDFC460B467AF7BFF8D39BFB715DFF58CDEFDED8BA2EAEAE1F072FE75F991B7C47C8
+ECAC9EF64D0CE7E597AB28E9030FEB4709FA50EAA1420BC33ADC3CE5E9D8128706AA8D
+29D8C4EF4A2957009B8E992272BC1F4D246C0A0515065F45E570734660DE584E0C3E6E
+44F49F7A13BFB7FCEDB5851461E73B7389D62D00D822E191C80F1CA0EC9DDB4166BFEC
+7A357B71C071C4A563B13289BB7AF56AB09134A74AAFF69473D6AC798D05FF67BEFD8A
+932A2F1E2CCFBA033938DCCBC3461A5E779E35074D3E1FB0EAA1392E81994F3E86A7B2
+1A2E340994A72D8BFFD1151AED1A1355C7C037B4D6464C19ED528CE93256FB7860677B
+7CB801A8D7981E6CCA464E0E146D66CF8EB3CBC90940FA7F257741EA3AADC58511F57B
+8954DC40126FAFEC61B7FB66CFBBA0D4E3A798362F45470A039C3A0F27348B4EE08CA3
+520D37C65E11801E9F0D41612F0984BC2E5DCC088F33FAA4DADCBBA6054E4D1F8144B1
+6A752307DBA59880A25C0BFF9134FEDA9AF2444071448C2B8887D7E59B677E14ABDB8E
+3140CCBBF4BADAAF452854040DC236ABA599CC0B4ECEA2D90C392C36132BD8AC1F740B
+7A8BE5DFAB9F9880A5B13B41B4A974C71FCF90D0687C64EB54A83C732384861673FACA
+2B82BB95FF0978F7AB90ABBF8FBB73E4610CF83C5A2F2DA9CFD373BB6E8DFCEE90A6BD
+4F43758116AD3FBD879653A940E1250299A62DAA31BB8CEB5D60291CAA14FAD261A3F7
+0A30FAFB147E0EF9A008FC5D5196B5FFAF0A3B1248EDB4FF2FACE22E9D5491889A248B
+E7869B52435DF12A0CEE81A89CEB8FA609B94FEC8D648C228DAD4F0CF18DF9B0C4C4B1
+9C5116B5C26F050312E4027F0F0FA0E92FA24C556E7928C65D802FD71C9FACF008AB82
+D1889933D007180DCFC75B54D83EABD76624D88BBB7B770044CB851CC9A7E40E42C9AA
+73B5857BAA91AFD061C02AF74530C79FC9BDB34D7E66E53D44BE1FC30C6C10AFCEB855
+64984E3955C28C2AA426601A23855C9106999DCB078B39BA8B81B47A3A39B3E3861A53
+A16D0CCC4BC9C98CC5527E7D7CC7B61F9AB08A4D447384977EBD60A91CBAE81DA3CAC1
+11D9249AD7F7903E0B17176F8252CA344266C71B9D3446C079B40355607D58417F4859
+C5BFC441EE20704A3E1C8FBCB0929DE0DA8E88B4BAB330A0012B0E1C5404AF21B78BD0
+CB5C908FD5D1F753BA161F0AE432A730B0E7028C9D183BD71B35E472B27829BF2815B1
+E25C28F2E193A9F90846FE045FA03EFED46F5C9F484FCE2D519E2CB0C2A7C3096028B9
+5151E4B4DD64A86ECF0FFBC427EAA2D8A6A715A9EB6F2DF3C78C9A49A5D5750BEC6D1F
+C8E630E186FF33E8B740AC2591343D304E994A99204928910E33759F2531966D3A2FCE
+E8FD6CD932007561B9763B0D5281B17358C3E19563A786B89A65321F513F46D6EA44C8
+B5E7AE4D0085D62B166BEAC7C3ED6F59D0C3FFD3F6A8E644122255A9F943268016E44F
+73AF4FF54B1E63BBAC97995ADC344611368431A2DD5A36C289BD32636923D69A7D4E08
+C57D4A3F17E283A028688EB0126963D30A26AAE0340AC60DEB160C48F7E27A72438FA2
+397E10B9458EDC1D6C283EF4F6C790C1188E3C30743018B478865A7D3BCA344F4D2AF4
+3FB2EA96373B714278454BE8D644CDD394B225773397AF284985C81AAE45FC2855A023
+E10B11A27013B79FC0CD29B8021C3476817C169DDF2FC93782A34CA90D757E8A4565E9
+3FCB508A552DBE9706B5355093AB04A4C77AE46164014448DA8C8C52D4F7DE407FC777
+C15965FE11994FA972B8345C1F6C642B7080BEA3390CF5B3AD605E5DFCB8EAEBAA18BD
+350B6ACF36CD2D5D1FC74F962D44DDBA42F9DE92C8DC8CF695BD886891F304CB39F4E7
+F339F7F70CE19AC946C25E7E13DE4490ED26147D662E532DA49BC23562794BDC7E7960
+690F8297D6147904DC718EF463422BDB52AD633F26B32AF30401AFB3F9A526B127B031
+D98B23B3F03905576CD910C89E81F0B8FF737D9ACEEF0B411BF63B9DD5F185308A1257
+696F79A768604F1277D1720A0E74D38DA9DD0532099A0D0FE89818F3C1C41B0ACC8F23
+9F729CC44B747283C70769C3745C58AE471E1249BE9246FB21C6A1F49AB29EC58C2FFA
+470A9A7955827E85F851747AFF4C8CFBF89C396055D7B2E77353FF9DF2BB713F6450C4
+347A185C888B6E52CB7321E333642FD1E09BE28D3F2DA2E9E6F615A240713A72A65975
+A2CE8ED012874B0804689B9D57B6A74DAAE852CB4F65D2000A17AEFAE671E46E5AE2F8
+94795B8D0383D959BFD312E7919E2475704D78E1C5972FF70D181C2B7C042B467BDD05
+F72B451031A0CE2422D8EF80164546AC4EF4219FED96B609619F54D7DD48AEFBA63A55
+F5FFB27B1FFF0ACFA773D7536583ECA6874A4903F50E3FC686798CE13DC248CA91FE4D
+40DDA0F453E7200A45E282C383FB89784FA75D1BD014C2284BCB84F52B64EC694525C2
+49EE7C083CB4CACF77BDD8B479029C06BFEB67ECD539D89C0300745EA4C2CF41984401
+D22CB2FAEDE4B0DD341F1689ABD1394125820F6517010D0EFA4E785A61D6B87F6774B7
+825C1394171AFAFAC9D359FF11632565F50326E97315E614E7518767F4CAB457D34F13
+E6CCEE575F87B33BF91D2B3B8807C431DEC78689C553B8CB4B441604157082246F82CE
+57CB040035D5CBB82C63967121D87440969B648C3BD1DB3D749916A7A5947D9E64F696
+382C4BF52188CB5AF79B423EAF96D6085725485B554FA24BE4310F3A07E15448800482
+51D10715DE6FFAD5E0096F34FC669E86CB758C856A70B7E4E3C7A417268023E99C15C2
+B22DAB9FF13B84D5E8FFDFBB8665445CA75F4EC89FD399C0363013AD536193D0C84DB6
+E7BEC51D55838E5283031EA0DB5C521A8A5FAB0B3D6FBB3FD1E5CADBF42AE2B304D399
+1B750B5D2F595E887C9C19B8FCA2278FCB0593899004112ECC8C338ED64186F7991964
+1CE15E20213F7C6C6AAB6F930DBEF508AFD3614FC78F9F4F23B9BF526A2CAC9A3A7CCF
+104B55490C55AF3F1A9FF696674335AA098A6C6CAA3F7D062DF9540F4742CAD084A394
+454876243D6AC9F244A3EC8EFF18F49913DB93CC6A76BFC1E1192C308003DB6DE5F425
+B80BCF021B01F88B50F7EEB768D45A5ECDBEB44BF3BC3FF5548C681ABD5BF33A65A17D
+2A33696E4013D6AEBAC2D6CC12D6D3B7A07C697BA346F2A0CEF2C8E715BEA189CFE4DB</pre>
+      </blockquote>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a
+        href="../../notes/privacy.html">Privacy notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

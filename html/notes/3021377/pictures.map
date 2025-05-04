@@ -1,0 +1,6 @@
+default https://t5k.org/bios/index.php
+rect https://t5k.org/bios/includes/gifs/woltman.jpg 62,0 122,79 
+rect http://entropia.com 123,0 183,79 
+rect https://t5k.org/bios/page.php?lastname=Clarkson 0,80 61,99
+rect https://t5k.org/bios/page.php?lastname=Woltman 62,80 122,99
+rect https://t5k.org/bios/page.php?lastname=Kurowski 123,80 184,99

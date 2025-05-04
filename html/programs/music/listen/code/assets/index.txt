@@ -1,0 +1,36 @@
+Title=MIDI Information
+
+This directory contains my routines to make MIDI files from
+<UL>
+  <li><a href="midi.cgi">character strings</a> (such as "Have a nice day.")
+  <li><a href="primes.cgi">prime numbers</a> (see the <a href="/programs/music/listen/">listening guide</a>)
+  <li><a href=sequence.cgi>integer sequences</a> (such as {1,2,3,4,5,6,...} -- unfinished!)
+</UL>
+
+If you are interested in the technical aspect of the midi standard, see the
+following references from <a href="http://sunsite.unc.edu/emusic-l">EMUSIC-L</a>: 
+
+   <ul>
+     <li>Bob McQueer's <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-Primer.txt>primer</a>
+on MIDI
+     <li>A <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-BNF.txt>BNF
+grammar</a> describing the MIDI data stream
+     <li>A table of <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-Controllers.txt>MIDI
+controller</a> bytes
+     <li>A table of <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-Statusbytes.txt>MIDI
+status bytes</a>
+     <li>A table of all the MIDI <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-Notenumbers.txt>note
+numbers</a>
+     <li>A description of <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-SMF.txt>standard
+MIDI files</a>
+     <li>A description of the MIDI <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-MTC.txt>timecode</a>
+standard
+     <li>A description of the MIDI <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-SDS.txt>sample
+dump</a> standard
+     <li>The <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-General_MIDI.txt>General
+MIDI</a> standard
+   </ul>
+See also
+<ul>
+<li><a href="http://larryholdermusic.org/midi.html">Larry's MIDI page</a>
+</ul>

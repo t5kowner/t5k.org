@@ -1,0 +1,5 @@
+The last line of the *.gplt files say when to start; e.g., [-6000,0] for the last 6000 days.
+If you go back more than 10000 days, update numlines in getlines.c from 10000. 
+When you change either, run ../update because the actual work is done in html/primes/graph/ not here.
+
+I know it says 5year.png, but it is the last 20 (or whatever you see)

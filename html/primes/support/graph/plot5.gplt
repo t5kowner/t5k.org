@@ -1,0 +1,46 @@
+set output "5year.png"
+set term pngcairo size 800,600 enhanced transparent 
+set termoption enhanced
+
+# title
+
+set title 'Digits in the n^{th} Largest Prime Over the Last Few Years'
+# Currently superscripts evoke missing fonts
+
+# y-axis
+
+set ylabel "Decimal Digits" 
+# set format y "10^{%L}"	# Show as exponents--currently a font problem
+set format y "%.0f"		# Don't switch to exponential when large
+set logscale y			# logrithmic vertical scale
+set mytics 10			# number of minor ticks
+
+# x-axis
+
+set xlabel "Calender Years Ago"
+set xtics ("now" 0, "-2" -730.5, "-4" -1461, "-6" -2192.5, "-8" -2922, "-10" -3652.5, \
+		"-12" -4383, "-14" -5113.5, "-16" -5844, "-18" -6570, "-20" -7300)
+
+# plot area
+
+set border 3			# borders only on axis (left/bottom)
+set grid mytics xtics
+set key left top		# move the key from the right top
+set key spacing 1.3
+
+set timestamp "(%a %d %b %Y)" offset 60,4.4	# display creation time on the graph (with location)
+
+# Data
+
+# set pointsize 3
+# set data style steps		# Can't seem to control width (also lines, linespoints, dots, ...)
+set style data lines
+set style line  1 linetype  1 linewidth 2
+set style line  2 linetype  2 linewidth 2
+set style line  3 linetype  3 linewidth 2
+set style line  4 linetype  4 linewidth 2
+set style line  5 linetype  9 linewidth 2
+set style line  6 linetype  6 linewidth 2
+set style line  7 linetype  8 linewidth 2
+
+plot [-7500:0] "snapshottab.txt" using 2:9 title "50th prime" linestyle 7, "snapshottab.txt" using 2:8 title "100th prime" linestyle 6, "snapshottab.txt" using 2:7 title "200th prime" linestyle 5, "snapshottab.txt" using 2:6 title "500th prime" linestyle 4, "snapshottab.txt" using 2:5 title "1000th prime" linestyle 3, "snapshottab.txt" using 2:4 title "2000th prime" linestyle 2, "snapshottab.txt" using 2:3 title " 5000th prime" linestyle 1

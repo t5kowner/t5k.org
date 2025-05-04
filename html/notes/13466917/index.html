@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Reaching new heights with new Mersenne prime!</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="../index.html">Notes</a></li>
+          <li class="breadcrumb-item active">M<sub>13466917</sub></li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->Reaching new
+        heights! (12/07/2001)<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" --><!-- #BeginLibraryItem "/Library/No Longer Largest.lbi" -->
+      <div class="d-flex flex-row-reverse">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert"> This is a historical page on an old
+          record prime. See the <a href="/largest.html" class="alert link">Largest Known Primes</a> for current records.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+              aria-hidden="true">&times;</span></button>
+        </div>
+      </div><!-- #EndLibraryItem -->
+      <p class="font-weight-bold">Table of Contents</p>
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#hard">How Hard?</a></li>
+        <li><a href="#three">Three Discoverers</a></li>
+        <li><a href="#therory">Prime Theory</a></li>
+        <li><a href="#links">Links for More Information</a></li>
+      </ul>
+      <img src="images/Everest1.jpg" width="349" height="185" align="right" hspace="10" vspace="10"
+        alt="Pumori (7425m/24,360ft) from Kala Pattar (5545,18,192ft) (c) FreeFoto.com">
+
+      <h2>Introduction</h2>
+
+      <a name="intro"></a>
+      <p>There are some places that few will ever go.&nbsp; Perhaps
+
+        the road is too long or the air is too thin.&nbsp; Often the length of the
+
+        trip alone is prohibitive.&nbsp; Michael Cameron of Owen Sound, Ontario
+
+        has just completed such a journey--he has found the <a href="../../largest.html">largest
+
+          known prime</a>: </p>
+
+      <blockquote class="blockquote">2<sup>13466917</sup>-1&nbsp; </blockquote>
+
+      <p>Now 20 years old, Michael is a student by day is training for a position
+
+        with NuComm International, Inc. at night.&nbsp; A few months ago Michael
+
+        joined GIMPS (the <a href="http://www.mersenne.org/prime.htm">Great Internet
+
+          Mersenne Prime Search</a>) and began to look for a new record Mersenne
+
+        prime.&nbsp; This is a daunting task!&nbsp; In over 2000 years of searching,
+
+        only 38 have been found.&nbsp; Now counting Michael's, there are 39. Michael's
+
+        new behemoth has 4,053,946 digits and would easily fill a paperback novel.</p>
+
+      <p>A Mersenne prime is a <a class="glossary" title="glossary" href="/glossary/page.php?sort=Prime">prime
+
+          number</a>that has the form 2<sup><i>p</i></sup>-1.&nbsp; The ancient
+
+        Greek geometer <a class="glossary" title="glossary" href="/glossary/page.php?sort=Euclid">Euclid</a>explained <a
+          href="/notes/proofs/EvenPerfect.html">the
+
+          connection between</a>these primes and even <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=PerfectNumber">perfect
+
+          numbers</a>in his classic geometry text &quot;The Elements.&quot;&nbsp;
+
+        The French monk Marin Mersenne stirred up a great deal of interest in
+
+        the middle ages with a wild claim about which of these numbers were prime.&nbsp;
+
+        Mathematicians continue to study <a href="/howmany.html">the
+
+          distribution of the primes</a>and especially the <a href="/notes/faq/NextMersenne.html">distribution
+
+          of Mersenne primes</a>.</p>
+
+      <h2>Was it hard?</h2>
+
+      <a name="hard"></a>
+      <p><img src="images/KalaPattar.jpg" width="208" height="306" class="float-left mr-3 mb-2"
+          alt="Everest (8848m/29,028ft) and the Khumbu Ice Fall from Kala Pattar (5545m/18,192ft) (c) FreeFoto.com">In
+
+        one sense what Michael did was very simple: he decided not to waste his
+
+        computer's idle time.&nbsp; As he explains:</p>
+
+      <blockquote class="blockquote"> &quot;My friend informed me that I was wasting my CPU power
+
+        and that if I was going to leave my computer on all the time I should
+
+        make use of that wasted CPU time.&nbsp; He recommended Prime95 but at
+
+        first I was hesitant.&nbsp; I wanted something that I could see happening.&nbsp;
+
+        I wanted instant results.&nbsp; So I tried some other programs but they
+
+        were not what I had expected.&nbsp; I decided to put Prime95 on my system
+
+        because running it is like running nothing at all.&quot;</blockquote>
+
+      <p><a href="http://www.mersenne.org/freesoft.htm">Prime95 is a free program</a>written by George Woltman and
+        provided on his GIMPS site.&nbsp;&nbsp;
+
+        Just download the software, install it, and let it run.&nbsp; Simple and
+
+        easy, but the road is long.&nbsp; To test a single number takes days on
+
+        the fastest microcomputers, months on others.&nbsp; Michael's &quot;AMD
+
+        T-Bird 800Mhz with 512 Megs of RAM&quot;&nbsp; took 42 days.</p>
+
+      <blockquote class="blockquote"> &quot;I was so surprised about the beeping and thought that
+
+        there was something wrong because I had forgotten all about it.&quot;</blockquote>
+
+      <p>But in another sense, what Michael did has proven very difficult--he
+
+        persisted. &nbsp; Over 86% of those who have begun to test a Mersenne
+
+        exponent with GIMPS have never completed even one, and the average GIMPS
+
+        participant has completed less than three (mean 2.67).&nbsp; This was
+
+        Michael's fourth.</p>
+
+      <p>And Michael was also very lucky.&nbsp; Mersenne primes appear to be <a
+          href="/notes/faq/NextMersenne.html">scattered
+
+          randomly</a>.&nbsp; Michael just hit the jack pot.&nbsp; Others have tested
+
+        3000, 4000, and one person almost 8000 exponents, but it was Michael who
+
+        found this one.&nbsp; In this sense Michael is a newcomer: of those that
+
+        have completed at least one exponent, the average is more than 19 (mean
+
+        19.54).</p>
+
+      <h3>Not one succeeds here alone</h3>
+
+      <p><a name="three"></a><img src="images/Porters.jpg" width="356" height="107" align="right" hspace="10"
+          vspace="10" alt="Porter with three Yak (c) FreeFoto.com">Michael
+
+        was able to succeed because <a href="/bios/page.php?lastname=Woltman">George
+
+          Woltman</a>wrote the software.&nbsp; Michael needed his help, so George
+
+        properly will share credit for this (his fifth!) Mersenne prime.&nbsp;</p>
+
+      <p><a href="/bios/page.php?lastname=Kurowski">Scott
+
+          Kurowski</a>, founder of Entropia, Inc.,
+
+        also deserves equal billing.&nbsp; His company provides the GIMPS project
+
+        with a free central server, and with the necessary components to make
+
+        the whole process of virtually invisible to the users.&nbsp; Because of
+
+        Scott's work GIMPS participants now include over 130,000 people running
+
+        more than 205,000 PC's in virtually every time zone in the world!&nbsp;
+
+        Scott's company is also involved in Aids research and economic research.</p>
+
+      <p>This is also a victory for all of the thousands involved in GIMPS. Perhaps
+
+        the most important contribution of the project to mathematics is not the
+
+        primes it finds, but showing that there are no other primes in between
+
+        that have been missed (and this has happened before).&nbsp; So each time
+
+        a participant completes a test and find these number is not prime, they
+
+        have actually done something quite positive!</p>
+
+      <p>The new Mersenne prime was independently verified by two others using
+
+        programs on different operating systems:</p>
+
+      <ul>
+
+        <li>Guillermo Ballester Valor used his program Glucas v.2.8c on a Compaq
+
+          server (Blazer Itanium with four Processors).&nbsp; The operating system
+
+          was Red Hat Linux 7.1.</li>
+
+        <li> Paul Victor Novarese of Compaq Corp. used a program written by Ernst
+          Mayer, on a 667 MHz Compaq Alpha workstation.&nbsp; The calculation
+          took about three weeks.</li>
+
+      </ul>
+
+      <h3><a name="therory"></a>A Little Theory Never Hurts</h3>
+
+      <p>Integers greater than one are called prime if they can not be factored
+
+        (10 is not prime because it has the prime factors 2 and 5). To show a
+
+        small number is prime, we can just divide by the primes below its square
+
+        root. For example, 53 is prime because it is not divisible 2, 3, 5 or
+
+        7. </p>
+
+      <p>Large numbers need more complicated tests that usually involve a form
+
+        of Lagrange's theorem. If you look at a list of <a href="../../lists/index.html">the
+
+          largest known primes</a>you will see that for most such number <i>n</i>,
+
+        either <i>n</i>+1 or <i>n</i>-1 factors easily. Mersenne primes follow
+
+        this rule and are the primes of the form 2<sup><i>p</i></sup>-1. It is
+
+        easy to show that <i>p</i> here <a href="../proofs/Theorem2.html">must
+
+          also be a prime</a>. Because of the special form of the Mersennes, there
+
+        is an easy test to see if they are prime, called the <a href="../../prove/prove3_2.html#test">Lucas-Lehmer
+
+          test</a>. </p>
+
+      <h3><a name="links"></a>Links for more information</h3>
+
+      <ul>
+
+        <li>About <b>this prime</b>
+
+          <ol>
+
+            <li>The <a href="http://www.mersenne.org/13466917.htm">information
+
+                on the GIMPS</a>site </li>
+
+            <li>Articles:
+
+              <ul>
+
+                <li><a href="http://news.bbc.co.uk/hi/english/sci/tech/newsid_1693000/1693364.stm">Number
+
+                    takes prime position</a></li>
+                <li><a href="http://www.heise.de/newsticker/data/as-06.12.01-000/">39.
+
+                    Mersenne-Primzahl entdeckt </a></li>
+                <li><span title="dead link http://www.lescienze.it/index.php3?id=4383">Un nuovo
+
+                    numero primo di Mersenne</span> </li>
+
+                <li>Gr&ouml;&szlig;te
+
+                  bekannte Primzahl hat 4 Millionen Stellen</li>
+                <li>CNET: <a href="http://news.com.com/2100-1001-276972.html?tag=tp_pr">Distributed
+
+                    Computing Strikes Gold</a><br></li>
+
+              </ul>
+            </li>
+
+            <li>The complete decimal expansion&nbsp;
+
+              <ul>
+
+                <li><a href="http://www.mersenne.org/prime5.txt">text file</a>(4 meg) </li>
+
+                <li><a href="http://www.isthe.com/chongo/tech/math/prime/mersenne.html">Curt
+
+                    Noll's site</a>which has the expansion in decimal (in three
+
+                  forms) as well as the English name!</li>
+
+              </ul>
+            </li>
+
+            <li><a href="/bin/HowLong.cgi/13466917/">How long
+
+                is this number when typed?</a>&nbsp; </li>
+
+          </ol>
+
+        <li>About <b>the <a href="http://www.mersenne.org/prime.htm">GIMPS</a>and <a
+              href="http://mersenne.org/primenet/">PrimeNet</a>projects</b>
+
+          <ol>
+
+            <li><a href="http://www.mersenne.org/credits.htm">GIMPS Search Credits</a></li>
+            <li>Entropia's PrimeNet Server </li>
+            <li>Search Status <a href="http://www.mersenne.org/status.htm">via
+                GIMPS</a>or <a href="http://www.mersenne.org/primenet/#status">via
+                PrimeNet</a></li>
+          </ol>
+        </li>
+
+        <li>About <b>Mersenne primes</b>&nbsp;
+
+          <ol>
+
+            <li><a href="/mersenne/">Mersenne Primes</a>definitions,
+
+              theorems, lists...&nbsp; </li>
+
+            <li><span title="dead link http://www.ndatech.com/mersenne/signup.htm">Mersenne
+
+                mailing list</span>&nbsp; </li>
+
+          </ol>
+        </li>
+
+        <li>About <b>primes in general</b>&nbsp;
+
+          <ol>
+
+            <li>Lists of the <a href="/largest.html">Largest Known
+
+                Primes</a>&nbsp; </li>
+
+            <li>How do you <a href="/prove/">find primes and prove
+
+                primality</a>&nbsp; </li>
+
+            <li><a href="/">Home page for prime information</a>&nbsp; </li>
+
+            <li><a href="/notes/faq/why.html">Why do people find
+
+                these primes?</a>&nbsp; </li>
+
+            <li>E-mail <a href="http://groups.yahoo.com/group/primenumbers/">discussion
+
+                list for general primes</a></li>
+
+          </ol>
+
+        </li>
+
+      </ul>
+
+      <p>Miscellaneous notes: </p>
+
+      <ul>
+
+        <li>Michel Gallant(another
+
+          Canadian) suggested the following mnemonic device to remember the exponent:
+
+          <blockquote class="blockquote">"I had some yellow apples occupying a crisper"</blockquote>
+
+          where the number of letters in each word is the corresponding number
+
+          in the exponent.
+        </li>
+
+        <li>Another suggestion:
+
+          <blockquote class="blockquote">&quot;A big hunt; primes record conquered, a victory&quot;
+
+            by Jon Wharf<br>
+
+          </blockquote>
+
+          (Images by<a href='http://www.freefoto.com/' TARGET='_top'> <IMG SRC='images/freefoto.gif' WIDTH='91'
+              HEIGHT='19' ALT='FreeFoto.Com' BORDER='0' ALIGN='absmiddle'></a>)
+        </li>
+
+      </ul>
+
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

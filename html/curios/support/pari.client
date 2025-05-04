@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+use lib "/var/www/html/primes/support/math";
+use bmath;
+use parser;
+
+$input = shift;
+
+my $in = &parser::parse($input);
+#print "[$in]\n";
+# Why do I need the "" on $out?  Fails without it!
+$out = &Math::Pari::type($in);
+if ("$out" eq 't_INT') {
+  if ("$in" < 10**150) {
+    # add the second parameter of 2 if we can ever get a newer version loaded
+    $out = &Math::Pari::isprime($in);
+    $temp = 'prime';
+  } else {
+    # add the second parameter of 2 if we can ever get a newer version loaded
+    $out = &Math::Pari::ispseudoprime($in);
+    $temp = 'prp';
+  }
+  if ($out == 1) { print $temp; }
+  elsif ($out == 0) { print "composite"; }
+  else { print "error $out"; }
+} else {
+  warn("Not an integer! (type is '$out')\n");
+  print "composite";
+}
+
+exit;

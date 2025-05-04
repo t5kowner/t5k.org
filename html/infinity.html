@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>There are infinitely many primes, but, how big of an infinity?</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="There are infinitely many primes, but, how big of an infinity? Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item active">How big of infinity?</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" --><span
+          class="d-none d-md-inline">There are infinitely many primes.</span> How big of an
+        infinity?<!-- #EndEditable --></h1>
+      <!-- #BeginEditable "content" -->
+      <h3 id="contents">Contents:</h3>
+      <ol>
+        <li><a href="#intro">Introduction</a> - What is the question?</li>
+        <li><a href="#countability">Countability</a> (is there another way to
+          distinguish infinite sets?) </li>
+        <li><a href="#converge">Convergence and Divergence</a> (definitions and
+          examples) </li>
+        <li><a href="#punchline">The Sum of the Reciprocal of the Primes</a> (diverges!
+          but for the twin primes...)</li>
+      </ol>
+      <h2 id="intro"><a href="#contents"><img src="gifs/up.gif" alt="[up]"></a> &nbsp; 1. Introduction -- What is the
+        Question?</h2>
+      <p>About 2300 years ago <a href="/notes/proofs/infinite/index.html">Euclid
+          proved</a> that there were infinitely many primes. For mathematicians "infinitely
+        many" is an incomplete answer--they then ask <i>"how big of an infinity?"&nbsp;</i> The <a
+          href="/howmany.html">prime number theorem,</a> which states the number of primes
+        less than <i>x</i> is approximately <i>x</i>/log <i>x</i> (the natural log),
+        gives perhaps the best answer.&nbsp; Another way to answer that question
+        is to ask whether or not the sum of the inverses of the primes converges--that
+        is, what happens when we add up the following fractions?</p>
+      <pre class="ml-5 my-2" style="line-height: 80%;">1   1   1   1    1    1    1    1    1
+- + - + - + - + -- + -- + -- + -- + -- +  . . . 
+2   3   5   7   11   13   17   19   23  
+
+</pre>
+      <p>If you understand the terms <b>convergence</b> and <b>divergence</b>, then
+        jump to <a href="#punchline">section four</a> below.</p>
+      <h2 id="countability"><a href="#contents"><img src="gifs/up.gif" alt="[up]"></a> &nbsp; 2. Countability</h2>
+      <p>In the field of <i>real analysis</i> we define two sets to be equivalent
+        if there is a one to one correspondence between their elements (that is,
+        if we can pair them up). Sets equivalent to the positive integers are said
+        to be <b>countable</b>. For example, the primes are countable because we
+        can pair 1 with the first prime, 2 with the second,...</p>
+      <div class="ml-5 my-2"> (1,2), (2,3), (3,5), (4,7), (5,11), (6,13), (7,17), ... </div>
+      <p>Similarly all infinite subsets of the integers are countable sets--so this
+        notion does not help us much!</p>
+      <h2 id="converge"><a href="#contents"><img src="gifs/up.gif" alt="[up]"></a> &nbsp; 3. Convergence and Divergence
+      </h2>
+      <p>When dealing with an infinite set of positive integers for which we
+        want some measure of its size we often look at the sum of the reciprocals.&nbsp;
+        For example, consider the sum of the reciprocals of the squares:</p>
+      <div class="ml-5 my-2"> 1/1 + 1/4 + 1/9 + 1/16 + 1/25 + 1/36 + ... </div>
+      <p>As we add up more and more terms of this series, the sum gets arbitrarily
+        close to <img src="gifs/pi.gif" alt="pi"><img src="gifs/square.gif" alt="^2">/6
+        (here <img src="gifs/pi.gif" alt="pi"> is the ratio of the circumference to the diameter
+        of a circle).&nbsp; So we say the series <b>converges</b> to <img src="gifs/pi.gif" alt="pi"><img
+          src="gifs/square.gif" alt="^2">/6.</p>
+      <p>For a second example consider the series</p>
+      <div class="ml-5 my-2"> 0.9 + 0.09 + 0.009 + 0.0009 + 0.00009 + 0.000009 + . . . </div>
+      <p>This series clearly converges to one.</p>
+      <p>Next, consider the sum of the reciprocals of the positive integers (this
+        is called the <b>harmonic series</b>):</p>
+      <div class="ml-5 my-2"> 1/1 + 1/2 + 1/3 + 1/4 + 1/5 + 1/6 + 1/7 + 1/8 + ... </div>
+      <p>As we add up more and more terms of this series the sum just keep getting
+        larger--larger than any predetermined constant.&nbsp; (So if we add enough
+        terms the sum is larger than 10, larger than 10<sup>10</sup>, larger than
+        10<sup>1000000</sup>...).&nbsp; When this happens we say the series <b>diverges</b>.</p>
+      <p>If you have trouble seeing that the harmonic series diverges, think of
+        it this way:</p>
+      <div class="ml-5 my-2"> 1/1 + 1/2 + 1/3 + 1/4 + 1/5 + 1/6 + 1/7 + 1/8 + ... <br>
+        &nbsp; &nbsp; = ( 1/1 ) + ( 1/2 ) + ( 1/3 + 1/4 ) + ( 1/5 + 1/6 + 1/7 + 1/8 ) + ... </div>
+      <p>(where each set of parenthesis stops at a reciprocal of a power of two.)&nbsp;
+        Replacing the terms in each set of parenthesis by the <i>smallest</i> term
+        (in those parenthesis) we get a smaller sum:</p>
+      <div class="ml-5 my-2"> 1/1 + 1/2 + 1/3 + 1/4 + 1/5 + 1/6 + 1/7 + 1/8 + ... <br>
+        &nbsp; &nbsp; &gt; ( 1/1 ) + ( 1/2 ) + ( 1/4 + 1/4 ) + ( 1/8 + 1/8 + 1/8 + 1/8 ) + ... <br>
+        &nbsp; &nbsp; = 1/1 + 1/2 + 1/2 + 1/2 + 1/2 + ... </div>
+      <p>which clearly gets arbitrarily large!</p>
+      <h2 id="punchline"><a href="#contents"><img src="gifs/up.gif" alt="[up]"></a>&nbsp; 4. The Sum of the Reciprocal
+        of the Primes</h2>
+      <p>When the sums of the reciprocals of a set of positive integers converge
+        (example: the square integers), we think of that set as "small."&nbsp; When
+        it diverges (example: the positive integers) we think of that set as "larger."&nbsp; <b>So what about the set of
+          primes?</b></p>
+      <p>We will show below that <b>the sum of the reciprocals of the primes diverges,</b> so the primes are a "large"
+        subset of the integers.&nbsp; This is a simple
+        consequence of the <a href="/howmany.html#pnt">prime number theorem</a>, but much more elementary proofs
+        are available (e.g., [<a href="/references/refs.cgi/Ribenboim88">Ribenboim88</a> pp. 156-7]).&nbsp; <span
+          id="twin">On</span> the other hand, it is conjectured
+        that there are infinitely many twin primes (this is the <b>twin prime
+          conjecture</b>, most everybody believes it is true--we just do not have
+        a proof yet).&nbsp; Nevertheless, it has been proven the sum of the reciprocals
+        of the twin primes is about is 1.90216054...(this is called <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=BrunsConstant">Brun's
+          constant</a>).&nbsp; So the twin primes are only a &quot;small&quot; subset
+        of the integers (in this sense).</p>
+      <p>To see the sum of the reciprocals of the primes diverge we will follow
+        [<a href="/references/refs.cgi/HW79">HW79</a> p16-17] and start by bounding N(<i>x</i>)
+        which is the number of positive integers <i>n</i> less than <i>x</i> which
+        are divisible only by primes among the first <i>i</i> primes.&nbsp; We
+        can write any such <i>n</i> as <i>k</i><sup>.</sup><i>m</i><sup>2</sup> where <i>k</i> is square free.&nbsp;
+        Since there are just <i>i</i> primes
+        which could divide <i>k</i>, we know there are exactly 2<sup><i>i</i></sup> choices of <i>k</i> (each of the
+        <i>i</i> primes is either used or it
+        is not).&nbsp; Also <i>m</i><sup>2</sup>&nbsp;<u>&lt;</u>&nbsp;<i>n</i>&nbsp;&lt;&nbsp;<i>x</i>,
+        so we have N(<i>x</i>)&nbsp;&lt;&nbsp;sqrt(<i>x</i>)<sup>.</sup>2<sup><i>i</i></sup>.
+      </p>
+      <p>Now suppose the sum of the reciprocals of the primes converges, then
+        there is an integer <i>i</i> such that remainder after the first <i>i</i> terms (the "tail" of the series) is
+        less than one half:</p>
+      <pre class="ml-5 my-2" style="line-height: 70%;">
+  1      1      1      1               1  
+---- + ---- + ---- + ---- +  . . .  &lt;  - .
+<i>p      p      p      p</i>                 2 
+ <i>i</i>+1    <i>i</i>+2    <i>i</i>+3    <i>i</i>+4  
+
+</pre>
+      <p>(The denominators here are the <i>i</i>+1<i>st</i> prime, <i>i</i>+2<i>nd</i> prime and so on).&nbsp; The
+        number of positive integers <i>n</i> less than <i>x</i> which are divisible by <i>p</i> is at most <i>x/p</i>,
+        hence those
+        divisible by any prime other than the first <i>i</i> primes, <i>x</i> -
+        N(<i>x</i>), is at most</p>
+      <pre class="ml-5 my-2" style="line-height: 70%;">
+  x      x      x      x               x  
+---- + ---- + ---- + ---- +  . . .  &lt;  - .
+<i>p      p      p      p</i>                 2 
+ <i>i</i>+1    <i>i</i>+2    <i>i</i>+3    <i>i</i>+4  
+
+</pre>
+      <p>This gives N(<i>x</i>) &gt; <i>x</i>/2.&nbsp; Combining this with our upper
+        bound on N(<i>x</i>) we have</p>
+      <div class="ml-5 my-2"> <i>x</i>/2 &lt; N(<i>x</i>) &lt; sqrt(<i>x</i>) ⋅ 2<sup><i>i</i></sup>. </div>
+      <p>But this is false for all <i>x</i> larger than 2<sup>2<i>i</i>+2</sup>,
+        completing the proof. </p>
+      <p>It is interesting to note that there is a good bound for the partial
+        sums of the reciprocals of the primes.&nbsp;&nbsp; If we let S(<i>x</i>)
+        = the sum of the reciprocals of the primes less than <i>x</i>, then for <i>x</i> &gt; 1, </p>
+      <div class="ml-5 my-2">log log <i>x</i> &nbsp;&lt; &nbsp;S(<i>x</i>) &nbsp;&lt; &nbsp;log
+        log <i>x</i> + B + 1/(log <i>x</i>)<sup>2</sup></div>
+      <p>where B is Euler's &gamma; plus the sum over the primes <i>p</i> of (1/<i>p</i> + log(1-1/<i>p</i>)) [<a
+          href="/references/refs.cgi/BS96">BS96</a>,
+        Thm 8.8.5].&nbsp; B is about 0.261497.</p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="notes/privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

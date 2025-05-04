@@ -1,0 +1,5 @@
+AuthName "Top20 Database Administration Directory"
+AuthType Basic
+AuthUserFile /var/www/html/glossary/admin/.htpasswd
+require valid-user
+

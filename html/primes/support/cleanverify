@@ -1,0 +1,175 @@
+#!/usr/bin/perl -w
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use LoadPrimes;
+
+# Both clean up notes (should be unnecessary) by
+# removing lines like
+#
+#	298124127*2^107120-1 1/107150
+#
+# and removes enteries for missing primes and list info about duplicates
+# Also removes bad entries (e.g. a 'failed', 'error' or 'requested' when a
+# result of 'prime', 'composite' or 'prp' recorded).
+# Uses both the prime and deleted tables so that deleted primes keep thier verfication data.
+
+# Do the work
+
+# Load the primes into %desc (desc{id}=description), so we know what id's we are looking for
+print &LoadPrimes::ProcessPrimes(sub {$desc{$$_{'id'}} = $$_{'description'}},
+	{'fields' => 'id,description'}).' primes and ';
+print &LoadPrimes::ProcessPrimes(sub {$desc{$$_{'id'}} = $$_{'description'}},
+	{'fields' => 'id,description', 'table' => 'deleted'});
+print " deleted primes loaded.\n";
+
+use connect_db;
+my $dbh = &connect_db::connect();
+
+# Now load the verify entries
+########################################################
+my $query = "SELECT what, prime_id, id, notes FROM verify ORDER BY created DESC";
+my $sth = $dbh->prepare($query);
+$sth->execute();
+
+$missing = 0;		# verify entries for missing primes (removed composited?)
+			# these entries are deleted
+$extra_requests = 0;	# number of verify entries deleted
+$shortened_by = 0;	# Total number characters removed from text column
+
+# Most results are deleted if better ones are found.  E.g., remove a prp verify entry
+# if we later show it prime.  But trial division entries might remain even if we later
+# show composite/prime...  yet still delete multiple trial_div entries
+
+my %result;	# key is prime id, value is 'prime_id.result'--if a later one
+		# matches, we could delete it (see loop below).  But not trial_divison entries.
+my %result2;	# key is still prime id, but value is verify id so we
+		# can delete the earlier item if later better
+my %trial_div;  # key is prime id, value is the verify id.
+
+
+while ($v = $sth->fetchrow_hashref) {
+
+  # Unnecessary data? (e.g. left over request from dead process or failed
+  # attempt that later succeded).  Basically if it ever has a result matching
+  # /(prp|prime|composite)/o then any result matching /(requested|failed|error)/
+  # is removed
+
+  if (exists($result{$$v{'prime_id'}})) {	# There is a previous result (which is not 'trial_divided')
+    if (($$v{'what'} =~ /(requested|failed|error|prp)/o)
+	and ($result{$$v{'prime_id'}} =~ /(prp|prime|composite)/o)) {
+      $extra_requests++;
+      &Remove($$v{'id'});			# previously read is better (newer), remove this one (older)
+      next;
+    }
+    if (($$v{'what'} =~ /(prp|prime|composite)/o)
+	and ($result{$$v{'prime_id'}} =~ /(requested|failed|error)/o)) {
+      $extra_requests++;
+      &Remove($result2{$$v{'prime_id'}});	# this one is better, remove previously read (newer)
+      next;
+    }
+
+    if (($$v{'what'} =~ /(prp|prime)/o) 	# duplicate prime entry?
+	and ($result{$$v{'prime_id'}} =~ /(prime)/o)) {
+      $extra_requests++;
+      &Remove($$v{'id'});			# previously read is better (newer), remove this one (older)
+      next;
+    }
+    if (($$v{'what'} =~ /(composite)/o) 	# duplicate composite entry?
+	and ($result{$$v{'prime_id'}} =~ /(composite)/o)) {
+      $extra_requests++;
+      &Remove($$v{'id'});			# previously read is better (newer), remove this one (older)
+      next;
+    }
+
+  }
+
+  # Remove any repeated trial division entries
+
+  if (exists($trial_div{$$v{'prime_id'}}) and ($$v{'what'} =~ /trial_divided/)) {
+      $extra_requests++;
+      &Remove($$v{'id'});
+      next;
+  }
+
+  # If primes exists--simplify the text column; else remove the database
+  # entry (e.g., a composite was removed from the list)
+
+  if (exists($desc{$$v{'prime_id'}})) {
+    $match = quotemeta($desc{$$v{'prime_id'}});
+    $text = $$v{'notes'};
+    $text =~ s/^(16777259|33554467|50331653|67108879|83886091)$//gm;
+    $text =~ s/$match \d+\/\d+[\b\r\f]+//gm;
+    $text =~ s/Ellapsed time:/Elapsed time:/gm;
+    $text =~ s/\r+\d+\/\d+(?=[\r\f])/\r/gs;
+    $text =~ s/(F|PRP|N\+1|N\-1)?:? .*? \d+\/\d+[\b\r\f]+//ogm;
+    $text =~ s/Prime\_Testing\_Warning, unused factor from helper file:\s+\d+\.+\d+\s*[\b\r\f\n]+//ogm;
+    $text =~ s/(F|PRP|N\+1|N\-1)?:? .*? \d+\/\d+\s*(mro=\d+\.\d+e?-?\d*|mro=0)?[\b\r\f]+//ogm;
+#   This one first screws up helper files!!!
+    $text =~ s/(\d{35})(\d{20,})(\d{35})/$1.'...('.(length($2)+70).' digits)...'.$3/egs;
+    # One-time for LLR (now added to verify)
+    $text =~ s/\S+,\s*iteration\s*:\s*\d+\s+\/\s+\d+\s+\[\d*\.\d*\%\]\.\s+Time per iteration\s+:\s*\d+\.\d+\s*\S*//gm;
+    $text =~ s/[\t\f\v ]+/ /go;
+    $text =~ s/[\t\s\r\f\n]*\n[\t\s\r\f\n]*/\n/sg;
+    $text =~ s/[\n\r]{3,}/\n\n/sg;
+    $text =~ s/(\d\.\d\d)\d+\.2 /$1 /;
+    $text =~ s/\033\[7m//;
+    $text =~ s/\033\[0m//;
+    if ($text ne $$v{'notes'}) {
+	$shortened_by += length($$v{'notes'})-length($text);
+	$query = "UPDATE verify SET notes = ".($dbh->quote($text))." WHERE id=".$$v{'id'};
+	$sth2 = $dbh->prepare($query);
+	$sth2->execute();
+    }
+  } else {
+    $missing++;
+    &Remove($$v{'id'});
+    next;
+  }
+
+  # fill the two result hash arrays (last so it can be skipped if the entry was removed!)
+
+  if ($$v{'what'} ne 'trial_divided') {
+    $result{$$v{'prime_id'}} = ($result{$$v{'prime_id'}}||'').$$v{'what'};
+    $result2{$$v{'prime_id'}} = $$v{'id'};
+  } else {
+    $trial_div{$$v{'prime_id'}} = $$v{'id'};
+  }
+}
+
+print "$missing verify entries for missing primes removed.\n";
+print "$extra_requests from dead/failed processes deleted.\n";
+print "Text columns shortend by a total of $shortened_by characters.\n";
+
+# Tally up the number of possible results stored for primes
+# (e.g. 'prpprpprime')
+
+foreach (keys %result) {
+  $summary{$result{$_}}++;
+}
+
+print "\nTally of the types of results stored for a single prime\n\n";
+foreach my $key (sort {$summary{$b} <=> $summary{$a}} keys %summary) {
+  printf "%8d %s", $summary{$key}, $key;
+  if ($summary{$key} < 20) {
+    print " : the prime id(s) are as follows\n\t\t";
+    foreach (keys %result) {
+      if ($result{$_} eq $key) {
+	print "$_ ";
+      }
+    }
+  }
+  print "\n";  # end the line started above
+}
+print "\n";
+
+exit;
+
+sub Remove() {
+  my $id=shift;
+  my $query = "DELETE FROM verify WHERE id=$id";
+  my $sth = $dbh->prepare($query);
+  $sth->execute();
+}

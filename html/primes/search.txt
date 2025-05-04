@@ -1,0 +1,97 @@
+<!--  When adding input field make their names are \w+ and match these patterns exactly:
+
+        Radio:    type=radio name=xxxxx value=xxxxxx [checked]
+        Checkbox: type=checkbox name="xxxxx[]" value=xxxxxx [checked]
+        Other:    name=xxxxx value=xxxxxx
+
+      This is so I can modify them from the search routine. 
+-->
+
+<p>The prime database currently has six fields:</p>
+<ol>
+  <LI><B>Rank:</B> primes are ranked from largest (1) to the least in order of size 
+  <LI><B>Description:</B> the mathematical expression that defines the prime 
+  <LI><B>Digits:</B> the number of digits in the base ten expansion 
+  <LI><B>Discoverer:</B> the name of the discoverers (provers) 
+  <LI><B>Year:</B> the year they were added to the list 
+  <LI><B>Comment:</B> Certain types of primes are indicated with comments(twins, 
+	Mersennes,...)
+</OL>
+<p>There is also an <a href="search.php?Advanced=1">Advanced Search Form</a>)</p>
+
+
+<FORM method=post action="search.php">
+ <p>For the description and comment fields you may enter a substring (case insensitive) which the primes must
+match.&nbsp; Leave blank to allow any value.&nbsp; <B>Examples:</B> You could enter "<code>twin</code>" in the comment
+field to get a list of twin primes in the database; or enter "<code>!! OR !2</code>" in the description field to get
+all double factorial primes.&nbsp; (See also the <a href="help/search_description.php">advanced search options</a>.)</p>
+
+<BLOCKQUOTE>
+  <INPUT tabindex=1 size=30 name=Description> <B>Mathematical Description</B> (e.g., <CODE>5*2^30000+1</CODE>)<BR>
+  <INPUT tabindex=2 size=30 name=Comment><B> Text Comment</B> (e.g., <CODE>twin</CODE>)
+</BLOCKQUOTE>
+
+<p>You may restrict the prime output to one or more discoverer by selecting
+one of the following.&nbsp; Leave blank to allow any discoverer.&nbsp; You may also
+use * as a wildcard.</p>
+
+<BLOCKQUOTE>
+  <INPUT tabindex=3 size=8 name=Discoverer> <B>Proof-Code(s)</B> (e.g., <CODE>C</CODE>, or perhaps <CODE>C or D*</CODE>). 
+</BLOCKQUOTE>
+
+<p>You may also restrict the primes selected by specifying a minimum and/or
+maximum number of digits.&nbsp; Since all primes in this database have at least
+1000 digits, smaller minimums would be meaningless.&nbsp; Leave blank to place
+no restriction on the size.</p>
+
+<BLOCKQUOTE>
+ <DL>
+  <DT>Rank: 
+  <DD>minimum <INPUT tabindex=10 size=7 name=MinRank> maximum <INPUT tabindex=11 size=7 name=MaxRank><BR>
+  <DT>Digits:
+  <DD>minimum <INPUT tabindex=12 size=7 name=MinDigits> maximum <INPUT tabindex=13 size=7 name=MaxDigits><BR></DD>
+ </DL>
+</BLOCKQUOTE>
+
+<p>You may restrict the primes selected by specifying a minimum and/or
+maximum age (in number of days).</p>
+
+<BLOCKQUOTE>
+ <DL>
+  <DT>Age:
+  <DD>minimum <INPUT tabindex=15  size=7 name=MinAge> maximum <INPUT tabindex=16 size=7 name=MaxAge> days<BR></DD>
+ </DL>
+</BLOCKQUOTE>
+
+<p>You may restrict the type of primes to search for.&nbsp; For example, the database
+stores all of the primes that were ever on the list; not just those currently on 
+the list.&nbsp; It also stores submissions that have not yet been (re)verified.</p>
+
+<BLOCKQUOTE>
+ <DL>
+  <DT>Type:
+  <DD><input tabindex=20 type=radio name=OnList value=yes checked> Just those on list
+  <input tabindex=21 type=radio name=OnList value=verified> all verified primes
+  <input tabindex=22 type=radio name=OnList value=all> all (includes unverified primes)
+ </DL>
+</BLOCKQUOTE>
+
+<p>Finally, you may limit the size of the list you get by placing an upper
+limit on the number of primes.&nbsp;
+<B>Example</B>: If you leave every other field above blank, and enter 100
+here, you will get a list of the 100 largest primes.&nbsp; (The number
+displayed has a default value of 20.)</p>
+
+<BLOCKQUOTE>
+ <INPUT tabindex=30 name=Number value=20> <B>Maximum number of primes to output</B> (limited to 16,000)
+ <BR><B>Search Output Style:</B> <input tabindex=31 type=radio name=Style value=HTML checked> HTML
+	 <input tabindex=32 type=radio name=Style value=Text> Text
+	 <input tabindex=33 type=radio name=Style value=NoBorder> Text (printable)
+</BLOCKQUOTE>
+
+<B>
+ <INPUT tabindex=40 type=submit value="Search database for matches" class="btn btn-primary p-2 mb-4"> &nbsp; &nbsp; 
+ <INPUT tabindex=41 type=reset  value="Reset search form" class="btn btn-primary p-2 mb-4"> 
+</B>
+
+</FORM>

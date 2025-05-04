@@ -1,0 +1,60 @@
+x
+
+<HEAD>
+    <ccMETA sort="Letters">
+        <TITLE>New values of pi(x) (18 Apr 1996)</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+    <H1 align="center">New values of pi(x)</H1>
+    <b>Date:</b> Thu, 18 Apr 1996 09:30:37 +0200<BR>
+    <b>From:</b> Marc Deleglise<BR>
+    <b>To:</b> Chris Caldwell
+
+    <p>[See the later note of <a href="md6-96.html">19 Jun 1996</a>]
+
+    <p>I am pleased to send you some new values of pi(x):
+        ( 2e18 means 2.10^(18) and so on...)
+
+    <blockquote class="blockquote">
+        <pre>
+pi(2e18) 		=  48 645 161 281 738 535
+pi(3e18) 		=  72 254 704 797 687 083
+pi(4e18) 		=  95 676 260 903 887 607
+pi(4185296581467695669) = 100 000 000 000 000 000 
+pi(5e18) 		= 118 959 989 688 273 472
+pi(6e18) 		= 142 135 049 412 622 144
+pi(7e18) 		= 165 220 513 980 969 424
+pi(8e18) 		= 188 229 829 247 429 504
+pi(9e18) 		= 211 172 979 243 258 278
+pi(1e19) 		= 234 057 667 276 344 607
+</pre>
+    </blockquote>
+
+    These values have been checked
+    <ol>
+        <li>by computing pi(x) and pi(x + 1e7) and checking that the number of primes in
+            the short interval agrees with the two values of pi.
+        <li>or
+            by computing them two times with different values of 2 parameters
+            y and z used during the computation.
+    </ol>
+
+    (Thanks to Paul Zimmermann from INRIA Nancy who lend me some hours of
+    computation on his Silicon Graphics and between other values got
+    the pi(418....) = 10^17).
+
+    <p>The method is presented in Math of Comp 1996 by
+        Deleglise & Rivat: Computing Pi(x), the Meissel, Lehmer, Lagarias,
+        Miller, Odlyzko method [<a href="/references/refs.cgi/DR96">DR96</a>].
+        The program is an improved implementation of the precedent version.
+        The asymptotic time and space complexity are unchanged (O(x^(2/3)/logx^2)
+        for time and O(x^(1/3)logx^3) for space);
+
+    <p>It is running about 2 times faster and needs less memory.
+        The last value took 40 hours of computation on a DEC-Alpha 5/250
+        and needed about 80Mo memory.
+        I got some other intermediate values that are waiting to be checked.
+        I hope to send you some new bigger values after a while.
+
+    <p>Marc Deleglise.

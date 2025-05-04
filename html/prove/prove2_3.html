@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>2.3: Strong probable-primality and a practical test</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->2.3: Strong
+                probable-primality and a practical test<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove2.html">Chapter
+                  Two</a> &gt; Strong PRPs<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p>A better way to make the Fermat test more accurate is to realize that if an
+    odd number <i>n</i> is prime, then the number 1 has just two square roots
+    modulo <i>n</i>: 1 and -1.&nbsp; So the square root of <i>a</i><sup><i>n</i>-1</sup>,
+    <i>a</i><sup>(<i>n</i>-1)/2</sup>
+    (since <i>n</i> will be odd), is either 1 or -1.&nbsp; (We actually could
+    calculate which it should be using the <a class="glossary" title="glossary"
+      href="/glossary/page.php?sort=JacobiSymbol">Jacobi
+      symbol</a>, see the glossary page on <a class="glossary" title="glossary"
+      href="/glossary/page.php?sort=EulerPRP">Euler
+      PRP's</a>, but we wish to develop a stronger test here.)&nbsp; If (<i>n</i>-1)/2
+    is even, we can easily take another square root...&nbsp; Let's make this into
+    an algorithm:
+  </p>
+  <blockquote>
+    Write <i>n</i>-1 = 2<sup><i>s</i></sup><i>d</i> where <i>d</i> is odd and <i>s</i>
+    is non-negative: <i>n</i> is a <b>strong probable-prime base <i>a</i></b>
+    (an <b><i>a</i>-SPRP</b>) if either <i>a<sup>d</sup></i> ≡ 1 (mod <i>n</i>)
+    or (<i>a<sup>d</sup></i>)<sup>2<sup><i>r</i></sup></sup> ≡ -1 (mod <i>n</i>)
+    for some non-negative <i>r</i> less than <i>s</i>.
+  </blockquote>
+  <p>Again all integers <i>n</i> &gt; 1 which fail this test are composite; integers
+    that pass it <i>might</i> be prime. The smallest odd composite SPRP's are
+    the following. </p>
+  <ul>
+    <li>2047 = 23.89 is a 2-SPRP,</li>
+    <li>121 = 11.11 is a 3-SPRP,</li>
+    <li>781 = 11.71 is a 5-SPRP and,</li>
+    <li>25 = 5.5 is a 7-SPRP.</li>
+  </ul>
+  <p>A test based on these results is quite fast, especially when combined with
+    trial division by the first few primes.&nbsp; If you have trouble programming
+    these results Riesel [<a href="/references/refs.cgi/Riesel94">Riesel94</a>,
+    p100] has PASCAL code for a SPRP test, Bressoud has pseudocode [<a
+      href="../references/refs.cgi/Bressoud89">Bressoud89</a>,
+    p77], and <a href="http://www.olivierlanglois.net/">Langlois</a>
+    offers <a href="http://www.olivierlanglois.net/archive/prime_cpp.htm">C-Code</a>.&nbsp;
+    See the glossary page &quot;<a class="glossary" title="glossary" href="/glossary/page.php?sort=StrongPRP">Strong
+      PRP</a>&quot;
+    for more information.&nbsp;</p>
+  <p>It has been proven ([<a href="../references/refs.cgi/Monier80">Monier80</a>]
+    and [<a href="../references/refs.cgi/Rabin80">Rabin80</a>]) that the strong
+    probable primality test is wrong no more than 1/4th of the time (3 out of 4
+    numbers which pass it will be prime).&nbsp; Jon Grantham's &quot;Frobenius
+    pseudoprimes&quot; can be used to create a test (see [<a href="../references/refs.cgi/Grantham98">Grantham98</a>])
+    that takes three times as long as the SPRP test, but is far more than three
+    times as strong (the error rate is less than 1/7710).</p>
+  <h3>Combining these tests to prove primality</h3>
+  <p id="quick">Individually these tests are still weak (and again
+    there are infinitely many <i>a</i>-SPRP's for every base <i>a</i>&gt;1
+    [<a href="../references/refs.cgi/PSW80">PSW80</a>]),
+    but we can combine these individual tests to make powerful tests for small
+    integers <i>n</i>&gt;1 (these tests <i>prove</i> primality):</p>
+  <ul>
+    <li>If <i>n</i> &lt; 1,373,653 is a both 2 and 3-SPRP, then <i>n</i> is
+      prime [<a href="../references/refs.cgi/PSW80">PSW80</a>].</li>
+    <li>If <i>n</i> &lt; 25,326,001 is a 2, 3 and 5-SPRP, then <i>n</i> is
+      prime [<a href="../references/refs.cgi/PSW80">PSW80</a>].</li>
+    <li>If <i>n</i> &lt; 25,000,000,000 is a 2, 3, 5 and 7-SPRP, then either <i>n</i>
+      = 3,215,031,751 or <i>n</i> is prime [<a href="../references/refs.cgi/PSW80">PSW80</a>].
+      (This is actually true for <i>n</i>
+      &lt; 118,670,087,467 [<a href="../references/refs.cgi/Jaeschke93">Jaeschke93</a>].)</li>
+    <li>If <i>n</i> &lt; 2,152,302,898,747 is a 2, 3, 5, 7 and 11-SPRP, then <i>n</i>
+      is prime [<a href="../references/refs.cgi/Jaeschke93">Jaeschke93</a>].</li>
+    <li>If <i>n</i> &lt; 3,474,749,660,383 is a 2, 3, 5, 7, 11 and 13-SPRP, then
+      <i>n</i> is prime [<a href="../references/refs.cgi/Jaeschke93">Jaeschke93</a>].
+    </li>
+    <li>If <i>n</i> &lt; 341,550,071,728,321 is a 2, 3, 5, 7, 11, 13 and
+      17-SPRP, then <i>n</i> is prime [<a href="../references/refs.cgi/Jaeschke93">Jaeschke93</a>].</li>
+  </ul>
+  The first three of these are due to Pomerance, Selfridge and Wagstaff [<a
+    href="../references/refs.cgi/PSW80">PSW80</a>],
+  the parenthetical remark and all others are due to Jaeschke [<a
+    href="../references/refs.cgi/Jaeschke93">Jaeschke93</a>].&nbsp;
+  (These and related results are summarized in [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>,
+  Chpt 2viiib].)&nbsp; In the same article Jaeschke considered other sets of
+  primes (rather than just the first primes) and found these
+  slightly better results:
+  <ul>
+    <li>If <i>n</i> &lt; 9,080,191 is a both 31 and 73-SPRP, then <i>n</i> is
+      prime.</li>
+    <li>If <i>n</i> &lt; 4,759,123,141 is a 2, 7 and 61-SPRP, then <i>n</i> is
+      prime.</li>
+  </ul>
+  Finally, Worley (<a href="http://www.gpgpgpu.com/gecco2009/6.pdf">on-web</a>, unpublished) suggests the following,
+  <ul>
+    <li>If <i>n</i> &lt; 170,584,961 is a 350 and 3958281543-SPRP, then n is prime.</li>
+    <li>If <i>n</i> &lt; 75,792,980,677 is a 2, 379215, and 457083754-SPRP, then n is prime.</li>
+    <li>If <i>n</i> &lt; 21,652,684,502,221 is a 2, 1215, 34862, and 574237825-SPRP, then n is prime.</li>
+  </ul>
+  <p>To make a quick primality test from these results,
+    start by dividing by the first few primes (say those below 257); then perform
+    strong primality tests base 2, 3, ... until one of the criteria above is
+    met.&nbsp; For example, if <i>n</i> &lt; 25,326,001 we need only check bases
+    2, 3 and 5.&nbsp; This is much faster than trial division because someone
+    else has already done much of the work, but will only work for small numbers
+    (<i>n</i> &lt; 10<sup>16</sup> with the data above).</p>
+
+  <p>Note that these results can be strengthened by not treating them as separate
+    tests, but rather realizing we are finding square root of -1.&nbsp; For example, <i>n</i> =
+    46,856,248,255,981 is a 2 and 7 pseudoprime, but </p>
+  <blockquote>2<sup>(<i>n</i>-1)/4</sup> ≡ 34456063004337 (mod <i>n</i>), and <br>
+    7<sup>(<i>n</i>-1)/4</sup> ≡ 21307242304265 (mod <i>n</i>).</blockquote>
+  <p>The square of both of these is -1.&nbsp; If <i>n</i> were prime, then it
+    would have only two square root and the above would be equal or negatives
+    of each other; yet gcd(<i>n</i>,34456063004337-21307242304265) = 4840261
+    and we have factored <i>n</i>.</p>
+  <p>Finally, there is a fair amount more that could (and should) be said.&nbsp; We
+    could discuss Euler pseudoprimes and their relationship with SPRP's.&nbsp; Or
+    we could switch</p>
+  <p> to the &quot;plus side&quot; and discuss Lucas pseudoprimes,
+    or Fibonacci pseudoprimes, or the important combined tests... but that would
+    take a chapter of a book--and it has already been well written by Ribenboim
+    [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>].&nbsp; Let
+    us end this section with one last result: </p>
+  <blockquote id="MillersERHTest"><b>Miller's Test </b>[<a href="../references/refs.cgi/Miller76">Miller76</a>]<b>:</b>
+    <i>If
+      the extended Riemann hypothesis is true,</i> then if <i>n</i> is an <i>a</i>-SPRP
+    for all integers <i>a</i> with 1 &lt; <i>a</i> &lt; 2(log <i>n</i>)<sup>2</sup>,
+    then
+    <i>n</i> is prime.
+  </blockquote>
+  <p>The <a href="../notes/rh.html#erh">extended Riemann hypothesis</a> is far
+    too complicated for us to explain here--but should it be proven, then we
+    would have a very simple primality test.&nbsp; Until it is proven, we can
+    at least expect that if <i>n</i> is
+    composite, we should be able to find an <i>a</i> that shows it is composite
+    (a witness) without searching &quot;too long.&quot;&nbsp; Most surveys cover
+    Miller's test (often with the constant 70 from [<a href="../references/refs.cgi/Osterle1979">Osterle1979</a>]
+    as Miller's article just said O((log <i>n</i>)<sup>2</sup>)); the improvable
+    constant 2 is due to Bach [<a href="../references/refs.cgi/Bach85">Bach85</a>],
+    see also [<a href="../references/refs.cgi/CP2001">CP2001</a>, pp. 129-130].&nbsp; Note
+    that <i>heuristically</i> Bach and Huelsbergen [<a href="../references/refs.cgi/BH1993">BH1993</a>]
+    argue that we should be able to replace the bound in Miller's test with a bound
+    near: </p>
+  <blockquote>(log 2)<sup>-1</sup> log <i>n</i> log log <i>n.</i></blockquote>
+  <p> Note that there is no finite set of bases that will work in Miller's test.&nbsp; In
+    fact, if for <i>n</i> composite we let W(<i>n</i>) denote the least
+    witness for <i>n</i> (the least <i>a</i> which shows <i>n</i> is composite),
+    then there are infinitely many composite <i>n</i> with </p>
+  <blockquote>
+    W(<i>n</i>) &gt; (log <i>n</i>)<sup>1/(3 log log log <i>n</i>)</sup> &nbsp;
+    [<a href="../references/refs.cgi/AGP94">AGP94</a>]
+  </blockquote>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->
+              [ <a href="prove3_1.html"><b>next page</b></a> | <a href="prove2_2.html">previous page</a>
+              ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

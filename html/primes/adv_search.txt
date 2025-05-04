@@ -1,0 +1,96 @@
+<!--  When adding input field make their names are \w+ and match these patterns exactly:
+
+	Radio:    type=radio name=xxxxx value=xxxxxx [checked]
+	Checkbox: type=checkbox name="xxxxx[]" value=xxxxxx [checked]
+	Other:    name=xxxxx value=xxxxxx 
+
+      This is so I can modify this form from values previously sent to the search routine.
+-->
+
+<table width="100%"><tr><td>
+  See the simple search form for basic information on these first options:
+</td><td align=right width=200>
+  (<a href="search.php">Simple Search Form</a>)
+</td></tr></table>
+
+<form method=post action="search.php?Advanced=1">
+
+<input type=submit value="Search database for matches"> &nbsp; &nbsp; 
+<input type=reset  value="Reset search form"> 
+<p>
+
+<fieldset><legend>Basic Search Options </legend>
+ <dl>
+  <dt>Mathematical Description:</dt>
+  <dd><input tabindex=1 name=Description size=30> e.g., <code>5*2^30000+1</code>
+	(<a href="help/search_description.php">help</a>)</dd>
+  <dt>Official Comment:</dt>
+  <dd><input tabindex=2 name=Comment size=30> e.g., <code>twin</code>
+	(<a href="help/search_description.php">help</a>)</dd>
+  <dt>Proof-Code(s):</dt>
+  <dd><input tabindex=3 size=8 name=Discoverer> e.g., <code>C</code>, or perhaps <code>C or D*</code></dd>
+  <dt>Rank: 
+  <dd>minimum <input tabindex=4 size=7 name=MinRank> maximum <input tabindex=5 size=7 name=MaxRank></dd>
+
+  <dt>Entrance Rank: 
+  <dd>minimum <input tabindex=4 size=7 name=MinERank> maximum <input tabindex=5 size=7 name=MaxERank></dd>
+
+  <dt>Digits: 
+  <dd>minimum <input tabindex=10 size=7 name=MinDigits> maximum <input tabindex=11 size=7 name=MaxDigits></dd>
+  <dt>Age: 
+  <dd>minimum <input tabindex=13 size=7 name=MinAge> maximum <input tabindex=14 size=7 name=MaxAge> days</dd>
+  <dt>Type:
+  <dd><input tabindex=16 type=radio name=OnList value=yes checked> Just those on list
+  <input tabindex=17 type=radio name=OnList value=verified> all verified primes
+  <input tabindex=18 type=radio name=OnList value=all> all (includes unverified primes)</dd>
+  <dt>Maximum Number of Primes:</dt>
+  <dd> <input tabindex=20 size=6 name=Number value=20> </dd>
+  <dt>Search Output Style:<dt>
+  <dd><input tabindex=21 type=radio name=Style value=HTML checked> HTML
+	 <input tabindex=22 type=radio name=Style value=Text> Text
+	 <input tabindex=23 type=radio name=Style value=NoBorder> Text (printable)</dd>
+ </dl>
+</fieldset>
+
+<fieldset>
+ <legend>Advanced Search Options </legend>
+  <dl>
+   <dt>Sort Order:</dt>
+   <dd>
+     <input tabindex=31 type=radio name=OrderBy value=Rank checked> Rank (ascending)
+     <input tabindex=32 type=radio name=OrderBy value=Date> Date (descending)
+   </dd>
+   <dt>Prime Verification Status: (overrides 'Type' above)
+   <dd>
+     <input tabindex=35 type=checkbox name="PrimeStatus[]" value=1> Composite
+     <input tabindex=36 type=checkbox name="PrimeStatus[]" value=2> Untested
+     <input tabindex=37 type=checkbox name="PrimeStatus[]" value=3> InProcess
+     <input tabindex=38 type=checkbox name="PrimeStatus[]" value=4 checked> PRP
+     <input tabindex=39 type=checkbox name="PrimeStatus[]" value=5 checked> Prime
+     <input tabindex=40 type=checkbox name="PrimeStatus[]" value=6 checked> External
+   </dd>
+  </dl>
+</fieldset>
+
+<fieldset>
+ <legend>User Contributed Comment Options </legend>
+  <dl>
+   <dt>Restrictions:</dt>
+   <dd>
+     <input tabindex=50 type=radio name=UserComment value=yes> With user comments
+     <input tabindex=51 type=radio name=UserComment value=NULL> without user comment
+     <input tabindex=52 type=radio name=UserComment value=either checked> either
+   </dd>
+  <dt>Last modification age:</dt>
+  <dd>minimum <input tabindex=60 size=7 name=UserMinAge> maximum <input tabindex=61 size=7 name=UserMaxAge> days</dd>
+  <dt>Text of user comment:</dt>
+  <dd><input tabindex=65 name=UserCommentMatch size=30> e.g., <code>twin</code>
+	(<a href="help/search_description.php">help</a>)</dd>
+  </dl>
+</fieldset>
+
+<p>
+<input tabindex=200 type=submit value="Search database for matches"> &nbsp; &nbsp; 
+<input tabindex=201 type=reset  value="Reset search form"> 
+
+</form>

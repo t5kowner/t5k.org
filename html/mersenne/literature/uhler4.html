@@ -1,0 +1,528 @@
+<HTML>
+
+<HEAD>
+
+</HEAD>
+
+<BODY>
+   <center>
+      <font size=+3>
+         A BRIEF HISTORY OF THE INVESTIGATIONS ON MERSENNE NUMBERS AND
+         THE LATEST IMMENSE PRIMES
+      </font>
+      <br>
+      <br>
+      <font size=+2>
+         B</font>
+      <font size=+1>Y<font size=+2> HORACE S. UHLER
+            <br>
+         </font>
+         <br>
+         <font size=+1>T</font>HIS ARTICLE IS ADDRESSED TO THOSE VALUED READERS WHO PREFER
+         OR REQUIRE A SYNOPSIS OF FACTS BEFORE ALGEBRAIC PROOFS.
+      </font>
+   </center>
+   <br>
+   What are Mersenne numbers and why should any television fan abandon
+   this latest relaxation fad for neglecting the proper maintenance of
+   muscular tissue in order to consume any mental energy on something
+   as ancient, trite, and obvious as any kind of number? We shall
+   endeavor to give a succinct answer to the first part of this question
+   while abandoning the second part to the anthropologist, to the student
+   of the completely unreliable mammal often questionably referred to as
+   &quot;homo sapiens.&quot;
+
+   <br>&nbsp;&nbsp;&nbsp;
+   It is convenient to call any number expressed by the form <I>Mp</I> = 2^<I>p</I>-1,
+   where <I>p</I> denotes a prime number, a Mersenne number regardless of the
+   fact that this philosopher extended his prediction only as far as
+   <I>p</I> = 257.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   When[<a href="#ref_01">1</a>] did Marin Mersenne live? He was born near Oiz&eacute; (Sarthe) on
+   Sept. 8, 1588, and died in Paris on Sept. 1, 1648. Mersenne and
+   Descartes were fellow students at the Jesuit college of La Fl&egrave;che.
+   In 1611 Mersenne joined the Minim Friars, and in 1620 he made
+   permanent residence in Paris at the convent of L'Annonciade. The
+   Minimi[<a href="#ref_02">2</a>] (or Minims) were members of a Roman Catholic monastic order
+   founded in Italy in 1435 by St. Francis of Paula. This designation
+   was assumed as an expression of self-abasement. A portrait of Father
+   Mersenne is reproduced on page 72 of Oystein Ore's fascinating text
+   entitled <I>Number Theory and Its History</I>, (1948).
+
+   <br>&nbsp;&nbsp;&nbsp;
+   What interest attaches to integers of the form 2^<I>p</I> - 1, <I>p</I> prime?
+   Fundamentally because of their relation to the so-called <I>perfect</I>
+   numbers. A number is said to be perfect when it is equal to the sum
+   of all its integral divisors not including itself. For example 28 =
+   1 + 2 + 4 + 7 + 14 and is &quot;perfect.&quot; Euclid (<I>c</I> 330 B.C.) proved that
+   a number satisfying the formulation (2^(<I>p</I>-1))(2^<I>p</I> - 1) is perfect
+   when the factor 2^<I>p</I> - 1 is a Mersenne prime. Obviously when the
+   number itself is included as its own divisor then the sum of the
+   divisors equals twice the perfect integer.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   In this connection the following quotations are interesting and
+   informative. From pages 43 and 44 of Peter Barlow's book entitled
+   <I>Theory of Numbers</I> we quote &quot;The difficulty, therefore, of finding
+   perfect numbers, arises from that of finding prime numbers, of the
+   form 2^<I>n</I> - 1, which is very laborious. Euler ascertained, that
+   2^31 - 1 = 2147483647 is a prime number; and this is the greatest at
+   present known to be such, and, consequently, the last of the above
+   perfect numbers, which depends upon this, is the greatest perfect
+   number known at present, and probably the greatest that ever will be
+   discovered; for, as they are merely curious without being useful, it
+   is not likely that any person will attempt to find one beyond it.
+   It may not be amiss to observe, that the reason for employing the
+   powers of 2 in this research, to the exclusion of all other numbers,
+   arises from this, that 2 is the only even prime; and, therefore, if
+   we made use of any other prime, as <I>a</I>, then (<I>a</I>^<I>n</I> - 1) would not be a
+   prime number; and, if we employed an even number, then the formula
+   above given would not truly express the sum of the divisors of <I>N</I>.&quot;
+   Barlow's rather derogatory opinions of the year 1811 are partially
+   shared by Edmund Landau.[<a href="#ref_03">3</a>]
+
+   <br>&nbsp;&nbsp;&nbsp;
+   He says (in German): &quot;This ancient idea
+   of the perfect number and its associated questions are not
+   especially important, I treat these matters only because by so doing
+   we shall immediately encounter two problems which are unsolved even
+   to-day: ... [1927]. Is the number of even perfect numbers infite? I
+   do not know. Is the number of odd perfect numbers infite? I don't
+   even know whether a single odd perfect number exists. Nevertheless
+   I beg the reader not to ponder long over these two questions; he or
+   she will learn about many more abstruse and promising problems during
+   the study of this work.&quot;
+
+   <br>&nbsp;&nbsp;&nbsp;
+   In marked contrast with the last opinion we read from the pen of
+   E. T. Bell:[<a href="#ref_04">4</a>] &quot;This raises the interesting and extremely difficult
+   question of finding those primes <I>p</I> which make 2^<I>p</I> - 1 prime. Any
+   help here would be appreciated by arithmeticians. For <I>p</I> = 2, 3, 5,
+   7, 13, 17, 19, 31, 61, 89, 107, 127, it is known that 2^<I>p</I> - 1 is
+   prime. Can anything <I>general</I> be stated? If so, whisper it to some
+   mathematician and you will probably be heard, from now till at least
+   the year 4000 A. D.)&quot;
+
+   <br>&nbsp;&nbsp;&nbsp;
+   Greater human interest in Mersenne numbers developed from his
+   apparently off-hand prediction that the only values of <I>p</I> up to, and
+   inclusive of, 257 are 2, 3, 5, 7, 13, 17, 19, 31, 67, 127, 257.
+   Justifiable curiosity led to the investigation by many computers of
+   the prime or composite character of the numbers 2^<I>p</I> - 1 for all of
+   the 55 primes not exceeding <I>p</I> = 257. Comparison of the predicted
+   list with the correct set given in the preceding paragraph shows
+   that Mersenne made five mistakes.. He erroneously included <I>p</I> = 67,
+   257, and excluded <I>p</I> = 61, 89, 107. Since Mersenne made his
+   prediction in the year 1644 and the last one of the 55 candidates
+   2^<I>p</I> - 1 was finally examined in the year 1947[<a href="#ref_05">5</a>] it is rather
+   astonishing that about 303 years were required to completely set
+   Mersenne right! (I wonder what his reactions were, if any.)
+
+   <br>&nbsp;&nbsp;&nbsp;
+   In critical vein attention may be called to a Special to the <I>New
+      York Times</I>, from Chicago, and published on Friday, March 27, 1936.
+   We quote: &quot;A problem which has baffled mathematicians since the
+   time of Euclid, the finding of a perfect number with more than 19
+   digits, has been solved by Dr. Samuel I. Krieger.&quot; The 155-figure
+   value of 2^513 - 2^256 is then given correctly. But this equals
+   (2^256)(2^257 - 1) in which the <I>M</I>257 factor had been shown to be
+   <I>composite</I> by D. H. Lehmer and published in May 1931, nearly five
+   years earlier than Dr. Krieger's false claim to prominence. The
+   moral relative to the very best of newspapers should be obvious.
+   (By the way, the writer has sought in vain to find out the personal
+   history of D. Krieger. So haben der Krieger und die Zeitung gar
+   nichts &quot;gekriegt.&quot;)
+
+   <br>&nbsp;&nbsp;&nbsp;
+   An extension of the playground belonging to the perfect numbers is
+   afforded by the multiply perfect numbers which are defined as
+   having the sum of their divisors equal to a multiple (2, 3, 4, . . . )
+   of the number itself. For example 672 = 2^5*3*7 is a number of this
+   kind since the sum of its 192 divisors equals 2*672. The multiple
+   may be called the <I>class</I> of the number. An enthusiastic amateur has
+   sent me (in 1949) one of his numbers of class 8, having 162 digits
+   and 13122 97817 86896 62976 divisors, inclusive of 1 and N.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   The reader who desires full details concerning the names of the
+   investigators of the prime or composite character of Mersenne
+   numbers, of the factors when obtainable, of the dates and journals
+   of publication, etc., should refer to the characteristically
+   complete and reliable paper by R. C. Archibald in S<font size=-1>CRIPTA</font>
+   M<font size=-1>ATHEMATICA</font>, v. 3, No. 2, p. 112-119, April 1935. Since Archibald's
+   paper practically exhausts the references up to the last date we
+   shall continue the present record after the year 1935.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   At that time there were six values of <I>p</I> within the Mersenne range
+   which had not been investigated. They corresponded to <I>p</I> = 157, 167,
+   193, 199, 227, and 229. The work of E. Fauquembergue,[<a href="#ref_06">6</a>] published
+   in 1914, established beyond question the primality of 2^127 - 1.
+   The interval of 21 years (1935-1914) seemed to give excellent
+   promise of a prime among the six virgin Mersenne numbers. These
+   considerations so overwhelmed the writer that he entered the arena
+   well armed and practiced but wholly ignorant of the strength of the
+   enemy. After tremendous labor caused by unreliable desk machines
+   and especially by an almost exaggerated estimate of the penalty of
+   an error of even one digit in any place, he eventually succeeded in
+   proving that all six of the Mersenne numbers are composite. It was
+   small consolation to realize that not a single prime occurred in,
+   the surprisingly long interval including the 24 prime values of p,
+   namely, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191,
+   193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, and 257. But
+   this is not all, the first sentence of a letter generously sent to
+   me by Lehmer and received on March 30, 1952, reads: &quot;You will
+   doubtless be interested in the results on the SWAC on the night of
+   Jan. 30, namely that 2^521 - 1 and 2^607 - 1 are the next two
+   Mersenne primes. Since there are 42 prime <I>p</I>'s between 257 and 521
+   the complete gap of composite numbers of the form 2^<I>p</I> - 1 (<I>p</I>-prime)
+   comprises 66 values. It was certainly unexpected that 12 prime
+   <I>Mp</I>'s should occur in the first 31 values of <I>p</I> while not a single]
+   Mersenne prime or perfect number exists in the succeeding range of
+   66 prime <I>p</I>'s. (Long live the &quot;Queen and Servant of Science.&quot; E. T.
+   B<font size=-1>ELL</font>.)
+
+   <br>&nbsp;&nbsp;&nbsp;
+   Why is it so difficult to test with desk machines a given number of
+   the form <I>Mp</I>? This is tantamount to asking precisely what the
+   procedure is. A brief outline of the high points of the method may
+   not be superfluous. The basic theorem, as perfected by D. H. Lehmer
+   from the pioneer results of Lucas, reads: <I>The number Mp</I> = 2^<I>p</I> - 1 <I>is
+      a Prime if and only if it divides the</I> (<I>p</I> - 1)-<I>st term of the series
+      4, 14, 194, 37634, S</I>[<I>n</I>],...where <I>S</I>[<I>n</I>] = <I>S</I>[<I>n</I>-1]^2 - 2. In non-
+   algobraic language we obtain the second element of this series by
+   squaring the first term and subtracting 2, i.e., 14 = 4^2 - 2. Next
+   we square the second term and subtract 2 to derive the third
+   element, i.e., 194 = 14^2 - 2, etc. Lehmer[<a href="#ref_07">7</a>] says: &quot;For numbers of
+   the form 2^(4<I>p</I>+-1)-1 Lucas advises the use of the series 3, 7, 47,
+   . . . This series does not give a necessary condition for primality,
+   while the series 4, 14, 194, . . . gives a necessary and sufficient
+   test for both 2^(4<I>p</I>+-1)-1.&quot; An equivalent corollary is this: <I>The
+      number 2</I>^<I>p</I>-<I>1 is prime if and only if the </I>(<I>p</I> - 2)-<I>nd term of the
+      series 4, 14, 194, equals +-2</I>^((<I>p</I>+1)/2) (<I>modulo p</I>). The point here
+   is that on repeated divisions by <I>Mp</I> the remainder for the (<I>p</I> - 1)-st
+   term must be zero and the remainder for the preceding division must
+   equal numerically 2 with the exponent (<I>p</I> + 1)/2 in order that
+   primality of 2^<I>p</I> - 1 shall exist. Obviously (<I>p</I> + 1)/2 will be an
+   integer because to be prime and greater than 2, <I>p</I> must be odd, <I>p</I> + 1
+   even, and hence (<I>p</I> + 1)/2 integral.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   An extremely simple numerical illustration should suffice. Consider the
+   case where <I>p</I> = 7 and <I>M</I>[7] = 2^7 - 1 = 127. To have a non-zero quotient
+   we begin with the third term of the sequence 4, 14, 194, ... Divide 194
+   by 127 to obtain the remainder r3 = 67. (Don't bother about the
+   quotients.) Square 67 and subtract 2 to get 4487. Divide 4487 by 127
+   to produce the remainder <I>r</I>4 = 42. Square 42 and subtract 2 to find 1762.
+   Divide this by 127 using the quotient 14 (instead of 13) to produce the
+   smaller remainder <I>r</I>5 = -16. This satisfies the corollary -2^((<I>p</I>+1)/2) =
+   -2^((7+1)/2) = -2^4 = -16 hence 2^7 - 1 is prime. If we had gone one step
+   farther we should have squared 16 and subtracted 2 giving 254. Finally
+   division by 127 presents the remainder zero and thus satisifies the
+   necessary and sufficient requirement for primality. In this extremely
+   simple illustration we might have divided 127 into the fifth member of 4,
+   14, 194, ... that is, into 14163 17954 and obtained the remainder +111 or
+   111-127 = -16 at one stroke. Or again we may divide 127 into 2005 95654
+   68227 46114, which is the sixth term of the series (counting 4 as the first)
+   and find the remainder 0 at once. On the other hand this last procedure
+   is of no practical value because the higher terms of 4, 14, 194, ...
+   increase at a terrific rate[<a href="#ref_08">8</a>]. For illustration, the tenth term contains
+   293 digits (roughly 3 X 10^2), the 226th term possesses very roughly
+   3 X 10^57 figures, and the 388th term boasts of about 1.8 X 10^116 digits.
+   Hence, in now obsolete practice one humbly commenced with the smallest term
+   of the series 4, 14, 194, which exceeded the divisor (modulus, modul) <I>Mp</I>.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   Too much emphasis cannot be placed upon the fact that at long last the
+   courageous arithmetician has been emancipated forever from the slavery of
+   hand computation on Mersenne and analogous numbers by the appearance on
+   Earth of the magnificent digital calculating assemblages. And in point of
+   time these are still in their infancy. As stated in an earlier paragraph
+   the SWAC battery proved on the night of January 30, 1952, that 2^521 - 1
+   and 2^607 - 1 are Mersenne primes. Behold <I>M</I>521 = 68 64797 66013 06097
+   14981 90079 90813 93217 26943 53001 43305 40939 44634 59185 54318 33976
+   56052 12255 96406 61454 55497 72963 11391 48085 80371 21987 99971 66438
+   12574 02829 11150 57151 and M607 = 531 13799 28167 67098 68958 82065
+   52468 62732 95931 17727 03192 31994 44138 20040 35598 60852 24273 91625
+   02265 22928 56688 89329 48624 65010 15346 57933 76527 07239 40951 99787
+   66587 35194 38312 70835 39321 90317 28127, which PRIMES possess, respectively,
+   157 and 183 digits (when written on the base 10). The smallest term of the
+   series 4, 14, 194, ... which could be used as a dividend for the divisor just
+   written would be the 10th, which comprises 293 figures. Imagine dividing by
+   a number 183 digits long 596 or 597 times, squaring the remainders, etc.,
+   with a desk machine.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   Finally and for completeness I squared 2^606 and multiplied by 2 to get
+   2^1213 with the object of computing the largest perfect number known to man
+   at this time. <I>v</I>14 = 2^(<I>p</I>-1)(2^<I>p</I> - 1) = (2^606) (2^607 - 1) = 2^1213 -
+   2^606 = 1 41053 78370 67120 69063 20795 80860 63189 88148 67435 14715 66783
+   88386 75999 95486 77426 52380 11410 41933 29037 69025 15619 50568 70982
+   93271 64087 72436 63700 87116 73126 81593 13652 48745 06524 39805 87729
+   62072 97446 72329 51666 58228 84692 68077 86652 87018 89208 67879 45147
+   83645 69313 92206 03706 95064 73607 35723 78695 17647 30552 66826 25328
+   48863 83715 07297 43244 63835 30005 31384 29460 29657 51433 68065 57075
+   95373 28128.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   The SWAC digital computer uses the base 16 instead of the radix 10 as may
+   be inferred from the fact that the remainders kindly sent to the writer
+   by D. H. Lehmer were expressed in terms of 2^4. For example the SWAC gave
+   for the last remainder for <I>M</I>227 the value 3<I>z</I> 93458 0<I>w</I>7<I>w</I>0 45028 626<I>z</I>6 58002
+   91<I>ux</I>2 4<I>xuw</I>2 28<I>vx</I>7 <I>zv</I>7<I>uy</I> 36<I>yv</I>2
+   6<I>y</I>7<I>wy</I> where <I>u</I> == 10, <I>v</I> == 11, <I>w</I> == 12,
+   <I>x</I> == 13, <I>y</I> == 14, <I>z</I> == 15. This verifies exactly my (<I>p</I> - l)-th remainder
+   as first obtained on June 4, 1947, viz., 1071 24133 67508 18344 33653
+   76892 98433 16050 93930 31886 49512 37078 23311 35950. In other words the
+   same remainder reads (3)(16)^56 + (15)(16)^55 + (9)(16)^54 + ... + (7)(16)^2
+   + (12)(16)^1 + (14)(16)^0, or, if the reader prefers, 3*2^224 + 15*2^220 +
+   9*2^216 + ... + 7*2^8 + 12*2^4 + 14*2^0, in the language of the SWAC and
+   1*10^69 + 0*10^68 + 7*10^67 + ... + 9*10^2 + 5*10^1 + 0*10^0 in the
+   language of the Collector of Internal Revenue.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   The probability that a computer would obtain the (<I>p</I> - 1)-th remainder
+   from a series like 4, 14, 194, ... as zero when the Mersenne number was
+   actually composite is utterly negligible, although not impossible. On the
+   other hand, even with the utmost care and impeccable honesty it would be
+   possible (&quot;human&quot;) to obtain an incorrect finite (<I>p</I> - 1)-th remainder with
+   the divisor Mp and to claim proof for the composite character of the
+   2^<I>p</I> - 1 number under investigation when the number is prime. A case in
+   point is that of Charles B. Barker who published a note indicating that he
+   had demonstrated the composite nature of <I>M</I>167[<a href="#ref_09">9</a>]. The subsequent discovery
+   by D. H. Lehmer of the factor 2349023 for <I>M</I>167 established the facts that
+   this number is composite but that Barker's remainder from the Lucasian
+   sequence 3, 7, 47, ... was incorrect. In other words Barker's result was
+   illusory and he did not really prove anything about 2^167 - 1. Indeed the
+   same misfortune might have befallen the present writer for at least one of
+   the six then unexamined Mersenne numbers which he investigated and found
+   to have finite (<I>p</I> - 1)-th remainders. Hence it was a source of great
+   encouragement when the SWAC furnished the data (as of January 1952) which
+   completely verified all of his final test remainders. However the
+   discovery by Lehmer of the factors 2349023 and 1504073 for <I>M</I>167 and <I>M</I>229,
+   respectively, had previously substantiated two of my residues in the year
+   1946.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   The only reason for relegating this paragraph to the end of the
+   historiette is that it refers chiefly to new prime numbers which are not
+   of the Mersenne type. From various sources,[<a href="#ref_10">10</a>] including personal letters
+   from England, the following valuable information has been gleaned. A.
+   Ferrier proved that (2^148 + 1)/17 is prime. When written out on the base
+   ten we find the 44-digit number 2098 89366 57440 58648 61512 64256 61022
+   25938 63921. Using the EDSAC, Miller and Wheeler have demonstrated that
+   the expression <I>k</I>(2^127 - 1) + 1 generates a prime for each of the following
+   eleven values of <I>k</I>, namely, 114, 124, 388, 408, 498, 696, 738, 744, 780,
+   934, and 978. For visual reasons I have expanded the prime numbers
+   corresponding to the extreme values of <I>k</I>. For <I>k</I> = 114 the result has 41
+   digits and reads 1 93960 94914 49349 24174 12352 62361 07880 52879. For
+   978*<I>M</I>127 + 1 the decimalized representation 16 63980 77424 33890 86335
+   90183 03413 46554 01007 has 42 digits. Finally the M.-W. team can boast
+   of the 79-digit prime 180(2^127 - 1)^2 + 1 = 5210 64401 56792 28794 06069
+   43253 90955 85333 58984 83908 05645 83521 83851 01837 25557 35221.
+   Collecting, we record that of the 1951-52 record-breaking crop of 15
+   luscious prime numbers 5 have 41 digits each, 6 have 42 digits each, the
+   remaining 4 possess, respectively, 44, 79, 157, 183 digits.
+
+   <br>
+   <br>
+   <br>
+   <center>
+      ADDENDA
+   </center>
+   <br>&nbsp;&nbsp;&nbsp;
+   After the preceding manuscript had been received by the Editor-in-Chief
+   of S<font size=-1>CRIPTA</font> M<font size=-1>ATHEMATICA</font> I became aware of the fact that valuable
+   information acquired subsequently from various sources concerning the work
+   with SWAC should be included in this paper provided that no unprofessional
+   duplication be thereby incurred. Hence I wrote to headquarters, that is
+   to my friend Professor D. H. Lehmer, Director of Research of the Institute
+   for Numerical Analysis, National Bureau of Standards, Los Angeles,
+   California. His answering letter was immediate and it contained without
+   reservation the following up-to-date minute details, as of June 4, 1952.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   All Lucas tests that were performed earlier with hand machines have been
+   repeated on the SWAC. The machine definitively emphasized Barker's fiasco.
+   A few other disagreements will be investigated by Lehmer.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   &quot;The SWAC Mersenne Project consists in testing 2^<I>p</I> - 1 for <I>p</I> &lt; 2309. Each
+   test is run twice with agreement, the second run being made at least a
+   week after the first. At present writing only two Mersenne primes have
+   been found, 2^521 - 1 and 2^607 - 1. The first run has reached <I>p</I> = 2011
+   and the second run <I>p</I> = 1307. The test for a given <I>p</I> takes approximately
+   (<I>p</I>/100)^3 seconds.&quot;
+
+   <br>&nbsp;&nbsp;&nbsp;
+   &quot;The 'credit' for these results goes to the SWAC.&quot; Personal credit belongs
+   to Professor R. M. Robinson of the University of California, at Berkeley,
+   who designed this program.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   As to prime factoring the SWAC has recently proved that &quot;2^89 + 1 = 3 *
+   179 * 62020897 * 18584774046020617,&quot; a new valuable result.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   In an earlier paper[<a href="#ref_11">11</a>] we have recorded the numbers of digits in <I>s</I>12,
+   <I>s</I>13, and <I>s</I>14 to be, respectively, 1172, 2343, and 4686. 2^2309 and 2^2297
+   in order possess 696 and 692 digits. Since <I>s</I>11 has only 586 digits it is
+   clear that <I>s</I>12 would cover the present project for SWAC relative to
+   2^<I>p</I> - 1, <I>p</I> prime. Extensions of these data and their implications may be
+   derived from the following elaborations of the initial and final sequences
+   of figures in <I>s</I>12. The first 134 figures read 2231 39958 67897 90076
+   96037 96342 29578 85662 08710 40916 51298 31038 16096 83114 91946 22031
+   98934 07703 85772 14379 57260 31497 87541 60034 50340 10407 89215 and the
+   last 128 figures (ending at the unwritten decimal point) are 790 13713
+   78462 70954 69233 91035 93130 68881 74580 89003 06832 76492 57250 08680
+   49200 61619 79334 98686 55052 18272 48591 48886 69136 96655 34697 14434.
+   The joy (?) of computing the 910 intermediate figures may be left to some
+   electronic giant and its trainer.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   My indebtedness to Professor Lehmer is appreciably enhanced and
+   gratefully acknowledged because of the following additional information
+   which he imparted to me in a letter dated June 16, 1952.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   &quot;The reason why <I>p</I> has to be less than 2309 has to do with the fact that
+   the SWAC has only 256 numbers of 36 binary digits each in its internal
+   memory. One half of this capacity is used for instructions. The other
+   half has to hold the 2<I>p</I> binary digits of <I>U</I>[<I>n</I>] and <I>U</I>[<I>n</I>+1] Hence 2<I>p</I> &lt;=
+   128*36 so that <I>p</I> &lt;= 2304. Of course you could not have known about these
+   details.&quot; Now the preceding paragraphs have come to a conclusion which
+   befits a brief account of the magnificent recent progress in the Mersenne
+   number field.
+
+   <br>
+   <br>
+   <br>
+   <center>
+      POST-ADDENDA
+   </center>
+
+   <br>&nbsp;&nbsp;&nbsp;
+   Paging Peter Barlow, Esq.! On August 21, 1952, the present author
+   received from Professor D. H. Lehmer a note containing the following very
+   exciting important facts: On June 25 the SWAC discovered that the
+   Mersenne-like number 2^1279 - 1 is prime. &quot;We have tested this number
+   quite a number of times since. At high speed it takes less than 13 1/2
+   minutes. You may be interested in knowing that the 1277th term of the
+   sequence 4, 14, ... is congruent to -2^640 mod (2^1279 - 1).&quot; The last
+   item may be looked upon as an additional check but the minus sign alone
+   is informative.
+
+   <br>&nbsp;&nbsp;&nbsp;
+   The writer immediately began to calculate on the base ten the exact
+   values of <I>M</I>1279 and the fifteenth perfect number <I>v</I>15. The value of 2^1279
+   was obtained by multiplying 2^1213 X 2^66 = 73786 97629 48382 06464. (vide
+   supra). The same 386-digit number had been worked out earlier by Dr. John
+   W. Wrench, Jr. Verbal comparison of the two independent results showed
+   them to be identical.
+   <br>
+   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <I>M</I>1279 = 1 04079 32194 66439 90819 25240
+   32736 40855 38615 26224 72667 04805 31911 23504 03608 05967 33602 98012
+   23944 17323 24184 84242 16139 54281 00779 13835 66248 32346 49081 39906
+   60567 73207 62924 12950 93892 20345 77318 33496 61583 55047 29594 20547
+   68981 12116 93677 14754 84788 66962 50138 44382 60291 73234 88853 11160
+   82853 84165 85028 25560 46662 24831 89091 88018 47068 22220 31405 21026
+   69843 54887 32958 02887 80508 69736 18690 07147 20710 55570 31687 29087
+   <br>
+   <br>&nbsp;&nbsp;&nbsp;
+   The first calculation of <I>v</I>15 = (2^1278)(2^1279 - 1) = 2^2557 - 2^1278 --
+   the result of which is given below -- obviously necessitated the
+   evaluation of 2^2557. Since the latter datum, if published, was not
+   available to me, I formed the 770-digit product of 2^2222 X 2^335 because
+   these data were known to be absolutely correct. These powers of 2 possess
+   669 and 101 digits, respectively. The new result is
+   <br>
+   <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <I>v</I>15 = 54162 52628 43658 47412 65446 53743 91316 14085 64905 39031
+   69578 46039 20818 38720 69941 58534 85919 89999 21056 71992 19190 57390
+   08026 36461 59280 01382 76054 39746 26278 89030 57303 44550 58270 28395
+   13947 52077 69044 92443 14948 61729 43511 31262 80837 90493 04627 40681
+   71796 04658 67348 72099 25721 90569 46554 52996 29919 82343 10310 92624
+   24446 35477 89635 44148 13917 19816 44160 55867 88092 14788 66773 21398
+   75666 16247 14551 72696 43022 17554 28178 42548 17319 61195 16598 55553
+   57393 77559 23405 14622 23245 06715 97919 37573 72520 86087 82143 22052
+   22758 45375 52897 47625 61793 95176 62442 63144 80313 44693 50852 03657
+   58479 82475 36021 17288 04037 83048 60287 36212 59313 78999 49003 36673
+   94150 37472 24966 98402 82408 06042 10869 00776 70395 25923 18946 66273
+   61521 27756 03535 76470 79522 50173 85830 51710 28603 02123 48966 47851
+   36394 99289 04973 29214 51075 05979 91145 62215 19889 34576 49842 91328
+   <br>
+   <br>&nbsp;&nbsp;&nbsp;
+   The accuracy of this value of <I>v</I>15 deserves confidence because for every
+   one of the 86 sums-of-products-of-nonads involved in 2^335 X 2^2222 the
+   value was checked at once by an auxiliary modulus and later the definitive
+   product 2^2557 was shown to agree congruently with the product of the
+   separate factors on the basis of larger moduli. Incidentally the digits
+   0, 1, 2 ... 7, 8, 9 occur respectively in <I>v</I>15 67, 74, 84, 73, 84, 80, 76,
+   76, 69, 87 times.
+
+   <br>
+   <br>
+   <font size=-1>Y</font>
+   <font size=-2>ALE</font>
+   <font size=-1>U</font>
+   <font size=-2>NIVERSITY</font>
+   <br>
+   <br>
+   <center>
+      BIBLIOGRAPHY
+   </center>
+   <font size=-1>
+      <br>&nbsp;&nbsp;<a name="ref_01">1</a> <cite>Encyc. Brit.</cite>, 14th ed., v. 15, p. 284.
+
+      <br>&nbsp;&nbsp;<a name="ref_02">2</a> <cite>Ibid.</cite>, p. 541.
+
+      <br>&nbsp;&nbsp;<a name="ref_03">3</a> Edmund Landau, <cite>Elementare Zahlentheorie</cite>, Chelsea Publishing
+      Co. (1946),
+      p. 18, 19.
+
+      <br>&nbsp;&nbsp;<a name="ref_04">4</a> E. T. Bell, <cite>Numerology</cite> (1933), p. 185, 186.
+
+      <br>&nbsp;&nbsp;<a name="ref_05">5</a> H. S. Uhler,
+      &quot;On Mersenne's Number M227 and Cognate Data,
+      <cite>Bull. Am. Math. Soc.</cite>, v. 54, no. 4 (April 1948) p. 378-380.
+
+      <br>&nbsp;&nbsp;<a name="ref_06">6</a> E. Fauquembergue, <cite>Sphinx OEdipe</cite>, v. 9, (June 1914) p. 85
+      103-105.
+
+      <br>&nbsp;&nbsp;<a name="ref_07">7</a> D. H. Lehmer, &quot;An Extended Theory of Lucas' Functions,&quot; Thesis at
+      Brown
+      University, (Dec. 26, 1929) p. 443-445.
+
+      <br>&nbsp;&nbsp;<a name="ref_08">8</a> H. S. Uhler, &quot;The Magnitude of Higher Terms of the Lucasian Sequence
+      4,
+      14, 194, ...,&quot; <cite>Math. Tables and other Aids to Computation</cite>, v. 3, no. 22
+      (April 1948), p. 142, 143.
+
+      <br>&nbsp;&nbsp;<a name="ref_09">9</a> C. B. Barker,
+      &quot;Proof That the Mersenne Number M167 Is Composite,&quot;
+      <cite>Bull. Am. Math. Soc.</cite>, v. 51 (1945) p. 389.
+
+      <br>&nbsp;<a name="ref_10">10</a> J. C. P. Miller and D. J. Wheeler,
+      &quot;<a href="../biblio.html#millerWheeler">Large Prime Numbers</a>,&quot;
+      Nature, v. 168, (1951) p. 838.
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;J. C. P. Miller,
+      &quot;<a href="../biblio.html#miller">Large Primes</a>,&quot; <cite>Eureka</cite>,
+      no. 14 (1951) p. 10, 11.
+      <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D. H. Lehmer as Editor and Reviewer, <cite>M. T. A. C.</cite>,
+      <a href="../biblio.html#lehmer2">v. 6, no. 37 (January 1952), p. 61</a>.
+
+      <br>&nbsp;<a name="ref_11">11</a> H. S. Uhler,
+      &quot;
+      Many-Figure Values of the Logarithms of the Year of Destiny and Other Constants,&quot;
+      S
+   </font>
+   <font size=-2>CRIPTA </font>
+   <font size=-1>M</font>
+   <font size=-2>ATHEMATICA</font>
+   <font size=-1>, v. 17, nos. 3-4 (Sept.-Dec. 1951) p. 202-208.
+   </font>
+</body>
+
+</html>

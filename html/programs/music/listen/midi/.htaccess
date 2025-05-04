@@ -1,0 +1,3 @@
+AddType audio/mid .mid
+AddType audio/midi .midi
+

@@ -1,0 +1,115 @@
+#!/usr/bin/perl -w
+
+# This routine reranks the primes which are marked prime=Prime
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use Time::HiRes 'time'; # More accurate timming
+my $time = time;
+
+getopts('hsfd'); 
+$opt_s or opt_h or print "usage: rerank [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "The routine reranks the primes (unranked, like composites, set to NULL);
+
+usage: rerank [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-f 	force -- rerank even if no prime has the rerank flag set
+	-d	debug
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+$opt_s or $opt_f and print "Will rerank all primes even if none are set to 'rerank'.\n";
+$opt_d and $opt_s = '';
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# Are there any in the database marked 'rerank'?
+
+my $query = "SELECT count(*) as count FROM prime WHERE status LIKE '%Rerank%' 
+  OR prime.rank IS NULL OR e_rank IS NULL";
+$opt_d and print "Query: $query\n";
+my $sth = $dbh->prepare($query);
+$sth->execute();
+my $p = $sth->fetchrow_hashref;
+$opt_s or print("Found ", $$p{'count'} || 'none', " marked 'rerank' or with NULL rank or e_rank.\n");
+unless ($$p{'count'} or $opt_f) {
+  $opt_s or printf("Done. Used %9.4f seconds total.\n",time-$time);
+  exit;
+}
+$sth->finish;
+ 
+# Currently redoes the whole list!
+
+#my $query = "SELECT id FROM prime WHERE prime = 'Proven'
+#	ORDER BY digits DESC, digit_rank ASC";
+$query = "SELECT id, status FROM prime WHERE prime != 'Composite' 
+	ORDER BY digits DESC, digit_rank ASC";
+
+$sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or printf("Have selected the set of primes to rank.  Used %9.4f seconds.\n",time-$time);
+
+
+# Loop through this list of primes 
+# The modified = modified is an attempt to keep this value from 
+# being updated when setting the rank; I do not consider this "modification"
+# when called from search routines (e.g., what's new?)
+ 
+my $sth2 = $dbh->prepare("UPDATE prime SET prime.rank = ?, modified=modified, status = ? WHERE id = ?") or die;
+
+$rank = 1;
+while ($p = $sth->fetchrow_hashref) {
+  my $id = $$p{'id'};
+
+  my $new_status = $$p{'status'};
+  $new_status =~ s/Rerank//;
+  $new_status =~ s/,,/,/;
+  $new_status =~ s/(^,|,$)//;
+  $opt_d and $$p{'status'} ne '' and print "  prime id '$$p{'id'}', status was '$$p{'status'}' now is '$new_status'\n";
+
+  $sth2->execute($rank++,$new_status,$id) or die;
+}
+$opt_s or printf("Used %9.4f seconds to rank the primes, now for the composites.\n",time-$time);
+
+# Now let's unset the rest and remove any archival tags for now unranked primes
+
+# $query = "SELECT id FROM prime WHERE prime = 'Composite' AND rank IS NOT NULL";
+$query = "SELECT id, status FROM prime WHERE prime = 'Composite'";
+$sth = $dbh->prepare($query);
+$sth->execute();
+
+$sth2 = $dbh->prepare("UPDATE prime SET rank = NULL, score = 1, onlist = 'no',
+	e_rank = NULL, modified=modified, status = ? WHERE id = ?") or die;
+
+$sth3 = $dbh->prepare("DELETE FROM archival_tag WHERE prime_id=?") or die;
+
+while ($p = $sth->fetchrow_hashref) {
+  my $id = $$p{'id'};
+
+  my $new_status = $$p{'status'};
+  $new_status =~ s/Rerank//;
+  $new_status =~ s/,,/,/;
+  $new_status =~ s/(^,|,$)//;
+  $opt_d and $$p{'status'} ne '' and print "  prime id '$$p{'id'}', status was '$$p{'status'}' now is '$new_status'\n";
+
+  $sth2->execute($new_status,$id) or die;
+  $sth3->execute($id) or die;
+}
+
+# In theory, e-rand=NULL means the prime is new, so e_rank=rank 
+$query = "UPDATE prime SET e_rank = prime.rank WHERE e_rank IS NULL AND prime.rank IS NOT NULL";
+$sth = $dbh->prepare($query);
+$sth->execute();
+
+$opt_s or printf("Done. Used %9.4f seconds total.\n",time-$time);

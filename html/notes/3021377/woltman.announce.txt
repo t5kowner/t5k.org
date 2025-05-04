@@ -1,0 +1,78 @@
+
+
+From <...> Tue Feb  3 06:31:36 1998
+
+Date: Mon, 02 Feb 1998 22:27:31 -0500
+
+From: George Woltman
+
+To: ...
+
+Subject: Mersenne: M#37 - its official
+
+
+
+Excerpt from
+
+The Mersenne Newsletter, issue #13		February 2, 1998
+
+
+
+37th Known Mersenne Prime Discovered!!!
+
+---------------------------------------
+
+
+
+Congratulations to Roland Clarkson.  On January 27th he discovered
+
+that 2^3021377 - 1 is prime!  This prime number is 909,526 digits long.
+
+The computation took 46 days part-time on his 200-MHz Pentium computer.
+
+David Slowinski confirmed the find on January 31st.
+
+
+
+Roland is a 19 year-old sophmore at California State University
+
+Dominguez Hills.  He is the third youngest Mersenne prime discoverer - 
+
+behind Noll and Nickel.  Incredibly, this was only the 8th exponent
+
+he has tested!
+
+
+
+Unlike the previous GIMPS finds, Roland let the PrimeNet server
+
+(see Program News below) choose the lucky exponent.  At first,
+
+he did not want to test the exponent.  Roland said, "I never would
+
+have imagined two Mersenne primes would be so close together!".
+
+In fact, in percentage terms, the gap between the 36th and 37th Mersenne
+
+primes is the smallest ever.
+
+
+
+To acknowledge Scott Kurowski's work on the PrimeNet server and
+
+every GIMPS participants diligent work, official credit for this
+
+prime will go to "Clarkson, Woltman, Kurowski, et.al.".
+
+
+
+You can read the official press release at
+
+http://www.mersenne.org/3021377.htm and be sure to check out
+
+Chris Caldwell's web pages starting at
+
+https://t5k.org/notes/3021377/
+
+
+

@@ -1,0 +1,120 @@
+#!/usr/bin/perl -w
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use constants;
+#use strict;
+#use warnings;
+use diagnostics;
+
+getopts('hs');
+our($opt_h,$opt_s);
+$opt_s or opt_h or print "usage: adjust_blobs [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "Checking links between prime and prime_blob tables
+
+usage: $0 [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-h	print this help and exit
+
+This routine makes sure primes on the list that have prime_blobs
+are linked to them (via column blob_id) and prime_blob's are linked
+to the primes (description of blob should match prime).
+";
+
+$opt_h and exit;
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# First grab the blobs
+
+my $query = "SELECT description,prime_id,log10,id FROM prime_blob";
+$sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or print "Have selected the prime_blobs to adjust.\n";
+
+# Loop through this list of primes
+my $sth2 = $dbh->prepare('SELECT description, blob_id, log10 FROM prime WHERE id = ?') or die;
+
+while ($p = $sth->fetchrow_hashref) {
+  my $id = $$p{'id'};
+  my $prime = $$p{'prime_id'};
+  my $log10 = $$p{'log10'};
+  if ($prime) {
+    # make sure that the descriptions match and prime points back to blob
+    $sth2->execute($prime);
+    unless ($q = $sth2->fetchrow_hashref) {
+      print "blob $id : $$p{'description'} points to non-existant prime $prime; NOT adjusting.\n";
+    }
+    # This blob points to a prime--it should point back!
+    # But first, are the log10's the same?
+# print $$q{'log10'},"\n";
+    if (abs($log10-$$q{'log10'})/$log10 > 100*$defaults::eps) {
+      print "$id : $$p{'description'} has log10 $log10, but
+	prime $prime : $$q{'description'} has $$q{'log10'} ";
+      if ($$q{'log10'} != 0) {  ## chris
+	print "Adjusting.\n";
+	$$q{'log10'} = $log10;
+      } else {
+	print "SERIOUS PROBLEM UNFIXED.\n";
+        next;
+      }
+    }
+
+    if (! $$q{'blob_id'} ) {
+      print "$id : $$p{'description'} was not pointed to by
+	prime $prime : $$q{'description'}; adjusting.\n";
+      my $sth3 = $dbh->prepare("UPDATE prime SET blob_id='$id',log10=$log10,modified=modified WHERE id='$prime'");
+      $sth3->execute();
+    } elsif ($$q{'blob_id'} != $id) {
+      print "blob $id : $$p{'description'} points prime $prime : $$q{'description'}
+	but the prime points to blob $$q{'blob_id'}.  Not repaired!\n";
+    }
+
+    # Also this blobs description should echo the primes
+    if ($$q{'description'} ne $$p{'description'}) {
+      print "Blob $$p{'id'} : $$p{'description'} not match
+	$prime : $$q{'description'} adjusting.\n";
+      my $desc = $dbh->quote($$q{description});
+      my $sth3 = $dbh->prepare("UPDATE prime_blob SET description=$desc WHERE id='$id'");
+      $sth3->execute();
+    }
+    next;
+  }
+
+  # otherwise look prime whose description matches the blob
+  my $desc = $dbh->quote($$p{description});
+  my $sth4 = $dbh->prepare("SELECT id, description FROM prime WHERE description = $desc");
+  $sth4->execute();
+  unless ($q = $sth4->fetchrow_hashref) {
+    # might be quoted
+    $desc = $dbh->quote('"'.$$p{description}.'"');
+    $sth4 = $dbh->prepare("SELECT id, description FROM prime WHERE description = $desc");
+    $sth4->execute();
+    unless ($q = $sth4->fetchrow_hashref) {
+      print "Unused blob $id : $$p{'description'}.\n";
+      next;
+    }
+  }
+
+  # set the blob to point to the matching prime
+  print "$id : $$p{'description'} was not pointing to
+	prime $$q{'id'} : $$q{'description'}; adjusting.\n";
+  my $sth3 = $dbh->prepare("UPDATE prime_blob SET prime_id='$$q{id}' WHERE id='$id'");
+  $sth3->execute();
+
+  # and loop again to again make sure that the descriptions match
+  $$p{'prime_id'} = $$q{'id'}; # (If redo, does not reload this now altered value)
+  redo;
+}
+
+# should I also look for primes with blob_id set but blob_id does not exist?

@@ -1,0 +1,125 @@
+#!/usr/bin/perl -w
+
+# The formating work is done by &LoadPrimes::ShowHTML()
+
+use lib qw(/var/www/html/primes/support
+	/var/www/html/glossary/bin /var/www/bin/ );
+
+use SlurpFile;
+use LoadPrimes;
+
+use Getopt::Std;
+getopts('sd');
+
+unless ($opt_s) {
+  print "This program reads the list of primes and then updates the single
+page largest.html.  Should be dumped and rebuilt!  Based on the list of
+of archivable records in the 'archivable' table in the 'primes'.  Warning:
+twin primes (id=1) comment match is manually altered.\n
+        -s      silent operation
+        -d      verbose!\n\n";
+}
+$opt_d and print "Noisey verbose option is on.\n";
+
+
+#####################################################################
+# Load the prime info into the array @Primes
+$opt_d and print "Starting to load the primes.\n";
+# Should be limited to those primes on the list
+$count = &LoadPrimes::Load(\@Primes,{where => "onlist='yes'"},'AdjustLinks');
+$opt_s or print "$count primes loaded\n";
+
+# Now load the top20 db info
+use DBI;
+use connect_db;
+my $dbh = &connect_db::connect();
+my $query = "SELECT id, name, weight_func, comm_match, desc_match, sort FROM archivable;";
+$opt_d and print "Query:\n\t$query\n\n";
+
+$modified = $dbh->selectall_arrayref($query) || die;
+$opt_s or print "Found " . @$modified .
+        " 'archivable' entries\n";
+
+# Now do the top ten lists;
+
+$TopTenListsIn = '/var/www/html/largest.html.in';
+$TopTenListsOut = '/var/www/html/largest.html';
+$NewsBanner = '/var/www/html/includes/newsbanner.txt';
+
+$temp = &SlurpFile::SlurpFile($TopTenListsIn);
+$opt_s or print "updating $TopTenListsIn\n\tSeeking: ";
+
+foreach (@$modified) {
+  # Grab the row selected -- MUST MATCH $query!!
+  my ($id, $name, $weight_func, $comm_match, $desc_match, $sort) = @$_;
+  if ($id eq 1) {
+    $comm_match = '[tT]win \(p\)';
+  }
+
+    # Insert the record primes
+    $opt_s or print "\n\t$name ";
+
+    if ($temp =~ /<!-- META NAME="list start" CONTENT="$sort" -->.*?<!-- META NAME="list end" CONTENT="$sort" -->/si) {
+      my $before = "$`<!-- META NAME=\"list start\" CONTENT=\"$sort\" -->\n";
+      my $after = "\n<!-- META NAME=\"list end\" CONTENT=\"$sort\" -->$'";
+      $temp = $before.&ShowMatches($desc_match,$comm_match,10).$after;
+      $opt_s or print "(updated) ";
+    }
+}
+
+# Add a date stamp
+my $date = `date -u +"%X %B %e %Y %Z"`;
+chop $date;
+$temp =~ s/(<!-- date -->)(.*?)(<!-- end date -->)/$1$date$3/si;
+
+# add a news banner
+
+$opt_s or print "\nNews banner ";
+my $banner = &SlurpFile::SlurpFile($NewsBanner);
+if ($banner) {
+  if ($temp =~ /<!-- META NAME="newsbanner start" -->.*?<!-- META NAME="newsbanner end" -->/si) {
+    my $before = "$`<!-- META NAME=\"newsbanner start\" -->\n";
+    my $after = "\n<!-- META NAME=\"newsbanner end\" -->$'";
+    $temp = $before.$banner.$after;
+    $opt_s or print "(updated) ";
+  }
+} else {
+  $opt_s or print "(banner file empty) ";
+}
+
+
+# Spit it back out
+&SlurpFile::BackupAndSave($TopTenListsOut,$temp);
+$opt_s or print "done.\n";
+
+exit;
+
+########################## support ##########################
+
+# &ShowMatches($DescMatch,$CommMatch,$number,$desc_modify,$comm_modify)
+#  finds matches in the list of primes
+
+sub ShowMatches {
+  my $DescMatch = shift || '';
+  my $CommMatch = shift || '';
+  my $NumberToFind = shift || 20;
+
+  my $out = &LoadPrimes::ShowHTML('head', {'renumber'=>TRUE, 'comment' => 'comment'});
+
+  foreach (@Primes) {
+    next unless (!$CommMatch or ($$_{'comment'} =~ /$CommMatch/i));
+    next unless (!$DescMatch or ($$_{'description'} =~ /$DescMatch/i));
+    $opt_d and print "  Found match: $$_{'description'} $$_{'digits'} $$_{'comment'}\n";
+    $out .= &LoadPrimes::ShowHTML($_,
+       {'description' => sub {
+          my $desc = shift || die "No description passed";
+          &LoadPrimes::MakePretty($desc) },
+##       'no rank'     => TRUE,
+       'comment'     => AdjustHiddenLinks,
+       'digits'      => \&LoadPrimes::LinkDigits,
+##       'discoverer'  => sub { $CodeNames{$_[0]} },
+       'add links'   => TRUE } );
+    last if --$NumberToFind <= 0;
+  }
+  $out.&LoadPrimes::ShowHTML('tail');
+}

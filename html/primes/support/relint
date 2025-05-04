@@ -1,0 +1,460 @@
+#!/usr/bin/perl -w
+
+# The idea is to check one prime.comment against the comment lint.
+# Any new comments will be added to the archival_tag table, unnecessary
+# ones will be removed.  Look at help below for more info.
+
+# The "Divides " ones are handled differently--instead of removing all the comment
+# match it leaves Divides behind; assumes Fermats are listed first.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib ("$Bin/math","$Bin/modules",$Bin);
+
+use DBI;
+use LoadPrimes;
+use primes;
+use Time::HiRes 'time';
+use open ':std', ':encoding(UTF-8)';
+
+use compare;	# &compare::on_list used by various classes (twin, AP's...)
+		# pari is called by compare, which makes pari is available here
+use Regexp::Common qw(balanced number);	# these are used by generalized Fermat,
+	# generalized unique... so parenthesis are ballanced in matches
+
+
+use Getopt::Std;        # Allow for command line options
+getopts('adhstl:w:W:');
+
+$opt_s or print
+"This routine scans the comment column of the prime table to create archival_tag
+data.  Default is to just (re)process those proven primes (at least prp) with
+the 'Lint' prime.status flag set.  As it processes a set of primes and  rules,
+it will remove the old primes for that cross-product. Use -h for help.\n\n";
+
+$opt_h and print "usage: relint [options]    where the options are
+
+	-a	reprocess all primes
+	-d 	noisey debug option
+        -h      print this help then exist
+        -l n    limit to n lines
+        -s      silent -- only errors printed.
+	-t	test mode--will not change the database
+        -w e    which primes to process (e.g., \"rank < 99\" or \"status LIKE '%Reparse%'\")
+        -W e    which 'archivable' table rules to process (e.g., \"name = 'Twin'\")
+	\n(-w and -a turn off the default where condition:  \"status LIKE '%Lint%'\")\n\n";
+$opt_h and exit;
+
+$opt_a and not $opt_s and print "Reprocess all primes.\n";
+$opt_t and not $opt_s and print "Test mode, will not alter the database.\n";
+$opt_l and not $opt_s and print "Process just $opt_l primes.\n";
+$opt_w and not $opt_s and print "Process those primes \"WHERE $opt_w\".\n";
+$opt_W and not $opt_s and print "Use just the 'archivable' table  rules matching \"WHERE $opt_W\".\n";
+$opt_C=1 if $opt_W;	# Pseudo command line option
+$opt_C and not $opt_s and print "Will not complain if not all of comment matches.\n";
+
+# Connect to database (also has a e-mail routine to forward errors that need attention)
+use connect_db;
+my $dbh = &connect_db::connect();
+
+# Do the work
+
+my @Primes = &GetThePrimes;	# get the primes
+my $against = &against();	# get the rules to check against
+
+my $time=time;
+foreach (@Primes) { &scan_one_prime($_); }
+$opt_s or printf("Time used to process:%9.4f seconds.\n",time-$time);
+$opt_s or printf("Average time used to process:%9.4f seconds/prime.\n",(time-$time)/(@Primes||1));
+exit;
+
+
+############################# Support Routines ################################
+
+# Get the primes to process
+
+sub GetThePrimes () {
+  # Set up the where part of the query
+  my $where = '';
+  $where = "status LIKE '%Lint%'" unless ($opt_a or $opt_w);
+  ($where .= ($where ? ' AND ' : '').$opt_w) if $opt_w;
+  ($where .= ($where ? ' AND ' : '').' prime > 3');  # Not until they are proven
+
+  my @Primes;
+  my $time=time;  # Just to track how long it takes
+  my $count = 0;
+  if ($opt_l) {
+    $opt_d and print "Seeking primes matching {'where'=>$where, 'limit'=>$opt_l}\n";
+    $count = LoadPrimes::Load(\@Primes, {'where'=>$where, 'limit'=>$opt_l});
+  } else {
+    $opt_d and print "Seeking primes matching {'where'=>$where}\n";
+    $count = LoadPrimes::Load(\@Primes, {'where'=>$where});
+  }
+  #	Not ready for prime-time: fields=>'description,comment,id,rank'});
+  $opt_s or (print "$count primes loaded. ");
+  $opt_s or printf("Time used to load:%9.4f seconds.\n",time-$time);
+  return @Primes;
+}
+
+# Which of the 'archivable' table rules do we test against?
+
+sub against( ) {
+  unless ($against) {
+    # Warning--same where must be used in scan_one_prime!
+    my $where = 'WHERE '.($opt_W ? "$opt_W AND" : '')." purpose LIKE '%Lint%'";
+    # The next lime *must* match the corresponding line in the main loop of &scan_one_prime
+    my $query = "SELECT desc_match, desc_func, comm_match, comm_func,
+	not_comment, subcategory, repeatable,
+        modified, created, id, name FROM archivable $where";
+    $opt_d and print "Query:\n\t$query\n\n";
+
+    use connect_db;
+    my $dbh = &connect_db::connect();
+    $against = $dbh->selectall_arrayref($query);
+    die "No matching 'archivable' table entries found" if (@$against == 0);
+    $opt_s or print "Found " . @$against . " 'archivable' table entries.\n";
+  }
+  return $against;
+}
+
+# process one prime (removes old tags, add new ones...)
+
+sub scan_one_prime() {
+  # This routine accepts one prime as input and process each 'archivable' table rule
+  # selected in the routine against.
+
+  $p = shift;	# Grab the prime
+  $opt_d and print &LoadPrimes::ShowText($p,{'id'=>1});
+
+  # De-Englification:
+  if ($$p{'comment'} =~ s/eneralised/eneralized/) {
+    print "Altered comment: ('ised' to 'ized')\n\t";
+    print &LoadPrimes::ShowText($p,{'id'=>1});
+    $opt_t or &connect_db::UpdateRow({ where=>"id = $$p{id}",
+	    	set => 'comment='.$dbh->quote($$p{'comment'}) }  );
+  }
+
+  # De-Spacification: <grin>
+  if ($$p{'comment'} =~ s/(\(\d+,) (\d+\))/$1$2/) {
+    print "Altered comment: removed space that trailed comma\n\t";
+    print &LoadPrimes::ShowText($p,{'id'=>1});
+    $opt_t or &connect_db::UpdateRow({ where=>"id = $$p{id}",
+	    	set => 'comment='.$dbh->quote($$p{'comment'}) }  );
+  }
+
+  # Assuming [ ] in comments can be removed (they are credits like [BR], [x12])
+  # We will be messing with the comment alot, so let's simplify the reference
+  my $Comm = $$p{'comment'};
+  $Comm =~ s/\[[\w &]+\]//go;
+
+  # Also removing links... (LoadPrime reloads them into the comment!)
+  $Comm =~ s/<ref,[^>]+>//go;
+  $Comm =~ s/<rel,[^,>]+,[^>]+>//go;
+  $Comm =~ s/<url,[^,>]+,[^>]+>//go;
+
+  # Clear out any old tags for this one prime (too slow in the loop!)
+  # but it must be there if $opt_W is set!
+  my $sth_remove;
+  unless ($opt_W) {
+    my $query = "DELETE FROM archival_tag WHERE prime_id=$$p{'id'}";
+    $opt_d and print "\tremove old tags via: $query\n";
+    $sth_remove = $dbh->prepare($query);
+    $opt_t or $sth_remove->execute() or warn("Query failed: \n\t$query\n");
+    $opt_d and print "\t",$sth_remove->rows()," archival tags deleted\n";
+  } else {
+    my $query = "DELETE FROM archival_tag WHERE prime_id = ? AND category_id = ?";
+    $opt_d and print "\tremove old tags via: $query\n";
+    $sth_remove = $dbh->prepare($query);
+  }
+
+  # Now loop through the list of 'archivable' table rules in &against
+
+  my $old_category_id = 0;
+  foreach my $rule (@{&against()}) {
+    # Grab the row selected -- MUST MATCH $query in $against()
+    my ($desc_match, $desc_func, $comm_match, $comm_func,
+	$not_comment, $subcategory, $repeatable,
+	$modified, $created, $category_id, $name) = @$rule;
+
+    # Clear out any old tags for this one prime (too slow in the loop!)
+    # but it must be here if $opt_W is set! It takes over 1/10th second on the PII
+    # Only do it the first time though the loop
+    if ($opt_W and $old_category_id != $category_id and not $opt_t) {
+      # my $time = time;
+      $sth_remove->execute($$p{'id'},$category_id);
+      # print "time used ",time-$time,"\n";
+      $opt_d and print "\t",$sth_remove->rows()," archival tags deleted\n";
+      $old_category_id = $category_id;
+    }
+
+    # Note that $desc_func/$comm_func are either a reference to a subroutine (\&length)
+    # or is  an anonymous subroutine (sub { return 1; } ).  In the latter case,
+    # need to execute the string so the anonomous subroutine exists here..
+    # They operate on $1, $2, ... from the $desc_match and $comm_match respectively.
+    # But conceivable they could also use $$p{}...
+
+    my $comm_test = 0;
+    if ($comm_func) {
+      # $opt_d and print "evaluating \$comm_test = $comm_func\n";
+      $comm_test = eval($comm_func);
+      die "$comm_func returned $@" if $@;
+    }
+
+    my $desc_test = 0;
+    if ($desc_func) {
+      # $opt_d and  print "evaluating \$desc_test = $desc_func\n";
+      $desc_test = eval($desc_func);
+      die "$desc_func returned $@" if $@;
+    }
+
+    $GlobalMessage = '';  # Might be appended to by &$desc_test and &$comm_test;
+
+    # All rows have comment match string ($comm_match).
+    # Those rows without a description match string ($desc_match) are just
+    # marked for editor atention (just to verify).  As for the others, those
+    # rows that have a description match string ($desc_match),  if this matches,
+    # then the comment match string ($comm_match) should too, and then &comm_test
+    # (if it exists) should be true,  and $not_comment should not match.  If all
+    # this is fine--we go on.  If comment missing--add it.
+    # If comment should not be there--remove it.
+
+    # print "xx $Comm\ntesting $comm_match\n";
+
+    # First process comment laws without $desc_match
+    if (not $desc_match) {
+
+      # Execute these together as $comm_test often uses $1, $2, ... from the match
+      my $comm_matches = ($Comm =~ /$comm_match/);
+      my $comm_testsok = ($comm_matches ? (not $comm_test or &$comm_test) : 0);
+      print "\n$GlobalMessage" if $GlobalMessage;
+      my $not_matches  = ($not_comment and $Comm =~ /$not_comment/);
+      if ($comm_matches and not $not_matches) {
+	if (not $comm_testsok) {  # Is this right?
+          print "Bad comment?: $name (id: $category_id)? (not added to archival_tag)\n\t";
+          print &LoadPrimes::ShowText($p,{'id'=>1});
+        } else {
+          ### Editor should be warned if new!
+	  # print "Untested comment: $comm_match\n";
+
+	  ### Valid comment! ################# (same code below)
+
+	  $Comm =~ /$comm_match/;	# Make sure $1 ... are defined for next instruction
+          my $subcat = $name;
+          if ($subcategory) {
+	    $subcat = eval($subcategory);
+ 	    warn "$name (id: $category_id) subcategory '$subcategory' returned $@" if $@;
+	  }
+	  &add_tag_if_missing($p,$category_id,$subcat);
+
+  	  # Remove the text from the temporary comment string.
+	  # Handle 'Divides...' and 'consecutive primes ...' as exception (should be added to database!)
+	  my $replace = ($comm_match =~ /ivides/o ? 'Divides ' : '');
+	  # This requires that '[cC]onsecutive primes arithmetic progression' is executed before AP...
+	  if ($comm_match =~ /\[cC\]onsecutive primes arithmetic progression/) {
+	    $Comm =~ s/[cC]onsecutive primes arithmetic progression/arithmetic progression/;
+	  } else {
+  	    $Comm =~ s/$comm_match/$replace/;
+	  }
+	  # print &LoadPrimes::ShowText($p,{'id'=>1});
+	  redo if ($repeatable eq 'yes');
+
+	  ### End valid comment! #################
+
+	}
+      } # else { no reason to examine this prime }
+
+    } else { # there is a $desc_match
+
+      # Do some testing, store the info for below.
+      my $desc_matches = ($$p{'description'} =~ /$desc_match/ and (!$desc_test or &$desc_test));
+
+      my $comm_matches = ($Comm =~ /$comm_match/);
+      my $comm_testsok = ($comm_matches ? (not $comm_test or &$comm_test) : 0);
+      print "\n$GlobalMessage" if $GlobalMessage;
+      my $not_matches  = ($not_comment and $Comm =~ /$not_comment/);
+      # Next, look for missing comments
+
+      if ($desc_matches and not $not_matches) {
+	if (not $comm_matches or not $comm_testsok) {
+
+	  (my $CleanComment = $comm_match) =~ s/\[(.).*\]/$1/go;
+    	  # The line above changes "[Uu]nique" to "Unique".  Lets also remove \b's
+ 	  $CleanComment =~ s/\\b//go;
+	  # If there is no comment at this time, make sure first letter is upper case
+	  $CleanComment = ucfirst($CleanComment) if length($$p{'comment'}) == 0;
+   	  $opt_s or print "Missing comment: $CleanComment; adding it now to:\n\t";
+          $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'modified', "prime.id=$$p{id}",
+		"Missing comment: $CleanComment; adding it now.");
+    	  $opt_s or print &LoadPrimes::ShowText($p,{'id'=>1});
+    	  print $GlobalMessage if $GlobalMessage;
+	  # First add the comment to the prime's entry
+          $opt_t or &connect_db::UpdateRow({ where=>"id = $$p{id}",
+	    	set => "comment=IF(LENGTH(comment)>0,
+		CONCAT(comment,', $CleanComment'),'$CleanComment')"});
+	  # Now add the associated archival_tag #### same lines below
+          my $subcat = $name;
+          if ($subcategory) {
+            $subcat = eval($subcategory);
+            warn "$name (id: $category_id) subcategory '$subcategory' returned $@" if $@;
+          }
+	  &add_tag_if_missing($p,$category_id,$subcat);
+
+	} else {
+
+	  ### Valid comment! ################# (same code above)
+
+	  $Comm =~ /$comm_match/;	# Make sure $1 ... are defined for next instruction
+          my $subcat = $name;
+          if ($subcategory) {
+            $subcat = eval($subcategory);
+            warn "$name (id: $category_id) subcategory '$subcategory' returned $@" if $@;
+          }
+	  &add_tag_if_missing($p,$category_id,$subcat);
+
+	  # remove the text from the comment
+	  my $replace = ($comm_match =~ /ivides/o ? 'Divides ' : '');
+	  $Comm =~ s/$comm_match/$replace/;
+	  # print &LoadPrimes::ShowText($p,{'id'=>1});
+	  redo if ($repeatable eq 'yes');
+
+	  ### End valid comment! #################
+
+	}
+      } elsif ( $comm_matches and not $not_matches and       # Last, look for false marks.
+	 (not $comm_testsok or not $desc_matches) ) {
+
+        # To be falsely marked we need that
+        #  1) The comment matches (e.g., 'Cullen')
+        #  2) The not_comment, if defined, does not match (e.g., 'Generalized Cullen')
+        #  3) The description does not match, it fails one of the tests.
+
+        print "Error in comment: Not a $comm_match? (from $name)\n";
+        print &LoadPrimes::ShowText($p,{'id'=>1});
+        print $GlobalMessage if $GlobalMessage;
+        $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'error', "prime.id=$$p{id}",
+		"Error in comment: Not a $comm_match? (from $name) $GlobalMessage");
+
+        print "(desc_matches,comm_matches,comm_testsok,not_matches) =
+	  ($desc_matches,$comm_matches,$comm_testsok,$not_matches)\n";
+
+      }
+    }
+  } # End main foreach loop
+
+  # Chopping out a comment can leave leading or trailing whitespace, commas...
+  $Comm =~ s/[ ,;]*$//o;
+  $Comm =~ s/^[ ,;]*//o;
+  $Comm =~ s/^[Dd]ivides$//o;
+
+  if ($Comm and not $opt_C) {
+    print "Error in comment:: Left over text \"$Comm\"\n";
+    print &LoadPrimes::ShowText($p,{'id'=>1});
+    $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'error', "prime.id=$$p{id}",
+	"Error in comment: Left over text \"$Comm\"",'also mail to adminstrator');
+  }
+
+  # Let's turn off the 'Lint' status flag, otherwise the log fills with
+  # duplicate error messages (and so does my mail!)
+  $opt_t or &connect_db::UpdateRow({where => "id = $$p{id}",
+	set => "status = REGEXP_REPLACE(REGEXP_REPLACE(status,'Lint,?',''),',\$','')"});
+}
+
+###############  Non-scan Support ##############
+
+# &add_tag_if_missing($p,$category_id,$subcategory);
+
+sub add_tag_if_missing( ) {
+  my $p = shift;
+  my $prime_id = $$p{'id'};
+  my $category_id = shift;
+  my $subcategory = shift;
+  $subcategory = $dbh->quote($subcategory);
+
+  my $query = "SELECT * FROM archival_tag WHERE prime_id=$prime_id
+	AND category_id=$category_id AND subcategory=$subcategory";
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+  if (my $row = $sth->fetchrow_hashref) {  # Already recorded?
+    $opt_d and print "\talready in archival_tag #$$row{'id'}: prime #$prime_id, category #$category_id $subcategory\n";
+  } else {
+    $query = "INSERT archival_tag SET prime_id=$prime_id,
+	category_id=$category_id, subcategory=$subcategory, created='$$p{'submitted'}'";
+    my $insert_id = '(-t set)';
+    unless ($opt_t) {	# make no changes if $opt_t set
+      $dbh->do($query) or die "Failed to create archival tag\n\n$query";
+      $insert_id = $dbh->last_insert_id(0,0,0,0);
+    }
+    $opt_d and print "\tadded archival_tag #$insert_id: prime #$prime_id, category #$category_id $subcategory\n";
+  }
+}
+
+###############  Scan Support ###############
+
+sub WoodallCullenTestG {
+  # print &WoodallCullenTest(1).":";
+  &WoodallCullenTest(1);
+}
+
+sub WoodallCullenTest {
+  # The routine recognizes regular/generalized Woodall of Cullen, even
+  # when writen in non-standard forms.  Returns 1 if so, 0 otherwise.
+  # also sets $GlobalMessage if in non-standard form.
+  # When called with a parameter seeks generalized, otherwise regular
+
+  my $generalized = shift || 0;
+
+  # print("Line 418 : $1, $2, $3; \$generalized = $generalized\n");
+
+  # Matching '^(\d+)\*(\d+)\^(\d+)(\-|\+)1$' before called
+  if ($1 == $3 and $1 > $2) {
+    # print("\txxxmatched : $1 = $3, $1 > $2\n");
+    # Already in standard form!
+    # If $2 =2 return false (not generalized!), else 1 (generalized)
+    return($generalized ? ($2 != 2) : ($2 == 2));
+  }
+  # print("Line 427 : non-standard form?\n");
+
+  # Okay, is it in a non-standard form?
+
+  my $CullenOrWoodall = 0;
+  my $a=$1; my $b=$2; my $c=$3; my $sign=$4;
+
+  # We try to rewrite $a*$b^$c as ($a*$b^$r)*($b^[($c-$r)/$x])^$x
+  # That is, the number is $A*$B^$x with $A=$a*$b^$r and $B= $b^[($c-$r)/$x
+  # To be a Cullen we need $A = $x and $A > $B.  That is
+  # $x = $a*$b^$r (a divisor of $c-$r) and $a*$b^$r > $b^[($c-$r)/$x].
+
+  # To do this, we must have $a divides $x which divides $c-$r.  So we try all
+  # possible $r's for which $a divides $c-$r starting with $c mod $a, and adding
+  # $a until $r is too large.
+
+  my $r = ($c % $a);
+  while (($c-$r)/$a >= $b**$r) {
+
+  # print("Line 446 : a,b,c,r is $a, $b, $c, $r\n");
+    # Now we must have $b**$r divides ($c-$r)/$a (divide without a remainder)
+    if ( !(($c-$r)/$a % ($b**$r)) ) {
+
+      # Okay, this is the right form.  Now size tests
+      my $q = ($c-$r)/($a*$b**$r);
+      my $A = $a*$b**$r;
+      # print("Line 453 : q,A is $q, $A\n");
+
+#     if ($A >= $b**$q and ($generalized ? ($b**$q != 2) : ($b**$q == 2))) {
+      if (log($a) >= ($q-$r)*log($b) and ($generalized ? ($b**$q != 2) : ($b**$q == 2))) {
+        $CullenOrWoodall = 1;  # Mark as verified
+	# I only want to set the error message if the prime is not marked...
+        # The next line could be more specific--we could figure out which we are seeking...
+	unless (($generalized and ($$p{'comment'} =~ /generalized (Woodall|Cullen)/io))
+	  or (not $generalized and ($$p{'comment'} =~ /(Woodall|Cullen)/io))) {
+          $GlobalMessage .= " write $a*$b^$c${sign}1 as $A*".($b**$q)."^$A${sign}1\n";
+        }
+      }
+      # else { print("Line 465 : need log(a) >= (q-r)*log(b) but these are ", log($a) , ' and ', ($q-$r)*log($b), " respectively.\n");  }
+
+    }
+
+    $r += $a;
+  }
+
+  $CullenOrWoodall;
+}

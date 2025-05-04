@@ -1,0 +1,221 @@
+#!/usr/bin/perl -w
+
+# This routine reranks the numbers in the databse (used to sort, choose random...)
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use POSIX qw(ceil floor);
+use strict;
+use warnings;
+
+use DBI qw(:sql_types);		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+
+getopts('dhlsBR');
+our($opt_h, $opt_l, $opt_s, $opt_B, $opt_R, $opt_d);
+
+$opt_s or $opt_h or print "usage: rerank [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "The routine reranks the numbers with curios by size (and should unset rank if no curios),
+then sets digits if not set, and sets curios.book to the average ranking give to it by editors (if any).
+
+usage: rerank [options]    where the options are
+
+	-s	silent -- only errors printed.
+        -d	print warnings and debug info
+	-l 	recheck the numbers' logs, update those if necessary
+
+	-B	skip the number re-ranking and do the curios only
+	-R	skip the curio re-ranking and do the numbers only
+
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+$opt_s or $opt_l and print "Adjusting logs if necessary\n";
+$opt_s or $opt_B and print "Adjusting only curios.book, not reranking numbers.\n";
+$opt_s or $opt_R and print "Reranking the numbers only, not adjusting only curios.book.\n";
+$opt_d = 0 if $opt_s;
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+my ($sth, $sth2, $sth3, $sth4);
+
+unless ($opt_B) {
+  # First make sure digits is set
+  my $query = " update numbers set digits=FLOOR(log10+1) where digits is NULL";
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+
+  # Now adjust the rank of the others
+
+  $query = "SELECT numbers.id as id, if(0+sign>2,- log10, log10) as log10, sign, long_, short, numbers.rank, digits
+	FROM numbers, curios WHERE curios.number_id=numbers.id AND curios.visible='yes'
+	ORDER BY numbers.sign DESC, log10, numbers.digits, numbers.long_, numbers.id";
+
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+  $opt_s or print "Have selected the set of numbers to rank.\n";
+
+  # Loop through this list
+  # The modified = modified is an attempt to keep this value from being updated when setting the
+  # rank; I do not consider this "modification" when called from search routines (e.g., what's new?)
+
+  $sth2 = $dbh->prepare('UPDATE numbers SET numbers.rank = ?, modified=modified WHERE id = ?') or die;
+  $sth3 = $dbh->prepare('UPDATE numbers SET log10 = ?, modified=modified WHERE id = ?') or die;
+  $sth4 = $dbh->prepare('UPDATE numbers SET digits = ?, modified=modified WHERE id = ?') or die;
+
+  our $logs_checked = 0;
+  our $logs_changed = 0;
+  our $digits_changed = 0;
+  my $rank = 1;
+  my $old_id = 0;  # The query above gets the same id for each curio
+  while (my $p = $sth->fetchrow_hashref) {
+    next if $old_id == $$p{'id'};
+    &check_log($p) if $opt_l;
+    if ($rank != $$p{'rank'}) {
+      $opt_s or print "id #$$p{'id'}: was $$p{rank}, now $rank ($$p{'short'}; log10=$$p{'log10'}; digits=$$p{'digits'})\n";
+$sth2->bind_param(1,$rank, {TYPE=>SQL_INTEGER} ); 
+$sth2->bind_param(2,$$p{'id'}, {TYPE=>SQL_INTEGER} ); 
+#      $sth2->execute($rank,$$p{'id'}) or die;
+      $sth2->execute( ) or die;
+    }
+    $rank++;
+    $old_id = $$p{'id'};
+  }
+
+  $opt_s or $opt_l and print "$logs_checked logs checked; $logs_changed changed.\n\n";
+  $opt_s or print "Done reranking (highest rank $rank).\n";
+
+
+
+  # Now lets unrank.  Should be dones as a subquery???
+
+  $query = "SELECT numbers.id AS id, short, numbers.rank, COUNT(curios.visible) AS num_curios
+	FROM numbers LEFT JOIN curios ON curios.number_id = numbers.id AND visible='yes'
+	WHERE numbers.rank != 99999 GROUP BY numbers.id ORDER BY num_curios, id limit 200;";
+
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+  $opt_s or print "Have selected the set of numbers to (un)rank.\n";
+
+  # Loop through this list
+  # $sth2 = $dbh->prepare('UPDATE numbers SET rank = ?,   modified=modified WHERE id = ?') or die;
+
+  our $unranked = 0;
+  while (my $p = $sth->fetchrow_hashref) {
+    next if $$p{'num_curios'} > 0;
+    # $opt_s or
+    print "id #$$p{'id'}: was $$p{rank}, now 99999 ($$p{'short'}) $$p{'num_curios'} curios\n";
+    $sth2->execute(99999,$$p{'id'}) or die;
+    $unranked++;
+  }
+
+  $opt_s or print "Done unranking $unranked numbers.\n";
+
+
+
+}
+
+
+##############  Now lets adjust the book rankings set by the editors
+
+unless ($opt_R) {
+
+  my $query = "SELECT curios.id, book, AVG(rating) AS ratings FROM curios, ratings
+		WHERE ratings.curio_id = curios.id GROUP BY curios.id";
+  $sth = $dbh->prepare($query);
+  $sth->execute();
+  $opt_s or print "Have selected the set of numbers to book-rank.\n";
+
+  # Loop through this list
+  # The modified = modified is an attempt to keep this value from
+  # being updated when setting the rank; I do not consider this "modification"
+  # when called from search routines (e.g., what's new?)
+
+  $sth2 = $dbh->prepare('UPDATE curios SET book = ?, modified=modified WHERE id = ?') or die;
+
+  my $count1 = 0;
+  my $count2 = 0;
+  while (my $c = $sth->fetchrow_hashref) {
+    $count1++;
+    next if $$c{'book'} == $$c{'ratings'};
+    # print "$$c{'book'} == $$c{'ratings'}\n";
+    $sth2->execute($$c{'ratings'},$$c{'id'}) or die;
+    $count2++;
+  }
+
+  $opt_s or print "$count1 curios checked; $count2 changed.\n\n";
+  $opt_s or print "Done.\n";
+
+}
+
+exit;
+
+############################################################
+
+sub check_log() {
+
+  my $p = shift;
+
+  my $log10 = 0;
+  my $digits = 'unknown';
+  my $leading_digits = 0;
+  
+  # match SQL query logic for log10
+  if ($$p{'sign'} eq '-') {
+	  $$p{'log10'} *= -1;
+  }
+  
+  if ($$p{'long_'} or $$p{'short'} =~ /^-?\d+\.?\d*$/o) {
+    $$p{'long_'} = $$p{'short'} unless $$p{'long_'};
+    $$p{'long_'} =~ s/\s//go;       # Remove any whitespace
+    $$p{'long_'} =~ s/\.\.\.$//o;   # Decimals may end ... (e.g., 3.14...)
+    $$p{'long_'} =~ /^-?(\d*)/;	    # Digits before the decimal point...
+
+    $digits = length($1) or print "id=$$p{id} : $$p{short} digits error?\n\t$$p{'long_'}\n";
+    $digits-- if $$p{'long_'} =~ /^\-?0/;
+    if ($$p{'long_'} =~ /^-?(\d{16})/o) {
+      $log10 = $digits-16+log($1)/log(10);
+    } elsif ($$p{'long_'} =~ /^-?(\d*\.?\d{0,15})/o) {
+      # The number might be 0
+      $log10 = ($$p{'long_'}==0 ? -999999 : log($1)/log(10));
+    }
+    $main::logs_checked++;
+    if (  abs($log10 - $$p{'log10'}) > 0.00001*abs($$p{'log10'})
+	or   abs($log10 - $$p{'log10'}) > 0.00001*abs($log10)  ) {
+      print "Too far off? id $$p{'id'} : $$p{'short'} stored log $$p{'log10'} calculated $log10 (changing)\n";
+    }
+    if ($log10 != $$p{'log10'}) {
+      $sth3->execute($log10,$$p{'id'}) or die;
+      $main::logs_changed++;
+    }
+  } elsif ($$p{'short'} =~ /(\d+)\.\.\.\d+ \((\d+)\-digits\)/) {
+    $leading_digits = $1;
+    $digits = $2;
+    $log10 = $digits + log($leading_digits)/log(10) - length($leading_digits);
+    $main::logs_checked++;
+    if (  abs($log10 - $$p{'log10'}) > 0.00001*abs($$p{'log10'})
+        or   abs($log10 - $$p{'log10'}) > 0.00001*abs($log10)  ) {
+      print "Too far off? id $$p{'id'} : $$p{short} stored log $$p{'log10'} calculated $log10 (changing)\n";
+    }
+    if ($log10 != $$p{'log10'}) {
+      $sth3->execute($log10,$$p{'id'}) or die;
+      $main::logs_changed++;
+    }
+  } else {
+    print "Failed to check log for id $$p{'id'} : $$p{'short'} (unchanged)\n";
+  }
+
+  if (not $$p{'digits'} or $$p{'digits'} != $digits) {
+      $sth4->execute($digits,$$p{'id'}) or die;
+      $main::digits_changed++;
+  }
+  if ($opt_d and $digits != floor($log10+1)) {
+    print "Error? digits <> floor(log10+1) : id=$$p{id} $$p{short}, $digits digits, log10 $log10\n";
+  }
+
+}

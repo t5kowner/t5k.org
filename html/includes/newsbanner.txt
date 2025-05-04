@@ -1,0 +1,1 @@
+<a href="http://www.mersenne.org" class=none>GIMPS</a> found two new primes: 2<sup>43112609</sup>-1 (about 12.9 million digits) and 2<sup>37156667</sup>-1 (only 11.1 million digits).

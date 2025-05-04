@@ -1,0 +1,30 @@
+Date: Sun, 04 Jul 1999 22:15:38 -0400
+From: George Woltman 
+Subject: Mersenne: M38 = M6972593
+
+Hi all,
+
+	As the newspaper should announce the new prime on Monday or Tuesday,
+I've placed the info on the new prime at http://www.mersenne.org/prime.htm
+Congratulations to Nayan Hajratwala and all GIMPS members for our fourth
+success!
+
+	Each Mersenne announcement is different.  This time round I finally
+figured out how to get the press interested in the new number - tell them
+its a secret.  The Oregonian was doing an article on Richard Crandall and
+when the found out there was a new prime and we wouldn't tell them what it
+was, their interest level went way up!
+
+	I admire the resourcefulness of GIMPS members for going on a 
+"scavenger hunt" and finding out the exponent a few days before this
+email was sent out.  However the resourcefulness award must go to one
+enterprising GIMPS member that dug through all the cleared and assigned
+exponent lists and human-readable files and deduced the exponent in early
+June!  (Note to Scott - create a dummy non-zero residue a stick it
+in the cleared exponents report).
+
+	Good luck to all in the search for M39!	
+
+Have fun,
+George
+

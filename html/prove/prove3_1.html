@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 3.1: n-1 tests and Pepin's Test for Fermats</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->3.1: <i>n</i>-1 tests
+                and Pepin's tests for Fermats<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove3.html">Chapter
+                  Three</a> &gt; <i>n</i>-1 Tests<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p>Have you ever looked at the list of <a href="../largest.html">largest known
+      primes</a>?&nbsp; The most obvious feature of the largest few thousand primes <i>p</i>
+    is that in almost every case either <i>p</i>-1 or <i>p</i>+1 is trivially
+    factored.&nbsp; Why is that?&nbsp; Because these are the numbers easiest to
+    prove prime!&nbsp; In this section we will show how we can use Fermat like tests
+    for <i>n</i> if we know enough factors of <i>n</i>-1.&nbsp; These are tests that
+    <b>prove</b> primality, they do not just suggest that primality is (however
+    highly) probably.
+  </p>
+
+  <p>In 1891 Lucas turned Fermat's Little Theorem into a practical primality test.&nbsp;
+    Here is Lucas' test as strengthened by Kraitchik and Lehmer (see [<a
+      href="../references/refs.cgi/BLS75">BLS75</a>]):</p>
+  <blockquote>
+    <b id="theorem1">Theorem 1:</b> Let <i>n</i> &gt; 1.&nbsp; If for every prime factor <i>q</i>
+    of <i>n</i>-1 there is an integer <i>a</i> such that
+    <ul>
+      <li><i>a<sup>n</sup></i><sup>-1</sup> ≡ 1 (mod <i>n</i>), and</li>
+      <li><i>a</i><sup>(<i>n</i>-1)/<i>q</i></sup> is not 1 (mod <i>n</i>);</li>
+    </ul>
+    then <i>n</i> is prime.
+  </blockquote>
+  <p>We will prove this theorem because we have a great deal to learn from it.&nbsp;
+    (If you lose your way here, then just move on to the <a href="#Pocklington">next
+      theorem</a>--since in this case you must be taking me at my word anyway.)</p>
+  <blockquote>
+    <b>Proof:</b> To show <i>n</i> is prime we need only show phi(<i>n</i>) = <i>n</i>-1
+    (here phi(<i>n</i>) is Euler totient function), or more simply, that <i>n</i>-1
+    divides phi(<i>n</i>).&nbsp; Suppose this is not the case, then there is a
+    prime <i>q</i> and exponent <i>r</i>&gt;0 such that <i>q<sup>r</sup></i>
+    divides <i>n</i>-1, but not phi(<i>n</i>).&nbsp; For this prime <i>q</i> we
+    must have an integer <i>a</i> that satisfies the conditions above.&nbsp; Now
+    let <i>m</i> be the order of <i>a</i> modulo <i>n</i>, then <i>m</i> divides <i>n</i>-1
+    (first condition), but not (<i>n</i>-1)/<i>q</i> (second condition).&nbsp; So <i>q<sup>r</sup></i>
+    divides <i>m</i> which divides phi(<i>n</i>)--a contradiction which proves the
+    theorem.
+  </blockquote>
+  <p>What did we do in this proof?&nbsp; We looked at a group, (<b>Z</b>/<i>n</i><b>Z</b>)*,
+    which, if it had the correct size, <i>n</i>-1, would show <i>n</i> was prime.&nbsp;
+    We then collected enough information (the two conditions) to show the group had
+    the correct size!&nbsp; <b>This is the basis of all modern primality tests</b>
+    whether they are as simple as the test above or something as elaborate such as
+    the methods using elliptic curves or number fields.</p>
+
+  <p>Theorem 1 requires a complete factorization of <i>n</i>-1.&nbsp; The key to
+    strengthening this result into a form that only requires the factored part of <i>n</i>-1
+    to be roughly the square root of <i>n</i>-1 was discovered by Pocklington:</p>
+  <blockquote>
+    <p id="Pocklington"><b>Pocklington's Theorem</b> (1914):&nbsp; Let <i>n</i>-1 = <i>q<sup>k</sup>R</i>
+      where <i>q</i> is a prime which does not divide <i>R.</i>&nbsp; If there is an
+      integer <i>a</i> such that <i>a<sup>n</sup></i><sup>-1</sup> ≡ 1 (mod <i>n</i>)
+      and gcd(<i>a</i><sup>(<i>n</i>-1)/<i>q</i></sup>-1,<i>n</i>) = 1, then each
+      prime factor <i>p</i> of <i>n</i> has the form <i>q<sup>k</sup>r</i>+1.</p>
+
+    <p><b>Proof.</b>&nbsp; Let <i>p</i> be any prime divisor of <i>n</i>, and let <i>m</i>
+      be the order of <i>a</i> modulo <i>p</i>.&nbsp; As above <i>m</i> divides <i>n</i>-1
+      (first condition on <i>a</i>), but not (<i>n</i>-1)/<i>q </i>(second
+      condition); so <i>q<sup>k</sup></i> divides <i>m</i>.&nbsp; Of course <i>m</i>
+      divides <i>p</i>-1 so the conclusion follows.</p>
+  </blockquote>
+  <p>The result of applying Pocklington's theorem to each prime power factor of <i>n</i>
+    (plus a little more work) is:</p>
+  <blockquote>
+    <b id="theorem2">Theorem 2:</b>&nbsp; Suppose <i>n</i>-1 = <i>FR</i>, where <i>F</i>&gt;<i>R</i>,
+    gcd(<i>F,R</i>) is one and the factorization of <i>F</i> is known.&nbsp; If
+    for every prime factor <i>q</i> of <i>F</i> there is an integer <i>a</i>&gt;1
+    such that
+    <ol>
+      <li><i>a<sup>n</sup></i><sup>-1</sup> ≡ 1 (mod <i>n</i>), and</li>
+      <li>gcd(<i>a</i><sup>(<i>n</i>-1)/<i>q</i></sup>-1,<i>n</i>) = 1;</li>
+    </ol>
+    then <i>n</i> is prime.
+  </blockquote>
+  <p>(Notice that different <i>a</i>'s can be used for each prime <i>q</i>.)&nbsp;
+    Theorem 2 can be improved even more: if <i>F</i>&lt;<i>R</i>, but either every
+    factor of <i>R</i> is greater than sqrt(<i>R/F</i>); or <i>n</i>&lt;2<i>F</i><sup>3</sup>,
+    <i>R</i>=<i>rF</i>+<i>s</i>, 0&lt;<i>s</i>&lt;<i>F</i>, and <i>r</i> is odd or <i>s</i><sup>2</sup>-4<i>r</i>
+    is not a square; then <i>n</i> is prime.&nbsp; If you are interested in these
+    theorems, then it is well worth going to the source: [<a href="../references/refs.cgi/BLS75">BLS75</a>].
+  </p>
+  <p>Before we switch to the plus side tests, let me quote a few classical cases
+    of theorem 2.</p>
+  <blockquote>
+    <b id="Pepin">Pepin's Test</b> (1877): Let F<i><sub>n</sub></i> be
+    the <i>n</i>th Fermat number (so F<i><sub>n</sub></i> = <img src="assets/Fermat_n.gif" alt="2^2^n+1" width="35"
+      height="18">
+    ) with <i>n</i>&gt;1.&nbsp; F<i><sub>n</sub></i> is prime if and only if 3<sup>(F<sub><i>n</i>
+      </sub>-1)/2</sup> ≡ -1 (mod F<i><sub>n</sub></i>).
+    <p><b>Proof</b>.&nbsp; If&nbsp; 3<sup>(F<sub><i>n</i></sub>-1)/2</sup> ≡ -1
+      (mod F<i><sub>n</sub></i>), then F<i><sub>n</sub></i> is prime by theorem 2
+      with <i>a </i>= 3.&nbsp; If instead F<i><sub>n</sub></i> is prime, then 3<sup>(F<sub><i>n</i></sub>-1)/2</sup>
+      ≡ (3|F<i><sub>n</sub></i>) (mod F<i><sub>n</sub></i>) where (3|F<i><sub>n</sub></i>)&nbsp;
+      is the Jacobi symbol.&nbsp; It is easy to check that (3|F<i><sub>n</sub></i>)
+      = -1.</p>
+  </blockquote>
+  <blockquote>
+    <b id="Proth">Proth's Theorem</b> (1878): Let <i>n</i> = <i>h</i><sup>.</sup>2<i><sup>k</sup></i>+1
+    with 2<i><sup>k</sup></i> &gt; <i>h</i>.&nbsp;&nbsp; If there is an integer <i>a</i>
+    such that <i>a</i><sup>(<i>n</i>-1)/2</sup> ≡ -1 (mod <i>n</i>), then <i>n</i>
+    is prime.
+  </blockquote>
+  <blockquote>
+    <b id="theorem3">Theorem 3</b> (&quot;Well Known&quot;): Let <i>n</i>
+    = <i>h</i><sup>.</sup><i>q<sup>k</sup></i>+1 with <i>q</i> prime and <i>q<sup>k</sup></i>
+    &gt; <i>h</i>.&nbsp;&nbsp; If there is an integer <i>a</i> such that <i>a<sup>n</sup></i><sup>-1</sup>
+    ≡ 1 (mod <i>n</i>), and gcd(<i>a</i><sup>(<i>n</i>-1)/<i>q</i></sup>-1,<i>n</i>)
+    = 1, then <i>n</i> is prime.
+  </blockquote>
+  <p>Perhaps the best single source source of information on the classical tests is
+    Hugh Williams book &quot;Édouard Lucas and Primality Testing&quot; [<a
+      href="../references/refs.cgi/Williams98">Williams98</a>].&nbsp;
+    Other useful sources include &quot;the&quot; <i>n</i><sup>2</sup>-1 article: [<a
+      href="../references/refs.cgi/BLS75">BLS75</a>],
+    and the standard surveys (such as [<a href="../references/refs.cgi/BLSTW88">BLSTW88</a>],
+    [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>] and [<a
+      href="/references/refs.cgi/Riesel94">Riesel94</a>]).&nbsp;
+    These surveys include pointers to the results which use the factorization of
+    other polynomials in <i>n</i> such as <i>n</i><sup>6</sup>-1, most developed by
+    Williams and his associates [<a href="../references/refs.cgi/Williams78">Williams78</a>,
+    <a href="../references/refs.cgi/Williams98">Williams98</a>].&nbsp;
+  </p>
+  <p>These theorems have been implemented and are available for you to use on most
+    computer platforms.&nbsp; For example, look at Jean Penné's <a href="http://jpenne.free.fr/index2.html">LLR</a>
+    and Chris Nash's <a href="https://groups.yahoo.com/neo/groups/openpfgw/info">PrimeForm</a>).<br></p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove3_2.html"><b>next
+                  page</b></a> | <a href="prove2_3.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

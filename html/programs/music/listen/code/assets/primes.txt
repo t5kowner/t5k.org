@@ -1,0 +1,19 @@
+Title = Notes on Primal Sounds
+<ol>
+   <li>The number of terms must be at most 500 (to protect our server).
+   <li>The modulus (base) must be less than 127 (75 with no half notes, 54
+for percussion only).  Smaller numbers will sound better.
+   <li>Rather than start with the first prime 2, you may specify a starting
+value (at most 10,000,000).  The sequence will begin with the first prime
+greater than or equal to the number you specify.
+   <li>The quality of the instruments varies <b><i>dramatically</i></b>
+with the quality of your sound card.  Some sound cards do not implement all
+of the instruments.  Others do not implement all the notes for each
+instrument.
+   <li>The numbers before the instrument names are their code in the 
+       <a href=http://sunsite.unc.edu/emusic-l/info-docs-FAQs/MIDI-doc/MIDI-General_MIDI.txt>general 
+       midi standard</a> (see the information on the MIDI format).
+   <li>See <a href="/programs/music/listen/code/page.cgi/hear.txt">this page</a> if you have trouble
+playing these midi's.
+</ol>
+

@@ -1,0 +1,77 @@
+BODY {
+	background-image: url("https://t5k.org/curios/includes/background.gif");
+	background-color: rgb(252, 252, 252);
+
+	font-family: verdana, sans-serif;
+	color: rgb(0, 0, 0);
+	font-size: 12pt;
+}
+
+UL,
+P,
+TD,
+TH,
+LI {
+	font-family: verdana, sans-serif;
+}
+
+H1,
+H2,
+H3,
+H4,
+H5 {
+	font-family: "Comic Sans MS", Georgia, sans-serif;
+	font-weight: bold;
+	color: black;
+	text-shadow: 3px 3px 5px;
+}
+
+A {
+	color: rgb(51, 102, 153);
+}
+
+A:Visited {
+	color: rgb(51, 74, 255);
+}
+
+/* The link formats for the menu items */
+
+LI.menu,
+A.menu {
+	color: rgb(51, 102, 153);
+	font-size: 12pt;
+}
+
+A.menu:Active {
+	color: rgb(255, 255, 255);
+}
+
+A.menu:Hover {
+	background-color: rgb(255, 255, 204);
+	color: rgb(51, 74, 255);
+	text-decoration: underline;
+}
+
+/* Formats for the index page and links to it */
+
+HR.index {
+	background-color: rgb(252, 252, 252);
+	color: rgb(204, 204, 153);
+}
+
+div.index {
+	background: rgb(204, 204, 153);
+	color: blue;
+	text-align: center;
+}
+
+.highlight {
+	background: rgb(204, 204, 153);
+	color: black;
+}
+
+A.index:Hover {
+	color: rgb(51, 74, 255);
+	background-color: rgb(204, 204, 153);
+	text-decoration: underline;
+}

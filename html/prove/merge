@@ -1,0 +1,155 @@
+#!/usr/bin/perl -w
+
+# This file merges files into one.
+# Assume is a chapter (larger title) unless 'section' contains &gt;
+
+use FindBin qw($Bin);  # For portability when mirroring...
+use lib "$Bin/../bin";
+use SlurpFile;
+
+use Getopt::Std;
+getopts('ds');
+
+$opt_s or print "Usage: $0 [flags] [path]
+  -d	debug node--many messages
+  -s	silent operation (except for errors)
+";
+
+if ($opt_d) {
+  $opt_s = 0;
+  print "In debug mode--copious messages!";
+}
+
+my @files = qw ( prove1.html
+  prove2.html  prove2_1.html prove2_2.html prove2_3.html
+  prove3.html prove3_1.html prove3_2.html prove3_3.html
+  prove4.html prove4_1.html prove4_2.html prove4_3.html
+  prove5.html references.html);
+
+my $output_to = 'merged.html';
+
+my $a = '<!-- #BeginEditable "(.*?)" -->';
+my $b = '<!-- #EndEditable -->';
+
+my $out = '';  # Build output in this variable
+$out = <<HERE;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>How to find primes and prove primality (merged)</title>
+<script>
+<!--
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<style>
+body {
+	/*  font-size: 14pt; */
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	background-color: white;
+}
+a:link { color: #309; }
+a:visited { color: #036; }
+a:active, a:hover { color: #00C; }
+
+.cc1 { border: 2px solid black; width: 100%; padding: 0px; }
+.cc0 { width: 100%; margin: 0px; }
+.cc2 { background-color: #cef; vertical-align:middle; }
+.cc3 { background-color: #0cf;}
+
+\@media (max-width: 640px) {
+  .cc {
+    display: none;
+  }
+}
+
+\@media (max-width: 1200px) {
+  body {
+	margin-left: 5%;
+	margin-right: 5%;
+  }
+}
+
+\@media (min-width: 1201px) {
+  body {
+	max-width: 60em;
+	margin: auto;
+  }
+}
+</style>
+</head>
+<body onLoad="">
+
+<table class="cc1">
+  <tr>
+    <td> <table class="cc0">
+        <tr class="cc2">
+          <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving primality</span><br>
+            <span style="font-size: 120%">How to Prove Primality (single page version)</span></td>
+          <td><a href="index.html" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1" src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a>
+          </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+HERE
+
+foreach my $file (@files) {
+  $opt_s or print "Parsing $file:";
+  my $text = &SlurpFile::SlurpFile($file);
+  my %file; # to store parsed data
+  $text =~ s/$a(.*?)$b/$opt_d and print " $1";$file{$1}=$2;''/soeg;
+  $opt_d and print ".\n";
+
+  $file{'doctitle'} =~ s/\s*\<\/?title\>\s*//goi;
+  $chapter = ($file{'section'} =~ /\&gt\;/o);
+  $out .= "<table class=\"cc3 cc0\">
+     <tr><td><span style=\"font-size: 60%;\">File: <a href=\"$file\">$file</a> \"".($file{'doctitle'}||'untitled')
+     ."\" ($file{'section'})
+     </span></td></tr></table>\n";
+
+  unless ($chapter) {
+    $out .= "<h2 style=\"text-align:center;\">$file{'title'}</h2>";
+  } else {
+    $out .= "<h3>$file{'title'}</h3>";
+  }
+  $out .= $file{'content'};
+}
+
+$out .= <<HERE;
+<table class="cc1">
+  <tr>
+    <td>
+	<table class="cc0">
+        <tr class="cc2">
+  	  <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a> (Originally written by Chris Caldwell)</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+HERE
+
+&SlurpFile::WriteFile($output_to,$out);

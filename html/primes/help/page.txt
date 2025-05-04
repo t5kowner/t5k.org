@@ -1,0 +1,62 @@
+
+<dl>
+  <dt><a name=onlist></a><b>Currently on list?</b>
+  <dd>The value of this field (<code>prime.onlist</code>) is either 'yes' or 'no'.&nbsp;  
+The list contains the 5000 largest known primes plus 20 (or 5) each of the <a
+href="../../top20/home.php">archivable forms</a> (or archivable classes respectively).&nbsp;  If a
+prime meets one of these criteria it is labeled <code>'yes'</code>.&nbsp; Otherwise, it is labeled <code>'no'</code>. 
+
+   <br><br>
+   <dt><a name=status></a><b>Verification Status</b>
+   <dd>Only proven primes are allowed on this list!&nbsp;  When possible we try to verify these proofs 
+independently.&nbsp;  The verification status (<code>prime.prime</code>) is one of the following:
+     <blockquote><dl>
+       <dt>'Composite' <dd>Proven composite-will soon be deleted from the database.&nbsp;  This should never happen, but sometimes does.  
+<dt>'Untested' <dd>The verification process has not yet started.&nbsp;  If a lot of primes were submitted at once the system may take
+many hours to catch up.  <dt>'InProcess' <dd>The system is working on this prime.&nbsp;  If the prime is over a hundred thousand digits,
+this might take a little while (sometimes days).  <dt>'PRP' <dd> We were able to verify it is a PRP by a Fermat type test, but have not
+yet reconstructed a proof.&nbsp;  This is common on ECPP proofs where the verification requires substantial effort even with a
+certificate.&nbsp;  It is our hope to eventually go back and verify each of these completely. <dt>'Proven' <dd>Verification
+complete.&nbsp; the number has once again been proven prime. <dt>'External' <dd>We use this only for those primes verified by others
+(hence verified externally)-and this is done only in the case of the Mersennes (and similar primes) which are so large 
+they would tie up
+the system for weeks (and are already carefully verified by others).
+  </dl></blockquote>
+
+  <dt id="official"><b>Official comment</b></dt>
+  <dd>Certain forms of primes (see the <a href="/top20/index.php">top 20 index</a> are allowed on the list at smaller sizes, ... and those that
+are such exceptions are marked with official comments within the prime list.  These are distinct from the user comments.</dd>  
+
+  <br>
+  <dt id="proofcode"><B>Proof-code</b>
+  <dd>A proof code list the persons, programs and projects involved in a proof.</dd> 
+
+  <br>
+  <dt><a name=rank></a><B>Rank</b>
+  <dd>The largest prime has rank one, the next rank two...&nbsp;  (When multiple primes have the same number of 
+digits, then the <code>digit rank</code> shows how this prime ranks among those with the same number of 
+digits--otherwise <code>digit rank</code> is just 1).</dd>  
+
+  <br>
+  <dt><a name=e_rank></a><B>Entrance rank</b>
+  <dd>As new primes are added, the rank of any given prime slowly drops.&nbsp;  The 'entrance rank' is the rank the 
+prime had when it was first added--so it is its highest rank.&nbsp; This rank is less reliable on primes submitted 
+before 2000 because the submission time was less granular.&nbsp; In fact, for some primes submitted before 1 
+January 1997 we only know what year they were submitted.&nbsp;
+
+  <br><br>
+  <dt><a name=removed></a><B>Removed (date)</b>
+  <dd>Primes eventually get pushed off the list by the new primes being added.&nbsp;  For primes that have been pushed 
+off, and have no comments, 'removed' is the date/time at which they were pushed off.&nbsp;  This feature has not yet 
+been implemented for primes with comments because that is much more difficult to do.
+
+   <br><br>
+  <dt><a name=score></a><B>Score</b>
+  <dd>A measure of how difficult it is to find primes of this size: 
+log((log&nbsp;<I>n</I>)<sup>3</sup>&nbsp;log&nbsp;log&nbsp;<I>n</I>).&nbsp; See the bottom of the <a
+href="/bios/top20.php?type=person&by=ScoreRank">Top 20 by Score</a> page for an explanation.&nbsp; The normalized
+score is this score without the final (natural) log, divided by the same for the 5000th prime.&nbsp; See the bottom of
+the page <a href="/bios/top20.php?type=person&by=ScoreNormal">Top 20 by Normalized Score</a> for more information
+about normalized scores.
+
+ </dl> 

@@ -1,0 +1,124 @@
+#!/usr/bin/perl -w
+
+# This routine should reweight the codes
+# First assures the primes have been weighted:
+#
+# 	update prime set score = pow(log10*log(10),3)*log(log10*log(10));
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+
+
+getopts('hsd');
+$opt_s or $opt_h or print "usage: $0 [options].  Use $0 -h to see the options.\n\n";
+
+$opt_h and print "This routine adjusts the counts and scores in the code table.
+(It just uses the scores in the prime table--updating any nulls, and uses
+the current code table--it does not make new codes.)
+
+usage: reweight [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-d	print debug messages.
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+$opt_d and print "Noisey -d option turned on!\n";
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# Ready a few variables
+
+my ($query, $sth, $sth2);
+my $log10 = log(10);
+my $log10_3 = log(10)**3;
+
+# Before we start, make sure all primes have weights (called score)
+# Score is log(n)^3*log(log(n))
+
+$opt_d and print "Checking to see each prime has a score: ";
+$query = "/* reweightcodes */ UPDATE prime SET score=pow(log10*log(10),3)*log(log10*log(10)),
+	modified=modified WHERE score < 1000";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+$opt_d and print $sth->rows," primes' 'score's updated.\n";
+
+
+# First, remove old weights
+
+$query = "/* reweightcodes */ UPDATE code SET PrimesTotal=0, ScoreTotal=0, PrimesActive=0, ScoreActive=0, NonPrime=0";
+$opt_d and print "Query: $query\n";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+
+# Now re-add them in three (almost identical) passes
+
+# First, all primes
+
+$query = "SELECT CAST(credit AS BINARY) AS credit, count(*) as count_, sum(score) AS sum_ FROM prime WHERE list='Top 5000' AND prime > 3 GROUP BY CAST(credit AS BINARY)";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$opt_d and print "Query: $query\n";
+$sth->execute() || die $sth->errstr;
+$opt_s or print "Have selected all of the primes\n";
+
+# Loop through this list of codes
+
+$query = '/* reweightcodes */ UPDATE code SET PrimesTotal = ?, ScoreTotal = ? WHERE name=?';
+$opt_d and print "Query: $query\n";
+$sth2 = $dbh->prepare($query);
+while ($p = $sth->fetchrow_hashref) {
+  $sth2->execute($$p{'count_'}, $$p{'sum_'}, $$p{'credit'});
+}
+$sth2->finish;
+$opt_s or print "\tand weighted the corresponding codes.\n";
+
+
+
+# Now repeat with just those active primes
+
+$query = "SELECT CAST(credit AS BINARY) AS credit, count(*) AS count_, sum(score) AS sum_ FROM prime WHERE onlist>'no' AND list='Top 5000' and prime > 3 group by CAST(credit AS BINARY)";
+$opt_d and print "Query: $query\n";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+$opt_s or print "Have selected all *active* the primes (prime.onlist > 'no')\n";
+
+# Loop through this list of codes
+
+$query = '/* reweightcodes */ UPDATE code SET PrimesActive = ?, ScoreActive = ? WHERE name=?';
+$opt_d and print "Query: $query\n";
+$sth2 = $dbh->prepare($query);
+while (my $p = $sth->fetchrow_hashref) {
+  $sth2->execute($$p{'count_'}, $$p{'sum_'}, $$p{'credit'});
+}
+$sth2->finish;
+$opt_s or print "\tand weighted the corresponding codes.\n";
+
+
+
+# Now repeat with entries that are not proven primes or prps
+
+$query = "SELECT CAST(credit AS BINARY) AS credit, count(*) AS count_ FROM prime WHERE list='Top 5000' AND prime in (0,1,2,3) GROUP BY CAST(credit AS BINARY)";
+$opt_d and print "Query: $query\n";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+$opt_s or print "Have selected all questionable prime entries (prime IN (0,1,2,3))\n";
+
+# Loop through this list of codes
+
+$query = '/* reweightcodes */ UPDATE code SET NonPrime = ? WHERE name=?';
+$opt_d and print "Query: $query\n";
+$sth2 = $dbh->prepare($query);
+while (my $p = $sth->fetchrow_hashref) {
+  $sth2->execute($$p{'count_'}, $$p{'credit'});
+}
+$sth2->finish;
+$opt_s or print "\tand weighted the corresponding codes.\n";

@@ -1,0 +1,155 @@
+#!/usr/bin/perl -w
+
+# The routine reranks the entries in archival_tags, sets the 'onlist' columns in both
+# the 'prime' table (eventually could be unnecessary) and on the 'archival_tag' table.
+#
+# For archival_tags, 'onlist' is 'yes' (top 20 or 5...) or 'no' (but
+# still might make the full list if in the top 5000).
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+
+my $time = time;
+
+getopts('hs');
+$opt_s or opt_h or print "usage: rerank [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "The routine reranks the entries in archival_tags
+
+usage: rerank [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+
+# Special cases : where two subcategories with different names are actually identical
+# Decided not to do this for now
+
+# $Equate{'Cunningham chain (p)'} = 'Sophie Germain (p)';
+# $Equate{'Sophie Germain (p)'} = 'Cunningham chain (p)';
+# $Equate{'Cunningham chain (2p+1)'} = 'Sophie Germain (2p+1)';
+# $Equate{'Sophie Germain (2p+1)'} = 'Cunningham chain (2p+1)';
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.  (".(time-$time)." sec)\n";
+
+# For each category, find out how many should be marked 'onlist' (regardless
+# of size.  archivable.type is enum('archivable','archivable class',
+# 'tolerated','deprecated','unknown')
+
+my $query = "SELECT id, type, name FROM archivable WHERE purpose LIKE '%lint%'";
+
+my $sth = $dbh->prepare($query);
+$sth->execute();
+while ($c = $sth->fetchrow_hashref) {
+  if ($$c{'type'} eq 'archivable') { $number{$$c{'id'}} = 20; }
+  elsif ($$c{'type'} eq 'archivable class') { $number{$$c{'id'}} = 5; }
+  elsif ($$c{'type'} eq 'tolerated') { $number{$$c{'id'}} = 0; }
+  elsif ($$c{'type'} eq 'deprecated') { $number{$$c{'id'}} = 0; }
+  elsif ($$c{'type'} eq 'unknown') { $number{$$c{'id'}} = 0; }
+  else { die "archivable.type has unknown value '$$c{type}' for row with id=$$c{id} '$$c{name}'"; }
+  # print "$$c{'type'} \$number{$$c{'id'}} = $number{$$c{'id'}}\n";
+}
+$opt_s or print "Got archivable info.  (".(time-$time)." sec)\n";
+$sth->finish;
+
+# Get a list of the subcategories to rank
+
+$query = "SELECT COUNT(*) AS count, subcategory, category_id AS id
+	FROM archival_tag GROUP BY category_id,subcategory";
+$sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or print "Got archival_tag info.  (".(time-$time)." sec)\n";
+
+# Loop through this list of subcategories
+
+my %onlist;     # Key = prime id, value is if it should be on the list
+		# (the or'd values of if the comments are on the list)
+
+while ($c = $sth->fetchrow_hashref) {
+  my $subcategory = $dbh->quote($$c{subcategory});
+  my $category = $dbh->quote($$c{id});
+  my $number_on_list = 0;
+  if (exists $number{$$c{'id'}}) {
+    $number_on_list = $number{$$c{'id'}};
+  } else {
+     warn "$$c{'subcategory'} missing count; id $$c{'id'}; so using 0.";
+  }
+  $opt_s or print "Ranking the $$c{count} \"$$c{subcategory}\" [id=$$c{id}] (archive $number_on_list)\n";
+
+  # get the matching primes
+  my $which = "subcategory=$subcategory";	# Easy case: subcategory is unique.
+  if ($Equate{$$c{subcategory}}) { 	# Hard case: another subcategory is equivalent to this!
+    $which = "($which OR subcategory=".($dbh->quote($Equate{$$c{subcategory}})).')';
+    $opt_s or print "\t$which\n";
+  }
+  $which = "$which AND category_id=$category";
+  $query = "SELECT archival_tag.id AS tag, archival_tag.prime_id AS id FROM prime, archival_tag 
+	WHERE archival_tag.prime_id=prime.id AND prime.list!='deleted' AND $which ORDER BY prime.rank";
+  my $sth1 = $dbh->prepare($query);
+  $sth1->execute();
+
+  # Loop through this list of primes
+  my $sth2 = $dbh->prepare('UPDATE archival_tag SET rank_now=?, onlist=?
+	WHERE id=?') or die;
+  my $rank = 1;
+  while ($p = $sth1->fetchrow_hashref) {
+    my $tag_id = $$p{'tag'};
+    my $prime_id = $$p{'id'};
+    my $onlist = ($rank <= $number_on_list ? 'yes' : 'no');
+    $sth2->execute($rank++,$onlist,$tag_id) or die;
+  }
+  # $sth2 here--not inside the loop because we reuse the handle!
+  $sth2->finish;
+  $sth1->finish;
+}
+$opt_s or print "The archival_tags are now ranked.  (".(time-$time)." sec)\n";
+
+# Now let's update the prime list
+
+# First mark on those in the top 5000 onlist and the rest off list
+# (this updates those pushed off the list to 'no')
+# Lets lock the modified tag so these don't show up on the whats new
+# pages just because of this.  (They will when proven...)
+
+$query = "/* reranktags */ UPDATE prime SET onlist=IF(prime.rank<=5000,'yes','no'),
+	modified=modified WHERE prime.list!='deleted'";
+$sth = $dbh->prepare($query);
+$sth->execute();
+$sth->finish;
+$opt_s or print "Top 5000 now onlist, rest now not onlist.  (".(time-$time)." sec)\n";
+
+
+# Note that 'onlist' for primes is either 'no', 'yes' So now mark the rest onlist='yes' if they should be because
+# of onlist archival tags (tag.onlis='yes') these all make the list.
+
+# USE A SUBSELECT HERE WHEN UPGRADED!
+
+# Select those primes without 'onlist'='yes' but the
+# archival tag has onlist='yes'.  DOn't mess with those marked deleted.
+
+$query = "/* reranktags */ SELECT prime.id AS id FROM prime,archival_tag
+	WHERE archival_tag.onlist='yes' AND prime.id=prime_id AND prime.onlist!='yes'
+	AND prime.list!='deleted' GROUP BY prime.id";
+$sth = $dbh->prepare($query);
+$sth->execute();
+
+$sth2 = $dbh->prepare("/* reranktags */ UPDATE prime SET onlist='yes', modified=modified WHERE id=?") or die;
+while ($p = $sth->fetchrow_hashref) {
+    $sth2->execute($$p{'id'}) or die;
+}
+$sth2->finish;
+$sth->finish;
+
+$opt_s or print "Rest adjusted per archival_tag info.  (".(time-$time)." sec)\n";
+
+$opt_s or print "Done.\n";

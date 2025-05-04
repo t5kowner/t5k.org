@@ -1,0 +1,19 @@
+Title=Can not play MIDI's?
+
+<ul>
+  <li>You must have a sound card (speakers...)  The quality of the sound card
+(e.g., wave tables verses synthesized) may dramatically effect the sounds produced by these
+routines.<BR><BR>
+
+  <li> Getting the browser to play MIDI's is usually fairly easy. You need software installed to play
+MIDI's.  Windows media player seems quite fickle and worse, Mircosoft Explorer 
+<a href="http://ppewww.ph.gla.ac.uk/~flavell/www/content-type.html">improperly ignores</a> HTTP Content-Type 
+headers.  Under Windows you might try the debug options which will give a link to the output <BR><BR>
+
+  <li>If your player repeats the MIDI over and over, check to see it has an option you can set to stop
+looping.<BR><BR>
+
+  <li>If the server response time is too slow (page takes too long to load and the MIDI device times
+out), check the "debug" checkbox and use the link on the debug page.<BR><BR>
+
+</ul>

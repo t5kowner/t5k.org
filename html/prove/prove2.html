@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving: Contents of Section Two "The quick tests for small numbers
+    and probable primes"</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->Chapter 2: The quick
+                tests for small numbers and probable primes<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" -->Chapter Two (contents)<!-- #EndEditable --> </b>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <h3>Contents of this Chapter:</h3>
+  <ol>
+    <li> <a href="prove2_1.html">Finding Very Small Primes</a>&nbsp;</li>
+    <li> <a href="prove2_2.html">Fermat, Probable-Primality and Pseudoprimes</a>&nbsp;</li>
+    <li> <a href="prove2_3.html">Strong Probable-Primality and a Practical Test</a>&nbsp;</li>
+  </ol>
+  <p>This is one of four chapters on finding primes and proving primality.&nbsp;
+    The first is a short <a href="index.html">introduction and table of contents</a>.&nbsp;
+    The second (these pages) chapter discusses <a href="prove2.html">finding small
+      primes</a> and the basic probable primality tests.&nbsp; The third chapter cover
+    the <a href="prove3.html">classical primality tests</a> that have been used
+    to prove primality for 99.99% of the numbers on the <a href="../largest.html">largest
+      known prime list</a>.&nbsp; The last chapter introduces the <a href="prove4.html">general
+      purpose tests</a> that do not require factorization. </p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove2_1.html"><b>next
+                  page</b></a> | <a href="prove1.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

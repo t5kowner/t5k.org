@@ -1,0 +1,252 @@
+#!/usr/bin/perl -w
+
+# This programs prints the various forms of the list (data, text, tex for LaTex
+#  ...  So, for example, It contains the headers for each of these types (my
+# name, ...) as well as the LaTeX header info.  However, the file LoadPrimes.pm
+# actually controls the printing of each of these forms of primes.  So change
+# the header/tail info here, but adjust how primes are printed in LoadPrimes.
+
+use FindBin qw($Bin);	# Where is this script stored?  Put full path into $Bin
+use lib ("$Bin/../bin",$Bin);
+
+use LoadPrimes;
+use SlurpFile;
+use DisplayCodes;
+
+use Getopt::Std;	# Allow for command line options
+getopts('CDLRhiostvl:w:f:F:x');
+
+$opt_s or print "This routine prints lists of primes.  Default is \"data\""
+			." format.  Use -h for help.\n";
+
+$opt_h and print "usage: print [options]    where the options are
+	-f m	output to file m (e.g., all.dat)
+	-F m    output to file m only if database changed since m was modified
+        -h      print this help then exist.
+        -s      silent -- only errors printed.\nwhich (you may combine these):
+	-w e	which primes to list (e.g., \"rank < 99\" or \"status LIKE '%Reparse'\")
+	-v 	add those that are unverified
+	-C	just those marked composite
+	-D	just those marked duplicate
+	-L	the standard all.dat list (top 5000 + those marked 'onlist')
+	-R	just those marked to remove\nhow:
+	-t	text format
+	-x	LaTeX format
+	-o	reverse usual order (smallest first)
+	-i	use database id's instead of ranks (turned on by -C, -D and -R)
+	-l n 	limit to n lines\n";
+$opt_h and exit;
+
+$opt_f and not $opt_s and
+	print "Will output to the file $opt_f (and use $opt_f.bak).\n";
+$opt_f and $opt_F and print "Warning: -f over-rides -F\n";
+$opt_C and not $opt_s and print "Just list the Composite primes.\n";
+$opt_i = 1 if ($opt_C or $opt_D or $opt_R);
+$opt_i and not $opt_s and print "Will use database id's instead of ranks.\n";
+$opt_D and not $opt_s and print "Just list the duplicate primes.\n";
+$opt_L and not $opt_s and
+	print "Print the standard all.dat primes (top 5000 + those marked onlist).\n";
+$opt_R and not $opt_s and print "Just list primes marked Removed.\n";
+$opt_t and not $opt_s and print "Print in text format.\n";
+$opt_x and not $opt_s and print "Print in LaTeX format.\n";
+$opt_l and not $opt_s and print "Print just $opt_l primes.\n";
+$opt_w and not $opt_s and print "Print those \"WHERE $opt_w\".\n";
+$opt_o and not $opt_s and print "Will print the smallest first.\n";
+$opt_v and not $opt_s and print "Will also include the unverified primes.\n";
+
+if ($opt_F) {
+ die "The file '$opt_F' does not exist." unless -e $opt_F;
+ my @stat = stat($opt_F);
+ my @time = localtime($stat[9]);
+ my $filedate = sprintf("%d%02d%02d%02d%02d%02d",1900+$time[5],$time[4]+1,
+		$time[3],$time[2],$time[1],$time[0]);
+ $opt_s or print "Will output to the file $opt_F (and use $opt_F.bak)\n".
+		"if database modified since $filedate.\n";
+ my $date = &connect_db::GetRow({where=>"NOT prime = 'InProcess'",
+		table=>'prime', columns=>'MAX(modified+0)'});
+ if ($date <= $filedate) {
+   $opt_s or print "The file was created after the last modification ($date)\n";
+   exit;
+ }
+}
+
+# Set up the where part of the query
+
+my $where = '';
+$where = "status LIKE '%Duplicate%'" if $opt_D;
+($where .= ($where ? ' AND ' : '')."status LIKE '%Remove'") if $opt_R;
+($where .= ($where ? ' AND ' : '')."prime = 'Composite'") if $opt_C;
+($where .= ($where ? ' AND ' : '')."prime > 3") unless $opt_v || $opt_w;
+($where .= ($where ? ' AND ' : '')."onlist > 'no'") if $opt_L;
+($where .= ($where ? ' AND ' : '').$opt_w) if $opt_w;
+$limit = ($opt_l ? $opt_l : 999999);
+
+my $OrderBy = 'prime.rank';
+$opt_o and $OrderBy = 'log10';
+
+# Print the opening line and set up the subroutine to print the primes
+
+my ($out, $sub);
+if ($opt_t) {
+  # The long text form (opt_L) get headers in text format
+  $out = ($opt_L ? &text_header('all') : $out);
+  if ($opt_i) {
+    $out  .= &LoadPrimes::ShowText('head',{'renumber' =>1, 'id' => 1});
+  } else {
+    $out  .= &LoadPrimes::ShowText('head',{'renumber' =>1});
+  }
+  $sub = sub { $out .= &LoadPrimes::ShowText(shift,{'wrap'=>78,dateletter=>1});
+  $limit--; };
+} elsif ($opt_x) {
+  $out = &LaTex_header('Start');
+  $out .= ($opt_L ? &LaTex_header('all') : '');
+  if ($opt_i) {
+    $out  .= &LoadPrimes::ShowLaTex('head',{'renumber' =>1, 'id' => 1});
+  } else {
+    $out  .= &LoadPrimes::ShowLaTex('head',{'renumber' =>1});
+  }
+  $sub = sub { $out .= &LoadPrimes::ShowLaTex(shift,{'wrap'=>78,dateletter=>1});
+  $limit--; };
+} else {
+  if ($opt_i) {
+    $out = &LoadPrimes::ShowData('head',{'id' => 1});
+  } else {
+    $out = &LoadPrimes::ShowData('head',{});
+  }
+  $sub = sub { $out .= &LoadPrimes::ShowData(shift); $limit--; };
+}
+
+# Add all of the primes to the global string $out
+
+&LoadPrimes::ProcessPrimes($sub, {'where'=>$where, limit=>$limit,
+	orderby=>$OrderBy});
+
+# Add the closing line(s)
+
+if ($opt_t) {
+  $out .= &LoadPrimes::ShowText('tail');
+  $out .= "\n\n".&DisplayCodes::DisplayCodes({list=>\%LoadPrimes::UsedCodes,
+		style=>'text'});
+} elsif ($opt_x) {
+  $out .= &LoadPrimes::ShowLaTex('tail');
+  $out .= "\n\n".&DisplayCodes::DisplayCodes({list=>\%LoadPrimes::UsedCodes,
+		style=>'LaTex'});
+  $out .= '\end{document}';
+} else {
+  $out .= &LoadPrimes::ShowData('tail');
+}
+
+# Output the list of primes
+
+if ($opt_f or $opt_F) {
+  my $file = $opt_f || $opt_F;
+  if (-e $file) {
+    &SlurpFile::BackupAndSave($file,$out);
+  } else {
+    &SlurpFile::WriteFile($file,$out);
+  }
+} else {
+  print $out;
+}
+
+exit;
+
+sub text_header {
+  my $type = shift;
+  my $date = `date`;
+  chop $date;
+  my $out = (' 'x25)."THE LARGEST KNOWN PRIMES\n";
+
+  $out .= (' 'x21)."(The 5,000 largest known primes)
+        (selected smaller primes which have comments are included)\n";
+
+  $out .= "    Originally Compiled by Samuel Yates -- Continued by Chris Caldwell and now maintained by Reginald McLean
+                       ($date)\n\n
+So that I can maintain this database of the 5,000 largest known primes
+(plus selected smaller primes with 1,000 or more digits), please send
+any new primes (that are large enough) to:
+
+  https://t5k.org/bios/submission.php
+
+This list in a searchable form (plus information such as how to find
+large primes and how to prove primality) is available at the interactive
+web site:
+
+  https://t5k.org/primes/
+
+See the last pages for information about the provers.
+
+The letters after the rank refer to when the prime was submitted.
+'a' is this month, 'b' last month...
+";
+}
+
+sub LaTex_header {
+# Merge with previous--allow other languages!
+  my $type = shift;
+  my $date = `date`;
+  chop $date;
+  if ($type eq 'Start') {
+    return '\documentclass[10pt]{article}
+\usepackage{fullpage}           % sets the pargins to 1" all around
+% \usepackage{graphicx}         % standard graphic package
+\usepackage{longtable}          % allows long tables
+\usepackage{array,ragged2e}     % extends table column alignment types; allow raggedright as column preamble
+\usepackage{url}                % formats urls
+\usepackage{amsmath}            % provides multline
+% \setlength{\parskip}{1ex}
+\setlength{\parindent}{0ex}	% Don not want to indent my paragraphs
+% Identification of the file
+\def\FileAuthor{Chris K. Caldwell}
+\def\FileTitle{The Largest Known Primes}
+\def\FileSubject{University of Tennessee at Martin}
+
+\usepackage[breaklinks=true,linkbordercolor={0 0 1}]{hyperref}
+\hypersetup{  % doc info for pdf
+  pdftitle      = \FileTitle{},
+  pdfsubject    = \FileSubject{},
+  pdfkeywords   = {Primes, records, lists, largest, Mersenne, twins},
+  pdfauthor     = \FileAuthor{},
+  pdfcreator    = {LaTeX with hyperref package}
+}
+\hyperbaseurl{https://t5k.org/}
+
+\begin{document}
+';
+  }
+
+  my $out = "\\begin{center}\n{\\Large THE LARGEST KNOWN PRIMES}\\\\\n";
+
+  $out .= "(The \$5,000\$ largest known primes)\\\\\n";
+  $out .= "(selected smaller primes which have comments are included)\\\\
+Originally Compiled by Samuel Yates -- Continued by Chris Caldwell and now maintained by Reginald McLean\\\\
+(Last Updated $date)\\\\\n\\end{center}
+
+So that I can maintain this database of the 5,000 largest known primes
+(plus selected smaller primes with 1,000 or more digits), please send
+any new primes (that are large enough) to:
+
+  \\begin{quote}
+  \\url{https://t5k.org/bios/submission.php}
+  \\end{quote}
+
+This list in a searchable form (plus information such as how to find
+large primes and how to prove primality) is available at the interactive
+web site:
+
+  \\begin{quote}
+  \\url{https://t5k.org/primes/}
+  \\end{quote}
+
+See the last pages for information about the provers.
+
+\\section{The List of Primes}
+
+The letters after the rank refer to when the prime was submitted.
+`a' is this month, `b' last month...
+
+\\raggedright
+
+";
+
+}

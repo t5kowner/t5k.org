@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>A Check of Benford's Law</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/">Notes</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/faq/">FAQ</a></li>
+          <li class="breadcrumb-item active">Checking Benford's Law</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->FAQ: A
+        Check of Benford's Law <!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <p>As discussed on <a href="BenfordsLaw.html">another page</a>, <a class="glossary" title="glossary"
+          href="/glossary/page.php"> Benford's law</a>states that for many data distributions that <b>the string of
+          leading digits <i>d</i></b> occur with relative frequency
+      <blockquote class="blockquote">log<sub>10</sub>(1 + 1/<i>d</i>).</blockquote>
+      So the entries would begin with the leading digits 43 with frequency log<sub>10</sub>(1
+      + 1/43), or about 1.00% percent of the time. </p>
+
+      <p>To test this with a sample, on 21 December 2001, Andy Steward mailed me the
+        results from his collection of factors of <a class="glossary" title="glossary"
+          href="/glossary/page.php">generalized
+          repunit</a>numbers.&nbsp; These include results from the <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=CunninghamProject">Cunningham
+          project</a>as well as Richard Brent's (and others) factor tables.&nbsp; His
+        list of 926,952 prime factors of generalized repunits with at least 5 digits
+        yielded the following excellent fit.</p>
+
+      <p>
+        The entries of this table are the observed frequency folloed by the (predicted frequency).
+      </p>
+
+      <center>
+        <table borderColor=#66ccff cellPadding=3 border=1>
+          <tr align="center">
+            <td title=39981>&nbsp;</td>
+            <td title=39981 colspan="10" bgcolor="#F0F9FF"><b>second digit</b></td>
+          </tr>
+          <tr align="center">
+            <td title=39981 bgcolor="#99CCFF"><b>first<br>
+                digit</b></td>
+            <td title=39981 bgcolor="#F0F9FF">0</td>
+            <td title=37224 bgcolor="#F0F9FF">1</td>
+            <td title=33772 bgcolor="#F0F9FF">2</td>
+            <td title=31821 bgcolor="#FFFFCC"><b>3</b></td>
+            <td title=28656 bgcolor="#F0F9FF">4</td>
+            <td title=27494 bgcolor="#F0F9FF">5</td>
+            <td title=25158 bgcolor="#F0F9FF">6</td>
+            <td title=23665 bgcolor="#F0F9FF">7</td>
+            <td title=22617 bgcolor="#F0F9FF">8</td>
+            <td title=21249 bgcolor="#F0F9FF">9</td>
+          </tr>
+          <tr align="center">
+            <td title=39981 bgcolor="#99CCFF">1</td>
+            <td title=39981>4.31% (4.14%)</td>
+            <td title=37224>4.02% (3.78%)</td>
+            <td title=33772>3.64% (3.48%)</td>
+            <td title=31821 bgcolor="#FFFFCC">3.43% (3.22%)</td>
+            <td title=28656>3.09% (3.00%)</td>
+            <td title=27494>2.97% (2.80%)</td>
+            <td title=25158>2.71% (2.63%)</td>
+            <td title=23665>2.55% (2.48%)</td>
+            <td title=22617>2.44% (2.35%)</td>
+            <td title=21249>2.29% (2.23%)</td>
+          </tr>
+          <tr align="center">
+            <td title=20305 bgcolor="#99CCFF">2</td>
+            <td title=20305>2.19% (2.12%)</td>
+            <td title=19124>2.06% (2.02%)</td>
+            <td title=18076>1.95% (1.93%)</td>
+            <td title=17563 bgcolor="#FFFFCC">1.89% (1.85%)</td>
+            <td title=16464>1.78% (1.77%)</td>
+            <td title=15878>1.71% (1.70%)</td>
+            <td title=15426>1.66% (1.64%)</td>
+            <td title=14682>1.58% (1.58%)</td>
+            <td title=14142>1.53% (1.52%)</td>
+            <td title=13777>1.49% (1.47%)</td>
+          </tr>
+          <tr align="center">
+            <td title=13186 bgcolor="#99CCFF">3</td>
+            <td title=13186>1.42% (1.42%)</td>
+            <td title=12798>1.38% (1.38%)</td>
+            <td title=12467>1.34% (1.34%)</td>
+            <td title=11774 bgcolor="#FFFFCC">1.27% (1.30%)</td>
+            <td title=11661>1.26% (1.26%)</td>
+            <td title=11326>1.22% (1.22%)</td>
+            <td title=10952>1.18% (1.19%)</td>
+            <td title=10681>1.15% (1.16%)</td>
+            <td title=10071>1.09% (1.13%)</td>
+            <td title=10362>1.12% (1.10%)</td>
+          </tr>
+          <tr align="center">
+            <td title=9639 bgcolor="#FFFFCC"><b>4</b></td>
+            <td title=9639 bgcolor="#FFFFCC">1.04% (1.07%)</td>
+            <td title=9487 bgcolor="#FFFFCC">1.02% (1.05%)</td>
+            <td title=9337 bgcolor="#FFFFCC">1.01% (1.02%)</td>
+            <td title=9080 bgcolor="#FFFFCC"><b>0.98% (1.00%)</b></td>
+            <td title=8978>0.97% (0.98%)</td>
+            <td title=8456>0.91% (0.95%)</td>
+            <td title=8368>0.90% (0.93%)</td>
+            <td title=8690>0.94% (0.91%)</td>
+            <td title=7769>0.84% (0.90%)</td>
+            <td title=7975>0.86% (0.88%)</td>
+          </tr>
+          <tr align="center">
+            <td title=7665 bgcolor="#99CCFF">5</td>
+            <td title=7665>0.83% (0.86%)</td>
+            <td title=7750>0.84% (0.84%)</td>
+            <td title=7643>0.82% (0.83%)</td>
+            <td title=7422>0.80% (0.81%)</td>
+            <td title=7198>0.78% (0.80%)</td>
+            <td title=7138>0.77% (0.78%)</td>
+            <td title=6935>0.75% (0.77%)</td>
+            <td title=6948>0.75% (0.76%)</td>
+            <td title=6513>0.70% (0.74%)</td>
+            <td title=6798>0.73% (0.73%)</td>
+          </tr>
+          <tr align="center">
+            <td title=6469 bgcolor="#99CCFF">6</td>
+            <td title=6469>0.70% (0.72%)</td>
+            <td title=6449>0.70% (0.71%)</td>
+            <td title=6366>0.69% (0.69%)</td>
+            <td title=6057>0.65% (0.68%)</td>
+            <td title=5918>0.64% (0.67%)</td>
+            <td title=6011>0.65% (0.66%)</td>
+            <td title=5693>0.61% (0.65%)</td>
+            <td title=5606>0.60% (0.64%)</td>
+            <td title=5567>0.60% (0.63%)</td>
+            <td title=5313>0.57% (0.62%)</td>
+          </tr>
+          <tr align="center">
+            <td title=5557 bgcolor="#99CCFF">7</td>
+            <td title=5557>0.60% (0.62%)</td>
+            <td title=5141>0.55% (0.61%)</td>
+            <td title=5441>0.59% (0.60%)</td>
+            <td title=4989>0.54% (0.59%)</td>
+            <td title=4975>0.54% (0.58%)</td>
+            <td title=4988>0.54% (0.58%)</td>
+            <td title=5096>0.55% (0.57%)</td>
+            <td title=4958>0.53% (0.56%)</td>
+            <td title=4810>0.52% (0.55%)</td>
+            <td title=4760>0.51% (0.55%)</td>
+          </tr>
+          <tr align="center">
+            <td title=4452 bgcolor="#99CCFF">8</td>
+            <td title=4452>0.48% (0.54%)</td>
+            <td title=4684>0.51% (0.53%)</td>
+            <td title=4677>0.50% (0.53%)</td>
+            <td title=4543>0.49% (0.52%)</td>
+            <td title=4361>0.47% (0.51%)</td>
+            <td title=4513>0.49% (0.51%)</td>
+            <td title=4448>0.48% (0.50%)</td>
+            <td title=4449>0.48% (0.50%)</td>
+            <td title=4285>0.46% (0.49%)</td>
+            <td title=4215>0.45% (0.49%)</td>
+          </tr>
+          <tr align="center">
+            <td title=4166 bgcolor="#99CCFF">9</td>
+            <td title=4166>0.45% (0.48%)</td>
+            <td title=4159>0.45% (0.47%)</td>
+            <td title=4229>0.46% (0.47%)</td>
+            <td title=4106>0.44% (0.46%)</td>
+            <td title=3994>0.43% (0.46%)</td>
+            <td title=4075>0.44% (0.45%)</td>
+            <td title=3890>0.42% (0.45%)</td>
+            <td title=3939>0.42% (0.45%)</td>
+            <td title=3719>0.40% (0.44%)</td>
+            <td title=3743>0.40% (0.44%)</td>
+          </tr>
+        </table>
+      </center>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

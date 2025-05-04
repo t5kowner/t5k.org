@@ -1,0 +1,74 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib ("$Bin/..",$Bin);
+use POSIX qw/floor/;
+
+use Getopt::Std;	# Allow for command line options
+getopts('dhs');
+our($opt_d,$opt_h,$opt_s);
+
+$opt_s or print "
+It tries...\n\n";
+
+$opt_h and print "reparse command line options
+
+	-h	print this help info and exit reparse
+	-d	noisey debug options
+	-s	silent except for known errors
+";
+$opt_h and exit;
+
+my @lines = (5000, 2000, 1000, 500, 200, 100, 50);	# ranks for the data to collect
+my $length = 0;						# highest rank sought
+my %records = ();  					# current sizes of each rank
+foreach(@lines) { 
+  $records{$_} = 0; 
+  if ($_ > $length) { $length = $_; }
+}
+$opt_d and print 'seeking the '.join(", ", keys %records)." th primes.\n";
+
+
+use connect_db;
+my $dbh = &connect_db::connect();
+my $sth;
+
+my $query = 'select DATE_FORMAT(submitted,"%Y %c %e") as date, TO_DAYS(submitted)-TO_DAYS(NOW()) as days, log10 as log_'.
+	' from prime order by submitted';
+$opt_d and print("query: $query\n");
+
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr; 
+
+my $count = 0;
+my @list = ();		# largest prime sizes sorted by size
+while (my $p = $sth->fetchrow_hashref) {
+  my $date = $$p{'date'};	$date =~ s/ /-/g;
+  my $days = $$p{'days'};
+  my $size = floor($$p{'log_'}+1);
+
+
+  # Keep a sorted list of the sizes of the largest of the primes
+  @list = sort {$b <=> $a} $size, @list;
+  pop(@list) if @list > $length;
+  # print join(", ", @list)."\n";
+
+  # update the records of sizes sought in @lines
+  my $changed = 0;
+  foreach (@lines) {
+    if (@list >= $_ and $size > $records{$_} and $records{$_} < $list[$_-1]) { $records{$_} = $list[$_-1]; $changed = 1; }
+  }
+
+  # only print if changes and just do one a day 
+  if ($changed and @list >= $length) {
+    my $out = "$date $days";
+    foreach (@lines) {
+      $out .=  " $records{$_}";
+    }
+    print $out."\n";
+  }
+
+}
+
+exit;

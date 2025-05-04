@@ -1,0 +1,19 @@
+#!/usr/bin/perl -w
+
+# Expects an expression to parse, returns the full digit expansion--white space added.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib "$Bin/math";
+use parser;
+use bmath;
+use DBI;
+
+print '' unless (my $in = shift());
+
+if ($in !~ /"(.*?)"/) {
+  $out = &parser::parse($in || '');
+  $leading = (length($out) % 10);
+  $out =~ s/^(\d{$leading})(?=\d)/$1 /;
+  $out =~ s/(\d{10})(?=\d)/$1 /g;
+  print $out;
+}

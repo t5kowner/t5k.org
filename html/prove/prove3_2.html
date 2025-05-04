@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 3.2 n+1 tests and the Lucas-Lehmer test</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->3.2: <i>n</i>+1 tests
+                and the Lucas-Lehmer test<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove3.html">Chapter
+                  Three</a> &gt; <i>n</i>+1 Tests<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p>About half of the primes on the list of the largest known primes are of the form <i>N</i>-1, where <i>N</i> (the
+    prime plus one) is trivial to factor, why is that?&nbsp;
+    It is because there is a theorem similar to Fermat's Little theorem that we can
+    use here--but first we must do a little ground work.&nbsp; Again you may skip
+    the details and go straight to the theorem if you must, but you'll miss most of
+    the fun!</p>
+  <p>Suppose we choose integers <i>p</i> and <i>q</i> such that <i>p</i><sup>2</sup>-4<i>q</i> is <b>not a square</b>
+    modulo <i>n</i>, then the polynomial <i>x</i><sup>2</sup>-<i>px</i>+<i>q</i> has distinct zeros, one of which is
+    <i>r</i> = (<i>p</i> + sqrt(<i>p</i><sup>2</sup>-4<i>q</i>))/2,
+    and it is easy (by induction) to show <i>r</i>'s powers have the form
+  </p>
+  <blockquote id="lucas"> <b>Lemma 1:</b>&nbsp; <i>r<sup>m</sup></i> = (V(<i>m</i>) + U(<i>m</i>)
+    sqrt(<i>p</i><sup>2</sup>-4<i>q</i>))/2 </blockquote>
+  where U and V are defined recursively by
+  <blockquote>U(0) = 0,&nbsp;&nbsp; U(1) = 1,&nbsp;&nbsp; U(<i>m</i>) = <i>p</i>U(<i>m</i>-1)
+    - <i>q</i>U(<i>m</i>-2) <br>
+    V(0) = 2,&nbsp;&nbsp; V(1) = <i>p</i>,&nbsp;&nbsp; V(<i>m</i>) = <i>p</i>V(<i>m</i>-1)
+    - <i>q</i>V(<i>m</i>-2) </blockquote>
+  <p>These are the <b>Lucas sequences</b> associated with <i>p</i> and <i>q</i>.&nbsp;
+    A well known special case is given by letting <i>p</i>=1, <i>q</i>=-1, then U(<i>m</i>)
+    is the sequence of Fibonacci numbers.</p>
+  <p>These Lucas sequences have many properties (such as the following) which make
+    them very fast to calculate (in a way analogous to how we calculate <i>x<sup>m</sup></i> by repeated squarings):</p>
+  <blockquote>U(2<i>m</i>) = U(<i>m</i>)V(<i>m</i>) <br>
+    V(2<i>m</i>) = V(<i>m</i>)<sup>2</sup>-2<i>q<sup>m</sup></i>&nbsp; </blockquote>
+  <p>(See [<a href="../references/refs.cgi/BLSTW88">BLSTW88</a>] or better
+    [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>, chpt2, iv].)</p>
+  <p>Now we are ready to state our analog to Fermat's Little Theorem (keep lemma 1
+    in mind while reading this theorem):</p>
+  <blockquote><b>Lemma 2:</b>&nbsp; (With <i>p, q</i> and <i>r</i> as above so <i>p</i><sup>2</sup>-4<i>q</i> is not a
+    square mod <i>n</i>), let 2<i>r</i> ≡ <i>a</i> + <i>b</i> sqrt(<i>p</i><sup>2</sup>-4<i>q</i>)
+    (mod <i>n</i>) for integers <i>a</i> and <i>b</i> of the same parity.&nbsp;
+    If <i>n</i> is prime, then 2<i>r<sup>n</sup></i> ≡ <i>a</i> - <i>b</i> sqrt(<i>p</i><sup>2</sup>-4<i>q</i>)
+    (mod <i>n</i>). </blockquote>
+  <p>That's too messy, lets restate it using our sequence U (the coefficient of sqrt(<i>p</i><sup>2</sup>-4<i>q</i>))
+    from above.&nbsp; To do this notice that lemma 2 essentially says that <i>r<sup>n</sup></i> is the complex conjugate
+    of <i>r</i><sup>1</sup> modulo <i>n</i>, so multiply
+    them together.</p>
+  <blockquote> <b>Lemma 3:</b>&nbsp; (With <i>p, q</i> as above) if <i>n</i> is
+    prime, then U(<i>n</i>+1) ≡ 0 (mod <i>n</i>). </blockquote>
+  <p>Now we can restate theorem 1 for the plus side:</p>
+  <blockquote> <b>Theorem 4:&nbsp;</b> Let <i>n</i> &gt; 1 be an odd integer.&nbsp;
+    If there is an integer <i>d</i> for which the <a class="glossary" title="glossary"
+      href="/glossary/page.php?sort=JacobiSymbol">Jacobi
+      symbol</a> (<i>d</i>|<i>n</i>) = -1 and for every prime factor <i>r</i> of <i>n</i>+1
+    there are relatively prime integers <i>p</i> and <i>q</i> with <i>p</i><sup>2</sup>-4<i>q</i> = <i>d</i> such that
+    <ul>
+      <li> U(<i>n</i>+1) ≡ 0 (mod <i>n</i>), and</li>
+      <li> U((<i>n</i>+1)/<i>r</i>) is not 0 (mod <i>n</i>);</li>
+    </ul>
+    then <i>n</i> is prime.
+  </blockquote>
+  <p>Note that you may use different <i>p</i>'s and <i>q</i>'s as long as the discriminant <i>d</i> does not
+    change.&nbsp; One way to alter <i>p</i> and <i>q</i> (but not <i>d</i>) is to replace (<i>p</i>,<i>q</i>) by
+    (<i>p</i>+2,<i>p</i>+<i>q</i>+1).</p>
+  <p>An interesting example of this test is found by setting S(<i>k</i>) = <img src="assets/v(2k+1)22k.gif"
+      alt="V(2^k+1)/(2^2^k)" width="60" height="16"></p>
+  <blockquote id="text"><b>Lucas-Lehmer Test</b> (1930):&nbsp; Let <em>n</em> be an odd prime.&nbsp;
+    The Mersenne number M(<i>n</i>) = 2<i><sup>n</sup></i>-1 is prime if and only
+    if S(<i>n</i>-2) ≡ 0 (mod M(<i>n</i>)) where S(0) = 4 and S(<i>k</i>+1) = S(<i>k</i>)<sup>2</sup>-2. </blockquote>
+  <p>(The proof of sufficiency is found on a <a href="../notes/proofs/LucasLehmer.html">separate
+      page</a>.)&nbsp; This test is exceptionally fast on a binary computer because
+    it requires no division.&nbsp; It is also so easy to program that in 1978 two
+    high school students, with little understanding of the mathematics behind the
+    test, were able to use it to find the then record Mersenne prime 2<sup>21701</sup>-1
+    (see <a href="/mersenne/index.html">our page on Mersennes</a>).</p>
+  <p>It is also easy to give a test paralleling Pocklington's theorem using Lucas
+    sequences.&nbsp; This was first done by D. H. Lehmer in 1930 (in the same article
+    he introduced the Lucas-Lehmer test: [<a href="../references/refs.cgi/Lehmer30">Lehmer30</a>]).&nbsp; See
+    [<a href="../references/refs.cgi/BLSTW88">BLSTW88</a>] or [<a href="../references/refs.cgi/BLS75">BLS75</a>] or ...
+    for more information
+    on these tests.</p>
+  <p>Joerg Arndt notes that a striking (but computationally useless) way to state
+    this test is as follows:</p>
+  <blockquote><b>Theorem:&nbsp;</b> <i>p</i>=2<i><sup>n</sup></i>-1 is prime if
+    and only if <i>p</i> divides cosh(2<sup><i>n</i>-2</sup>log(2+sqrt(3))). </blockquote>
+  <p>Lucas also stated one case of his theorem in this manner.</p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove3_3.html"><b>next
+                  page</b></a> | <a href="prove3_1.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

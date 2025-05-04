@@ -1,0 +1,90 @@
+#!/usr/bin/perl -w
+
+# The routine reweights the few types of archival_tags which have a weighted form
+# as defined in the table archivable.  The weights are stored in the archival_tag.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;			# Generic database interface
+use Getopt::Std;		# Allow for command line options
+require "reweighttags.conf";	# Weight functions
+
+my $time = time;
+
+getopts('adhs');
+$opt_s or opt_h or print "usage: reweighttags [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "The routine reranks the entries in archival_tags
+
+usage: reweight [options]    where the options are
+
+	-a	rerank all the primes (default is just those unweighted; of course
+		'all' means just those with archival_tags that have a weight function
+		defined in the table archivable)
+	-d	noisey debug mode
+	-s	silent -- only errors printed.
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+$opt_a and ($opt_s or print "Option a set, so will rerank all tags\n");
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.  (".(time-$time)." sec)\n";
+
+if ($opt_a) {
+  my $query = "/* reweighttags */ UPDATE archival_tag SET weight=0";
+  my $sth = $dbh->prepare($query);
+  $sth->execute();
+  $opt_s or print "All archival_tag's now zeroed.\n";
+}
+
+my $query = "SELECT id, name, weight_func from archivable
+  where weight_func is not NULL and weight_func != ''";
+$opt_d and print "Getting which categories to weight with \n\n$query\n\n";
+
+my $sth = $dbh->prepare($query);
+$sth->execute();
+while ($c = $sth->fetchrow_hashref) {
+  # Get the primes/tags to weight
+
+  $where = "WHERE prime.id=prime_id AND archival_tag.category_id = $$c{'id'}";
+  # $where .= ($opt_a ? '' : " AND archival_tag.weight = 0");
+  # reranktags.conf expects prime columns id (as prime_id), description, comment and log10
+  $query = "SELECT comment, prime_id, archival_tag.id, prime.description,
+	prime.log10, archival_tag.weight, archival_tag.subcategory from prime, archival_tag
+	$where";
+  $opt_d and print "Get one category with \n\n$query\n\n";
+  my $sth2 = $dbh->prepare($query);
+  $sth2->execute();
+  $function = $$c{'weight_func'};
+  $opt_s or print "Starting to weight (id $$c{'id'}) $$c{'name'} with '$function'\n";
+
+  # Loop through this list of primes/tags
+
+  my $count = 0;
+  my $changed = 0;
+  my $sth3 = $dbh->prepare('/* reweighttags */ UPDATE archival_tag SET weight=? WHERE id=?') or die;
+  while ($p = $sth2->fetchrow_hashref) {
+    $weight = &$function($p,$$p{'subcategory'});
+    $opt_d and print "\t$$p{'description'} $$p{'comment'} (tag $$p{'id'})\n\t\t".
+	"was $$p{weight} now is $weight\n";
+    # The stored value might be slightly off do to storage format
+    $count++;
+    # exit if $$p{description} eq '101882667*2^180010-1';
+    next if abs($weight - $$p{'weight'}) < 0.0000000001;
+    $sth3->execute($weight,$$p{'id'}) or die;
+    $changed++;
+  }
+  $sth2->finish;
+  $sth3->finish;
+  $opt_s or print "\tdone ($changed of $count updated--others correct already).\n";
+}
+$opt_s or print "Got archivable info.  (".(time-$time)." sec)\n";
+$sth->finish;
+

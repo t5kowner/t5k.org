@@ -1,0 +1,79 @@
+                             Large Primes
+
+                          By J. C. P. MILLER
+
+FOR seventy-five years, and in spite of many attempts to beat it,
+the largest known prime has been p = 2^127 - 1, identified as such by
+E. Lucas.  Recently D. J. Wheeler and I have succeeded in identifying
+some larger ones, making use of Edsac.  We have used Fermat's theorem
+to test numbers in the arithmetic progression N = kp + 1, p as above,
+selecting values of k for which N has no factor less than 400.
+  Fermat's theorem states that if N is prime and if a is prime to N,
+then
+                         a^(N-1) == 1 (mod N).
+We chose a = 2, and found this to be true for k = 114, 124, 388, 408,
+498, 696, 738, 774, 780, 934, 978. (Each machine test took three
+minutes; there were also about ninety unsuccessful trial k's.) However,
+the converse of Fermat's theorem is not true, as can be seen from the
+special cases
+    2^340 == 1 (mod 341); a^560 == 1 (mod 561), for a prime to 561.
+Hence further work is needed to show that the values of k listed above
+give primes--as, in fact, they do.
+  To see that this is so, we argue as follows.  For a particular k
+making 2 (mod N), suppose that e is the least exponent such that
+                           2^e == 1 (mod N).
+It is readily seen that e is a factor of N - 1, i.e. that
+                        lambda*e = N - 1 = kp.
+Hence either (i) e is a multiple of p,
+          or (ii) k is a multiple of e, so that 2^k== 1 (mod N).
+When k < 1024, it can be shown fairly easily that N is too big for
+(ii) to be possible, hence (i) must hold.
+  In case (i), suppose N = (q^alpha)(r^beta)(s^gamma) ... in prime
+factors.  Now, there is a least exponent f such that 2^f == 1 (mod
+q^alpha).  But, since q^alpha is a factor of N,
+                  2^e == 1 (mod N) == 1 (mod ^alpha),
+so that f is a factor of e.  The same is true for g, h, . corresponding
+to r^beta, s^gamma, . . .  Hence e is a common multiple of g, h, . . .;
+but if E is any common multiple of f, g, h, . . .,
+                2^E == 1 (mod q^alpha), (mod r^beta), . . . ,
+and hence       2^E == 1 (mod N);
+it follows that e is the least common multiple of f, g, h, . . .  Hence,
+as e contains a factor p, so must at least one of f, g, h, . . . , say
+f: i.e. f = mu*p.
+  By Fermat's theorem,
+                         2^(q-1) == 1 (mod q),
+and an extension can be proved showing that
+                2^((q-1)q(alpha-1)) == 1 (mod q^alpha)
+hence f = mu*p is a factor of (q - 1)q(alpha-1).  But clearly p =
+(N -1)/k cannot divide q^(alpha-1), a factor of N; hence it divides
+q - 1, and the prime q = nu*p + 1.
+Hence N = kp + 1 == (nu*p + 1)(tau*p + s), say, whence s = 1 and, since
+k << p, nu*tau*p^2 = 0; thus tau = 0 and nu = k (since nu =/ 0); and
+N = kp^2 + 1 = nu*p + 1 is prime.
+ The values of k listed above thus all give prime numbers and each was,
+in succession, and for a few weeks, days, or hours, the largest known
+prime.
+  Wheeler then became more ambitious and tried the sequence N = kp^2 + 1,
+first removing all k for which N has a factor less than 20,000.  By
+precisely similar arguments it can be shown that if the Fermat test is
+satisfied, N must have at least one prime factor nu*p + i. Then
+                 N = kp^2 + 1 = (nu*p + 1) (tau*p + s).
+As before s = 1.  Also (nu + tau)p must be a multiple of p^2; hence,
+since both are positive, one must be of order p.  Thus nu*tau*p^2 is
+zero, since it cannot be of order p^3; so tau = 0, nu = kp, and N ==
+kp^2 + 1 = nu*p + 1 is prime.
+  The test was satisfied (twenty-seven minutes on Edsac, after seven
+similar abortive trials) for k = 180.  The resulting number, P, is the
+largest known prime at present and has 79 decimal digits;
+                      P = 180(2^127 - 1)^2 + 1 =
+5210 64401 56792 28794 06069 43253 90955 85333 58984 83908 05645 83521
+83851 01837 25557 35221.
+
+ADDENDUM.--Since the above note was written, I have heard in a letter
+from A. Ferrier (France) that he has identified as prime the number
+(2^148 + 1)/17, by showing the Fermat test to be satisfied for a = 3,
+and with the help of certain auxiliary calculations to supplement this
+test.  This number, namely
+         2098 89366 57440 58648 61512 64256 61022 25938 63921,
+is thus the second largest prime known.
+

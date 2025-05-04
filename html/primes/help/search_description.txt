@@ -1,0 +1,60 @@
+Below we give many of the advanced <a href=../search.php>search options</a> available with the two fields <code>description</code> and
+<code>comment</code>.&nbsp;  The example I give are all aimed at the <code>description</code> field, but apply to either.&nbsp;  The key
+thing to note is that matches need only match part of the string--so a search using just <font color=red><code>2</code></font> in the
+description field will match a prime with a 2 anywhere in its description.
+
+<DL>
+  <DT>An expression may <em>begin</em> with the word <font color=red><code>NOT</code></font> (uppercase) to negate a search
+  <DD>Example:&nbsp; <font color=red><code>NOT [2345]</code></font> will match the primes without the digits 2, 3, 4 or 5 in their 
+descriptions
+  <DD>Example:&nbsp; <font color=red><code>NOT .^</code></font> will match primes without the exponentiation operator
+  <P>
+
+  <DT>An expression may contain the word <font color=red><code>OR</code></font> (uppercase) to allow a boolean search
+  <DD>Example:&nbsp; <font color=red><code>3^ OR 5^</code></font> will match the primes like Phi(3,-163195^8192) and 343372*3^178255-1
+  <DD>Example:&nbsp; <font color=red><code>2^ OR 3^ OR 5^</code></font> will return mostly primes like 3*2^478785+1 (which greatly outnumber the previous 
+types)
+  <P>
+
+  <DT>An expression may <em>begin</em> with the character <font color=red><code>^</code></font> (carat) which will only match at the beginning
+of the prime description.&nbsp; (Using <font color=red><code>^</code></font> anywhere else in the description field will simply match the exponentiation 
+operator.)
+  <dd>Example:&nbsp; <font color=red><code>^2</code></font> will match prime descriptions that begin with the digit 2. 
+  <br>Example:&nbsp; <font color=red><code>.^2</code></font> will match prime descriptions that have an exponent that begins with the digit 2. 
+  <P>
+
+  <DT>An expression may <em>end</em> with the character <font color=red><code>$</code></font> (dollar sign) which will only match at the end of the prime
+description.&nbsp;
+  <dd>Example:&nbsp; <font color=red><code>2$</code></font> will match prime descriptions that end with the digit 2. 
+  <br>Example:&nbsp; <font color=red><code>$2</code></font> can not match any prime (how can 2 occur after the end?)
+  <P>
+
+  <DT>The character <font color=red><code>.</code></font> (period) will match any <em>single</em> character
+  <dd>Example:&nbsp; <font color=red><code>(..)</code></font> will match primes with two characters in a pair of parenthesis (e.g., 43013#*R(23)^11+1)
+  <br>Example:&nbsp; <font color=red><code>..</code></font> will match everything on the list (as there are no one-character descriptions)
+  <br>Example:&nbsp; <font color=red><code>^......$</code></font> will match every description with exactly six-characters.
+  <br>Example:&nbsp; <font color=red><code>^.?3</code></font> will match description whose first or second character is 3.&nbsp; 
+(The couplet <font color=red><code>.?</code></font> matches any 0 or 1 characters).
+  <P>
+
+  <DT>The character <font color=red><code>%</code></font> (percent sign) will match any (0 or more) characters.  
+  <dd>Example:&nbsp; <font color=red><code>^2%1$</code></font> will match descriptions beginning with the digit 2 and ending 
+with the digit 1 (with anything else in between)
+  <br>Example:&nbsp; <font color=red><code>%</code></font> will match everything on the list.
+</dl>
+
+Many, GRE constructs will work.&nbsp; The fact that <font color=red><code>+</code></font>, <font
+color=red><code>*</code></font>, <font color=red><code>(</code></font> and <font color=red><code>)</code></font> are quoted (to make
+searching for algebraic expressions easy) eliminates many, but you can get around this by being creative and 
+using the fact MySQL represents many GRE expressions using <font color=red><code>[</code></font>, <font 
+color=red><code>]</code></font>, <font color=red><code>{</code></font>, <font color=red><code>}</code></font>,  and <font 
+color=red><code>:</code></font>.&nbsp; 
+
+<blockquote>
+  Example: <font color=red><code>^[123]{3,}[[:digit:]]{3,}*</code></font> will match those beginning with at least
+	three digits from the set {1,2,3} followed by at least three more digits (0 through 9).<br>
+  Example: <font color=red><code>^[[:alpha:]]{1,2}(</code></font> will match those beginning with one or two
+	letters followed by a parenthesis. 
+</blockquote>
+ 
+Internally <font color=red><code>%</code></font> is translated to the GRE '.*'.

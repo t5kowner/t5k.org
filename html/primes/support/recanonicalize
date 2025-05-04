@@ -1,0 +1,73 @@
+#!/usr/bin/perl -w
+
+# The routine adjusts prime descriptions to their canonical forms
+
+# Use -h for info on options and stop.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib ("$Bin/math","$Bin/modules",$Bin);
+
+use Getopt::Std;	# Allow for command line options
+use compare;		# Comparison functions for hard cases
+use canonical;		# Rewrite primes in a canonical for (for option c)
+use constants;		# Like $eps for parser
+use open ':std', ':encoding(UTF-8)';
+
+getopts('sthdw:');
+$opt_s or opt_h or print "usage: redigitrank [options].  Use rereank -h to see the options.\n\n";
+
+$opt_h and print "This routine adjusts prime descriptions to their canonical forms.
+
+usage: recanonicalize [options]    where the options are
+
+	-d	debug -- lots of output
+	-w 	state which primes (-w \"comment LIKE '%win%'\")
+	-h 	print this help then exist.
+	-s	silent -- only errors printed.
+    -t  test mode -- will not change the database\n\n";
+
+$opt_h and exit;
+
+$opt_w and not $opt_s and print "-w set : Just those primes matching 'WHERE $opt_w'.\n";
+$opt_t and not $opt_s and print "-t set : Test mode, will not alter the database.\n";
+$opt_s or print "\n";
+
+# Open database handle
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_d and print "Connected to database.\n";
+
+# Set some counting variables for reporting what we did
+my $number_checked = 0;
+my $number_updated = 0;
+
+$query = "SELECT id,description FROM prime";
+$opt_w and $query = "$query WHERE $opt_w";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+ 
+while ($p = $sth->fetchrow_hashref) {
+	$number_checked += 1;
+	$opt_s or print "$$p{'id'} processing...\n";
+	my $new_desc = &canonical::adjust($$p{'description'});
+	$opt_d and print &canonical::show_changes();
+	if(not $new_desc eq $$p{'description'}){
+		$number_updated += 1;
+		$opt_s or print "$$p{'id'}: Was $$p{'description'}, now $new_desc\n";
+		my $query = "UPDATE prime SET modified=modified,description=".$dbh->quote($new_desc)." WHERE id=$$p{'id'}";
+		$chars = length($new_desc);
+		if($chars > 255){
+			print "PROBLEM: $$p{'id'} has a new description of $new_desc, which is too long - $chars characters!\n";
+		}
+		elsif($opt_t){
+			print "Test mode: would have ran $query\n";
+		}else{
+			$sth2 = $dbh->prepare($query) || die $sth2->errstr;
+			$sth2->execute() || die $sth2->errstr;
+		}
+	}
+}
+
+# Proclaim success
+
+$opt_s or print "$number_checked prime descriptions examined, and $number_updated updated.\n";

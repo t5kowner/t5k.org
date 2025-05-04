@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The Largest Known prime by Year: A Brief History</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="Here we present the history of the largest known prime (by year).  We list the records from before computers, then those with computers.  We also discuss when the first billion digit prime might be found. This is another of the Prime Pages!">
+  <meta name="keywords"
+    content="prime, primes, history, records, lists, Mersenne,Euler, Euclid, Fermat, Computers, Algorithms">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item active">Largest By Year</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" --> The Largest
+        Known prime by Year: A Brief History <!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <p class="mt-4">The <a href="/largest.html">largest known prime</a> today
+        is the 41,024,320 digit <a href="/mersenne/index.html">Mersenne</a> prime <a
+          href="https://www.mersenne.org/primes/?press=M136279841">2<sup>136279841</sup>-1</a> found in
+        October 2024, but how big have the &quot;largest known primes&quot; been
+        historically?&nbsp; Historically,
+        how have these primes been found?&nbsp; We will briefly discuss each of these
+        questions below.</p>
+      <h3 id="contents"><img src="../gifs/here.gif" width="28" height="28" alt="[up]"> Contents</h3>
+      <ol>
+        <li><a href="#1">Before Electronic Computers</a>
+          <ul>
+            <li><a href="#table1">Table</a> of the Record Prime by Year</li>
+          </ul>
+        </li>
+        <li><a href="#2">The Age of Electronic Computers</a>
+          <ul>
+            <li><a href="#graph1">Graph</a> of the Record Prime by Year</li>
+            <li><a href="#table2">Table</a> of the Record Prime by Year</li>
+          </ul>
+        </li>
+        <li>Epilogue: <a href="#3">No more predictions</a>
+          <ul>
+            <li>The First <a href="#bevaprime">Billion Digit Prime</a></li>
+          </ul>
+        </li>
+      </ol>
+      <a id="1"></a>
+      <h2><a href="#contents"><img src="../gifs/up.gif" alt="[up]" width="28" height="28"></a>&nbsp; Part One: Before
+        <span class="d-none d-md-inline">Electronic</span> Computers
+      </h2>
+      <p class="note">For information on the French Monk Marin Mersenne's prime
+        conjecture and its errors, <a href="/mersenne/index.html#monk">see this link</a></p>
+      <p>Many early writers felt (incorrectly) that if <i>p</i> was prime, then so
+        was M<sub><i>p</i></sub> = 2<sup><i>p</i></sup>-1.&nbsp; These numbers, now
+        called the <a href="/mersenne/index.html">Mersenne Numbers</a>, were the
+        focus of most of the early searches for large primes.&nbsp; The early history
+        of these numbers is strewn with many false claims of primality, even by such
+        notables as Mersenne, Leibniz, and Euler.&nbsp; So we give credit to our first
+        record holder with some doubt:</p>
+      <blockquote class="record"> by 1588 Pietro Cataldi had correctly verified that
+        2<sup>17</sup>-1 = 131071 and 2<sup>19</sup>-1 = 524287 are both prime [<a
+          href="/references/refs.cgi/Cataldi1603">Cataldi1603</a>]. </blockquote>
+      <p>But Cataldi also had incorrectly stated 2<sup><i>n</i></sup>-1 was also prime
+        for each of 23, 29, 31 and 37.&nbsp; This is interesting because Cataldi made
+        his discoveries by constructing what Shanks calls &quot;the first extensive table
+        of primes--up to 750&quot; [<a href="/references/refs.cgi/Shanks78">Shanks78</a>, p14].&nbsp; These
+        tables are big enough to show 2<sup>19</sup>-1 is prime (its square root is
+        approximately 724) but <i>not</i> large enough to handle these four larger
+        numbers!</p>
+      <p class="note">Note: Some writers (e.g., [<a href="/references/refs.cgi/Picutti1989">Picutti1989</a>]
+        and [<a href="/references/refs.cgi/BS96">BS96</a>, p309]) include
+        the primes 8191=2<sup>13</sup>-1 (before 1458, Codice Palatino 573) and 131071=2<sup>17</sup>-1
+        (1460, Codex Ottb. Lat 3307) in their list of records.&nbsp; But we omit them
+        for lack of evidence that they were proven primes at that time, rather than
+        just lucky guesses.</p>
+      <p>In 1640 Fermat showed that if <i>p</i> is an odd prime, then all prime divisors
+        of 2<sup><i>p</i></sup>-1 have the form 2<i>kp</i>+1.&nbsp; He then quickly
+        showed Cataldi was wrong about 23 (which has the factor 47 with <i>k</i>=1)
+        and 37 (factor 223 at <i>k</i>=3).&nbsp; Finally, in 1738, Euler showed Cataldi
+        was also wrong about 29 by finding the divisor 233.&nbsp; Here, using Fermat's
+        result, <i>k</i>=4.&nbsp; This is just the second number to try using Fermat's
+        result as <i>k</i>=2 and <i>k</i>=3 yield composites (so I would guess Fermat
+        also knew of this factor).&nbsp; Note that Cataldi's errors were shown with
+        small factors found in Cataldi's own table of primes, and none took more than
+        two trial divisions! <a id="31"></a></p>
+      <p>Euler gives us the first clear record (except perhaps for the date) by proving
+        Cataldi was correct about 31:</p>
+      <blockquote class="record"> by 1772 Euler had used clever reasoning and trial division
+        to show 2<sup>31</sup>-1 = 2147483647 is prime. </blockquote>
+      <p>The actual date must be between 28 October 1752 when Euler sent a letter
+        to Goldbach [<a href="http://www.math.dartmouth.edu/~euler/correspondence/letters/OO0877.pdf">text</a> from <a
+          href="http://www.math.dartmouth.edu/%7Eeuler/">Euler
+          Archive</a>] stating that he was uncertain about this number (even though he
+        had earlier listed it as prime) and 1772 when a letter [<a
+          href="http://www.math.dartmouth.edu/%7Eeuler/docs/originals/E461.pdf">text</a>] was published
+        from Euler to Bernoulli stating he proved 2<sup>31</sup>-1 prime by showing
+        all prime divisors of 2<sup>31</sup>-1
+        must have one of the two forms 248<i>n</i>+1 and 248<i>n</i>+63, and then dividing
+        by all such primes less than 46339 [<a href="/references/refs.cgi/Dickson19">Dickson19</a>, pp18-19].&nbsp; This
+        requires <a href="proofs/MerDiv.html">a simple theorem</a> which is stronger
+        than Fermat's result above.&nbsp; (Euler had listed 2<sup>31</sup>-1 a prime
+        as early as 1732,
+        but he did so along with 2<sup>41</sup>-1 and 2<sup>47</sup>-1
+        both of which were composite [<span title="dead link (do you know the correct one?)
+http://arxiv.org/PS_cache/math/pdf/0501/0501118.pdf">translation</span>].)</p>
+      <p class="note">Note: Some writers (e.g., [<a href="/references/refs.cgi/BS96">BS96</a>, p309]) include
+        the primes 999999000001 (1851, &quot;found&quot; by Looff) and 67280421310721
+        (1 Jan. 1855, Clausen) in their tables.&nbsp; The first appeared in a table
+        of Looff with a question mark, but Reuschle [<a href="/references/refs.cgi/Reuschle1856">Reuschle1856</a>,
+        pp.3,18] claims Looff had proved it prime.&nbsp; Thomas Clausen provided the
+        factorization 274177 &middot; 67280421310721 of 2<sup>64</sup>+1 in a letter to Gauss
+        dated 1 Jan 1855 stating both factors were prime [<a
+          href="/references/refs.cgi/Biermann1964">Biermann1964</a>].&nbsp; But
+        it remains a claim without a method.</p>
+      <p>By 1867 Landry had found a larger prime, still by trial division, as a factor
+        of 2<sup>59</sup>-1 (namely (2<sup>59</sup>-1)/179951 = 3203431780337), this
+        prime held the record longer than any other <b>non</b>-Mersenne would (before
+        or after his discovery).&nbsp; However all such efforts were to be eclipsed
+        by a new mathematical discovery, so we pause for a moment to summarize all
+        record primes (that I know about) before modern computers.&nbsp; (In the long
+        run, it is always the mathematics that decide how large of prime we can find.)</p>
+      <table class="record mx-auto table-hover">
+        <caption class="cc text-center font-weight-bold" id="table1">
+          Table 1. Records before Electronic Computers
+        </caption>
+        <thead class="blue lighten-4 font-weight-bold">
+          <tr>
+            <th class="text-right border-primary">Number</th>
+            <th class="text-center">Digits</th>
+            <th>Year</th>
+            <th>Prover</th>
+            <th>
+              <div class="text-center">Method</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-right">2<sup>17</sup>-1</td>
+            <td class="text-center">6</td>
+            <td>1588</td>
+            <td>Cataldi</td>
+            <td>trial division</td>
+          </tr>
+          <tr>
+            <td class="text-right">2<sup>19</sup>-1</td>
+            <td class="text-center">6</td>
+            <td>1588</td>
+            <td>Cataldi</td>
+            <td>trial division</td>
+          </tr>
+          <tr>
+            <td class="text-right">2<sup>31</sup>-1</td>
+            <td class="text-center">10</td>
+            <td>1772</td>
+            <td>Euler</td>
+            <td><a href="proofs/MerDiv.html">trial division++</a></td>
+          </tr>
+          <tr>
+            <td class="text-right">(2<sup>59</sup>-1)/179951</td>
+            <td class="text-center">13</td>
+            <td>1867</td>
+            <td>Landry</td>
+            <td><a href="proofs/MerDiv.html">trial division++</a></td>
+          </tr>
+          <tr>
+            <td class="text-right">2<sup>127</sup>-1</td>
+            <td class="text-center">39</td>
+            <td>1876</td>
+            <td>Lucas</td>
+            <td><a href="/mersenne/index.html#test">Lucas sequences</a></td>
+          </tr>
+          <tr>
+            <td class="text-right">(2<sup>148</sup>+1)/17</td>
+            <td class="text-center">44</td>
+            <td>1951</td>
+            <td>Ferrier</td>
+            <td><a href="/prove/prove3_1.html#theorem2">Proth's
+                theorem</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p> By 1876 Lucas had developed a clever test to determine if Mersenne numbers
+        were prime.&nbsp; His method was later <a href="/mersenne/index.html#test">made
+          even simpler by Lehmer</a> in the 1930's, and is still used to discover the
+        record primes!</p>
+      <blockquote class="record"> In 1876 Lucas proved that 2<sup>127</sup>-1 = 170141183460469231731687303715884105727
+        was prime. </blockquote>
+      <p>&quot;This remained the largest known prime until 1951&quot; [<a href="/references/refs.cgi/HW79">HW79</a>,
+        p16] And this
+        record, which stood for 75 years, may stand forever as the largest prime found <i>by
+          hand calculations</i>.</p>
+      <p>In 1951 Ferrier used a mechanical desk calculator and techniques based on
+        partial inverses of Fermat's little theorem (see the pages on <a href="/prove/">finding and proving primes</a>)
+        to slightly
+        better this record by finding a 44 digit prime:</p>
+      <blockquote class="record"> In 1951 Ferrier found the prime (2<sup>148</sup>+1)/17
+        = 20988936657440586486151264256610222593863921. </blockquote>
+      <p>With this record we end the period before electronic computers, for in this same
+        year a new record of 79 digits was to be set by computer.</p>
+      <p class="note">Note: It is quite difficult to place Ferrier's discovery among
+        Miller &amp; Wheeler's
+        chronologically.&nbsp; We follow the traditional order and put Ferrier's first,
+        but <a href="FirstIn1951.html">there is good reason to doubt this</a>. </p>
+      <p>For more information see <i>The History of the Theory of Numbers</i> by Leonard
+        Dickson [<a href="/references/refs.cgi/Dickson19">Dickson19</a>]. <a id="2"> </a></p>
+      <h2><a href="#contents"><img SRC="../gifs/up.gif" alt="[up]" width="28" height="28"></a>&nbsp; Part Two: <span
+          class="d-none d-lg-inline">The Age of</span> Electronic Computers</h2>
+      <p><a id="MW"></a>In 1951 Miller and Wheeler began the electronic computing age
+        by finding several primes:</p>
+      <div class="ml-5 my-2"> <i>k</i><sup>.</sup>M<sub>127</sub> + 1 for <i>k</i> = 114, 124,
+        388, 408, 498, 696, 738, 774, 780, 934 and 978 </div>
+      <p>as well as the new 79 digit record:</p>
+      <blockquote class="record">180(M<sub>127</sub>)<sup>2</sup>+1 (here M<sub>127</sub> =
+        2<sup>127</sup>-1) [<a href="/references/refs.cgi/MW51">MW51</a>].</blockquote>
+      <p>This record was soon eclipsed by Raphael Robinson's discoveries of five new
+        Mersennes the very next year using the SWAC (Standards Western Automatic Computer).&nbsp; This
+        was the first program that Robinson had ever written, and it ran the very first
+        time he tried it! Not only that, but his program found two new record primes
+        that very day!&nbsp; He writes [<a href="/references/refs.cgi/Robinson54">Robinson54</a>]:</p>
+      <blockquote class="record"> The program was first tried on the SWAC on January
+        30, and two new primes were found that day [M<sub>521</sub>, M<sub>607</sub>],
+        three other primes were found on June 25 [M<sub>1279</sub>], October 7 [M<sub>2203</sub>]
+        and October 9 [M<sub>2281</sub>].
+      </blockquote>
+      <a id="graph1"><img class="img-fluid float-lg-right" src="../gifs/From1945.png" style="max-width:539px"
+          alt="[A surprisingly linear graph of log(digits) versus year]"></a>
+      <p><a id="temp"></a>It is interesting to note that in 1949 the topologist <a
+          href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Newman.html">M.
+          H. A Newman</a> used the prototype Manchester electronic computer (with 1024
+        bits of storage) to make the first attempt to find Mersenne primes by computer.&nbsp; Perhaps
+        because <a href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Turing.html">Alan
+          Turing</a> worked on this machine from 1948 to 1950, and improved the program
+        by Newman, this first attempt at finding primes by (electronic) computers
+        is sometimes attributed to him (e.g., [<a href="/references/refs.cgi/Robinson54">Robinson54</a>] and
+        [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>,
+        p93]).&nbsp; The excellent <a href="http://www.turing.org.uk/turing/scrapbook/manmach.html">Alan
+          Turing Internet Scrapbook</a> has a picture of this machine.</p>
+      <p>We see the records of Miller, Wheeler, and Robinson as the first points on
+        the following graph--note the vertical scale!</p>
+      <p>Progress over the next few years was as steady as the increase in speed of
+        computers.&nbsp; Riesel found M<sub>3217</sub> using the Swedish machine BESK;
+        Hurwitz found M<sub>4253</sub> and M<sub>4423</sub> using an IBM 7090 (see
+        next paragraph); Gillies used the ILLIAC-2 to find M<sub>9689</sub>, M<sub>9941</sub> and
+        M<sub>11213</sub>. Tuckerman found M<sub>19937</sub> using an IBM360.</p>
+      <p>Surprisingly Hurwitz knew about M<sub>4423</sub> seconds before M<sub>4253</sub> (because
+        of the way the output was stacked).&nbsp; John Selfridge asked &quot;Does a machine
+        result need to be observed by a human before it can be said to be 'discovered'?&quot;&nbsp; To
+        which Hurwitz replied, &quot;forgetting about whether the computer knew, what if
+        the computer operator who piled up the output looked?&quot;&nbsp; In the table below
+        I decided that Hurwitz discovered the prime when he read the output, so M<sub>4253</sub> was
+        never the largest known prime.</p>
+      <table class="cc record mx-auto table-hover">
+        <caption class="text-center font-weight-bold" id="table2">
+          Table 2. Records by Electronic Computer
+        </caption>
+        <thead class="blue lighten-4 font-weight-bold">
+          <tr>
+            <th>Number</th>
+            <th class="text-center">Digits</th>
+            <th>Year</th>
+            <th>Machine</th>
+            <th>Prover </th>
+          </tr>
+        </thead>
+        <tr>
+          <td>180(M<sub>127</sub>)<sup>2</sup>+1</td>
+          <td class="text-center">79</td>
+          <td>1951</td>
+          <td>EDSAC1</td>
+          <td>Miller &amp; Wheeler</td>
+        </tr>
+        <tr>
+          <td>M<sub>521</sub></td>
+          <td class="text-center">157</td>
+          <td>1952</td>
+          <td>SWAC</td>
+          <td>Robinson (Jan 30)</td>
+        </tr>
+        <tr>
+          <td>M<sub>607</sub></td>
+          <td class="text-center">183</td>
+          <td>1952</td>
+          <td>SWAC</td>
+          <td>Robinson (Jan 30)</td>
+        </tr>
+        <tr>
+          <td>M<sub>1279</sub></td>
+          <td class="text-center">386</td>
+          <td>1952</td>
+          <td>SWAC</td>
+          <td>Robinson (June 25)</td>
+        </tr>
+        <tr>
+          <td>M<sub>2203</sub></td>
+          <td class="text-center">664</td>
+          <td>1952</td>
+          <td>SWAC</td>
+          <td>Robinson (Oct 7)</td>
+        </tr>
+        <tr>
+          <td>M<sub>2281</sub></td>
+          <td class="text-center">687</td>
+          <td>1952</td>
+          <td>SWAC</td>
+          <td>Robinson (Oct 9)</td>
+        </tr>
+        <tr>
+          <td>M<sub>3217</sub></td>
+          <td class="text-center">969</td>
+          <td>1957</td>
+          <td>BESK</td>
+          <td>Riesel</td>
+        </tr>
+        <tr>
+          <td>M<sub>4423</sub></td>
+          <td class="text-center">1,332</td>
+          <td>1961</td>
+          <td>IBM7090</td>
+          <td><a href="/bios/page.php?lastid=Hurwitz">Hurwitz</a></td>
+        </tr>
+        <tr>
+          <td>M<sub>9689</sub></td>
+          <td class="text-center">2,917</td>
+          <td>1963</td>
+          <td>ILLIAC 2</td>
+          <td><a href="/bios/page.php?lastid=Gillies">Gillies</a></td>
+        </tr>
+        <tr>
+          <td>M<sub>9941</sub></td>
+          <td class="text-center">2,993</td>
+          <td>1963</td>
+          <td>ILLIAC 2</td>
+          <td>Gillies</td>
+        </tr>
+        <tr>
+          <td>M<sub>11213</sub></td>
+          <td class="text-center">3,376</td>
+          <td>1963</td>
+          <td>ILLIAC 2</td>
+          <td>Gillies</td>
+        </tr>
+        <tr>
+          <td>M<sub>19937</sub></td>
+          <td class="text-center">6,002</td>
+          <td>1971</td>
+          <td>IBM360/91</td>
+          <td><a href="/bios/page.php?lastid=Tuckerman">Tuckerman</a></td>
+        </tr>
+        <tr>
+          <td>M<sub>21701</sub></td>
+          <td class="text-center">6,533</td>
+          <td>1978</td>
+          <td>CDC Cyber 174</td>
+          <td><a href="/bios/page.php?lastid=Noll">Noll</a> &amp; <a href="/bios/page.php?lastid=Nickel">Nickel</a></td>
+        </tr>
+        <tr>
+          <td>M<sub>23209</sub></td>
+          <td class="text-center">6,987</td>
+          <td>1979</td>
+          <td>CDC Cyber 174</td>
+          <td>Noll</td>
+        </tr>
+        <tr>
+          <td>M<sub>44497</sub></td>
+          <td class="text-center">13,395</td>
+          <td>1979</td>
+          <td>Cray 1</td>
+          <td><a href="/bios/page.php?lastid=Nelson">Nelson</a> &amp; <a
+              href="/bios/page.php?lastid=Slowinski">Slowinski</a></td>
+        </tr>
+        <tr>
+          <td>M<sub>86243</sub></td>
+          <td class="text-center">25,962</td>
+          <td>1982</td>
+          <td>Cray 1</td>
+          <td>Slowinski</td>
+        </tr>
+        <tr>
+          <td>M<sub>132049</sub></td>
+          <td class="text-center">39,751</td>
+          <td>1983</td>
+          <td>Cray X-MP</td>
+          <td>Slowinski</td>
+        </tr>
+        <tr>
+          <td>M<sub>216091</sub></td>
+          <td class="text-center">65,050</td>
+          <td>1985</td>
+          <td>Cray X-MP/24</td>
+          <td>Slowinski</td>
+        </tr>
+        <tr>
+          <td>391581 &middot;2<sup>216193</sup>-1</td>
+          <td class="text-center">65,087</td>
+          <td>1989</td>
+          <td>Amdahl 1200</td>
+          <td><a href="http://www.isthe.com/chongo/tech/math/prime/amdahl6.html">Amdahl Six</a></td>
+        </tr>
+        <tr>
+          <td>M<sub>756839</sub></td>
+          <td class="text-center">227,832</td>
+          <td>1992</td>
+          <td>Cray-2</td>
+          <td><a href="/bios/page.php?lastid=Slowinski">Slowinski</a> &amp; <a
+              href="/bios/page.php?lastid=Gage">Gage</a> et al. (<a href="756839.html">notes</a>) </td>
+        </tr>
+        <tr>
+          <td>M<sub>859433</sub></td>
+          <td class="text-center">258,716</td>
+          <td>1994</td>
+          <td>Cray C90</td>
+          <td>Slowinski &amp; Gage</td>
+        </tr>
+        <tr>
+          <td>M<sub>1257787</sub></td>
+          <td class="text-center">378,632</td>
+          <td>1996</td>
+          <td> Cray T94</td>
+          <td>Slowinski &amp; Gage</td>
+        </tr>
+        <tr>
+          <td>M<sub>1398269</sub></td>
+          <td class="text-center">420,921</td>
+          <td>1996</td>
+          <td> Pentium (90 Mhz)</td>
+          <td><a href="/bios/page.php?lastid=Armengaud">Armengaud</a>, <a
+              href="/bios/page.php?lastid=Woltman">Woltman</a>, et al. [<a href="http://www.mersenne.org/">GIMPS</a>]
+          </td>
+        </tr>
+        <tr>
+          <td>M<sub>2976221</sub></td>
+          <td class="text-center">895,932</td>
+          <td>1997</td>
+          <td> Pentium (100 Mhz)</td>
+          <td><a href="/bios/page.php?lastid=Spence">Spence</a>, <a href="/bios/page.php?lastid=Woltman">Woltman</a>, et
+            al. [<a href="http://www.mersenne.org/">GIMPS</a>]</td>
+        </tr>
+        <tr>
+          <td>M<sub>3021377</sub></td>
+          <td class="text-center">909,526</td>
+          <td>1998</td>
+          <td> Pentium (200 Mhz)</td>
+          <td><a href="/bios/page.php?lastid=Clarkson">Clarkson</a>, <a
+              href="/bios/page.php?lastid=Woltman">Woltman</a>, <a href="/bios/page.php?lastid=Kurowski">Kurowski</a>,
+            et al. [<a href="http://www.mersenne.org/">GIMPS</a>, <a
+              href="http://www.mersenne.org/primenet/">PrimeNet</a>]</td>
+        </tr>
+        <tr>
+          <td>M<sub>6972593</sub></td>
+          <td class="text-center">2,098,960</td>
+          <td>1999</td>
+          <td> Pentium (350 Mhz)</td>
+          <td><a href="/bios/page.php?lastid=Hajratwala">Hajratwala</a>,
+            Woltman, Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>13466917</sub></td>
+          <td class="text-center">4,053,946 </td>
+          <td>2001</td>
+          <td> AMD T-Bird (800 Mhz)</td>
+          <td><a href="/bios/page.php?lastid=Cameron">Cameron</a>, Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>20996011</sub></td>
+          <td class="text-center">6,320,430</td>
+          <td>2003</td>
+          <td>Pentium (2 GHz) </td>
+          <td><a href="/bios/page.php?lastid=Shafer">Shafer</a>, Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>24036583</sub></td>
+          <td class="text-center">7,235,733</td>
+          <td>2004</td>
+          <td>Pentium 4 (2.4GHz)</td>
+          <td><a href="/bios/page.php?lastid=Findley_J">Findley</a>, Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>25964951</sub></td>
+          <td class="text-center">7,816,230</td>
+          <td>2005</td>
+          <td>Pentium 4 (2.4GHz)</td>
+          <td><a href="/bios/page.php?lastid=Nowak">Nowak</a>, Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>30402457</sub></td>
+          <td class="text-center">9,152,052</td>
+          <td>2005</td>
+          <td>Pentium 4 (2GHz upgraded to 3GHz)</td>
+          <td><a href="/bios/page.php?lastid=Cooper">Cooper</a>, <a href="/bios/page.php?id=834">Boone</a>,
+            Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>32582657</sub></td>
+          <td class="text-center">9,808,358 </td>
+          <td>2006</td>
+          <td>Pentium 4 (3 GHz)</td>
+          <td>Cooper,
+            Boone,
+            Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>43112609</sub></td>
+          <td class="text-center">12,978,189</td>
+          <td>2008</td>
+          <td>Intel Core 2 Duo E6600 CPU (2.4 GHz)</td>
+          <td><a href="/bios/page.php?id=1498">E_Smith</a>,
+            Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>57885161</sub></td>
+          <td class="text-center">17,425,170</td>
+          <td>2013</td>
+          <td>Intel Core2 Duo E8400 (3 GHz)</td>
+          <td>Cooper, Woltman,
+            Kurowski, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>74207281</sub></td>
+          <td class="text-center">22,338,618</td>
+          <td>2016</td>
+          <td>Intel I7-4790 CPU</td>
+          <td>Cooper, Woltman,
+            Kurowski, Blosser, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>77232917</sub></td>
+          <td class="text-center">23,249,425</td>
+          <td>2018</td>
+          <td>Intel i5-6600 CPU</td>
+          <td>Pace, Woltman, Kurowski, Blosser, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>82589933</sub></td>
+          <td class="text-center">24,862,048</td>
+          <td>2018</td>
+          <td>Intel i5-4590T CPU</td>
+          <td>Laroche, Woltman, Blosser, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+        <tr>
+          <td>M<sub>136279841</sub></td>
+          <td class="text-center">41,024,320</td>
+          <td>2024</td>
+          <td>NVIDIA A100 GPU</td>
+          <td>Durant, Preda, Woltman, Blosser, et al. [GIMPS, PrimeNet]</td>
+        </tr>
+      </table>
+
+      <p></p>
+      <p>Curiously the prime M<sub>74207281</sub> was detected by a machine months before a human noticed it--see<a
+          href="74207281.htm"> the press release</a> for this prime.</p>
+
+      <div class="float-lg-right">
+        <a id="3"></a><a id="graph2"><img alt="[A semi-linear graph of log(digits) versus year]"
+            src="../gifs/From1975.png" class="img-fluid mx-auto" style="max-width: 500px"></a>
+      </div>
+
+      <p>All of the Mersenne records were found using the <a href="/prove/prove3_2.html#test">Lucas-Lehmer
+          test</a> and the other two were found using <a href="/prove/prove3_1.html#Proth">Proth's
+          Theorem</a> (or similar results).&nbsp; The <a
+          href="http://www.isthe.com/chongo/tech/math/prime/amdahl6.html">Amdahl
+          Six</a> is <a href="/bios/page.php?lastid=Brown">J
+          Brown</a>, <a href="/bios/page.php?lastid=Noll">C Noll</a>, <a href="/bios/page.php?lastid=Parady">B
+          Parady</a>, <a href="/bios/page.php?lastid=Smith_G">G Smith</a>, <a href="/bios/page.php?lastid=Smith_J">J
+          Smith</a> and <a href="/bios/page.php?lastid=Zarantonello">S
+          Zarantonello</a>.</p>
+      <h2><a href="#contents"><img SRC="../gifs/up.gif" alt="[up]" width="28" height="28"></a>&nbsp; Epilogue: No
+        Predictions</h2>
+      <a id="bevaprime"></a>
+      <p><b>When will we have a one billion digit prime?</b> Good question! In the early days of the GIMPS search, my
+        predictions were reasonable, but recently things have taken a turn (see the graph) that defies prediction using
+        simple regressions and past history. My last prediction was way off!</p>
+      <p>I am getting out of the time prediction business. So we will end with a linear graph and a gratuitous cubic
+        below. Useful future predictions should be based not only on heuristics such as found on the page <a
+          href="/notes/faq/NextMersenne.html">Where is the Next Mersenne?</a>, but should also track the usage data for
+        projects like GIMPS. It is the current participants, not the past, which will find the next prime.</p>
+      <div class="row">
+        <div class="col-12 mx-auto" style="max-width: 598px"> <img src="../gifs/From1996.png" class="img-fluid"
+            alt="graph"> </div>
+      </div>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2024 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

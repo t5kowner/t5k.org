@@ -1,0 +1,89 @@
+#!/usr/bin/perl -w
+# The command line executable to test the parser
+use warnings;
+use strict;
+
+# PROBLEM: If called by web server with -e or -f or -c and an empty expression,
+# then will time out waiting for command line input.   the 'defined' code below did
+# not catch this problem.
+#
+# PROBLEM: Can not do "-c 0" as it does not see $opt_c as set
+
+use Time::HiRes 'time';
+
+# $eps = 0.0001;
+
+#use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+#use lib $Bin;
+use lib qw (/var/www/html/primes/support/math);
+
+use primes;
+
+#use primes;
+#$n = 0;
+#while ($n++ < 20) { print "$n  ",&primes::phi($n),"\n"; }
+#exit;
+
+use parser;
+
+use Getopt::Std;  # Allow for command line options
+
+getopts('e:sc:hf:');
+our($opt_e, $opt_s, $opt_c, $opt_h, $opt_f);
+
+if ( $opt_h or not($opt_s or $opt_e or $opt_f or defined($opt_c)) ) {
+  print "Usage: $0 [options] [parser] \nwhere the options are
+
+	-e \"number\"	log:  evaluate the given number, return log (only) or NaN
+	-c \"number\"	sign: evaluate the given number, return -1, 0, or 1 for <0, 0, >0
+	-f \"number\"	full: evaluate the given number, return full digitial expansion of NaN
+	-s		silent except for errors
+  \nand the parsers are
+
+	c|nothing	log-parser for complex numbers
+	s		strings (unfinished?)
+	b		large integers (PARI)
+  ";
+}
+if ($opt_h) { exit; }
+
+my $expression;
+$opt_e and $expression = $opt_e;
+defined($opt_c) and $expression = $opt_c;
+$opt_f and $expression = $opt_f;
+# if ( (defined($opt_e) or defined($opt_c) or defined($opt_f)) and !$expression)
+#  { die("The options c, e and f require an expression\n"); }
+
+# Import the correct mathematics module
+
+my $parser;
+$parser = shift() || 'c';
+$parser = ($opt_f ? 'b' : $parser); # For the -f option the parser must be b (PARI)
+die "parser type must be '', c or s (not '$parser')\n"
+  unless ($parser =~ /^[bcs]$/o);
+
+eval "require ${parser}math";  die $@ if $@;
+eval "import  ${parser}math";
+
+&parser::GlobalShowParserErrors(0) if $opt_s;
+
+if ($opt_e) {
+  print &parser::parse($expression,'log only');
+} elsif (defined($opt_c)) {
+  print &parser::parse($expression,'sign only');
+} elsif ($opt_f) {
+  print &parser::parse($expression);
+} else { # Interactive mode
+  while (1) {
+    print "expression: ";
+    my $parse_string= <>;
+    chop $parse_string;
+    exit if ($parse_string =~ /^[qr ]+/o);
+    my $time = time;
+    print "Returns:\n".&parser::parse($parse_string,'internal too')."\n";
+#    print "Returns:\n".&parser::parse($parse_string,'log only')."\n";
+#    $parser::GlobalString = $parse_string;
+#    print "Returns:\n".&math::show(&parser::get_term(18))."\n";
+    printf("\t(%9.6f seconds)\n",time-$time);
+  }
+};

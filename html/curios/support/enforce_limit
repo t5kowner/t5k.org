@@ -1,0 +1,104 @@
+#!/usr/bin/perl -w
+
+my $max_allowed = 9;  # leave some room (should be 7)
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+
+use Getopt::Std;        # Allow for command line options
+
+getopts('hms');
+$opt_s or $opt_h or print "usage: enforce_limit [options].  Use enforce_limit -h to see the options.\n\n";
+
+$opt_h and print "The routine looks or individuals with more than $max_allowed curios submitted
+in the last seven days (should be just seven).  It if finds them, then the excess will be deleted.
+
+usage: rerank [options]    where the options are
+
+        -s      silent -- only errors and deletions printed
+	-m	mail about deletions
+        -h      print this help and exit
+";
+$opt_h and exit;
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+$opt_m and ($opt_s or print "Will attempt to mail results.\n");
+
+# First let's count how many each submitter has submitted in the last week.
+# This is a double count--how many submitted, and how many submitted that 
+# are not visible.
+
+my $columns = 'count(*) as count,submitter,min(created) as oldest';
+my $table = 'curios';
+my $where = "NOW()-created < 7000000 group by submitter";
+my $where_no = "visible='no' and NOW()-created < 7000000 group by submitter";
+
+my $list = &connect_db::GetRow({'where'=>$where, 'table'=>$table, 'columns'=>$columns, 'key'=>'submitter'});
+my $list_no = &connect_db::GetRow({'where'=>$where_no, 'table'=>$table, 'columns'=>'COUNT(*) as no,submitter', 'key'=>'submitter'});
+
+# Okay, we have them; lets display the violations if any
+
+if (not defined $list) {
+  $opt_s or print "No matches in the database\n";
+  exit;	
+}
+
+  my $out = '';
+  foreach (sort {$list->{$a}->{'count'} <=> $list->{$b}->{'count'}} keys %$list) {
+    my $count = $list->{$_}->{'count'};
+    my $who = $list->{$_}->{'submitter'};
+    my $oldest = $list->{$_}->{'oldest'};
+    my $line = ' 'x(20-length($who))."$who has $count submissions this week (oldest $oldest).";
+    $line .= '  '.$list_no->{$_}->{'no'}.' not visible.' if $list_no->{$_}->{'no'};
+    $line .= '  (Not limited.)' unless $who;
+    $opt_s or print "$line\n";
+    if ($count > $max_allowed and $who) {	# Violated the rules!!
+      $out .= $line;
+    } else {			# Non-violator.
+      delete $list->{$_};
+    }
+  }
+
+# If all is well, %list is now empty.  Otherwise it contains only violators.
+
+foreach (keys %$list) {
+  my $who = $list->{$_}->{'submitter'};
+  $where = "NOW()-created < 7000000 AND submitter='$who' AND visible='no'";
+  $limit = $list->{$_}->{'count'} - $max_allowed;  # All above 7 to be deleted; newest first
+  $query = "DELETE FROM $table WHERE $where\n\tORDER BY created DESC LIMIT $limit;\n";
+  $opt_s or print $query;
+  $sth = $dbh->prepare($query) || die $sth->errstr;
+  $sth->execute() || die $sth->errstr;
+  my $rows = $sth->rows;
+  my $line = "Deleted $rows of $who\'s most recent not visible curios.\n";
+  print $line; # too of the $opt_s or so this would print deletions
+  $out .= $line;
+}
+
+# Okay, let's mail what we have done to the editors (if there is anything).
+# Why mail the info if we can see it printed on the console?
+
+$out and ($opt_m and &SendMail('admin@t5k.org','Curios! Enforcement program',
+   $out."\nThese folks are **not** yet notified!  Update this code.\n"));
+
+exit;
+
+
+
+
+# &SendMail(to[,subject[,message[,from[,cc]]]])
+
+sub SendMail {
+#  open(FILE,"|/usr/lib/sendmail -oi -t")
+  open(FILE,"|/usr/sbin/sendmail -t")
+    or die("Fatal error: could not open mail!");
+  print FILE 'To: ',$_[0],"\n";
+  print FILE "From: ".($_[3] || 'admin@t5k.org')."\n";  
+  (print FILE "CC: $_[4]\n") if defined $_[4];
+  print FILE 'Subject: ',($_[1] || 'No Subject'),"\n\n",
+      ($_[2] || 'No message text.');
+  close(FILE)
+    or die("Fatal error: could not send mail! Error:",$?>>8," Signal: ",$?&255)
+}  

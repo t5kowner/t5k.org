@@ -1,0 +1,5 @@
+*.log
+p_*.txt
+helper_*
+pfgw.ini
+command_output

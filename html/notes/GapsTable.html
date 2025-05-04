@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Table of Known Maximal Gaps between Primes</title>
+  <meta name="description" content="If p is a prime, the 'prime gap' after p is the
+number of composites that follow it.  maximal gaps are larger than those for any 
+smaller primes p.">
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/">Notes</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/faq/">FAQ</a></li>
+          <li class="breadcrumb-item active">Maximal Gaps</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->Table
+        of Known Maximal Gaps <!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell, et al.</h3>
+      <!-- #BeginEditable "content" -->
+      <p>
+        In the following table we list the <b>maximal gaps</b> through 1675.
+        These are the first occurrences of gaps of <i>at least this length</i>.
+        For example, there is a gap of 879 composites after the prime
+      </p>
+      <p class="ml-4">277900416100927.</p>
+      <p>This is the first occurrence of a gap of this length, but still is not a maximal gap since 905 composites
+        follow the smaller prime</p>
+      <p class="ml-4">218209405436543.</p>
+      <p>
+        (These examples are taken from [<a href="/references/refs.cgi/Nicely99">Nicely99</a>]). For more information,
+        see <a href="gaps.html">page on prime gaps</a>. See also
+        <a href="https://web.archive.org/web/20191118035255/http://www.trnicely.net/gaps/gaplist.html">
+          Nicely's table of prime gaps (archive.org)
+        </a> for a more extensive list which includes all of the known first occurrences of prime gaps &mdash; not just
+        the maximal ones, as well as <a href="https://primegap-list-project.github.io/">a community project</a> which
+        has been maintaining the list since the death of Dr. Nicely in 2019.
+      </p>
+      <p>Warning: there are two standard definitions of "gap".&nbsp; Let <i>p</i> be
+        a prime and <i>q</i> be the next prime.&nbsp; Some define the gap between
+        these two primes to be the number of composites between them, so <i>g</i> = <i>q</i> - <i>p</i> - 1 (and the gap
+        following the prime 2 has length
+        0).&nbsp; Others define it to be simply <i>q</i> - <i>p</i> (so the
+        gap following the prime 2 has the length 1).&nbsp; On these pages we
+        use the former definition.&nbsp; Jens Kruse Andersen's <a
+          href="http://primerecords.dk/primegaps/maximal.htm">page
+          on maximal gaps</a> and Nicely's pages use the second.</p>
+      <pre class="ml-4">
+---- --------------------  ----------------------------
+gap   following the prime  reference
+---- ---------------------  ----------------------------
+   0                     2
+   1                     3
+   3                     7
+   5                    23
+   7                    89
+  13                   113
+  17                   523
+  19                   887
+  21                  1129
+  33                  1327
+  35                  9551
+  43                 15683
+  51                 19609
+  71                 31397
+  85                155921
+  95                360653
+ 111                370261
+ 113                492113
+ 117               1349533
+ 131               1357201
+ 147               2010733
+ 153               4652353
+ 179              17051707
+ 209              20831323
+ 219              47326693
+ 221             122164747
+ 233             189695659
+ 247             191912783
+ 249             387096133
+ 281             436273009
+ 287            1294268491
+ 291            1453168141
+ 319            2300942549
+ 335            3842610773
+ 353            4302407359
+ 381           10726904659
+ 383           20678048297
+ 393           22367084959
+ 455           25056082087
+ 463           42652618343
+ 467          127976334671
+ 473          182226896239
+ 485          241160624143
+ 489          297501075799
+ 499          303371455241
+ 513          304599508537
+ 515          416608695821
+ 531          461690510011
+ 533          614487453523
+ 539          738832927927
+ 581         1346294310749
+ 587         1408695493609
+ 601         1968188556461
+ 651         2614941710599
+ 673         7177162611713
+ 715        13829048559701  [<a href="/references/refs.cgi/YP89">YP89</a>]
+ 765        19581334192423  [YP89]
+ 777        42842283925351  [YP89]
+ 803        90874329411493  [<a href="/references/refs.cgi/Nicely99">Nicely99</a>]
+ 805       171231342420521  [Nicely99]
+ 905       218209405436543  [Nicely99]
+ 915      1189459969825483  [<a href="/references/refs.cgi/NN99">NN99</a>]
+ 923      1686994940955803  [NN99]
+1131      1693182318746371  [NN99]
+1183     43841547845541059  [NN2002]
+1197     55350776431903243  <a href="http://www.ieeta.pt/%7Etos/hobbies.html">Tom&aacute;s Oliveira e Silva</a>
+1219     80873624627234849  Tom&aacute;s Oliveira e Silva
+1223    203986478517455989  Tom&aacute;s Oliveira e Silva
+1247    218034721194214273  Tom&aacute;s Oliveira e Silva 
+1271    305405826521087869  Tom&aacute;s Oliveira e Silva
+1327    352521223451364323  Tom&aacute;s Oliveira e Silva
+1355    401429925999153707  <a href="http://www-cs-staff.stanford.edu/~knuth/">Donald E. Knuth</a>
+1369    418032645936712127  Donald E. Knuth
+1441    804212830686677669  Siegfried Herzog &amp; Tomás Oliveira e Silva
+1475   1425172824437699411  Tomás Oliveira e Silva
+1487   5733241593241196731  Anand S. Nair
+1509   6787988999657777797
+1525  15570628755536096243
+1529  17678654157568189057  Bertil Nyman
+1549  18361375334787046697  Bertil Nyman
+1551  18470057946260698231  Craig Loizides
+1571  18571673432051830099  Craig Loizides
+1675  20733746510561442863  Brian Kehrig
+---- ---------------------  ----------------------------</pre>
+      </blockquote>
+      (If you know of results beyond those in this table, please <a href="/primes/includes/mail.php">let
+        us know</a>.) <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2024 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp;
+      (<a href="privacy.html">Privacy notice</a>)
+      <!-- #EndLibraryItem -->
+    </div>
+  </footer>
+</body>
+<!-- #EndTemplate -->
+
+</html>

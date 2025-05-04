@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 1: A Quick Introduction</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->1: Introduction<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><b>Chapter One:
+                  Introduction</b><!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <h4>Introduction</h4>
+  <p>How do we go about finding primes?&nbsp; And once we have found them, how do we
+    prove they are truly prime?&nbsp; The answer depends on the size of the primes
+    and how sure we need to be of their primality.&nbsp; In these pages we present
+    the appropriate answers in several sections.&nbsp; Let us preview these chapters
+    one at a time.</p>
+  <h4><a href="prove2.html">Chapter Two:</a> The quick tests for small
+    numbers and probable primes</h4>
+  <p>For very small primes we can use the <a href="prove2_1.html">Sieve of Eratosthenes</a>
+    or <a href="prove2_1.html#trial">trial division</a>.&nbsp; These methods are
+    sure, and are the best methods for small numbers, but become far too time consuming
+    before our numbers reach thirty digits.&nbsp; </p>
+  <p>If we are going to use our primes for "industrial" uses (e.g., for RSA encryption)
+    we often do not need to prove they are prime.&nbsp; It may be enough to know
+    that the probability they are composite is less than 0.000000000000000000000001%.&nbsp;
+    In this case we can use (<a href="prove2_3.html">strong</a>) <a href="prove2_2.html">probable primality tests.</a>
+  </p>
+  <p>These probable primality tests can be combined to create a <a href="prove2_3.html#quick">very quick algorithm</a>
+    for <i>proving</i> primality
+    for integers less than 340,000,000,000,000. </p>
+  <h4><a href="prove3.html">Chapter Three:</a> The classical tests</h4>
+  A quick look at the list of <a href="../largest.html">largest known primes</a>
+  shows numbers with hundreds of thousands (even millions) of digits--and these
+  are all <b>proven</b> primes (not probable primes)!&nbsp; So how can we know they
+  are prime?&nbsp; Look at a portion of this list and decide what the numbers all
+  have in common.
+  <pre>
+  111  189*2^34233-1                  10308 Z  89 
+  112  15*2^34224+1                   10304 D  93 
+  113  (5452545+10^5153)*10^5147+1    10301 D  90 Palindrome 
+  114  23801#+1                       10273 C  93 primorial plus one 
+  115  63*2^34074+1                   10260 Y  95
+  116  213819*2^33869+1               10201 Y  93  
+</pre>
+  <p>They are all trivial to factor if we either add, or subtract, one!&nbsp; This
+    is no accident.</p>
+  <p>It is possible to turn the probable-primality tests of chapter two for an integer
+    <i>n</i> into primality proofs, if we know enough factors of either <a href="prove3_1.html"><i>n</i>+1</a> and/or <a
+      href="prove3_2.html"><i>n</i>-1</a>.&nbsp; These proofs are called <b>the classical
+      tests</b> and we survey them in our third chapter.
+  </p>
+  <p>These tests have been used for over 99.99% of the largest known primes.&nbsp;
+    They include special cases such as the <a href="prove3_2.html#test">Lucas-Lehmer test</a> for Mersenne primes and <a
+      href="prove3_1.html#Pepin">Pepin's Test</a> for Fermat primes.</p>
+  <h4><a href="prove4.html">Chapter Four:</a> The General Purpose Tests</h4>
+  <p>Finally, the obvious problem with the classical tests is that they depend on
+    factorization--and it appears factoring is much harder than primality proving
+    for the "average" integer.&nbsp; In fact this is the key assumption behind the
+    popular RSA encryption method! </p>
+  <p>Using complicated modern techniques, the classical tests have been improved
+    into tests for general numbers that require no factoring such as the <a href="prove4_1.html">APR</a>, <a
+      href="prove4_1.html#aprt-cl">APRT-CL</a> and
+    the <a href="prove4_2.html">ECPP</a> algorithms.&nbsp; In chapter four we say
+    a few words about these methods, discuss which of these test to use (classical,
+    general purpose...), and then leave you with a few references with which to
+    pursue these tests.</p>
+  <p>In 2002 a long standing question was answered: can integers be proven prime
+    in &quot;polynomial time&quot; (that is, with time bounded by a polynomial
+    evaluated at the number of digits).&nbsp; Some of the previous algorithms
+    come close (ECPP is almost always polynomial, and is conjectured to always
+    be polynomial bounded).&nbsp;
+    Agrawal, Kayal and Saxena answered this question in the affirmative by giving
+    a &quot;simple&quot; polynomial time algorithm.&nbsp; We present this algorithm
+    in chapter four.</p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove2_1.html"><b>next
+                  page</b></a> | <a href="index.html">contents</a> ] <!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

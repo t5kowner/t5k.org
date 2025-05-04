@@ -1,0 +1,53 @@
+#!/usr/bin/perl -w
+
+# This progarm will open up the whatever database connect_db connects to and scan most of its tables
+# for bad urls.  They are displayed using the tables id field. 
+ 
+use DBI;		# Generic database interface
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+my $query = "SHOW tables;";
+my $sth = $dbh->prepare($query);
+$sth->execute();
+
+while ($t = $sth->fetchrow_hashref) {
+  foreach my $key (keys %$t) {
+    next if $$t{$key} eq 'log';		# table names to ignore (but why?)
+    next if $$t{$key} eq 'prime';
+    next if $$t{$key} eq 'verify';
+    &test($$t{$key});
+  }
+}
+
+exit;
+
+
+sub test {
+  my $table = shift || die 'must give &test a table name';
+
+  my $query = "SELECT * FROM $table;";
+  my $sth = $dbh->prepare($query);
+  $sth->execute();
+  $opt_s or print "Have selected the items in $table.\n";
+
+  while ($p = $sth->fetchrow_hashref) {
+    foreach my $key (keys %$p) {
+      next unless defined $$p{$key};
+      my $temp = ($table eq 'curios' and $key eq 'text' and $$p{'latex'}) ? ' but LaTeX is defined' : '';
+      if ($$p{$key} =~ /([\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x{ffff}])/ ) { 
+        print $table.'.'.$$p{'id'}."\t $key has '$1' (".unpack('H*',$1).") $temp\n";
+      }
+    }
+  }
+}
+
+print "Done.\n";
+
+exit;
+
+

@@ -1,0 +1,109 @@
+body {
+	background-color: white;
+	color: black;
+	clear: both;
+	max-width: 60em;
+	/*		font-family: verdana, sans-serif; */
+	/*		margin-left: 5%;   margin-right: 5%; */
+}
+
+hr {
+	color: #000099;
+	background-color: white;
+}
+
+a {
+	color: #000033;
+	background-color: #F0F9FF;
+	/* Screws up netscape: background-color: inherit; */
+	text-decoration: underline;
+}
+
+a.none {
+	color: black;
+	background-color: transparent;
+}
+
+a.none:hover {
+	background-color: #F0F9FF;
+}
+
+a:hover {
+	color: black;
+	background-color: #CCEEFF;
+	text-decoration: underline;
+}
+
+A.glossary {
+	color: #000033;
+	border: 1px dashed blue;
+	padding: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+.pre a {
+	text-decoration: underline;
+}
+
+.highlight {
+	background: #6CF;
+	color: #000
+}
+
+/* For home page */
+
+a.white {
+	background-color: #FFFFFF;
+}
+
+a.white:hover {
+	color: black;
+	background-color: #CCEEFF;
+	text-decoration: underline;
+}
+
+A.menu {
+	color: black;
+	font-size: 12pt;
+	text-decoration: none;
+}
+
+A.menu:Hover {
+	color: #00F;
+	background-color: rgb(102, 204, 255);
+	text-decoration: underline;
+}
+
+/* The link formats for the sidebar menu items */
+
+A.side {
+	color: black;
+	font-size: 12pt;
+	background-color: #66CCFF;
+	text-decoration: none;
+}
+
+A.side:Hover {
+	color: rgb(00, 00, 255);
+	background-color: rgb(204, 255, 255);
+	text-decoration: underline;
+}
+
+/* Bibliography styles */
+
+A.bib {
+	color: black;
+	text-decoration: none;
+}
+
+A.bib:Hover {
+	background-color: rgb(204, 255, 255);
+	text-decoration: underline;
+}
+
+table.double {
+	border: #000080 double 4px;
+}

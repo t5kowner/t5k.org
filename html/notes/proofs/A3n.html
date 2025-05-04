@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>A proof of a generalization of Mill's Theorem</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="This page contains the proof of a generalization of Mills' theorem 
+      which roughly states that there are real numbers A such that [A^3^n] is 
+      always prime. This is part of the Prime Pages.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="../index.html">Notes</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Proofs</a></li>
+          <li class="breadcrumb-item active">Generalized Mill's</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->
+        A generalization of Mills' Theorem<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <p>In the late forties Mills [<a href="/references/refs.cgi/Mills47">Mills47</a>] proved that there was a real
+        number A&gt;1 for which [<img src="../../gifs/A^3^n.gif" alt="A^3^n" width="19" height="14">] is always a prime
+        (<i>n</i> = 1,2,3,...).&nbsp;
+        The purpose of this short note is to prove the following theorem (from an exercise of Ellison [<a
+          href="/references/refs.cgi/EE85">EE85</a>, exercise 1.23]), for which Mills' theorem is a special case.&nbsp;
+        As a bonus, this theorem shows there are infinitely many <i>c</i>'s which each have infinitely many A's for
+        which
+        <img src="../../gifs/A3n.image3.gif" alt="[A^(c^n)]" width="27" height="16">
+        is always prime (there are actually uncountably many choices of A [<a
+          href="/references/refs.cgi/Wright1954">Wright1954</a>].&nbsp;
+        We then approximate the least <a href="#A">A for the sequence of primes</a>(with <i>c</i>=3) <i>after</i> this
+        proof.
+      </p>
+
+      <dl>
+        <dt>Theorem:</dt>
+        <dd>
+          <p>Let S={<i>a<sub>n</sub></i>} be any sequence of integers satisfying the following property:</p>
+          <p class="ml-4"> (1) there exists real numbers <i>x</i><sub>o</sub> and <i>w</i> with 0 &lt; <i>w</i> &lt; 1,
+            for which the open interval (<i>x</i>,<i>x</i>+<i>x<sup>w</sup></i>) contains an element of S for all reals
+            <i>x</i> &gt; <i>x</i><sub>o</sub>.
+          </p>
+          <p>Then for every real number <i>c</i> &gt; min(1/(1-<i>w</i>),2) there is a number A for which <img
+              src="../../gifs/A3n.image3.gif" alt="[A^(c^n)]" width="27" height="16"> is a subsequence of S.</p>
+        </dd>
+        <dt>Proof:</dt>
+        <dd>
+          <p>Use (1) to define a subsequence {<i>b<sub>n</sub></i>} of S recursively by</p>
+          <p class="ml-4"> (2) <i>b</i><sub>1</sub> = least member of S for which
+            <i>b</i><sub>1</sub><sup><i>c</i></sup> <u>&gt;</u> <i>x</i><sub>o</sub>.<br>
+            (3) <i>b</i><sub><i>n</i>+1</sub> = least member of S satisfying <i>b<sub>n</sub><sup>c</sup></i> &lt;
+            <i>b</i><sub><i>n</i>+1 </sub>&lt; <i>b<sub>n</sub><sup>c</sup></i> + <i>b<sub>n</sub><sup>wc</sup></i>.
+          </p>
+          <p>Because <i>c</i> <u>&gt;</u> 1/(1-<i>w</i>), and <i>c</i> <u>&gt;</u> 2 (see the <a href="#lemma">lemma
+              below</a>) we get the last two inequalities in the following revision of (3):</p>
+          <p class="ml-4"> <i>b<sub>n</sub><sup>c</sup></i> &lt; <i>b</i><sub><i>n</i>+1</sub>&lt;
+            1+<i>b</i><sub><i>n</i>+1 </sub>&lt; 1+<i>b<sub>n</sub><sup>c</sup></i>+<i>b<sub>n</sub><sup>wc</sup></i>
+            <u>&lt;</u> 1+<i>b<sub>n</sub><sup>c</sup></i> +<i>b<sub>n</sub></i><sup><i>c</i>-1</sup> <u>&lt;</u>
+            (1+<i>b<sub>n</sub></i>)<sup><i>c</i></sup>.
+          </p>
+          <p>For all positive integers <i>n</i> we can raise this to the <i>c</i><sup>-(<i>n</i>+1)</sup>th power to get
+          </p>
+          <p class="ml-4"> <img src="../../gifs/A3n.image1.gif" alt="ugly_inequalty" width="276" height="45"> </p>
+          <p>showing that the sequence <img src="../../gifs/A3n.image4.gif" align="TOP" alt="(b sub n)^(c^-n)"
+              width="34" height="25"> converges. Call its limit A. Finally,</p>
+          <p class="ml-4"> <img src="../../gifs/A3n.image2.gif" alt="(b sub n) &lt; A^(c^n) &lt; 1 + (b sub n)"
+              width="99" height="19"> </p>
+          <p>so <img src="../../gifs/A3n.image3.gif" align="BOTTOM" alt="[A^(c^n)]" width="27" height="16"> =
+            <i>b<sub>n</sub></i>, the chosen subsequence of S--completing the proof.
+            <span class="float-right" title="Q.E.D.">∎</span>
+          </p>
+        </dd>
+      </dl>
+
+      <p>For the sequence of primes property (1) is known to hold with <i>w</i>=7/12 and <i>x</i><sub>o</sub>
+        sufficiently large, so we can follow Mills and take <i>c</i> = 3.&nbsp; Note that it is not necessary to start
+        with the minimal prime satisfying (2) (<i>b</i><sub>o</sub> &gt; <i>x</i><sub>o</sub>) as long as we can find
+        the necessary primes satisfying (3) until we find one greater than <i>x</i><sub>o</sub> (then we know all of the
+        following primes exists).</p>
+      <p>The problem is, that even though surely there is a prime between consecutive cubes of integers (greater than
+        one), we can not yet prove it! The best effective lower bound may be as large as the one in Cheng's draft paper
+        [<a href="/references/refs.cgi/Cheng2003a">Cheng2003a</a>]: 10<sup>6000000000000000000</sup>.&nbsp; But it is
+        trivial to prove, that if the Riemann Hypothesis hold, then there always are primes between consecutive integer
+        cubes, starting with with <i>b</i><sub>o</sub> = 2 [<a href="/references/refs.cgi/CC2005">CC2005</a>]. </p>
+      <p>Mills did not give an explicit A, but it is traditional for authors to start with <i>b</i><sub>o</sub> = 2
+        (even though the way Mills' wrote his result, starting with 2 would have been ruled out).&nbsp; Starting with
+        <i>b</i><sub>o</sub> = 2 and taking the minimal prime at each step gives us the minimal sequence (given RH):
+      </p>
+      <blockquote class="ml-4">
+        2,<br>
+        11,<br>
+        1361,<br>
+        2521008887,<br>
+        16022236204009818131831320183,<br>
+        <font size="-1">4113101149215104800030529537915953170486139623539759933135949994882770404074832568499,</font>
+        <br>
+        <font size="-2">695838043769627416085392765735385928648359...(254
+          digits)...257390268487534179757699110378097045955949,</font><br>
+        <font size="-3">336918228195740742277307753365919464724735980446...(762
+          digits)...405013138097469593692676561694614253113386536243,</font>
+      </blockquote>
+      <p>... (see <a href="/glossary/page.php/MillsPrime.html" class="glossary">Mills' Primes</a>)
+        <a name="A"></a>showing that the constant A begins with the following digits (see <a
+          href="../MillsConstant.html" class="glossary">Mills' Constant</a> for more digits):
+      </p>
+      <blockquote class="ml-4">
+        <code> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.3063778838 6308069046 8614492602 6057129167 8458515671 3644368053 7599664340 5376682659 8821501403 7011973957 0729696093 8103086882 2388614478 1635348688 7133922146 1943534578 7110033188 1405093575 3558319326 4801721383 2361522359 0622186016 1085667905 7215197976 0951619929 5279707992 5631721527 8412371307 6584911245 6317518426 3310565215 3513186684 1550790793 7238592335 2208421842 0405320517 6890260257 9344300869 5290636205 6989687262 1227499787 6664385157 6619143877 2844982077 5905648255 6091500412 3788524793 6260880466 8815406437 4425340131 0736114409 4137650364
+      3793012676 7211713103 0265228386 6154666880 4874760951 4410790754 0698417260 3473107746 7757406400 7810935083 4214374426 5420408531,</code>
+      </blockquote>
+      <p>For now (until an appropriate effective bound is found), the above number is conjectured to be the least Mills'
+        constant, often called <b><i>the</i> Mills' number</b>.&nbsp; There are of course infinitely many others (to see
+        this start with any other prime, or note that if A works, so does A<sup>3</sup>, or ...)</p>
+      <p>Though amusing, this type of formula is useless for determining primes because we need to know the primes
+        determined <i>before</i> we find A (and the subsequence of primes represented is so small!)</p>
+      <p>We end this note by proving an inequality used in the proof above.</p>
+
+      <dl name="lemma">
+        <dt>Lemma:</dt>
+        <dd>If <i>x</i> <u>&gt;</u> 1 and <i>c</i> <u>&gt;</u> 2, then 1 + <i>x<sup>c</sup></i> +
+          <i>x</i><sup><i>c</i>-1</sup> <u>&lt;</u> (1 + <i>x</i>)<i><sup>c</sup></i>.
+        </dd>
+        <dt>Proof:</dt>
+        <dd>Dividing by <i>x<sup>c</sup></i> and replacing <i>x</i> with 1/<i>x</i> we arrive at the equivalent
+          inequality
+          <p class="ml-4"> 0 <u>&lt;</u> (1 + <i>x</i>)<i><sup>c</sup></i> - (1 + <i>x</i> +
+            <i>x<sup>c</sup></i>).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (0 &lt; <i>x</i> <u>&lt;</u> 1)
+          </p>
+          <p>The inequality clearly holds when <i>c</i> = 2 (because it reduces to <i>x</i> <u>&gt;</u> 0) and when
+            <i>x</i> = 0. Now if <i>x</i>&gt;0, differentiate the right side with respect to <i>c</i> to get
+          </p>
+          <p class="ml-4"> (1 + <i>x</i>)<i><sup>c</sup></i> log(1+<i>x</i>) - <i>x<sup>c</sup></i> log(x) </p>
+          <p>which is clearly positive, so the inequality above holds for all <i>c</i> &gt; 2. <span class="float-right"
+              title="Q.E.D.">∎</span></p>
+        </dd>
+      </dl>
+      <p>(See also our glossary entries <a href="/glossary/page.php/MillsTheorem.html">Mills' Theorem</a>and <a
+          href="/glossary/page.php/MillsPrime.html">Mills Prime.</a>)</p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

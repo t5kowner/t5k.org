@@ -1,0 +1,204 @@
+#!/usr/bin/perl -w
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use constants;		# Stores the anonymous user's person.id
+use Time::HiRes 'time';	# For more accurate timing
+
+getopts('hsdD');
+$opt_s or $opt_h or print "usage: $0 [options].  Use $0 -h to see the options.\n\n";
+$opt_d = 1 if $opt_D;
+
+($opt_h or $opt_d) and print
+  "This routine uses the weights in the code table (so run reweightcodes first)
+to reweight/rank the person table (e.g., fill person.PrimesTotal, .ScoreTotal, .RankTotal,
+.PrimesActive, .ScoreActive, .RankActive).  Does not alter the modification date.
+
+usage: reweight [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-d	print debug messages.
+	-D	print more debug messages.
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+$opt_d and print "Noisey -d option turned on!\n";
+
+# Do we have the Anonymous entries person id (from constants.pm)
+my $AnonymousID = $defaults::anonymous_person_id or die "Missing anonymous_person_id";
+$opt_d and print "anonymous_person_id = $AnonymousID\n";
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# I have had trouble when wild_codes gets set to '' instead of the default NULL
+# I suspect my admin/edit program is doing this!  Later rewrite &process_type to
+# make this unnecessary.  The '' makes the CONCAT return '' to match to.
+
+my $sth = $dbh->prepare("/* reweight */ UPDATE person SET wild_codes=NULL, modified=modified WHERE wild_codes=''");
+$sth->execute();
+$sth->finish();
+
+# Another problem: if an entry had a prime, but it is removed (say to another entry)
+# process_type will not reset the values!  Skip over the system account and unknown program.
+# BUT most of the entries caught in this next query are the new provers with no codes yet
+
+$sth = $dbh->prepare("/* reweight */ UPDATE person SET ScoreTotal=NULL, PrimesTotal=NULL,
+  PrimesRank=NULL, ScoreRank=NULL, ScoreActive=NULL, PrimesActive=NULL,
+  PrimesActiveRaw=NULL, PrimesTotalRaw=NULL,
+  modified=modified WHERE wild_codes is NULL AND (codes is NULL OR codes='')
+  AND NOT (id=560 OR id=254)");
+$sth->execute();
+$sth->finish();
+
+# Process each class of prover
+
+&process_type('program');
+&process_type('project');
+&process_type('other');
+&process_type('person');
+
+exit;
+
+
+
+# Support Routines
+
+sub process_type() {
+  my $type = shift;
+
+  my $query = "/* reweight */ SELECT person.id, ";
+  if ($type eq 'person') {
+    # For persons, we divide by the number of persons in the code
+    $query .= "sum(code.PrimesTotal/code.persons) as PrimesTotal,
+	sum(code.PrimesTotal) as PrimesTotalRaw,
+	sum(code.PrimesActive/code.persons) as PrimesActive,
+	sum(code.PrimesActive) as PrimesActiveRaw,
+	sum(code.ScoreActive/code.persons) as ScoreActive,
+	sum(code.ScoreTotal/code.persons) as ScoreTotal\n";
+  } elsif ($type eq 'project') {
+    # For persons, we divide by the number of persons in the code
+    $query .= "sum(code.PrimesTotal/code.projects) as PrimesTotal,
+	sum(code.PrimesTotal) as PrimesTotalRaw,
+	sum(code.PrimesActive/code.projects) as PrimesActive,
+	sum(code.PrimesActive) as PrimesActiveRaw,
+	sum(code.ScoreActive/code.projects) as ScoreActive,
+	sum(code.ScoreTotal/code.projects) as ScoreTotal\n";
+  } else {
+    # Non-person get full credit for each
+    $query .= "sum(code.PrimesTotal) as PrimesTotal,
+	sum(code.PrimesActive) as PrimesActive,
+	sum(code.ScoreActive) as ScoreActive,
+	sum(code.ScoreTotal) as ScoreTotal\n";
+  }
+  # Now make the types match... For the \d we need \\\\d because the perl "" takes
+  # half and the Mysql '' takes half.
+
+  # note we do not need to use '[0-9]+' here as the + is already in the wild code
+  $query .= "\tFROM person, code WHERE person.type='$type' AND
+      (
+	BINARY person.codes RLIKE BINARY CONCAT('\\\\b',code.name,'\\\\b') OR
+	BINARY code.name RLIKE BINARY CONCAT( '(', REPLACE(REPLACE(wild_codes,',','|'),'\\\\d','[0-9]'), ')' )
+      )
+      GROUP BY person.id";
+
+
+  $opt_d and print "Query: $query\n";
+  my $sth = $dbh->prepare($query);
+  my $time = time;
+  $sth->execute();
+  $opt_s or printf("Have selected the list of codes for '%s's (query took %6.4f seconds)\n",$type,time-$time);
+
+  # Loop through this list.  Note that the heys for all these hash arrays are the person.id's
+
+  my %PrimesTotal;	# For persons, this is weighted by dividing by the number of humans
+  my %PrimesTotalRaw;	# whereas this is not
+  my %PrimesActive;	# ...
+  my %PrimesActiveRaw;
+  my %ScoreTotal;
+  my %ScoreActive;
+
+  while ($p = $sth->fetchrow_hashref) {
+    my $id = $$p{'id'};
+    $PrimesTotal{$id} = $$p{'PrimesTotal'};
+    $PrimesActive{$id} = $$p{'PrimesActive'};
+    $ScoreTotal{$id} = $$p{'ScoreTotal'};
+    $ScoreActive{$id} = $$p{'ScoreActive'};
+    $PrimesTotalRaw{$id} = ($$p{'PrimesTotalRaw'} ? $$p{'PrimesTotalRaw'} : $$p{'PrimesTotal'});
+    $PrimesActiveRaw{$id} = ($$p{'PrimesActiveRaw'} ? $$p{'PrimesActiveRaw'} : $$p{'PrimesActive'});
+  }
+  $opt_s or print "\tand converted them to arrays.\n";
+
+  # Now lets rank them, using the convention ties get the same rank.
+  # Also, let's omit anonymous person entry
+
+  my %PrimesRank;
+  my $count = 0;
+  my $rank = 1;
+  my $previous = -1;
+  foreach (sort {$PrimesActive{$b} <=> $PrimesActive{$a}} keys %PrimesActive) {
+    next if $_ == $AnonymousID;
+    $count++;
+    if ($PrimesActive{$_} == $previous) { 	# Then gets the same rank
+      $PrimesRank{$_} = $rank;
+    } else {					# Rank increases
+      $PrimesRank{$_} = ($rank = $count);
+      $previous = $PrimesActive{$_};
+    }
+  }
+  $PrimesRank{$AnonymousID} = 99999;
+
+  if ($opt_d) {
+    print "First five by primes\n";
+    foreach (sort {$PrimesRank{$a} <=> $PrimesRank{$b}} keys %PrimesRank) {
+      last if $PrimesRank{$_} > 5;
+      print "\t$_\t$PrimesRank{$_}\n";
+    }
+    print "\n";
+  }
+
+  my %ScoreRank;
+  $count = 0;
+  $rank = 1;
+  $previous = -1;
+  foreach (sort {$ScoreActive{$b} <=> $ScoreActive{$a}} keys %ScoreActive) {
+    next if $_ == $AnonymousID;
+    $count++;
+    if ($ScoreActive{$_} == $previous) { 	# Then gets the same rank
+      $ScoreRank{$_} = $rank;
+    } else {					# Rank increases
+      $ScoreRank{$_} = ($rank = $count);
+      $previous = $ScoreActive{$_};
+    }
+  }
+  $ScoreRank{$AnonymousID} = 99999;
+
+  $opt_s or print "\tRanks assigned.\n";
+
+  # Now, update the pages
+
+  $query = 'UPDATE person SET PrimesTotal = ?, PrimesTotalRaw = ?,
+	PrimesActive = ?, PrimesActiveRaw = ?, ScoreTotal = ?, ScoreActive = ?,
+	PrimesRank = ?, ScoreRank = ?, modified=modified  WHERE id = ?';
+  $opt_d and print "Updating query: $query\n";
+  $sth = $dbh->prepare($query) or die;
+  foreach my $id (sort keys %PrimesTotal) {
+    $opt_D and print "\tid $id; \tprimes: $PrimesActive{$id}, ".
+        "$PrimesTotal{$id}; \tranks: ",$PrimesRank{$id}||'DEFAULT',"\n";
+    $sth->execute($PrimesTotal{$id}, $PrimesTotalRaw{$id}, $PrimesActive{$id}||0,
+	$PrimesActiveRaw{$id}||0, log($ScoreTotal{$id}||1),
+	log($ScoreActive{$id}||1),
+	$PrimesRank{$id}||'DEFAULT',  $ScoreRank{$id}||'DEFAULT', $id) or die;
+  }
+
+  $opt_s or print "\t'${type}'s done.\n";
+
+}

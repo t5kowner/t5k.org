@@ -1,0 +1,345 @@
+<HTML>
+
+<HEAD>
+
+</HEAD>
+
+<BODY>
+   <center>
+      <font size="+1">
+         <b>MERSENNE AND FERMAT NUMBERS</b>
+      </font>
+      <p>
+         RAPHAEL M. ROBINSON
+      <p>
+   </center>
+
+   &nbsp;&nbsp;
+   1. <b>Mersenne numbers.</b> The Mersenne numbers are of the form
+   2<sup><I>n</I></sup>-1. As a result of the computation described below, it can now be
+   stated that the first seventeen primes of this form correspond to the
+   following values of <I>n</I>:
+
+   <p>
+      <center>
+         2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607, 1279, 2203, 2281.
+      </center>
+
+   <p>
+      The first seventeen even perfect numbers are therefore obtained by
+      substituting these values of <I>n</I> in the expression 2<sup><I>n</I>-1</sup>(2<sup><I>n</I></sup>-1).
+      The first twelve of the Mersenne primes have been known since 1914; the
+      twelfth, 2<FONT SIZE="-1"><sup>127</sup></FONT>-1, was indeed found by Lucas as early as 1876, and for
+      the next seventy-five years was the largest known prime. More details
+      on the history of the Mersenne numbers may be found in Archibald
+      [<B><a href="#ref_01">1</a></B>]; see also Kraitchik [<B><a href="#ref_04">4</a></B>]. The next five Mersenne
+      primes were
+      found in 1952; they are at present the five largest known primes of
+      any form. They were announced in Lehmer [<B><a href="#ref_07">7</a></B>] and discussed by
+      Uhler [<B><a href="#ref_13">13</a></B>].
+
+      <br>&nbsp;&nbsp;
+      It is clear that 2<sup><I>n</I></sup>-1 can be factored algebraically if <I>n</I> is composite;
+      hence 2<sup><I>n</I></sup>-1 cannot be prime unless <I>n</I> is prime. Fermat's theorem
+      yields a factor of 2<sup><I>n</I></sup>-1 only when <I>n</I>+1 is prime, and hence does not
+      determine any additional cases in which 2<sup><I>n</I></sup>-1 is known to be composite.
+      On the other hand, it follows from Euler's criterion that if
+      <I>n</I> == 0, 3 (mod 4) and 2<I>n</I>+1 is prime, then 2<I>n</I>+1 is a factor of 2<sup><I>n</I></sup>-1.
+      Thus, in addition to cases in which <I>n</I> is composite, we see that 2<sup><I>n</I></sup>-1
+      is composite when 2<I>n</I>+1 is prime as well as <I>n</I>, provided that <I>n</I>
+      == 3 (mod 4) and <I>n</I> &gt; 3. Aside from this, factors of 2<sup><I>n</I></sup>-1 are known
+      only in individual cases. If no factor is known, the best way to find
+      out whether 2<sup><I>n</I></sup>-1 is prime is to apply a test due essentially to Lucas,
+      but stated in a simplified form by Lehmer [<B><a href="#ref_06">6</a></B>, Theorem 5.4].
+
+   <p>
+      &nbsp;&nbsp;
+      T<font size="-1">HEOREM</font>.
+      <I>Let S</I><SUB>1</SUB> = 4, <I>S</I><SUB><I>k</I>+1</SUB> = <I>S</I><SUB><I>k</I></SUB><sup>2</sup>-2. <I>Then,
+         for n</I> &gt; 2, <I>the number</I>
+      2<sup><I>n</I></sup>-1 <I>is prime if and only if S</I><SUB><I>n</I>-1</SUB> == 0 (mod 2<sup><I>n</I></sup>-1).
+
+   <p>&nbsp;&nbsp;
+      Alternatively, we may start with <I>S</I><SUB>1</SUB> = 10; or, if <I>n</I> == 3 (mod 4), we
+      may also use <I>S</I><SUB>1</SUB> = 3. Such a test was first applied by Lucas in 1876 to
+      show that 2<FONT SIZE="-1"><sup>127</sup></FONT>-1 is prime. By 1947, all of the numbers 2<sup><I>n</I></sup>-1
+      with
+      <I>n</I> &lt;= 257 had been tested; if there had been no errors in the
+      computations, this would have completed the proof or disproof of the various
+      cases of Mersenne's conjecture of 1644. In 1951, the first application
+      of an electronic computer to testing Mersenne numbers for primeness
+      was made by A. M. Turing at the University of Manchester; however,
+      no new primes were found, and no remainders were saved for
+      purposes of comparison.
+
+      <br>&nbsp;&nbsp;
+      In 1952, a program for testing Mersenne numbers for primeness
+      on the SWAC (the National Bureau of Standards' Western Automatic
+      Computer, at the Institute for Numerical Analysis in Los
+      Angeles), planned and coded by the author, using Lucas's test, was
+      carried out, with the cooperation of D. H. Lehmer and the staff of
+      the I. N. A. My thanks are due especially to Emma Lehmer, who did
+      various auxiliary computations, including checking some of the results
+      obtained against earlier results. The program was first tried
+      on the SWAC on January 30, and two new primes were found that
+      day; three other primes were found on June 25, October 7, and
+      October 9.
+
+      <br>&nbsp;&nbsp;
+      At that time, the total memory of the SWAC consisted of 256
+      words of 36 binary digits each, exclusive of the sign. For the Mersenne
+      test, half of this memory was reserved for commands. Since successive
+      squarings of numbers less than the modulus 2<sup><I>n</I></sup>-1 are required, this
+      modulus was restricted to 64 words, so that the condition <I>n</I> &lt; 64 * 36
+      = 2304 was imposed. The estimated running time for the program
+      was 0.25<I>n</I><sup>3</sup>+125<I>n</I><sup>2</sup> microseconds, and the actual time was in fair
+      agreement with this. Thus, roughly speaking, the testing time was a
+      minute for the first and an hour for the last of the five new primes.
+      Each minute of machine time is equivalent to more than a year's
+      work for a person using a desk calculator.
+
+      <br>&nbsp;&nbsp;
+      The output of the SWAC for each <I>n</I> was the least non-negative
+      residue of <I>S</I><SUB><I>n</I>-1</SUB> (mod 2<sup><I>n</I></sup>-1), written to the base 16. This was a long
+      string of zeros if 2<sup><I>n</I></sup>-1 was prime, and otherwise was an apparently
+      random sequence of digits. Every value of <I>n</I>
+      < 2304, for which no factor of 2<sup><I>n</I></sup>-1 was known, was run twice on the SWAC; in case of
+         disagreement, a third run was made. No remainder was accepted as
+         correct until it had been obtained twice, and indeed on different days.
+         (Although the bulk of this work was done in 1952, the checking was
+         not complete in all respects until late in 1953. The submission of this
+         report was delayed for this reason.) It is of course out of the question
+         to print the hundreds of remainders obtained, but they will remain
+         on file at the Institute for Numerical Analysis. [<I>Added in proof</I>. On
+         July 1, 1954, the I.N.A. became a part of the University of California
+         at Los Angeles; it is now known as Numerical Analysis Research.]
+
+         <br>&nbsp;&nbsp;
+         We shall confine ourselves here to mentioning various results of
+         earlier computations which have been verified or contradicted. (In a
+         few cases, earlier computers had used the test with <I>S</I><SUB>1</SUB> = 3; in these
+         cases, the same computation was also made on the SWAC.) The six
+         results of Uhler [<B><a href="#ref_12">12</a></B>], for <I>n</I>=157, 167, 193, 199, 227, 229, were all
+         checked by him by converting the corresponding SWAC remainders
+         to decimal form, and found to be correct. The rest of the checking
+         was done by Emma Lehmer. The three results of D. H. Lehmer
+         [<B><a href="#ref_05">5</a></B>],
+         for <I>n</I> = 139, 149, 257, were all verified. (Although Lehmer's remainder
+         for <I>n</I> = 139 had not been published, it was available for checking.) The
+         result of Powers [<B><a href="#ref_10">10</a></B>] for <I>n</I>=241 was found to be correct; the remainders
+         from his earlier computations, for <I>n</I> = 103, 109, had not
+         been published, and were not available for checking. On the other
+         hand, the four remainders of Fauquembergue [<B><a href="#ref_03">3</a></B>], for <I>n</I>=101, 103,
+         109, 137 were all found to be incorrect, as was the remainder of
+         Barker [<B><a href="#ref_02">2</a></B>] for <I>n</I> = 167.
+
+         <br>&nbsp;&nbsp;
+         If 2<sup><I>n</I></sup>-1 is prime, so that <I>S</I><SUB><I>n</I>-1</SUB> == 0 (mod 2<sup><I>n</I></sup>-1),
+         then <I>S</I><SUB><I>n</I>-2</SUB> is a
+         solution of the congruence <I>x</I>
+         <FONT SIZE="-1"><sup>2</sup></FONT> == 2 (mod 2<sup><I>n</I></sup>-1). Thus <I>S</I><SUB><I>n</I>-2</SUB> == +-
+         2<sup>(<I>n</I>+1)/2</sup>
+         (mod 2<sup><I>n</I></sup>-1). The calculation of the next to the last remainder <I>S</I><SUB><I>n</I>-2</SUB>
+         was undertaken for the various known Mersenne primes, both with
+         <I>S</I><SUB>1</SUB> = 4 and with <I>S</I><SUB>1</SUB> = 10, with the following results for the sign in the
+         above congruence:
+         <p>
+            <font size="-1">
+               <pre>
+        <I>n</I>=3,  5,  7, 13, 17, 19, 31, 61, 89, 107, 127, 521, 607,1279,2203,2281
+<I>S</I>[1]=4    +   +   -   +   -   -   +   +   -   -    +    -    -    -    +    -
+<I>S</I>[1]=1O   -   -   -   +   +   +   +   +   +   +    +    +    -    -    -    +
+</pre>
+            </font>
+
+         <p>&nbsp;&nbsp;
+            We have carried the program of testing Mersenne numbers for
+            primeness about as far as is practicable using present day computers.
+            The smallest untested Mersenne number is 2<FONT SIZE="-1"><sup>2309</sup></FONT>-1, which does not
+            appear to be a case of exceptional interest. A more interesting case
+            is 2<FONT SIZE="-1"><sup>8191</sup></FONT>-1, which should be prime according to a conjecture that
+            2<sup><I>n</I></sup>-1 is always prime when <I>n</I> is a Mersenne prime. This conjecture
+            is true for the first four cases, corresponding to the exponents
+         <p>
+            <center>
+               3 = 2<FONT SIZE="-1"><sup>2</sup></FONT>-1, 7 = 2<FONT SIZE="-1"><sup>3</sup></FONT>-1, 31 = 2<FONT
+                  SIZE="-1"><sup>5</sup></FONT>-1, and 127 = 2<FONT SIZE="-1"><sup>7</sup></FONT>-1.
+            </center>
+         <p>
+            The fifth case corresponds to <I>n</I> = 8191 = 2<FONT SIZE="-1"><sup>13</sup></FONT>-1. The corresponding
+            Mersenne number was actually tested in 1953 by D.J. Wheeler on
+            the Illiac, at the University of Illinois, one hundred hours of machine
+            time being required. The remainder obtained was not zero, indicating
+            that the number is composite, and the conjecture therefore false.
+            According to Dr. Wheeler, considerable confidence may be placed in
+            this result, since the computation was carefully checked.
+
+         <p>&nbsp;&nbsp;
+            2. <b>Fermat numbers.</b> The Fermat numbers are of the form 2<sup><I>n</I></sup>+1.
+            The only new result obtained here was that 2<FONT SIZE="-1"><sup>1024</sup></FONT>+1 is composite,
+            and hence that a regular polygon with this number of sides cannot be
+            constructed with ruler and compass.
+
+            <br>&nbsp;&nbsp;
+            The number 2<sup><I>n</I></sup>+1 can be factored algebraically unless <I>n</I> is a power
+            of 2. Factors are known in a few other cases. If no factor is known,
+            the following test may be used.
+
+         <p>&nbsp;&nbsp;
+            T<font size="-1">HEOREM</font>.
+            <I>If n</I> &gt; 1, <I>then</I> 2<sup><I>n</I></sup>+1 <I>is prime if and only if</I> 3<sup>
+               <FONT SIZE="-1">2<sup><I>n</I>-1</sup></FONT>
+            </sup>
+            == -1 (mod 2<sup><I>n</I></sup>+1).
+
+         <p>&nbsp;&nbsp;
+            The program set up for testing Mersenne numbers on the SWAC
+            was modified to apply to Fermat numbers. The range for the exponent
+            <I>n</I> was the same, but with <I>n</I> = 2<sup><I>m</I></sup>, this yields <I>m</I> &lt;= 11. Now
+            2<FONT SIZE="-1"><sup>2<sup><I>m</I></sup></sup></FONT>+1 is prime for <I>m</I> = 0, 1, 2, 3, 4, and factors
+            were known for
+            <I>m</I> = 5, 6, 9, 11. The Fermat numbers corresponding to <I>m</I> = 7, 8 had
+            been proved composite by Morehead and Western
+            [<B><a href="#ref_08">8</a></B>;<B><a href="#ref_09">9</a></B>], and the
+            remainders which they gave were found to be correct. (The necessary
+            conversion of the SWAC result to decimal form was done by Emma
+            Lehmer.) In the one new case, <I>m</I> = 10, the least positive residue of
+            3<FONT SIZE="-1"><sup>2<sup>
+                     <FONT SIZE="-2">1023</FONT>
+                  </sup></sup></FONT> (mod 2<FONT SIZE="-1"><sup>1024</sup></FONT>+1) was found to be
+            <font size="-1">
+               <pre><center>                   8x   4z258xu89   uw71y6w35   9z1vyy4u5   498v2v7v7
+55y9wy98v   6yx3yy0x4   00u07877w   2866316zu   85wy92558   3y201x7xO
+04w1zv076   yu292wxx4   0502v7567   226047037   308u12z32   887vyxu4x
+51w50169z   6815w5Ou1   0wy653448   v953xy0w6   8uv4492z2   v1u564ux9
+494x25wv7   wux26uuvw   4w5x12730   622y6z435   5xy035xx2   8798y8098
+</center></pre>
+            </font>
+         <p>
+            to the base 16, using 0,1,2,3,4,5,6,7,8,9,u,v,w,x,y,z as digits.
+            Thus 2 +1 is composite. This result was first obtained in February
+            1952. As an extra check in this case, the test was recoded by Emma
+            Lehmer; the modified test was run in January 1953, and the above
+            remainder was verified.
+
+            <br>&nbsp;&nbsp;
+            Later in 1953, Selfridge [<B><a href="#ref_11">11</a></B>] showed that this Fermat number has
+            the factor 11131*2<FONT SIZE="-1"><sup>12</sup></FONT>+1, which confirms the above result, but in a
+            sense renders it obsolete even before it is submitted for publication.
+            Selfridge also found a factor of 2<FONT SIZE="-1"><sup>2<sup>16</sup></sup></FONT>+1. Previously known
+            factors of
+            Fermat numbers may be found in Kraitchik [<B><a href="#ref_04">4</a></B>]. Factors of 2<FONT SIZE="-1">
+               <sup>2<sup><I>m</I></sup></sup>
+            </FONT>+1
+            are now known for <I>m</I> = 5, 6, 9, 10, 11, 12, 15, 16, 18, 23, 36, 38, 73.
+
+            <br>&nbsp;&nbsp;
+            The first Fermat number of unknown character is 2<FONT SIZE="-1"><sup>8192</sup></FONT>+1, corresponding
+            to <I>m</I>=13. The difficulty of testing this number is about
+            the same as for the Mersenne number 2<FONT SIZE="-1"><sup>8191</sup></FONT>-1. It would probably
+            be considerably easier to find some additional factors of Fermat
+            numbers by trial.
+
+         <p>
+            <center>
+               <font size="+1">R</font>EFERENCES
+            </center>
+         <p>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_01"><B>1</B></a>. R. C. Archibald,
+            <a href="../biblio.html#archibald"><cite>Mersenne's numbers</cite></a>,
+            Scripta Mathematica vol. 3 (1935) pp. 112-119.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_02"><B>2</B></a>. C. B. Barker,
+            <cite>Proof that the Mersenne number M167 is composite</cite>,
+            Bull. Amer. Math. Soc. vol. 51 (1945) p. 389.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_03"><B>3</B></a>. E. Fauquembergue,
+            <cite>Nombres de Mersenne</cite>, Sphinx-OEdipe, vol. 9
+            (1914) pp. 103-105; vol. 15 (1920) pp. 17-18.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_04"><B>4</B></a>. M. Kraitchik,
+            <cite>On the factorization of 2<sup>n</sup>+-1</cite>, Scripta Mathematica
+            vol. 18 (1952) pp. 39-52.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_05"><B>5</B></a>. D. H. Lehmer,
+            <cite>Note on the Mersenne number 2<FONT SIZE="-1"><sup>139</sup></FONT>-1</cite>, Bull. Amer. Math. Soc.
+            vol. 32 (1926) p. 552;
+            <CITE>Note on Mersenne numbers</CITE>,
+            ibid. vol. 38 (1932) p. 383-384.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_06"><B>6</B></a>. ------,
+            <cite>An extended theory of Lucas' functions</cite>, Ann. of Math.
+            vol. 31 (1930) pp. 419-448.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_07"><B>7</B></a>. ------,
+            <cite>Recent discoveries of large primes</cite></a>,
+            Mathematical Tables and Other Aids to Computation vol. 6 (1952) p. 61;
+            <a href="../biblio.html#lehmer3"><CITE>A new Mersenne prime</CITE></a>, ibid. p. 205;
+            <a href="../biblio.html#lehmer4"><CITE>Two new Mersenne primes</CITE></a>, ibid. vol. 7 (1953) p. 72.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_08"><B>8</B></a>. J. C. Morehead,
+            <cite>Note on Fermat's numbers</cite>, Bull. Amer. Math.
+            Soc. vol. 11 (1905) pp. 543-545.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_09"><B>9</B></a>. J. C. Morehead and A. E. Western,
+            <cite>Note on Fermat's numbers</cite>,
+            Bull. Amer. Math. Soc. vol. 16 (1909) pp. 1-6.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_10"><B>10</B></a>. R. E. Powers,
+            <cite>Certain composite Mersenne's numbers</cite>, Proc. London
+            Math. Soc. (2) vol. 15 (1916) p. xxii;
+            <a href="../biblio.html#powers3"><cite>Note on a Mersenne number</cite></a>,
+            Bull. Amer. Math. Soc. vol. 40 (1934) p. 883.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_11"><B>11</B></a>. J. L. Selfridge,
+            <cite>Factors of Fermat numbers</cite>, Mathematical Tables
+            and Other Aids to Computation vol. 7 (1953) pp. 274-275.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_12"><B>12</B></a>. H. S. Uhler,
+            <cite>First proof that the Mersenne number M<FONT SIZE="-1"><SUB>157</SUB></FONT> is composite</cite>,
+            Proc. Nat. Acad. Sci. U.S..A. vol. 30 (1944) pp. 314-316;
+            <cite>On all of Mersenne's numbers particularly M<FONT SIZE="-1"><SUB>193</SUB></FONT></cite>, ibid. vol. 34
+            (1948) pp.
+            102-103;
+            <cite>Note on the Mersenne numbers M<FONT SIZE="-1"><SUB>157</SUB></FONT> and M<FONT SIZE="-1">
+                  <SUB>167</SUB>
+               </FONT></cite>, Bull. Amer. Math.
+            Soc. vol. 52 (1946) p. 178;
+            <cite>On Mersenne's number M<FONT SIZE="-1"><SUB>199</SUB></FONT> and Lucas's sequences</cite>,
+            ibid. vol. 53 (1947) pp. 163-164;
+            <cite>On Mersenne's number
+               M<FONT SIZE="-1"><SUB>227</SUB></FONT> and cognate data</cite>,
+            ibid. vol. 54 (1948) p. 379;
+            <a href="../biblio.html#uhler3"><cite>A new result concerning a Mersenne
+                  number</cite></a>,
+            Mathematical Tables and Other Aids to Computation vol. 2 (1946) p. 94.
+            <br>&nbsp;&nbsp;&nbsp;
+
+            <a name="ref_13"><B>13</B></a>. ------,
+            <a href="../biblio.html#uhler4"><cite>A brief history of the investigation on
+                  Mersenne's numbers and the latest immense primes</cite></a>,
+            Scripta Mathematica vol. 18 (1952) pp. 122-131;
+            <cite>On the 16th and 17th perfect numbers</cite>,
+            ibid. vol. 19 (1953) pp. 128-131.
+         <p>
+            <dd>
+               U<font size="-1">NIVERSITY OF</font>
+               C<font size="-1">ALIFORNIA,</font>
+               B<font size="-1">ERKELEY</font>
+               <p>
+                  <font size="-1">Received by the editors February 7, 1954.</font>
+</body>
+
+</html>

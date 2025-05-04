@@ -1,0 +1,780 @@
+<!--D.H.Lehmer, "On Lucas's Test For The Primality of Mersenne's
+Numbers", J. London Math. Soc., v. 10, 1935, p. 162-165.-->
+<HTML>
+
+<HEAD>
+	<TITLE>On Lucas's Test For The Primality of Mersenne's Numbers</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#C000C0" ALINK="#FF0000" TEXT="#000000">
+	<BASEFONT SIZE=3>
+	<BR><BR><BR><BR><BR>
+	<CENTER>
+		<TABLE WIDTH=75%>
+			<TR>
+				<TD>
+					<CENTER>
+						<FONT SIZE=+1>
+							ON LUCAS'S TEST FOR THE PRIMALITY OF MERSENNE'S NUMBERS<BR><BR>
+							D. H. L</FONT>
+						<FONT SIZE=-1><B>EHMER</FONT> <A HREF="#foot_1">&sup1;</A>.</B>
+					</CENTER>
+					<BR><BR>
+					&nbsp;&nbsp;&nbsp; An examination of the literature on even perfect
+					numbers since Euclid's time reveals only two contributions to the
+					subject which are of genuine importance. The first of these is the
+					celebrated theorem of Euler to the effect that every even perfect
+					number is of Euclid's type
+					<NOBR>2<sup>
+							<FONT SIZE=-2><I>n</I>-1</FONT>
+						</sup></NOBR>
+					(<NOBR>2<sup><I>
+								<FONT SIZE=-2>n</FONT>
+							</I></sup></NOBR>-1),
+					where <NOBR>2<sup><I>
+								<FONT SIZE=-2>n</FONT>
+							</I></sup></NOBR>-1 is
+					a prime. The second contribution is that of Lucas who gave a pair
+					of theorems governing the primality of
+					<NOBR>2<sup>
+							<FONT SIZE=-2>4<I>k</I>&nbsp;&plusmn;&nbsp;1</FONT>
+						</sup></NOBR>-1.
+					A great deal of confusion exists in Lucas's writings about the exact
+					enunciation and actual proofs of these tests for primality.
+					Nevertheless, it is evident that Lucas was in possession of the facts
+					needed to prove the sufficiency of his tests. The confusion arose
+					from the fact that he was unable or unwilling to consider the
+					necessity also.<BR>
+
+					&nbsp;&nbsp;&nbsp; In 1930 the writer proved, as a by-product of an
+					extended theory of Lucas's functions
+					<I>U<SUB>
+							<FONT SIZE=-2>n</FONT>
+						</SUB></I> and
+					<I>V<SUB>
+							<FONT SIZE=-2>n</FONT>
+						</SUB></I>, that the test which Lucas
+					gave for <NOBR>2<sup>
+							<FONT SIZE=-2>4<I>k</I>&nbsp;+&nbsp;1</FONT>
+						</sup></NOBR>-1
+					is applicable also to
+					<NOBR>2<sup>
+							<FONT SIZE=-2>4<I>k</I>&nbsp;-&nbsp;1</FONT>
+						</sup></NOBR>-1, and that
+					his condition for primality is both necessary and sufficient. In fact
+					the theorem may be stated as follows.<P>
+
+						&nbsp;&nbsp;&nbsp; T<FONT SIZE=-1>HEOREM </FONT>A.
+						&nbsp;&nbsp; <I>The number
+							N&nbsp;=&nbsp;</I>
+						<NOBR>2<sup><I>
+									<FONT SIZE=-2>n</FONT>
+								</I></sup></NOBR>-1,
+						<I>where n is an odd prime, is a prime if ,and only if, N divides the
+						</I>(<I>n</I>-1)<I>-st term of the series</I>,
+					<P>
+						<CENTER>
+							<I>S</I><SUB>
+								<FONT SIZE=-2>1</FONT>
+							</SUB>&nbsp;=&nbsp;4,&nbsp;&nbsp;
+							<I>S</I><SUB>
+								<FONT SIZE=-2>2</FONT>
+							</SUB>&nbsp;=&nbsp;14,&nbsp;&nbsp;
+							<I>S</I><SUB>
+								<FONT SIZE=-2>3</FONT>
+							</SUB>&nbsp;=&nbsp;194,&nbsp;&nbsp;
+							...,&nbsp;&nbsp;
+							<I>S<SUB>
+									<FONT SIZE=-2>k</FONT>
+								</SUB></I>,&nbsp;&nbsp;&nbsp;...,<P>
+						</CENTER>
+						where <I>S<SUB>
+								<FONT SIZE=-2>k</FONT>
+							</SUB></I> =
+						<I>S</I><SUB>
+							<FONT SIZE=-2><I>k</I></FONT>
+						</SUB><sup>
+							<FONT SIZE=-2>2</FONT>
+						</sup><SUB>
+							<FONT SIZE=-2>-&nbsp;1</FONT>
+						</SUB>-2
+					<P>
+
+						&nbsp;&nbsp;&nbsp; In 1932 Dr. A. E. Western
+						<A HREF="#foot_2">&sup2;</A> gave a proof of this theorem by means
+						of the theory of algebraic numbers. It is the purpose of this paper
+						to give a very elementary yet self-contained proof of Theorem A.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <I>Notation and definitions</I>. &#151;Let
+					<P>
+
+					<TABLE WIDTH=100%>
+						<TR>
+							<TD WIDTH=1%></TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>a</I>&nbsp;=&nbsp;1&nbsp;+&nbsp;<IMG SRC="lehmerImg/sqrt.gif"
+									ALT="sqrt">3,&nbsp;&nbsp;
+								<I>b</I>&nbsp;=&nbsp;1&nbsp;-&nbsp;<IMG SRC="lehmerImg/sqrt.gif" ALT="sqrt">3,
+							</TD>
+						</TR>
+						<TR>
+							<TD WIDTH=1%>so&nbsp;that</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>a&nbsp;+&nbsp;b</I>&nbsp;=&nbsp;2,&nbsp;&nbsp;&nbsp;<I>ab</I>&nbsp;=&nbsp;-2,&nbsp;&nbsp;
+								<I>a&nbsp;-&nbsp;b</I>&nbsp;=&nbsp;2&nbsp;<IMG SRC="lehmerImg/sqrt.gif" ALT="sqrt">3.<P>
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					We define two sequences of integers <I>U<SUB>
+							<FONT SIZE=-2>r</FONT>
+						</SUB></I> and
+					<I>V<SUB>
+							<FONT SIZE=-2>r</FONT>
+						</SUB></I> by<P>
+
+						<CENTER>
+							<I>U<SUB>
+									<FONT SIZE=-2>r</FONT>
+								</SUB></I> =
+							(<I>a<sup>
+									<FONT SIZE=-2>r</FONT>
+								</sup> -
+								b<sup>
+									<FONT SIZE=-2>r</FONT>
+								</sup></I>)&nbsp;/&nbsp;(<I>a&nbsp;-&nbsp;b</I>),<BR>
+							<I>V<SUB>
+									<FONT SIZE=-2>r</FONT>
+								</SUB> =
+								a<sup>
+									<FONT SIZE=-2>r</FONT>
+								</sup>&nbsp;+&nbsp;b<sup>
+									<FONT SIZE=-2>r</FONT>
+								</sup></I>.<P>
+						</CENTER>
+
+						The following identities can be easily verified by using the above
+						definitions.
+					<P>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(1)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								2<I>U<SUB>
+										<FONT SIZE=-2>r&nbsp;+&nbsp;s</FONT>
+									</SUB>&nbsp;=
+									U<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;V<SUB>
+										<FONT SIZE=-2>s</FONT>
+									</SUB>&nbsp;+
+									V<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;U<SUB>
+										<FONT SIZE=-2>s</FONT>
+									</SUB></I>.
+							</TD>
+						</TR>
+
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(2)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								(-2)<sup>
+									<FONT SIZE=-2><I>s</I>&nbsp;+&nbsp;1</FONT>
+								</sup>&nbsp;<I>U<SUB>
+										<FONT SIZE=-2>r&nbsp;-&nbsp;s</FONT>
+									</SUB>&nbsp;=
+									U<SUB>
+										<FONT SIZE=-2>s</FONT>
+									</SUB>&nbsp;V<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;-
+									U<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;V<SUB>
+										<FONT SIZE=-2>s</FONT>
+									</SUB></I>.
+							</TD>
+						</TR>
+
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(3)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								2<I>V<SUB>
+										<FONT SIZE=-2>r&nbsp;+&nbsp;s</FONT>
+									</SUB>&nbsp;=
+									V<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;V<SUB>
+										<FONT SIZE=-2>s</FONT>
+									</SUB>&nbsp;+
+								</I>12<I>U<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;U<SUB>
+										<FONT SIZE=-2>s</FONT>
+									</SUB></I>.
+							</TD>
+						</TR>
+
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(4)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>U</I><SUB>
+									<FONT SIZE=-2>2<I>r</I></FONT>
+								</SUB>&nbsp;=
+								<I>U<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB>&nbsp;V<SUB>
+										<FONT SIZE=-2>r</FONT>
+									</SUB></I>.
+							</TD>
+						</TR>
+
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(5)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>V</I><SUB>
+									<FONT SIZE=-2>2<I>r</I></FONT>
+								</SUB>&nbsp;=
+								<I>V</I><SUB>
+									<FONT SIZE=-2><I>r</I></FONT>
+								</SUB><sup>
+									<FONT SIZE=-2>2</FONT>
+								</sup>&nbsp;+
+								(-2)<sup>
+									<FONT SIZE=-2><I>r</I>&nbsp;+&nbsp;1</FONT>
+								</sup>.
+							</TD>
+						</TR>
+
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(6)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>V</I><SUB>
+									<FONT SIZE=-2><I>r</I></FONT>
+								</SUB><sup>
+									<FONT SIZE=-2>2</FONT>
+								</sup>&nbsp;-
+								12<I>U</I><SUB>
+									<FONT SIZE=-2><I>r</I></FONT>
+								</SUB><sup>
+									<FONT SIZE=-2>2</FONT>
+								</sup>&nbsp;=
+								(-2)<sup>
+									<FONT SIZE=-2><I>r</I>&nbsp;+&nbsp;2</FONT>
+								</sup>.
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					&nbsp;&nbsp;&nbsp; D<FONT SIZE=-1>EFINITION</FONT>.
+					&nbsp;&nbsp; <I>The rank of apparition of the odd prime p is the least
+						positive subscript <IMG SRC="lehmerImg/omega.gif" ALT="w">
+					</I>(<I>if it exists</I>) <I>for which
+						U<SUB><IMG SRC="lehmerImg/omega.gif" ALT="w"></SUB> is divisible by p.</I>
+					<P>
+
+						&nbsp;&nbsp; In what follows <I>p</I> always represents a prime greater
+						than 3. Before proving Theorem A it is convenient to establish three
+						lemmas.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; L<FONT SIZE=-1>EMMA</FONT> 1.
+						&nbsp;&nbsp; <I>If <IMG SRC="lehmerImg/omega.gif" ALT="w"> is the rank of
+							apparition of p, then p divides U<SUB>
+								<FONT SIZE=-2>r</FONT>
+							</SUB>
+							if, and only if, <IMG SRC="lehmerImg/omega.gif" ALT="w"> divides r.</I>
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <I>Proof</I>.
+						&nbsp;&nbsp; Let <I>S</I> be the set of all subscripts <I>r</I> for
+						which <I>p</I> divides <I>U<SUB>
+								<FONT SIZE=-2>r</FONT>
+							</SUB></I>.
+						From (1) and (2) it follows that if <I>r</I> and <I>s</I> are members
+						of <I>S</I>, so also are <I>r</I>&nbsp;&plusmn;&nbsp;<I>s</I>.
+						Hence <I>S</I> coincides with the set of all integer multiples of its
+						least positive member <IMG SRC="lehmerImg/omega.gif" ALT="w">. This proves Lemma 1.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; L<FONT SIZE=-1>EMMA</FONT> 2.
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(7)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>U<SUB>
+										<FONT SIZE=-2>p</FONT>
+									</SUB></I>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+								(3/<I>p</I>)&nbsp;&nbsp;&nbsp;&nbsp;(mod&nbsp;<I>p</I>).
+							</TD>
+						</TR>
+
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(8)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>V<SUB>
+										<FONT SIZE=-2>p</FONT>
+									</SUB></I>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+								2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mod&nbsp;<I>p</I>).
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					&nbsp;&nbsp;&nbsp; <I>Proof</I>.
+					&nbsp;&nbsp; To prove (7) we expand <I>U<SUB>
+							<FONT SIZE=-2>p</FONT>
+						</SUB></I>
+					as follows:<P>
+
+						<CENTER><IMG SRC="lehmerImg/equate01.gif" ALT="Equation 1"></CENTER>
+					<P>
+
+						All the binomial coefficients are divisible by <I>p</I>, except the last
+						which is equal to unity. Hence
+					<P>
+
+						<CENTER>
+							<I>U<SUB>
+									<FONT SIZE=-2>p</FONT>
+								</SUB></I>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+							3<sup>
+								<FONT SIZE=-2>&frac12;&nbsp;(<I>p</I>&nbsp;-&nbsp;1)</FONT>
+							</sup>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+							(3/<I>p</I>)&nbsp;&nbsp;&nbsp;&nbsp;(mod&nbsp;<I>p</I>).<P>
+						</CENTER>
+
+						To prove (8) we expand <I>V<SUB>
+								<FONT SIZE=-2>p</FONT>
+							</SUB></I>
+						in like manner, thus
+					<P>
+
+						<CENTER><IMG SRC="lehmerImg/equate02.gif" ALT="Equation 2"></CENTER>
+					<P>
+
+						In this case all the binomial coefficients except the first are divisible
+						by <I>p</I>. Hence (8) follows at once.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; L<FONT SIZE=-1>EMMA</FONT> 3.
+						&nbsp;&nbsp; <I>If <IMG SRC="lehmerImg/omega.gif" ALT="w"> is the rank of apparition of p, then
+							<IMG SRC="lehmerImg/omega.gif" ALT="w">&nbsp;<U>&lt;</U>&nbsp;p&nbsp;+&nbsp;</I>1.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <I>Proof</I>.
+						&nbsp;&nbsp; It is obviously sufficient to prove that <I>p</I> divides
+						<I>U</I><SUB>
+							<FONT SIZE=-2><I>p</I>&nbsp;+&nbsp;1</FONT>
+						</SUB>
+						<I>U</I><SUB>
+							<FONT SIZE=-2><I>p</I>&nbsp;-&nbsp;1</FONT>
+						</SUB>.
+						From (1) and (2) with <I>r&nbsp;=&nbsp;p</I> and <I>s</I>&nbsp;=&nbsp;1 we have, since
+						<I>U</I><SUB>
+							<FONT SIZE=-2>1</FONT>
+						</SUB>&nbsp;=&nbsp;1
+						and <I>V</I><SUB>
+							<FONT SIZE=-2>1</FONT>
+						</SUB>&nbsp;=&nbsp;2,
+					<P>
+
+						<CENTER>
+							2<I>U</I><SUB>
+								<FONT SIZE=-2><I>p</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							2<I>U<SUB>
+									<FONT SIZE=-2>p</FONT>
+								</SUB>&nbsp;+
+								V<SUB>
+									<FONT SIZE=-2>p</FONT>
+								</SUB></I>,<P>
+								-4<I>U</I><SUB>
+									<FONT SIZE=-2><I>p</I>&nbsp;-&nbsp;1</FONT>
+								</SUB>&nbsp;=
+								2<I>U<SUB>
+										<FONT SIZE=-2>p</FONT>
+									</SUB>&nbsp;-
+									V<SUB>
+										<FONT SIZE=-2>p</FONT>
+									</SUB></I>.
+							<P>
+						</CENTER>
+
+						Using Lemma 2, we have
+					<P>
+
+						<CENTER>
+							-8<I>U</I><SUB>
+								<FONT SIZE=-2><I>p</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>
+							<I>U</I><SUB>
+								<FONT SIZE=-2><I>p</I>&nbsp;-&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							4<I>U</I><SUB>
+								<FONT SIZE=-2><I>p</I></FONT>
+							</SUB><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>&nbsp;-
+							<I>V</I><SUB>
+								<FONT SIZE=-2><I>p</I></FONT>
+							</SUB><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>
+							<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+							4(&plusmn;1)<sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>&nbsp;-
+							4<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">0
+							&nbsp;&nbsp;&nbsp;&nbsp;(mod&nbsp;<I>p</I>).<P>
+						</CENTER>
+
+						Hence Lemma 3 is proved.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <I>Proof of Theorem A</I>.
+						&nbsp;&nbsp; We are now in a position to prove Theorem A without
+						difficultly. The proof is in two parts.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <I>Proof of necessity</I>.
+						&nbsp;&nbsp; Let
+						<I>N</I>&nbsp;=&nbsp;2<sup>
+							<FONT SIZE=-2><I>n</I></FONT>
+						</sup>-1 be a prime. We
+						have to show that <I>S</I><SUB>
+							<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+						</SUB>
+						is divisible by <I>N</I>. Instead of the series <I>S<SUB>
+								<FONT SIZE=-2>k</FONT>
+							</SUB></I>
+						we may consider the series
+					<P>
+
+						<CENTER>
+							8,&nbsp;&nbsp;56,&nbsp;&nbsp;3104,&nbsp;&nbsp;...,&nbsp;&nbsp;<IMG SRC="lehmerImg/sigma.gif"
+								ALT="Sigma"><SUB><I>k</I></SUB>,&nbsp;&nbsp;...
+						</CENTER>
+
+						in which <IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+							<FONT SIZE=-2><I>k</I></FONT>
+						</SUB>&nbsp;=
+						2<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-4><I>k</I>&nbsp;-&nbsp;1</FONT>
+							</sup>
+						</sup>
+						<I>S<SUB>
+								<FONT SIZE=-2>k</FONT>
+							</SUB></I>. Then it
+						is sufficient to show that
+						<IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+							<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+						</SUB>
+						is divisible by <I>N</I>. Since
+					<P>
+
+						<CENTER>
+							<I>S</I><SUB>
+								<FONT SIZE=-2><I>k</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							<I>S</I><SUB>
+								<FONT SIZE=-2><I>k</I></FONT>
+							</SUB><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>&nbsp;-&nbsp;2,
+						</CENTER>
+
+						we have
+						<CENTER>
+							<IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+								<FONT SIZE=-2><I>k</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							<IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+								<FONT SIZE=-2><I>k</I></FONT>
+							</SUB><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>&nbsp;-
+							2<sup>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</sup>
+								<FONT SIZE=-2>&nbsp;+&nbsp;1</FONT>
+							</sup>.<P>
+						</CENTER>
+
+						Now if we put <I>r</I>&nbsp;=&nbsp;2<sup>
+							<FONT SIZE=-2><I>k</I></FONT>
+						</sup> in (5) we get
+					<P>
+
+						<CENTER>
+							<I>V</I><SUB>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>k</I>&nbsp;+&nbsp;1</FONT>
+								</sup>
+							</SUB>&nbsp;=
+							(<I>V</I><SUB>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</sup>
+							</SUB>)<sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>&nbsp;-
+							2<sup>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</sup>
+								<FONT SIZE=-2>&nbsp;+&nbsp;1</FONT>
+							</sup>.<P>
+						</CENTER>
+
+						Moreover <I>V</I><SUB>
+							<FONT SIZE=-2>2</FONT>
+						</SUB>&nbsp;=&nbsp;8&nbsp;=
+						<IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+							<FONT SIZE=-2>1</FONT>
+						</SUB>. Hence, in general,
+					<P>
+
+						<CENTER>
+							<IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+								<FONT SIZE=-2><I>k</I></FONT>
+							</SUB>&nbsp;=
+							<I>V</I><SUB>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</sup>
+							</SUB>.<P>
+						</CENTER>
+
+						We have to show then that <I>V</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</sup>
+						</SUB>&nbsp;=
+						<I>V</I><SUB>
+							<FONT SIZE=-2>&frac12;&nbsp;(<I>N</I>&nbsp;+&nbsp;1)</FONT>
+						</SUB> is divisible by <I>N</I>.
+						But from (5), with <I>r</I>&nbsp;=&nbsp;&frac12;&nbsp;(<I>N</I>&nbsp;+&nbsp;1), we have
+					<P>
+
+						<CENTER>
+							<I>V</I><SUB>
+								<FONT SIZE=-2><I>N</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							<I>V</I><SUB>
+								<FONT SIZE=-2>&frac12;</FONT>
+							</SUB><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup><SUB>
+								<FONT SIZE=-2>(<I>N</I>&nbsp;+&nbsp;1)</FONT>
+							</SUB>&nbsp;-
+							4&nbsp;&middot;&nbsp;2<sup>
+								<FONT SIZE=-2>&frac12;&nbsp;(<I>N</I>&nbsp;-&nbsp;1)</FONT>
+							</sup>.<P>
+						</CENTER>
+
+						Hence it is sufficient to show that
+					<P>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(9)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>V</I><SUB>
+									<FONT SIZE=-2><I>N</I>&nbsp;+&nbsp;1</FONT>
+								</SUB>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+								-4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(mod&nbsp;<I>N</I>),
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					since 2 is a quadratic residue of <I>N</I>&nbsp;=&nbsp;8<I>x</I>&nbsp;-&nbsp;1. But (9)
+					follows from Lemma 2 and (3). In fact<P>
+
+						<CENTER>
+							2<I>V</I><SUB>
+								<FONT SIZE=-2><I>N</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							<I>V<SUB>
+									<FONT SIZE=-2>N</FONT>
+								</SUB>&nbsp;V</I><SUB>
+								<FONT SIZE=-2>1</FONT>
+							</SUB>&nbsp;+
+							12<I>U<SUB>
+									<FONT SIZE=-2>N</FONT>
+								</SUB>&nbsp;U</I><SUB>
+								<FONT SIZE=-2>1</FONT>
+							</SUB>&nbsp;=
+							2<I>V</I><SUB>
+								<FONT SIZE=-2><I>N</I></FONT>
+							</SUB>&nbsp;+
+							12<I>U</I><SUB>
+								<FONT SIZE=-2><I>N</I></FONT>
+							</SUB>.<P>
+						</CENTER>
+
+						To apply Lemma 2 with <I>p&nbsp;=&nbsp;N</I>, we note that
+						<I>N</I>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">&nbsp;1&nbsp;(mod 3)
+						and that
+					<P>
+
+						<CENTER>
+							(3/<I>N</I>)&nbsp;=&nbsp;-(<I>N</I>/3)&nbsp;=&nbsp;-(1/3)&nbsp;=&nbsp;-1.<P>
+						</CENTER>
+
+						Hence we have
+					<P>
+
+						<CENTER>
+							<I>V</I><SUB>
+								<FONT SIZE=-2><I>N</I>&nbsp;+&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							<I>V<SUB>
+									<FONT SIZE=-2>N</FONT>
+								</SUB></I>&nbsp;+
+							6<I>U<SUB>
+									<FONT SIZE=-2>N</FONT>
+								</SUB></I>&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+							2&nbsp;-&nbsp;6&nbsp;<IMG SRC="lehmerImg/congrue.gif" ALT="congruent to">
+							-4&nbsp;&nbsp;&nbsp;&nbsp;(mod&nbsp;<I>N</I>).<P>
+						</CENTER>
+
+						Hence (9) is established. This completes the proof of necessity.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <I>Proof of Sufficiency</I>.
+						&nbsp;&nbsp; Let <I>S</I><SUB>
+							<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+						</SUB> be divisible by
+						<I>N</I>&nbsp;=&nbsp;2<sup>
+							<FONT SIZE=-2>n</FONT>
+						</sup>&nbsp;-&nbsp;1. Then <I>N</I> divides
+					<P>
+
+						<CENTER>
+							<IMG SRC="lehmerImg/sigma.gif" ALT="Sigma"><SUB>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							2<sup>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;2</FONT>
+								</sup>
+							</sup>
+							<I>S</I><SUB>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</SUB>&nbsp;=
+							<I>V</I><SUB>
+								<FONT SIZE=-2>2</FONT><sup>
+									<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+								</sup>
+							</SUB>.<P>
+						</CENTER>
+
+						Now let <I>p</I> be any prime factor of <I>N</I> and let <IMG SRC="lehmerImg/omega.gif" ALT="w">
+						be the rank of apparition of <I>p</I>. Then <I>p</I> divides
+						<I>U</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I></FONT>
+							</sup>
+						</SUB> since <I>N</I> divides
+						<I>U</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</sup>
+						</SUB>
+						<I>V</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</sup>
+						</SUB>, which is
+						<I>U</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I></FONT>
+							</sup>
+						</SUB>
+						by (4). By Lemma 1, <IMG SRC="lehmerImg/omega.gif" ALT="w"> divides
+						2<sup>
+							<FONT SIZE=-2><I>n</I></FONT>
+						</sup>. On the other hand,
+						<IMG SRC="lehmerImg/omega.gif" ALT="w"> does not divide
+						2<sup>
+							<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+						</sup>, for
+						otherwise, by Lemma 1, <I>p</I> would divide
+						<I>U</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</sup>
+						</SUB> as well as
+						<I>V</I><SUB>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I>&nbsp;-&nbsp;1</FONT>
+							</sup>
+						</SUB>. This is impossible by
+						(6) since <I>p</I> is odd. Hence <IMG SRC="lehmerImg/omega.gif" ALT="w">&nbsp;=
+						2<sup>
+							<FONT SIZE=-2><I>n</I></FONT>
+						</sup>.
+						By Lemma 3,
+					<P>
+
+						<CENTER>
+							<I>p</I>&nbsp;<U>&gt;</U>&nbsp;<IMG SRC="lehmerImg/omega.gif" ALT="w">&nbsp;-&nbsp;1&nbsp;=
+							2<sup>
+								<FONT SIZE=-2><I>n</I></FONT>
+							</sup>&nbsp;-&nbsp;1&nbsp;=&nbsp;<I>N</I>.<P>
+						</CENTER>
+
+						Hence <I>p&nbsp;=&nbsp;N</I>, so that <I>N</I> is a prime.
+					<P>
+						&nbsp;&nbsp; In his paper Dr. Western gives a list of Mersenne numbers
+						2<sup>
+							<FONT SIZE=-2><I>n</I></FONT>
+						</sup>&nbsp;-&nbsp;1 examined by
+						Lucas's tests. Since this list was made, Mr. R. E. Powers
+						<A HREF="#foot_3">&sup3;</A> has applied Theorem A to
+						2<sup>
+							<FONT SIZE=-2>241</FONT>
+						</sup>&nbsp;-&nbsp;1 and finds this
+						number to be composite. This leaves the characters of
+						2<sup>
+							<FONT SIZE=-2><I>n</I></FONT>
+						</sup>&nbsp;-&nbsp;1
+						(for <I>n</I>&nbsp;<U>&lt;</U>&nbsp;257) undetermined for
+					<P>
+
+						<CENTER>
+							<I>n</I>&nbsp;=&nbsp;157,&nbsp;167,&nbsp;193,&nbsp;199,&nbsp;227,&nbsp;and&nbsp;229.
+						</CENTER>
+					<P>
+					<P>
+
+						Lehigh University,<BR>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Bethlehem,&nbsp;Pa.,&nbsp;U.S.A.
+					<P>
+
+						<HR NOSHADE>
+					<P>
+
+						<A NAME="foot_1">&sup1;</A> Received 5 November, 1934; read 15 November, 1934.<BR>
+
+						<A NAME="foot_2">&sup2;</A> "On Lucas's and Pepin's tests for the primeness of Mersenne
+						numbers",
+						<I>Journal London Math. Soc</I>., 7 (1932), 130-137.
+						This paper contains a list of references to papers on the subject.<BR>
+
+						<A NAME="foot_3">&sup3;</A>
+						<A HREF="../biblio.html#powers3"><I>Bull. Amer. Math. So</I>., 40 (1934), 883</A>.
+
+				</TD>
+			</TR>
+		</TABLE>
+	</CENTER>
+</BODY>
+
+</HTML>

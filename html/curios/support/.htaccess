@@ -1,0 +1,5 @@
+AuthName "Curios Database Administration Directory"
+AuthType Basic
+AuthUserFile /var/www/html/curios/bin/.htpasswd
+require valid-user
+

@@ -1,0 +1,256 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Mersenne Numbers</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#C000C0" ALINK="#FF0000" TEXT="#000000">
+	<BASEFONT SIZE=3>
+	<BR><BR>
+	<CENTER>
+		<TABLE WIDTH=75%>
+			<TR>
+				<TD>
+					<CENTER>
+						<FONT SIZE=+1>Mersenne Numbers<P>
+								By Hans Riesel
+							<P>
+						</FONT>
+					</CENTER>
+
+					&nbsp;&nbsp;&nbsp; During 1957 the author of this note had the
+					opportunity of running the Swedish electronic digital computer
+					BESK in order to examine Mersenne numbers. The intention of the
+					author's investigation on the BESK was to check some known results,
+					and to examine some Mersenne numbers not previously examined.<P>
+
+						&nbsp;&nbsp;&nbsp; Mersenne numbers are numbers
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR> =
+						<NOBR>2<sup><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></sup></NOBR>&nbsp;-&nbsp;1,
+						where <I>p</I> is a prime. See [<a href="#foot1">1</a>], which contains a more complete
+						list of references. The Mersenne numbers have attained interest in
+						connection with digital computers because there is a simple test to
+						decide whether they are prime or composite. This is Lucas's test
+						[<a href="#foot1">1</a>]. Furthermore the number
+						<NOBR>2<sup>
+								<FONT SIZE=-2><I>p</I>-1</FONT>
+							</sup></NOBR>
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>
+						is a perfect number, if
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>
+						is a prime, and all known perfect numbers are of this form.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; In the beginning of 1957 a program for testing the
+						primeness of the Mersenne numbers on the BESK was worked out by the
+						author. This program, using Lucas's test, works for all
+						<I>p</I>&nbsp;&lt;&nbsp;10000. As a test, this program was run for
+						the following values of <I>p</I>: 2, 3, 5, 7, 13, 17, 19, 31, 61, 89,
+						107, 127, 521, 607, 1279, 2203, and 2281. The result was that the numbers
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR> are prime
+						for these values of <I>p</I>, thus confirming known results.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; After these tests, values of
+						<I>p</I>&nbsp;&gt;&nbsp;2300 were to be tested. These values had
+						not been tested before. But since the testing of
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>
+						for one value of <I>p</I> of this order takes several hours on the
+						BESK, a special program for calculating the smallest factor of
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>,
+						if this factor is
+						&lt;&nbsp;10&nbsp;&middot;&nbsp;<NOBR>2<sup>
+								<FONT SIZE=-2>20</FONT>
+							</sup></NOBR>
+						= 10485760, was worked out. This special program is based on
+						the following well-known theorem:
+					<P>
+
+						&nbsp;&nbsp;&nbsp; All prime factors <I>q</I> of
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>
+						(<I>p</I>&nbsp;&gt;&nbsp;2) are of the form <I>q</I>&nbsp;=&nbsp;2
+						<I>kp</I>&nbsp;+&nbsp;1, and of one of the two forms
+						<I>q</I>&nbsp;=&nbsp;8<I>l</I>&nbsp;&plusmn;&nbsp;1.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; The proof of the theorem is quite simple. If
+						<I>q</I> is a factor of
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB>,</NOBR>
+						<NOBR>2<sup><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></sup></NOBR>&nbsp;<IMG SRC="rieselImg/congrue.gif"
+							ALT="congruent to">&nbsp;1&nbsp;(mod&nbsp;<I>q</I>).
+						Since <I>p</I> is a prime, since all numbers
+						<I>n</I> for which <NOBR>2<sup><I>
+									<FONT SIZE=-2>n</FONT>
+								</I></sup></NOBR>&nbsp;=&nbsp;1&nbsp;(mod&nbsp;<I>q</I>)
+						form a module, and since
+						<NOBR>2<sup><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></sup></NOBR>&nbsp;<IMG SRC="rieselImg/congrue.gif"
+							ALT="congruent to">&nbsp;1&nbsp;(mod&nbsp;<I>q</I>),
+						this module consists of all integral multiples of
+						the prime <I>p</I>. Now
+						<NOBR>2<sup>
+								<FONT SIZE=-2><I>q</I>-1</FONT>
+							</sup></NOBR>&nbsp;<IMG SRC="rieselImg/congrue.gif"
+							ALT="congruent to">&nbsp;1&nbsp;(mod&nbsp;<I>q</I>)
+						if <I>q</I> is a prime, and hence <I>q</I>&nbsp;-&nbsp;1 is a multiple of
+						<I>p</I>, and in fact an even multiple (since <I>q</I> must be an
+						odd number). This is the first part of the theorem:
+						<I>q</I>&nbsp;-&nbsp;1&nbsp;=&nbsp;2<I>kp</I> (<I>k</I> = 1, 2, 3, ...).
+						The second part follows immediately from the theory of quadratic
+						residues. Since
+						<NOBR><I>x</I><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup></NOBR>&nbsp;<IMG SRC="rieselImg/congrue.gif"
+							ALT="congruent to">&nbsp;2&nbsp;(mod&nbsp;<I>q</I>)
+						has the solution
+						<I>x</I>&nbsp;<IMG SRC="rieselImg/congrue.gif" ALT="congruent to">&nbsp;<NOBR>2<sup>
+								<FONT SIZE=-2>(<I>p</I>+1)/2</FONT>
+							</sup></NOBR>&nbsp;(mod&nbsp;<I>q</I>),
+						we see that 2 is quadratic residue mod&nbsp;<I>q</I>, hence
+						<I>q</I>&nbsp;<IMG SRC="rieselImg/congrue.gif"
+							ALT="congruent to">&nbsp;&plusmn;&nbsp;1&nbsp;(mod&nbsp;8).
+					<P>
+
+						&nbsp;&nbsp;&nbsp; By the above mentioned special program for small
+						factors of <NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>
+						the values of
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>&nbsp;(mod&nbsp;<I>q</I>)
+						for all primes <I>q</I> of the theorem were now calculated. When this
+						residue was <IMG SRC="rieselImg/congrue.gif" ALT="congruent to">&nbsp;0, the
+						factor <I>q</I> was printed out. When no factor
+						<I>q</I>&nbsp;&lt;&nbsp;10&nbsp;&middot;&nbsp;<NOBR>2<sup>
+								<FONT SIZE=-2>20</FONT>
+							</sup></NOBR>
+						was found, the BESK turned to the next value of <I>p</I>.
+						This program was run for all values of <I>p</I>&nbsp;&lt;&nbsp;10000.
+						The running time on the BESK for one value of <I>p</I> lay between
+						0 and 2 minutes, depending on the size of the smallest factor. These
+						smallest factors are given below in a table. The known Mersenne
+						primes are also included in the table. Finally, Cole's factor of
+						<NOBR><I>M</I><SUB>
+								<FONT SIZE=-2>67</FONT>
+							</SUB></NOBR>, and Robinson's
+						factors of <NOBR><I>M</I><SUB>
+								<FONT SIZE=-2>109</FONT>
+							</SUB></NOBR>
+						and <NOBR><I>M</I><SUB>
+								<FONT SIZE=-2>157</FONT>
+							</SUB></NOBR>, though
+						greater than
+						10&nbsp;&middot;&nbsp;<NOBR>2<sup>
+								<FONT SIZE=-2>20</FONT>
+							</sup></NOBR>,
+						have been printed in the table. On checking the values against other
+						sources, a misprint in Archibald's note [<a href="#foot2">2</a>] was detected. This misprint,
+						which concerns the value of the smallest factor of
+						<NOBR><I>M</I><SUB>
+								<FONT SIZE=-2>163</FONT>
+							</SUB></NOBR>, seems to have
+						come from Kra&iuml;tchik [<a href="#foot3">3</a>], p.&nbsp;24 and p.&nbsp;92. As a further
+						check, all factors in our table have been looked up in Lehmer's Prime
+						Tables, except a few, which are too large, and a separate calculation
+						was made, to check that they are of the form 2<I>kp</I>&nbsp;+&nbsp;1.
+						Since, however, there are disturbances in digital computers, it is not
+						absolutely sure that all these numbers really are factors of the
+						corresponding Mersenne numbers
+						<NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB>.</NOBR> Those
+						primes <I>p</I>, for which no factor
+						&lt;&nbsp;10&nbsp;&middot;&nbsp;<NOBR>2<sup>
+								<FONT SIZE=-2>20</FONT>
+							</sup></NOBR>
+						of <NOBR><I>M</I><SUB><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></SUB></NOBR>
+						was found, are, except the known Mersenne primes, omitted in the table.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; When this table had been calculated, the BESK
+						examined the omitted values of <I>p</I> with Lucas's test. This was
+						done for all values of <I>p</I> between 2300 and 3300. Since the
+						available running time for testing Mersenne numbers on the BESK was
+						limited, every value of <I>p</I> was tested only once. The final
+						remainder, see [<a href="#foot1">1</a>], was printed out in hexadecimal form. On
+						September&nbsp;8th,
+						1957, a run indicated that the number
+						<NOBR><I>M</I><SUB>
+								<FONT SIZE=-2>3217</FONT>
+							</SUB></NOBR>
+						is prime. This result was repeated on September&nbsp;12th. All other
+						numbers tested turned out to be composite; however, this result could
+						be false, since the running time is very long. The testing of
+						<NOBR><I>M</I><SUB>
+								<FONT SIZE=-2>3217</FONT>
+							</SUB></NOBR> took about
+						<NOBR>5<sup>
+								<FONT SIZE=-2>h</FONT>
+							</sup>30<sup>
+								<FONT SIZE=-2>m</FONT>
+							</sup></NOBR>
+						on the BESK, for one run.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; A table of the smallest factor of
+						<NOBR>2<sup><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></sup></NOBR>&nbsp;-&nbsp;1,
+						<I>p</I> prime follows. Primes
+						<NOBR>2<sup><I>
+									<FONT SIZE=-2>p</FONT>
+								</I></sup></NOBR>&nbsp;-&nbsp;1,
+						<I>p</I> are indicated by a dash.
+					<P>
+
+						Ormangsgatan 67C<BR>
+						Stockholm-Vallingby, Sweden
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <a name="foot1">1</a>. R. M. R<FONT SIZE=-1>OBINSON</FONT>,
+						<a href="../biblio.html#robinson">"Mersenne and Fermat numbers," Amer. Math. Soc., <I>Proc.</I>,
+							v.&nbsp;5, p.&nbsp;842-846</a>.
+						<BR>
+						&nbsp;&nbsp;&nbsp; <a name="foot2">2</a>. R. C. A<FONT SIZE=-1>RCHIBALD</FONT>,
+						<a href="../biblio.html#archibald">"Mersenne's numbers," <I>Scripta Mathematica</I>,
+							v.&nbsp;3, 1935, p.&nbsp;112-119</a>.
+						<BR>
+						&nbsp;&nbsp;&nbsp; <a name="foot3">3</a>. M. K<FONT SIZE=-1>RA&Iuml;TCHIK</FONT>, <I>Recherches
+							sur la Th&eacute;orie des Nombres</I>, Gauthier-Villars, Paris, 1952.
+
+						<HR NOSHADE WIDTH=100 ALIGN=LEFT>
+						&nbsp;&nbsp;&nbsp; Received 8 November 1957.
+					<P>
+						Table omitted
+
+			</TR>
+			</TD>
+		</TABLE>
+	</CENTER>
+</BODY>
+
+</HTML>

@@ -1,0 +1,88 @@
+Date: Mon, 01 Sep 1997 18:04:57 -0400
+To: (Recipient list suppressed)
+From: George Woltman
+Subject: Mersenne Newletter #12 - A prime has been found!
+
+
+The Mersenne Newsletter, issue #12		September 1, 1997
+
+36th Known Mersenne Prime Discovered!!!
+---------------------------------------
+
+Congratulations to Gordon Spence.  On August 24th he returned from
+a short trip to find his computer beeping like crazy.  He turned on
+the monitor to find that his computer had proved 2^2976221 - 1 is prime!
+This prime number is a whopping 895,932 digits long.  The computation
+took 15 days on his 100-MHz Pentium computer.  David Slowinski confirmed
+the find on August 29th.
+
+Gordon was quite lucky.  In the last "Top Producers" list, compiled
+on August 6th, Gordon ranked 127th with only 61 exponents tested.
+
+Congratulations and credit also go to every GIMPS searcher.  It would
+have taken Gordon nearly a millenium to find this prime if he had been
+working alone. 
+
+If there are no Mersenne primes between M1398269 and M2976221, then the
+gap between the 35th and 36th Mersenne primes will be the 4th largest
+in percentage terms.  However, there are 8,554 exponents left to test
+below M2976221.
+
+You can read the official press release at
+http://www.mersenne.org/2976221.htm. 
+
+
+
+
+IMPORTANT REMINDER: New Range Reservation Policy
+------------------------------------------------
+
+Ranges will be returned to the available pool if no results
+are reported during a 4 month period.
+
+Hopefully, this will not be a burden to anyone - especially since I
+encourage you to send in results once every month or two.  As always,
+I can make exceptions if you let me know ahead of time.
+
+This policy will make it easier for me to detect people who have
+dropped out of the search and will ensure that active testers will
+always have the smallest possible ranges to choose from.
+
+
+More Milestones!
+----------------
+
+GIMPS has finished testing all exponents below M1257787, confirming
+that M1257787 is the 34th Mersenne Prime.  GIMPS has now double-checked
+all exponents below M756839 and M859433 - definitively proving
+them to be the 32nd and 33rd Mersenne primes.
+
+
+Status for exponents below 2,655,000
+------------------------------------
+
+Since the last newsletter on May 26th, we've proved another
+6,460 Mersenne numbers composite.  There are now only 4,327 untested
+exponents remaining below 2,655,000.  The chance of finding
+a new Mersenne prime in this range has fallen from 50% to 22%.
+
+The time required to finish this range has dropped from
+238 Pentium-90 CPU-years to 105.
+
+
+Status for exponents from 2,655,000 to 5,260,000
+------------------------------------------------
+
+Since May 26th, we've proved 9,363 Mersenne numbers composite.
+There are now 65,186 exponents left to test.  We've reduced the
+work effort by 578 CPU years, leaving an estimated 5,655 P-90 CPU
+years to complete.
+
+
+
+Best wishes and good luck.  Maybe you will be the one to find
+the 37th Mersenne prime!
+
+George Woltman
+
+

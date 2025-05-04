@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Searches at the Prime Pages</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="This page contains several diferent ways to search the pages and data at the PrimePages.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item active">Search</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->
+        Different Searches <span class="d-none d-md-inline">at the Prime Pages</span><!-- #EndEditable --></h1>
+      <!-- #BeginEditable "content" -->
+      <!-- Card -->
+
+      <script>
+        function Gsitesearch(curobj) {
+          curobj.q.value = "site:t5k.org " + curobj.qfront.value
+        }
+      </script>
+
+      <div class="card-deck mt-4">
+        <div class="card mb-4 green lighten-5 text-center">
+          <!-- Card image -->
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title my-4">Google Search of the PrimePages</h4>
+            <!-- Text -->
+            <form action="https://www.google.com/search" method="get" onSubmit="Gsitesearch(this)">
+              <input name="q" type="hidden" />
+              <input name="qfront" class="my-4" type="text" style="width:100%" />
+              <input class="btn btn-indigo mt-4 font-weight-bold" type="submit" value="Search" />
+            </form>
+          </div>
+        </div>
+        <div class="card mb-4 blue lighten-5" style="min-width: 18rem;">
+          <!-- Card image -->
+          <!-- img class="card-img-top" src="../primes/includes/gifs/The5000.gif" alt="Card image cap" -->
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title text-center">Top 5000 Primes Database Searches</h4>
+            <!-- Text -->
+            <p class="card-text">
+              <span class="card-text float-right">
+                <img class="d-none d-lg-block d-print-block m-2" height="57" alt="The Largest Known Primes Icon"
+                  src="../primes/includes/gifs/The5000.gif" width="232" border="0" name="myImage">
+              </span>
+            <ul>
+              <li><b><a href="/primes/search.php">advanced search <span class="d-none d-xl-inline">multiple
+                      fields</span></a></b> <span class="font-small">Examples:</span>
+                <ul class="font-small">
+                  <li><a href="/primes/search.php?Number=100">the one hundred
+                      largest known primes</a></li>
+                  <li><a href="/primes/search.php?Comment=twin OR triplet&Number=100">twin primes</a></li>
+                  <li><a href="/primes/search.php?Comment=orial&Number=100">
+                      primorial, factorial and multifactorial primes</a></li>
+                  <li><a href="/primes/search.php?Comment=Sophie&Number=100">
+                      Sophie-Germain primes</a></li>
+                </ul>
+              </li>
+              <li><a href="/primes/search_proth.php">
+                  <b>primes of the form</b> <i>k*b<sup>n</sup></i>+/-1</a></li>
+              <li><a href="/bios/search.php">
+                  <b>Search provers, proof-codes, ...</b></a></li>
+            </ul>
+
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card-deck mt-2">
+        <div class="card mb-4 orange lighten-3 text-center">
+          <!-- Card image -->
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title"><a href="/curios/search.php" class="text-dark font-weight-bold">Search the Prime
+                Curios!</a></h4>
+            <!-- Text -->
+            <span class="card-text d-none d-md-block d-print-block">
+              <a href="/curios/search.php"><img height="81" alt="The Prime Curios" src="../curios/includes/PrimeCur.gif"
+                  width="295" border="0"></a>
+            </span>
+            <a href="/curios/search.php" class="btn btn-dark mt-4 font-weight-bold">Search</a>
+          </div>
+        </div>
+        <div class="card mb-4 green lighten-4 text-center">
+          <!-- Card image -->
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Title -->
+            <h4 class="card-title"><a href="/glossary/search.php" class="text-dark font-weight-bold">Search the Prime
+                Glossary</a></h4>
+            <!-- Text -->
+            <p class="card-text">
+              <span class="card-text d-none d-md-block d-print-block">
+                <a href="/glossary/search.php"><img width="295" border="0" height="81" alt="The Prime Glossary"
+                    src="../glossary/includes/ThePG.gif"></a>
+              </span>
+              <a href="/glossary/search.php" class="btn btn-green mt-4 font-weight-bold">Search</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../notes/privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

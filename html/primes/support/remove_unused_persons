@@ -1,0 +1,99 @@
+#!/usr/bin/perl -w
+
+# This routine should remove those prover entries that were created but
+# never used (after 14 days).  Will try to log its actions.
+
+# Note: id's 254 and 560 will not be deleted (my system account and
+# the 'unknown program' account
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;                # Generic database interface
+use Getopt::Std;        # Allow for command line options
+
+getopts('dhn:st');
+$opt_s or print "This routine removes the prover entries over 30 days old.
+  Use remove_unused_persons -h to see the options.\n\n";
+
+$opt_h and print "usage: remove_unused_persons [options]    where the options are
+
+        -s      silent -- only errors printed.
+        -d      print debug messages.
+        -n n    number of days before deleting (default is 14)
+        -t      just show what you would do, don't do it (turns on -d)
+        -h      print this help and exit
+
+";
+
+if ($opt_t) {
+  $opt_d = 1;
+  print "Will show what changes we would make to database, but will not make them.\n";
+}
+$opt_h and exit;
+$opt_d and print "Noisey -d option turned on!\n";
+
+# How old ($age) in days do we allow entries to live before deleting?
+
+if ($opt_n and  $opt_n =~ /^\d+$/) {
+  $opt_s or print "Will remove codes older than $opt_n days\n";
+  $age = $opt_n;
+} else {
+  $age = 90;
+}
+
+# Could do this in one database call--but then informative messages would be 
+# hard to generate. Also speed is no object--so we will do it slow and steady.
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# Get a list of the persons to remove (display_html will be used when logging the deletion)
+# Do not delete my testing/system account #254
+
+my $query = "SELECT name, username, id, codes, created FROM person 
+        WHERE (NOT PrimesTotal OR PrimesTotal IS NULL) AND (created < NOW()-INTERVAL $age DAY) 
+	AND NOT (id=254) AND NOT (id=560)";
+
+$opt_d and print "QUERY: $query\n";
+my $sth = $dbh->prepare($query);
+$sth->execute();
+ 
+# Loop through this list of persons
+
+while (my $c = $sth->fetchrow_hashref) {  
+  my $id = $$c{'id'};
+  my $name = $$c{'name'};
+  my $username = $$c{'username'};
+  my $codes = $$c{'codes'};
+  my $created = $$c{'created'};
+
+  if ($codes) {
+    warn "Will not delete person $id : $username ($name); created $created
+	because they still have codes ($codes) assigned to them.\n";
+    next;
+  }
+  
+  # Now remove the entry from the person table
+
+  $opt_s or print "Deleting person $id : $username ($name); created $created\n";
+
+  $query = "DELETE FROM person WHERE id=$id";
+  $opt_d and print "\tquery: $query\n";
+  $sth2 = $dbh->prepare($query);
+  $opt_t or $sth2->execute();
+  $sth2->finish;
+
+  # Now log
+
+  $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'deleted', "person.id=$id", 
+        "was $id : $username ($name)");
+}
+$sth->finish;
+
+$opt_s or print "Done.\n";
+

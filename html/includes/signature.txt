@@ -1,0 +1,13 @@
+<TABLE CELLPADDING=10 >
+<TR>
+    <TD><a href="/index.html" onclick="return true"
+   OnMouseOver="document.image.src='/gifs/logo2a.gif'"
+   OnMouseOut ="document.image.src='/gifs/logo2.gif'"> 
+   <img src="/gifs/logo2.gif" border="0" name="image"
+       ALT="Prime Pages' Home" height="20" width="90" align="right"></a> </TD>
+ <TD><HR>Another <A HREF="/">prime page</A>
+    by <A HREF="https://t5k.org/">Reginald McLean</A>
+  <B><admin@t5k.org></B>
+  </TD>
+</TR>
+</TABLE>

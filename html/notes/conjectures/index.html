@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Prime Conjectures and Open Question</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Notes</a></li>
+          <li class="breadcrumb-item active">Conjectures</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->Prime
+        Conjectures and Open Questions<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->Below are just a few of the many conjectures
+
+      concerning primes.
+
+      <p>
+
+      <dl>
+
+        <dt><a name="Goldbach"><b>Goldbach's Conjecture: Every even <i>n</i> &gt;
+
+              2 is the sum of two primes.</b></a>
+        <dd>Goldbach wrote a letter to Euler in 1742 suggesting that <i>every
+
+            integer n &gt; 5 is the sum of three primes</i>.&nbsp; Euler replied
+
+          that this is equivalent to <i>every even n &gt; 2 is the sum of two
+
+            primes</i>--this is now known as Goldbach's conjecture.&nbsp; Schnizel
+
+          showed that Goldbach's conjecture is equivalent to <i>every integer
+
+            n &gt; 17 is the sum of three </i>distinct<i> primes</i>. <br>
+
+          &nbsp; &nbsp; It has been proven that every even integer is the sum
+
+          of at most six primes [<a href="/references/refs.cgi/Ramare95">Ramar&eacute;95</a>] (Goldbach's
+
+          conjecture suggests two) and in 1966 Chen proved every sufficiently
+
+          large even integer is the sum of a prime plus a number with no more
+
+          than two prime factors (a P<sub>2</sub>).&nbsp; In 1993 Sinisalo verified
+
+          Goldbach's conjecture for all integers less than 4<sup>.</sup>10<sup>11</sup>
+
+          [<a href="/references/refs.cgi/Sinisalo93">Sinisalo93</a>].&nbsp;
+
+          More recently Jean-Marc Deshouillers, Yannick Saouter and Herman te
+
+          Riele have verified this up to 10<sup>14</sup> with the help, of a Cray
+
+          C90 and various workstations.&nbsp; In July 1998, Joerg Richstein completed
+
+          a verification to 4<sup>.</sup>10<sup>14</sup> and placed a
+
+          list
+
+          of champions online. More recent work by
+
+          Oliveira e Silva has extended this to at least 4<sup>.</sup>10<sup>17</sup>.
+
+          See [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>]
+
+          and [<a href="/references/refs.cgi/Wang84">Wang84</a>] for more information.
+
+          <p>
+
+        <dt><b>The Odd Goldbach Problem: Every odd <i>n</i> &gt; 5 is the sum
+
+            of three primes.</b>
+
+        <dd>There has been substantial progress on this, the easier case of Goldbach's
+
+          conjecture. In 1937 Vinogradov proved that this is true for sufficiently
+
+          large odd integers <i>n</i>.&nbsp; In 1956 Borodzkin showed <i>n</i>
+
+          &gt; 3<sup>14348907</sup> is sufficient (the exponent is 3<sup>15</sup>).&nbsp;
+          In 1989 Chen and Wang reduced this bound to 10<sup>43000</sup>.&nbsp;
+
+          The exponent still must be reduced dramatically before we can use computers
+
+          to take care of all the small cases.
+
+          <p>
+
+        <dt><b>Every even number is the difference of two primes.</b>
+
+        <dd>Chen's work mentioned in the discussion of the <a href="#Goldbach">Goldbach conjecture</a> also showed that
+          every even number is
+
+          the difference between a prime and a P<sub>2</sub>.
+
+          <p>
+
+        <dt><b>For every even number 2<i>n</i> are there infinitely many pairs
+
+            of <i>consecutive</i> primes which differ by 2<i>n</i>.</b>
+
+        <dd>Conjectured by Polignac 1849.&nbsp; When <i>n</i>=1 this is the <a href="#twin">twin prime conjecture</a>.
+          It is easy to show that for every positive
+
+          integer <i>m</i> there is an even number 2<i>n</i> such that there are
+
+          more than <i>m</i> pairs of consecutive primes with difference 2<i>n</i>.
+
+          <p>
+
+        <dt><b><a name="twin">Twin Prime Conjecture</a>: There are infinitely many
+
+            twin primes.</b>
+
+        <dd>In 1919 Brun proved that the sum of the reciprocals of the twin primes
+
+          converges, as so the sum B = (1/3 + 1/5) + (1/5 + 1/7) + (1/11 + 1/13)
+
+          + (1/17 + 1/19) + ... is <b>Brun's constant</b>.&nbsp; B = 1.902160577783278...&nbsp;
+
+          See the Prime Glossary's entry on the <a class="glossary" title="glossary"
+            href="/glossary/page.php?sort=TwinPrimeConjecture">twin prime conjecture</a>.
+
+          <p>
+
+        <dt><b>Are there infinitely many primes of the form <i>n</i><sup>2</sup>+1?</b>
+
+        <dd>There are infinitely many of the forms <i>n</i><sup>2</sup>+<i>m</i><sup>2</sup>
+
+          and <i>n</i><sup>2</sup>+<i>m</i><sup>2</sup>+1.&nbsp; A more general
+
+          form of this conjecture is <i>if a, b, c are relatively prime, a is
+
+            positive, a+b and c are not both even,and b<sup>2</sup>-4ac is not a
+
+            perfect square, then there are infinitely many primes an<sup>2</sup>+bn+c</i>
+
+          [<a href="/references/refs.cgi/HW79">HW79</a>, p19].
+
+          <p>
+
+        <dt><b>The number of Fermat primes is finite.</b>
+
+        <dd>Hardy and Wright give an argument for this conjecture in their well
+
+          known footnote [<a href="/references/refs.cgi/HW79">HW79</a>,
+
+          p15] which goes roughly as follows.&nbsp; By the <a href="/howmany.html#pnt">prime number theorem</a> the
+          probability
+
+          that a random number <i>n</i> is prime is at most <i>a</i>/log(<i>n</i>)
+
+          for some choice of <i>a</i>.&nbsp; So the expected number of Fermat
+
+          primes is at most the sum of <i>a</i>/log(<img src="../../gifs/Fermat_n.gif" alt="2^2^n+1" width="35"
+            height="18">)
+
+          &lt; <i>a</i>/2<sup><i>n</i></sup>, but this sum is <i>a</i>.&nbsp;
+
+          However, as Hardy and Wright note, the Fermat numbers do not behave
+
+          "randomly" in that they are pairwise relatively prime...
+
+          <p>
+
+        <dt><b>Is there always a prime between <i>n</i><sup>2</sup> and (<i>n</i>+1)<sup>2</sup>?</b>
+
+        <dd>In 1882 Opperman stated pi(<i>n</i><sup>2</sup>+<i>n</i>) &gt; pi(<i>n</i><sup>2</sup>)
+
+          &gt; pi(<i>n</i><sup>2</sup>-<i>n</i>) (<i>n</i>&gt;1), which also seems
+
+          very likely, but remains unproven [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>, p248].&nbsp;
+
+          Both of these conjectures would follow if we could prove the conjecture
+
+          that the <a href="/notes/gaps.html">prime gap</a> following
+
+          a prime <i>p</i> is bounded by a constant times (log <i>p</i>)<sup>2</sup>.
+
+      </dl>
+
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

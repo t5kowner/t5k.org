@@ -1,0 +1,6 @@
+Order deny,allow
+Deny from all
+
+<Files "HowLong.cgi">
+	Allow from all
+</Files>

@@ -1,0 +1,28 @@
+/* what do we need to override when going rtl not ltr? */
+
+body {
+	padding-left: 2em;
+	padding-right: 0em
+}
+
+td.menu {
+	border-left: solid thin #009;
+}
+
+ul.menu {
+	margin: 1em 1.2em 1em 0;
+	padding: 0;
+}
+
+.gradient {
+	background-image: url(/assets/rtl_title_bg.jpg);
+	background-position: 100% 0;
+	background-repeat: repeat-y
+}
+
+
+/* position list chunks side by side */
+div.column {
+	float: right;
+	width: 33%;
+}

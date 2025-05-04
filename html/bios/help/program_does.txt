@@ -1,0 +1,70 @@
+Finding very large primes is inherently difficult.&nbsp;  Some of the
+algorithms for special forms can be easy to understand, but programming them
+requires fast multiplication of very large numbers.&nbsp;  Choosing which
+number to test can also require thought.&nbsp;  Before using the main
+primality tests we also should strongly consider presieving with some
+type of trial division program.
+
+<P>A variety of programmers have done their best to make this easier for
+you.&nbsp; For example, on the top twenty list you can see those programs that
+have used while finding the most primes.&nbsp;  But if you look at this list
+closely you will see we are comparing apples and oranges--the programs in the list
+often do very different things.&nbsp;  Below I will explain the very rough
+categories we have divided these programs into.
+
+<blockquote>
+<dl>
+
+<dt>sieve
+  <dd>A sieve quickly removes the numbers that have small composite 
+divisors from large set of potentially prime numbers.&nbsp;  Folks that find the
+record twins, for example, sieve very heavily before they use more
+definitive (and time consuming) primality tests. 
+
+<dt>minus
+  <dd>We can prove a number <i>N</i> is prime if we have enough factors of
+<i>N</i>-1.&nbsp; Programs that implement this type of test for a reasonably broad
+class of numbers are indicated with 'minus' in the database.
+
+<dt>plus
+  <dd>We can also prove a number <i>N</i> is prime if we have enough factors of
+<i>N</i>+1.&nbsp; Programs that implement this type of test for a reasonably broad
+class of numbers are indicated with 'plus' in the database.
+
+<dt>classical
+  <dd>There are ways of combining factors of <i>N</i>-1 and <i>N</i>+1, as well as
+factors of <i>N</i><sup><i>k</i></sup>-1 for small integers <i>k</i>.&nbsp;
+Programs that implement some relatively large part of these combined tests are
+marked with 'classical' in the database.
+
+<dt>special
+  <dd>'special' is just that, the program implements some test that works
+only for a very special form of prime (e.g., Prime95 implements just the
+Lucas-Lehmer test for Mersennes, but does it exceptionally well!)
+
+<dt>general
+  <dd>The hardest type of program to write is perhaps one that will
+quickly show a large number prime without using the classical tests
+above.&nbsp;  Those few that do are marked 'general'.
+
+<dt>other
+  <dd>I am not sure what this means yet.&nbsp; Certainly something other 
+than the above...
+
+
+</dl>
+</blockquote>
+
+Notes:
+
+<blockquote>
+<ul>
+<li>The above categories are very broad and roughly applied.&nbsp; To see
+what a program really does, go to its web site.
+
+<li>I only list programs used to find several primes on the list of the
+largest known primes.&nbsp; Look elsewhere for programs that work for small
+numbers (say less than 5,000 digits).
+</ul>
+</blockquote>
+

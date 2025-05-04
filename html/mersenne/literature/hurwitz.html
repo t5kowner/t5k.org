@@ -1,0 +1,742 @@
+<HTML>
+
+<HEAD>
+
+</HEAD>
+
+<BODY>
+	<center>
+		<font size="+1">
+			<b>NEW MERSENNE PRIMES</b>
+		</font>
+		<p>
+			<B>By Alexander Hurwitz</B>
+	</center>
+	<p>&nbsp;&nbsp;&nbsp;
+		If <I>p</I> is prime, <I>M<SUB>p</SUB></I> = 2<I><sup>p</sup></I> - 1 is called a
+		Mersenne number. The primes <I>M</I><SUB>
+			<FONT SIZE="-1">4253</FONT>
+		</SUB> and
+		<I>M</I><SUB>
+			<FONT SIZE="-1">4423</FONT>
+		</SUB> were discovered by coding the Lucas-Lehmer
+		test for the IBM 7090. These
+		two new primes are the largest prime numbers known; for other large primes see
+		Robinson [<a href="#ref_04">4</a>]. The computing was done at the UCLA Computing
+		Facility. This test
+		is described by the following theorem (see Lehmer [<a href="#ref_01">1</a>, p. 443-4]).
+
+		<br>&nbsp;&nbsp;&nbsp;
+		T<font size="-1">HEOREM</font>.
+		If <I>S</I>
+		<FONT SIZE="-1">1</FONT> = 4 and <I>S</I><SUB><I>n</I>+1</SUB> =
+		<I>S<SUB>
+				<FONT SIZE="-1">n</FONT>
+			</SUB></I>
+		<FONT SIZE="-1"><sup>2</sup></FONT> - 2 <I>then M<SUB>p</SUB> is prime if and only if</I>
+		<I>S</I><SUB><I>p</I>
+			<FONT SIZE="-1">-1</FONT>
+		</SUB> == 0 (mod <I>M<SUB>p</SUB></I>).
+
+		<br>&nbsp;&nbsp;&nbsp;
+		The test takes about 50 minutes of machine time for <I>p</I> = 4423. These results
+		bring the number of known Mersenne primes to 20. The values of <I>p</I> for these twenty
+		primes are listed in Table 1.
+
+		<br>&nbsp;&nbsp;&nbsp;
+		If <I>M<FONT SIZE="-1"><SUB>p</SUB></FONT></I> is prime it is of interest to know the
+		sign of the least absolute penultimate residue, that is, whether
+		<I>S</I>
+		<FONT SIZE="-1"><SUB><I>p</I>-2</SUB></FONT> == +2<sup>
+			<FONT SIZE="-1"><I>r</I></FONT>
+		</sup>
+		(mod <I>M<SUB>
+				<FONT SIZE="-1">p</FONT>
+			</SUB></I>) or
+		<I>S</I><SUB>
+			<FONT SIZE="-1"><I>p</I>-2</FONT>
+		</SUB> == -2<sup>
+			<FONT SIZE="-1"><I>r</I></FONT>
+		</sup>
+		(mod <I>M<SUB>
+				<FONT SIZE="-1"><I>p</I></FONT>
+			</SUB></I>) where
+		2<I>r</I> = <I>p</I>+1. The Lucas-Lehmer test can also be used with
+		<I>S</I><SUB>
+			<FONT SIZE="-1">1</FONT>
+		</SUB> = 10. The various
+		penultimate residues of the known Mersenne primes were computed and the
+		results appear in Table 1 (see Robinson [<a href="#ref_03">3</a>]).
+
+		<br>&nbsp;&nbsp;&nbsp;
+		In addition to testing the above Mersenne primes each Mersenne number with
+		<I>p</I> &lt; 5000 was tested unless a factor of <I>M<SUB>
+				<FONT SIZE="-1">p</FONT>
+			</SUB></I>
+		was known. The residues of <I>S</I><SUB>
+			<FONT SIZE="-1"><I>p</I>-1</FONT>
+		</SUB> (mod
+		<I>M<SUB>
+				<FONT SIZE="-1">p</FONT>
+			</SUB></I>) are available for checking purposes.
+		The results for 3300 &lt; <I>p</I> &lt; 5000 are
+		summarized in Table 2. The computer program also found (see
+		[<a href="#ref_03">3</a>, p.844]) that
+		<I>M</I><SUB>
+			<FONT SIZE="-1">8191</FONT>
+		</SUB>
+		is not prime.
+
+		<br>&nbsp;&nbsp;&nbsp;
+		The residue <I>S</I><SUB>
+			<FONT SIZE="-1"><I>p</I>-1</FONT>
+		</SUB> (mod
+		<I>M<SUB>
+				<FONT SIZE="-1">p</FONT>
+			</SUB></I>) for <I>p</I> &gt; 3300 is output from the computer in a
+		modified octal notation. That is, the residue is stored in the computer in 35 bit
+		binary words and the output is a word by word conversion of the 35 bit words into
+		octal (base 8) numbers. Thus the leading digit of each is quaternary (base 4).
+		For <I>p</I> &lt; 3300 the residue was printed in hexadecimal notation (see
+		Robinson [<a href="#ref_03">3</a>]
+		and Reisel [<a href="#ref_02">2</a>]).
+
+	<p>
+		<center>
+			T<font size="-1">ABLE</font> 1
+		</center>
+
+	<TABLE WIDTH=100% border=1 cellpadding=0 cellspacing=0>
+
+		<TR>
+			<TD align=center valign=top><I>p</I></TD>
+			<TD align=center valign=top><I>S</I><SUB>
+					<FONT SIZE="-1">1</FONT>
+				</SUB> = 4</TD>
+			<TD align=center valign=top><I>S</I><SUB>
+					<FONT SIZE="-1">1</FONT>
+				</SUB> = 10</TD>
+			<TD align=center valign=top><I>p</I></TD>
+			<TD align=center valign=top><I>S</I><SUB>
+					<FONT SIZE="-1">1</FONT>
+				</SUB> = 4</TD>
+			<TD align=center valign=top><I>S</I><SUB>
+					<FONT SIZE="-1">1</FONT>
+				</SUB> = 10</TD>
+		</TR>
+
+		<TR>
+			<TD align=center valign=top>2</TD>
+			<TD align=center valign=top>&nbsp;</TD>
+			<TD align=center valign=top>&nbsp;</TD>
+			<TD align=center valign=top>107</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+		</TR>
+
+		<tr>
+			<TD align=center valign=top>3</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>127</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>+</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>5</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>521</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>7</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>607</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>-</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>13</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>1279</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>-</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>17</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>2203</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>-</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>19</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>2281</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>31</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>3217</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>61</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>4253</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>+</TD>
+		</tr>
+
+		<tr>
+			<TD align=center valign=top>89</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>+</TD>
+			<TD align=center valign=top>4423</TD>
+			<TD align=center valign=top>-</TD>
+			<TD align=center valign=top>-</TD>
+		</tr>
+
+	</table>
+	<p>
+
+		<center>
+			T<font size="-1">ABLE</font> 2
+		</center>
+
+		<center>
+			<TABLE WIDTH=100% border=0 cellpadding=0 cellspacing=0>
+
+
+				<TR>
+					<TD align=right valign=top><I>p&nbsp;</I></TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top><I>&nbsp;&nbsp;&nbsp;R</I></TD>
+					<TD align=right valign=top><I>p&nbsp;</I></TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top><I>&nbsp;&nbsp;&nbsp;R</I></TD>
+				</TR>
+
+				<TR>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+
+				<TR>
+					<TD align=right valign=top>3301</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>72013</TD>
+					<TD align=right valign=top>4241</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>11012</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3307</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>62061</TD>
+					<TD align=right valign=top>4253</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>00000</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3313</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>10050</TD>
+					<TD align=right valign=top>4259</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>46007</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3331</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>51270</TD>
+					<TD align=right valign=top>4261</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>55632</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3343</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>76415</TD>
+					<TD align=right valign=top>4283</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>74774</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3371</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>57040</TD>
+					<TD align=right valign=top>4339</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>41356</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3373</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>36120</TD>
+					<TD align=right valign=top>4349</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>74465</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3389</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>64705</TD>
+					<TD align=right valign=top>4357</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>74271</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3413</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>50261</TD>
+					<TD align=right valign=top>4363</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>61114</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3461</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>03241</TD>
+					<TD align=right valign=top>4397</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>40174</TD>
+				</TR>
+
+				<TR>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+
+				<TR>
+					<TD align=right valign=top>3463</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>57665</TD>
+					<TD align=right valign=top>4409</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>51070</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3467</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>23046</TD>
+					<TD align=right valign=top>4421</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>25131</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3469</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>21765</TD>
+					<TD align=right valign=top>4423</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>00000</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3547</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>75574</TD>
+					<TD align=right valign=top>4481</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>70216</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3559</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>45350</TD>
+					<TD align=right valign=top>4493</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>36053</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3583</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>42507</TD>
+					<TD align=right valign=top>4519</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>01571</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3607</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>45062</TD>
+					<TD align=right valign=top>4523</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>22235</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3617</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>35431</TD>
+					<TD align=right valign=top>4567</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>74267</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3631</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>14530</TD>
+					<TD align=right valign=top>4583</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>46556</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3637</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>67413</TD>
+					<TD align=right valign=top>4591</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>47243</TD>
+				</TR>
+
+				<TR>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+
+				<TR>
+					<TD align=right valign=top>3643</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>04606</TD>
+					<TD align=right valign=top>4621</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>74601</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3671</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>04031</TD>
+					<TD align=right valign=top>4643</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>51444</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3673</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>01626</TD>
+					<TD align=right valign=top>4651</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>00707</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3691</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>54715</TD>
+					<TD align=right valign=top>4663</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>52442</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3697</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>53743</TD>
+					<TD align=right valign=top>4673</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>40333</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3709</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>06427</TD>
+					<TD align=right valign=top>4679</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>14305</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3739</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>22413</TD>
+					<TD align=right valign=top>4703</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>54013</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3769</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>00747</TD>
+					<TD align=right valign=top>4721</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>04420</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3821</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>52075</TD>
+					<TD align=right valign=top>4729</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>40137</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3833</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>45453</TD>
+					<TD align=right valign=top>4733</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>12774</TD>
+				</TR>
+
+				<TR>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+
+				<TR>
+					<TD align=right valign=top>3847</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>57652</TD>
+					<TD align=right valign=top>4783</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>77350</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3877</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>46507</TD>
+					<TD align=right valign=top>4789</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>02364</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3881</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>34503</TD>
+					<TD align=right valign=top>4799</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>04305</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3889</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>30737</TD>
+					<TD align=right valign=top>4817</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>70020</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3919</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>16520</TD>
+					<TD align=right valign=top>4831</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>33213</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>3943</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>33442</TD>
+					<TD align=right valign=top>4877</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>75412</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4007</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>17770</TD>
+					<TD align=right valign=top>4889</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>24410</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4027</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>60265</TD>
+					<TD align=right valign=top>4909</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>61113</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4049</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>31260</TD>
+					<TD align=right valign=top>4937</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>26525</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4051</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>63236</TD>
+					<TD align=right valign=top>4951</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>22271</TD>
+				</TR>
+
+				<TR>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+
+				<TR>
+					<TD align=right valign=top>4091</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>55650</TD>
+					<TD align=right valign=top>4973</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>03354</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4093</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>26670</TD>
+					<TD align=right valign=top>4987</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>72275</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4111</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>20437</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4133</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>66046</TD>
+					<TD align=right valign=top>8191</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>03624</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4157</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>43640</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4159</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>62544</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4177</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>16076</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4201</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>53211</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>4219</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>51756</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD align=right valign=top>5231</TD>
+					<TD valign=top>&nbsp;&nbsp;&nbsp;</TD>
+					<TD align=left valign=top>51457</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+					<TD valign=top>&nbsp;</TD>
+				</TR>
+
+			</table>
+		</center>
+
+	<p>&nbsp;&nbsp;&nbsp;
+		The five least significant octal digits of the residue appear in Table 2 for each
+		<I>p</I> &gt; 3300 tested. If <I>p</I> (3300 &lt; <I>p</I> &lt; 5000) is omitted from Table 2
+		a factor of 2<I><sup>
+				<FONT SIZE="-1">p</FONT>
+			</sup></I>-1
+		is known. Some of these factors are not yet published but were communicated to
+		the author by John Brillhart.
+
+		<br>&nbsp;&nbsp;&nbsp;
+		My thanks to the Computing Facility for their help in this work, especially J.
+		L. Selfridge and F. H. Hollander.
+
+	<p>
+		University of California at Los Angeles
+		<br>
+		Los Angeles, California
+
+	<p>&nbsp;&nbsp;&nbsp;
+		<a name="ref_01">1</a>. D. H. L<font size="-1">EHMER</font>,
+		&quot;An extended theory of Lucas' functions,&quot;
+		<I>Ann. of Math.</I>
+		v. 31, 1930, p. 419-448.
+
+		<br>&nbsp;&nbsp;&nbsp;
+		<a name="ref_02">2</a>. H. R<font size="-1">EISEL</font>,
+		&quot;<a href="../biblio.html#riesel">Mersenne numbers</a>,&quot;
+		<I>MTAC</I>,
+		v. 12, 1958, p. 207-213.
+
+		<br>&nbsp;&nbsp;&nbsp;
+		<a name="ref_03">3</a>. R. M. R<font size="-1">OBINSON</font>,
+		&quot;<a href="../biblio.html#robinson">Mersenne and Fermat numbers</a>,&quot;
+		<I>Proc. Amer. Math. Soc.</I>
+		v. 5, 1954, p. 842-846.
+
+		<br>&nbsp;&nbsp;&nbsp;
+		<a name="ref_04">4</a>. R. M. R<font size="-1">OBINSON</font>,
+		&quot;A report on primes of the form <I>k</I>*2<I><sup>
+				<FONT SIZE="-1">n</FONT>
+			</sup></I>+1 and on factors of Fermat numbers,&quot;
+		<I>Proc. Amer. Math. Soc.</I>
+		v. 9, 1958, p. 673-681
+
+	<p>
+		<font size="-1">
+			Received November 3, 1964. The preparation of this paper was sponsored by the U. S.
+			[photocopy illegible] Research.
+		</font>
+</body>
+
+</html>

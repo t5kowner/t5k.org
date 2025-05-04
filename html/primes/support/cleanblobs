@@ -1,0 +1,76 @@
+#!/usr/bin/perl -w
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use constants;
+
+getopts('hs');
+$opt_s or opt_h
+	or print "usage: adjust_blobs [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "Checking links between prime and prime_blob tables
+
+usage: $0 [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-h	print this help and exit
+
+This routine should clean blobs.  I am starting with having it adjust the full digit
+expansions.\n";
+
+$opt_h and exit;
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# First grab the blobs
+
+my $query = "SELECT description,full_digit,digits,prime_id,log10,id FROM prime_blob";
+$sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or print "Have selected the prime_blobs to clean.\n";
+
+while ($p = $sth->fetchrow_hashref) {
+  my $id = $$p{'id'};
+  my $prime = $$p{'prime_id'};
+  my $log10 = $$p{'log10'};
+  my $digits = $$p{'digits'};
+  my $full_digit = $$p{'full_digit'};
+
+  if (!$prime) {
+    print "Hey, why does blob id $id not point to a prime?  Rund adjust_blobs?\n";
+    next;
+  }
+
+  my $check = &adjust_full_digits($full_digit);
+  if ($check ne $full_digit) {
+     print "Updating the full digit expansion blob id: $id\n";
+     my $sth3 = $dbh->prepare("UPDATE prime_blob SET full_digit='$check', modified=modified WHERE id='$id'");
+     $sth3->execute();
+  }
+}
+
+
+sub adjust_full_digits {
+  my $new_long = $_[0] || die 'no expansion passed to &adjust_full_digits()';
+  $new_long =~ s/\s+//g;
+  my $full_digits = '';
+  my $length = length($new_long);
+  my $length_lead_block = 10 - ($length % 10);
+  my $spaces = 0;
+  for( $i = 0; $i < $length; $i++ ) {
+    $full_digits .= substr($new_long, $i, 1);
+    if ((($i + 1 + $length_lead_block) % 10) == 0) {
+       $spaces++;
+       if ($i+1 < $length) { $full_digits .= ' '};
+    }
+  }
+  return($full_digits);
+}

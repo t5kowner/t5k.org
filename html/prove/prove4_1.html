@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 4.1: Extending the classical tests</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->4.1 Neoclassical tests:
+                APR and APR-CL<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove4.html">Chapter
+                  Four</a> &gt; APR and APR-CL<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" --> <br>
+  How do we improve on the tests of the <a href="prove3.html">previous chapter</a>?&nbsp;
+  The way Williams and others began in the 70's was to use the factors of other
+  polynomials of <i>n</i> such as <i>n</i><sup>2</sup>+1, <i>n</i><sup>2</sup>+<i>n</i>+1
+  and <i>n</i><sup>2</sup>-<i>n</i>+1 [<a href="../references/refs.cgi/Williams78">Williams78</a>].&nbsp; But why stop
+  there?&nbsp;
+  Why not try <i>n<sup>m</sup></i>-1 for a higher exponent <i>m</i> such as 5040,
+  then every prime <i>q</i> such that <i>q</i>-1 divides 5040 (which does not divide
+  <i>n</i>) must divide <i>n<sup>5040</sup></i>-1 (by Fermats Little Theorem).&nbsp;
+  <p>This (with much more cleverness) makes (for <i>m</i> = 5040) a product of primes
+    <i>q</i> which is greater than 10<sup>52</sup>.&nbsp; So after we show there
+    are theorems similar to the classical theorems which only require a factorization
+    to the square root of <i>n</i>, then using this same <i>m</i>, 5040, we will
+    be done for all numbers with less than 100 digits--without any (explicit) factoring
+    (the same <i>q</i>'s work for all of these <i>n</i>'s).
+  </p>
+  <p>What about even larger <i>N's</i>?&nbsp; It is always possible to find the
+    necessary factors.&nbsp; In fact it has been shown that there is always an integer
+    <i>m</i> with
+  </p>
+  <blockquote><i>m</i> &lt; (log <i>n</i>)<sup>log log log <i>n</i></sup> </blockquote>
+  for which the factors <i>q</i> dividing <i>n<sup>m</sup></i>-1 with <i>q</i>-1
+  dividing <i>m</i>, have a product at least the size of the square root of <i>n</i>.
+  Usually <i>m</i> is around 100,000,000 for numbers <i>n</i> with about 3,000 digits.
+  <p>This is roughly (very roughly!) how Adleman, Pomerance and Rumely began the
+    modern age of primality testing by introducing the <b>APR</b> primality test
+    [<a href="/references/refs.cgi/APR83">APR83</a>] in 1979.&nbsp; The running
+    time of their method is almost polynomial--its running time <i>t</i> is bounded
+    as follows
+  <blockquote> (log <i>n</i>)<sup>(<i>c</i><sub>1</sub> log log log <i>n</i>)</sup>
+    &lt; <i>t</i> &lt; (log <i>n</i>)<sup>(<i>c</i><sub>2</sub> log log log <i>n</i>)</sup>
+  </blockquote>
+  <p>(recognize those bounds?)</p>
+  <p id="aprt-cl">Soon Cohen and Lenstra [<a href="/references/refs.cgi/CL84">CL84</a>] improved
+    this test into a practical version called <b>APRT-CL</b> that handles 100 digit
+    numbers in a matter of seconds (see also [<a href="/references/refs.cgi/CL87">CL87</a>], [<a
+      href="/references/refs.cgi/Mihailescu98">Mihailescu98</a>], and [<a
+      href="/references/refs.cgi/BH90">BH90</a>]).&nbsp; (They improved it by replacing
+    the general reciprocity law for the power residue symbol with much easier to
+    calculate Jacobi sums.)</p>
+  <p>It is also possible to mix the two approaches (the classical using large
+    factors of <i>n</i>&plusmn;1 and the neoclassical above using many small factors
+    of <i>n<sup>m</sup></i>-1).&nbsp; One example of this mixed approach is Tony
+    Forbes VFYPR <span class="descript">(limited to 2982 digits).</span></p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove4_2.html"><b>next
+                  page</b></a> | <a href="prove3_3.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

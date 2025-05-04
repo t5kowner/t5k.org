@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Which came first: 180(2^127-1)^2 + 1 or (2^148+1)/17</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Miller and Wheeler discovered the 
+prime 180(2<sup>127</sup>-1)<sup>2</sup>+1 in July 1951.  That same week 
+Ferrier announced the smaller prime: (2<sup>148</sup>+1)/17.  Which 
+was discovered first?  We seek an answer on this page.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Notes</a></li>
+          <li class="breadcrumb-item active">Which was first?</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->Which
+        came first<span class="d-none d-lg-inline">: 180(2<sup>127</sup>-1)<sup>2</sup> + 1 or
+          (2<sup>148</sup>+1)/17</span>?<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell (with updates by Reginald McLean)</h3>
+      <!-- #BeginEditable "content" -->
+      <h2>The Problem: </h2>
+
+      <p>For seventy five years Lucas' Mersenne:
+        M<sub>127</sub> = 2<sup>127</sup>-1 held the record for the largest known
+        prime.&nbsp; In 1951 Miller and Wheeler beat this by finding a series
+        of primes <i>k</i>*M<sub>127</sub>+1, then 180(2<sup>127</sup>-1)<sup>2</sup> +
+        1.&nbsp; The same year Ferrier
+        announced (2<sup>148</sup>+1)/17.&nbsp; So which came first?&nbsp; This
+        web page addresses just this one point of contention as a supplement
+        to our document: <a href="by_year.html">The
+          Largest Known Prime by Year</a>.</p>
+
+      <h2>Answer One: I don't know.</h2>
+
+      <p>In the journal Nature, Miller and Wheeler [<a href="/references/refs.cgi/MW51">MW51</a>] wrote the following
+        (this is the complete text of the article):</p>
+
+      <div class="w-75 ml-5 p-4 indigo lighten-5">
+        <p class="text-center font-weight-bolder m-3">Large Prime Numbers</p>
+        <p>For about seventy-five years the largest known
+          prime number has been <i>P</i> = 2<sup>127</sup> - 1,
+          identified as such by Edouard Lucas. It has remained the largest
+          known in spite of many attempts to identify larger
+          ones, although there have been conjectures and claims
+          insufficiently substantiated or entirely unproved.</p>
+
+        <p>Recently we have prepared a routine for testing on the
+          EDSAC the primality of numbers of the form <i>k P</i> + 1, with <i>P</i> as
+          defined above, and have found ten values of <i>k</i> that give prime numbers.
+          The largest of these gives the present (June 7) largest known prime, namely,</p>
+
+        <p class="pl-4">934(2<sup>127</sup> - 1) + 1 </p>
+        <p class="py-1 text-right">J. C. P. Miller<br>
+          D. J. Wheeler</p>
+        <p>June 7.</p>
+        <p><i>Note added in proof (October 8)</i>. Further work on
+          the EDSAC by Wheeler and myself has demonstrated the primality of
+        <p class="pl-5"> 978(2<sup>127</sup> - 1) + 1</p>
+        <p>and culminated in early July in the identification of the
+          present largest known prime,</p>
+        <div class="pl-5 py-1">180(2<sup>127</sup> - 1 )<sup>2</sup> + 1.</div>
+        Also,
+        in early July, A. Ferrier, of France, using a desk machine, demonstrated the
+        primality of
+        <div class="pl-5 py-2">(2<sup>148</sup> + 1)/17,</div>
+        which is the second largest known prime.
+        <div class="py-2 text-right">J. C. P. Miller <br>
+          University Mathematical Laboratory, Cambridge.</div>
+      </div>
+
+
+      <p class="mt-4">This can be read in many ways.&nbsp; If Miller &amp; Wheeler knew of Ferrier's
+        work in June, this would seem to imply Ferrier had not finished when they found
+        their first sequence of primes, but even so, it does not order the two &quot;early
+        July primes.&quot;&nbsp; So possibly Miller &amp; Wheeler had a sequence of records
+        sized primes beginning in June:
+      <div class="pl-5 py-1"><i>k</i><sup>.</sup>M<sub>127</sub> + 1 for <i>k</i> = 114, 124, 388, 408,
+        498, 696, 738, 774, 780, 934 and 978; </div>
+      and ending with 180(2<sup>127</sup>-1 )<sup>2</sup> +
+      1.&nbsp; In this case Ferrier's (2<sup>148</sup>+1)/17 never held the record
+      for the largest known prime.
+      </p>
+      <p>We can at least be confident Miller &amp; Wheeler were not <i>aware</i> of Ferrier's discovery when they found
+        180(2<sup>127</sup>-1 )<sup>2</sup> + 1. In the <i>Eureka</i> journal, Miller [<a
+          href="/references/refs.cgi/Miller51">Miller51</a>] noted in an addendum:</p>
+      <div class="w-75 ml-5 p-4 indigo lighten-5">
+        Since the above note was written, I have heard in a letter from A. Ferrier (France) that he has identified as
+        prime the number (2<sup>148</sup> + 1)/17
+      </div>
+      </br>
+      <p>Since there is still the possibility Ferrier's prime was found first and Miller &amp; Wheeler simply weren't
+        aware of it yet,
+        I (Chris Caldwell) checked with a family member, David Miller, who responded [e-mail, 4 April
+        1997]:</p>
+      <blockquote class="blockquote"> I do not know which was first.&nbsp; I have just checked some notes of
+        J. C. P. Miller in which he states &quot;until the 8th was found to be prime
+        in July.&quot; and &quot;during
+        the period of May to July A. Ferrier was applying similar tests to (2<sup>148</sup>+1)/17,
+        using a desk machine.&nbsp; His results show this to be prime, the second
+        largest prime number known.&quot;&nbsp; The notes are undated so I cannot
+        deduce which was first.&nbsp; My failing memory recalls that Jeff Miller,
+        went to some length to make sure Ferrier's result was
+        not overlooked.&nbsp; So I would guess that the 180 was first with a probability
+        of about 2/3rds. </blockquote>
+      <p>Undated... darn.&nbsp; So what do we know of Ferrier's dates?&nbsp; We
+        definitely know he had completed his work by July 14, but as Hans Riesel
+        suggest, he may have been done earlier [e-mail, 26 March 1997]: </p>
+      <blockquote class="blockquote"> I saw your &quot;history question&quot; on the largest prime, established
+        without computers.&nbsp; In MTAC, the forerunner to Math. Comp, vol.
+        6 (1952). p. 256, Ferrier reports on his work on (2<sup>148</sup>+1)/17.&nbsp; There
+        is an editorial remark, stating that Ferrier's letter to MTAC is dated
+        July 14, 1951.&nbsp; So
+        at least at that date Ferrier had completed his primality proof for
+        this number.<br>
+        <br>
+        (Perhaps Ferrier already had it for some time, and as a good Frenchman
+        saved its announcement to the French national holiday, but this is
+        just a guess on my part.)&nbsp; A description of Ferrier's work on this
+        number can be found in my book, on pp. 122-123.&nbsp; So, if you cannot
+        find a more precise date for Wheeler's and Miller's work, it will be
+        difficult to tell, which number came first.
+      </blockquote>
+      <p>If indeed he had waited for <a href="http://en.wikipedia.org/wiki/Bastille_Day">Bastille
+          Day</a>, July 14th, he surely would
+        not have waited too long.&nbsp; The one page excerpt of Ferrier's letter
+        in MTAC is a very nice summary, but gives no hint on timing.&nbsp; It
+        should not have taken months, so if he had been working on it in May,
+        he <i>could</i> have
+        completed before July.&nbsp;&nbsp;(Just like with today's prime records,
+        it is not the test of the final number that takes so long--it is finding
+        the right number to test!)</p>
+      <p> It is intriguing to me that D. H. Lehmer listed Ferrier first when
+        summarizing &quot;recent discoveries&quot; (given in its entirety) [MTAC,
+        Vol. 5, No. 36, Oct., 1951] : </p>
+      <blockquote class="blockquote"> 131. Recent Discoveries of Large Primes. Ever since Lucas announced
+        the discovery of the prime 2<sup>127</sup>-1 in 1786, many attempts
+        have been made to discover larger primes.&nbsp; These attempts have
+        succeeded only recently as follows:<br>
+        <br>
+        (a) A. Ferrier1 has identified (2<sup>148</sup>+1)/17 as prime, using
+        a method based on the converse of Fermat's theorem and a desk calculator.<br>
+        <br>
+        (b) Using the same method and the EDASC, Wheeler and Miller2,3 have
+        proved the primality of 1+<i>k</i>(2<sup>127</sup> - 1) for <i>k</i> =
+        114, 124, 388, 408, 498,696, 738, 744[sic], 780, 934, 978, and finally
+        1+180<i></i>(2<sup>127</sup> - 1)<sup>2</sup>, a number of 79 decimal
+        digits.<br>
+        <br>
+        (c) Using the standard Lucas test for Mersenne primes as programmed
+        by R. M. Robinson, the SWAC has discovered the primes 2<sup>521</sup>-1
+        and 2<sup>607</sup>-1 on January 30, 1952. These led to the 13th and
+        14th perfect numbers.
+        <div class="text-right">D. H. L. </div>
+        <br>
+        <sup>1</sup>Letter of July 14, 1951.<br>
+        <sup>2</sup>J.C.P. Miller &amp; D.
+        J. Wheeler, &quot;Large prime numbers,&quot; <i>Nature</i>, v. 168, 1951, p. 838.<br>
+        <sup>3</sup>J.C.P. Miller, &quot;Large Primes,&quot; <i>Eureka</i>, 1951, no. 14, p.
+        10-11.
+      </blockquote>
+      <p>Again, there is no statement that the order is chronological.</p>
+      <h2>Answer Two: Maybe it Doesn't Matter</h2>
+      <p>The two records are of very different type.&nbsp; Whichever was first,
+        Ferrier's result stands as the largest known prime found manually.&nbsp; On
+        the other hand, Miller and Wheeler's record lasted only a matter of months.</p>
+      <p>On our page of the Largest Known Primes by Year, the two records stand
+        in separate sections--Ferrier's at the end of the &quot;before computer&quot; primes
+        and Miller and Wheeler began the computer era of discovery.&nbsp; Both
+        records are important in their own right, and though I would be interested
+        in knowing the exact dates of discovery (let me know if you have information!),
+        I think we can rest for now with Lehmer's summary. </p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

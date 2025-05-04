@@ -1,0 +1,148 @@
+body {
+	background-color: #FFF;
+	color: #000;
+	font-size: 100%;
+	background-image: none;
+	max-width: 60em;
+}
+
+hr {
+	color: #009;
+	background-color: #009
+}
+
+.user {
+	/* User supplied data */
+	background-color: #ffd
+}
+
+a.none {
+	color: #000;
+	background-color: transparent;
+	text-decoration: underline
+}
+
+.first {
+	top: 10px;
+}
+
+.lower {
+	/* used to lower an image */
+	position: relative;
+	right: 0;
+	top: 2px;
+}
+
+a:hover {
+	color: #000;
+	background-color: #CEF;
+	text-decoration: underline
+}
+
+a.glossary {
+	/* background-color:transparent; */
+	border: 1px dashed blue;
+	color: #003;
+	padding: 0 2px;
+	text-decoration: none
+}
+
+a.glossary:hover {
+	background-color: #DEF;
+	color: #000;
+	text-decoration: underline
+}
+
+a {
+	color: #003;
+	background-color: #F0F9FF;
+	text-decoration: underline
+}
+
+a.no_underline {
+	text-decoration: none
+}
+
+ul.hanging {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 3em;
+	text-indent: -1em
+}
+
+/* Colorful aligned right notes for in text */
+.note {
+	background-color: #CEF;
+	font-style: italic;
+	text-align: right;
+	z-index: 4;
+	top: 3cm;
+	float: right;
+	border-right: thick solid #CCC;
+	margin-left: 1em;
+	margin-top: 0;
+	margin-bottom: 0.5em;
+	padding: 1em
+}
+
+.technote {
+	background-color: silver
+}
+
+div.technote {
+	font-size: smaller;
+	padding: .3em
+}
+
+blockquote.technote {
+	margin: 0 1em
+}
+
+/* Error messages in Red (sort-of) to stand out */
+.error {
+	color: #000;
+	background-color: #FFBFBF;
+	border-color: red;
+	font-weight: 700;
+	border-style: double;
+	padding: 1em
+}
+
+.highlight {
+	background: #6CF;
+	color: #000
+}
+
+/* The link formats for the sidebar menu items */
+a.menu {
+	color: #000;
+	background-color: #6CF;
+	text-decoration: none
+}
+
+a.menu:hover {
+	color: #00f;
+	background-color: #cff;
+	text-decoration: underline
+}
+
+td.menu {
+	font-family: Comic Sans MS, serif;
+	background-color: #6CF;
+	width: 140px;
+	padding: .3em .8em
+}
+
+/* Fieldsets */
+fieldset {
+	border: 2px double #009;
+	margin-top: .5em;
+	padding: .5em
+}
+
+fieldset legend {
+	color: #003;
+	font-weight: 700;
+	background-color: #F0F9FF;
+	padding: .1em .5em
+}

@@ -1,0 +1,41 @@
+        body {
+            background-color: white;
+            color: black;
+            /*              font-family: verdana, sans-serif; */
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        p {
+            line-height: 1.4em;
+        }
+
+        SUB,
+        SUP,
+        .note SUP {
+            line-height: 0;
+        }
+
+        .note {
+            background-color: #CCEEFF;
+            font-style: italic;
+            text-align: left;
+            border: 2px dashed #CCCCCC;
+            line-height: 1.3em;
+            width: 40%;
+            float: right;
+            padding: 1em;
+        }
+
+        .note a {
+            background-color: #CCEEFF;
+        }
+
+        .note a:hover {
+            background-color: #F0F9FF;
+        }
+
+        .record {
+            border: 2px double #0000CC;
+            padding: 1em;
+        }

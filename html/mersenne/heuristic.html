@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Heuristics: Deriving the Wagstaff Mersenne Conjecture</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="The heuristic arguments used to derive the likely distribution of the Mersenne primes.  These heuristics are compared against the known Mersemme primes. Developed by Wagstaff, Pomerance at al.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="index.html">Mersennes</a></li>
+          <li class="breadcrumb-item active">Heuristics</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->
+        Heuristics Model for the Distribution of Mersennes
+        <!-- #EndEditable -->
+      </h1>
+      <!-- #BeginEditable "content" -->
+      <div class="row d-print-none">
+        <div class="col-12">
+          <p class="float-right">[&nbsp; See also: <a href="../notes/faq/NextMersenne.html">Where is the next Mersenne
+              prime?</a>&nbsp; ] </p>
+        </div>
+      </div>
+
+      <p class="clearfix">Let M<i><sub>n</sub></i> be the <i>n</i>th <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=Mersennes">Mersenne prime</a>.&nbsp; Take a careful look at the graph of
+        log<sub>2</sub>(log<sub>2</sub>(M<i><sub>n</sub></i>)) versus <i>n</i>.&nbsp; (That is, the logarithm base two
+        of the logarithm base two of the <i>n</i>th Mersenne.)</p>
+
+      <div class="row">
+        <div class="col-12 mx-auto" style="max-width: 704px">
+          <img src="../gifs/lg_lg_Mn.gif" class="img-fluid">
+        </div>
+      </div>
+
+      <p>One can not miss that this graph is amazingly linear(at least until the las dozen).&nbsp; Erhardt (and many
+        others after him) looked at the limited data and guessed that the geometric mean of the ratio of two successive
+        Mersenne exponents 3/2.</p>
+
+      <p>Some time later Pomerance and Lenstra each (independently) [<a
+          href="../references/refs.cgi/Pomerance81">Pomerance81</a>, p. 101] suggested this should be 2 raised to
+        1/e<i><sup>gamma</sup></i> or about 1.47576, not 3/2, where <i>gamma</i> is <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=Gamma">Euler's constant gamma</a>.&nbsp; This is now the accepted value, but
+        why?&nbsp; Below we will answer this question using a simple <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=Heuristic">heuristic argument</a>.&nbsp; This means we try to make it seem
+        plausible (and eventually hope for a proof someday).</p>
+
+      <p>If you are in a rush, then let me simply follow Ribenboim [<a
+          href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>] and state the factor e<i><sup>gamma</sup></i> comes
+        by analogy from <a class="glossary" title="glossary" href="/glossary/page.php?sort=MertensTheorem">Mertens'
+          theorem</a>.&nbsp; But if you have time, take a sip of coffee and join us for a little mathematics.</p>
+
+      <h4 align="center"> Heuristic Derivation of this Mersenne Conjecture</h4>
+
+      <p>We will argue for Lenstra and Pomerance's conjecture in the form given in 1983 by Wagstaff [<a
+          href="/references/refs.cgi/Wagstaff83">Wagstaff83</a>] (though we do not follow his reasoning here):</p>
+
+      <ol>
+        <li> The number of Mersenne primes less than or equal to <i>x</i> is about
+          (e<i><sup>gamma</sup></i>/log 2) * log log <i>x</i>.&nbsp; (Here <i>gamma</i> is <a class="glossary"
+            title="glossary" href="/glossary/page.php?sort=Gamma">Euler's
+            constant</a>).&nbsp;</li>
+        <li> The expected number of Mersenne primes 2<i><sup>p</sup></i>-1 with <i>p</i> between <i>x</i> and 2<i>x</i>
+          is about e<i><sup>gamma</sup></i>.</li>
+        <li> The probability that&nbsp; 2<i><sup>p</sup></i>-1 is prime is about
+          (e<i><sup>gamma</sup></i> log <i>ap</i> )/(<i>p</i> log 2) where <i>a</i>=2
+          if <i>p</i>=3 (mod 4), and <i>a</i>=6 if <i>p</i>=1 (mod 4).</li>
+      </ol>
+
+      <p>So how might we reach this conclusions?&nbsp; We will start by estimating
+        the probability that 2<i><sup>k</sup></i>-1 is prime, and then combine
+        that guess with several others.</p>
+
+      <h2>The probability that 2<i><sup>k</sup></i>-1 is prime</h2>
+
+      <p>As our first step in estimating the probability that 2<i><sup>k</sup></i>-1 is prime, we recall that for
+        2<i><sup>k</sup></i>-1 to be prime, <i>k</i> must be prime (<a
+          href="/notes/proofs/Theorem2.html">proof</a>).&nbsp; Next, by <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=PrimeNumberThm">prime number theorem</a> the probability that a random positive
+        integer <i>k</i> is prime is (asymptotic to) 1/log(<i>k</i>) (where log <i>x</i> is the natural
+        logarithm).&nbsp; For the next step we will assume this is the case: that <i>k</i> is prime.</p>
+
+      <p>Next, we might want to again use the prime number theorem to guess that the probability that
+        2<i><sup>k</sup></i>-1 is prime, is 1/log(2<i><sup>k</sup></i>-1), or about 1/(<i>k</i> log 2); but
+        2<i><sup>k</sup></i>-1 does not behave like a "random number."&nbsp; For example, 2<i><sup>k</sup></i>-1 can
+        only be divisible by primes of the form 2<i>mk</i>+1 for certain integers <i>m</i> (<a
+          href="/notes/proofs/MerDiv.html">proof</a>).&nbsp; So we will need to adjust the estimate of probability we
+        get from the prime number theorem as follows.</p>
+
+      <p>Since 2<i><sup>k</sup></i>-1 can not be even--we multiply our estimate of the primality probability by 2 (since
+        2 divides 1/2 of the integers).&nbsp; Similarly, unless <i>k</i> is 2, 2<i><sup>k</sup></i>-1 can not be
+        divisible by 3, so we multiply our estimate of the primality probability by 3/2=1/(1-1/3) (since 3 divides 1/3rd
+        of the integers).&nbsp; In fact, for each prime <i>q</i> less than 2<i>k</i>+1 we must multiply our estimate by
+        <i>q</i>/(<i>q</i>-1) = 1/(1-1/<i>q</i>).&nbsp; So we now guess that the probability that 2<i><sup>k</sup></i>-1
+        is prime (for a given prime <i>q</i>) is about
+      </p>
+
+      <div class="ml-5 my-2"> 1/(<i>k</i> log 2) <sup>.</sup> 2/1 <sup>.</sup> 3/2 <sup>.</sup> 5/4 <sup>.</sup> ...
+        <sup>.</sup> <i>q</i>/(<i>q</i>-1)
+      </div>
+
+      <p>where <i>q</i> is the largest prime less than 2<i>k</i>.&nbsp; This product
+        can be estimated using <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=MertensTheorem">Mertens' theorem</a> to be</p>
+
+      <div class="ml-5 my-2"> e<i><sup>gamma</sup></i> <sup>.</sup> log(2<i>k</i>)/(<i>k</i> log 2) </div>
+
+      <p>where as above gamma is <a class="glossary" title="glossary" href="/glossary/page.php?sort=Gamma">Euler's
+          constant</a>.</p>
+
+      <p>"But wait" you might say, "you have log(2<i>k</i>), but Wagstaff says log(<i>ak</i>) where <em>a</em>
+        varies."&nbsp; Then I'd be forced to admit I omitted something else we know about the <a class="glossary"
+          title="glossary" href="/glossary/page.php?sort=MersenneDivisor">divisors of Mersenne numbers</a>: they are
+        always congruent to +/-1 modulo 8.&nbsp; When <i>k</i> is 3 modulo 4, this means <i>m</i> must be 0 or 3 <a
+          class="glossary" title="glossary" href="/glossary/page.php?sort=Congruence">modulo</a> 4, so the smallest such
+        prime is at least 6<i>k</i>+1 and we must replace the 2<i>k</i> in our argument above with 6<i>k</i>, just as
+        Wagstaff says.&nbsp; When <i>k</i> is 1 modulo 4, <i>m</i> may be 1, so we can stick with the 2<i>k</i> above in
+        this case.&nbsp; This completes the derivation of Wagstaff's third conclusion.</p>
+
+      <h2>Toward a combined estimate</h2>
+
+      <p>Let's go one step further and combine our two probability estimates:
+        the probability <i>k</i> is prime and the probability the resulting 2<i><sup>k</sup></i>-1
+        is prime.&nbsp; We then get the probability that 2<i><sup>k</sup></i>-1
+        is prime (for a random positive integer <em>k</em>) to be</p>
+
+      <div class="ml-5 my-2">
+        e<i><sup>gamma</sup></i> <sup>.</sup> log(<i>ak</i>)/(<i>k</i> log
+        2 <sup>.</sup> log <i>k</i>)
+      </div>
+
+      <p>(with <i>a</i>=2 or 6 as above).&nbsp; For large <i>k</i> (and indeed the "average" integer is large),
+        log(<i>ak</i>)=log <i>a</i> + log <i>k</i> is very close (asymptotically) to just log <i>k</i>, so our
+        probability estimate simplifies to</p>
+
+      <div class="ml-5 my-2">
+        e<i><sup>gamma</sup></i>/(<i>k</i> log 2).
+      </div>
+
+      <p>Next we will use this heuristic estimate to derive the first of Wagstaff's three conclusions.</p>
+
+      <h2>The number of Mersennes less than <i>x</i></h2>
+
+      <p>So, how many Mersenne primes 2<i><sup>k</sup></i>-1 do we expect with 1 <u>&lt;</u> <i>k <u>&lt;</u> n</i>
+        ?&nbsp; We can find this by adding the probabilities for <i>k</i>=1, 2, 3, ... up to <i>n</i>.&nbsp; The easiest
+        way to approximate this sum would be to integrate.&nbsp; This gives us</p>
+
+      <div class="ml-5 my-2">
+        approximately&nbsp; e<i><sup>gamma</sup></i> log <i>n</i> / log 2&nbsp; Mersenne primes 2<i><sup>k</sup></i>-1
+        with 1 <u>&lt;</u> <i>k <u>&lt;</u> n.</i>
+      </div>
+
+      <p>Now let's rephrase this.&nbsp; If we wish to restrict the size of <i>n</i> so that 2<i><sup>k</sup></i>-1
+        <u>&lt;</u> <i>x</i>, then we must stop with <i>n</i>&nbsp;log&nbsp;2 near log <i>x</i>, hence log&nbsp;<i>n</i>
+        near
+        log log <i>x</i>.&nbsp; So we have
+      </p>
+
+      <div class="ml-5 my-2">
+        approximately&nbsp; e<i><sup>gamma</sup></i> log log <i>x</i> / log 2&nbsp; Mersenne primes less than <i>x</i>.
+      </div>
+
+      <p>This is the first of Wagstaff's conclusions (from which the second follows
+        trivially).</p>
+
+      <p>Note: The above is definitely not the argument you find in Wagstaff's article, but I think it is easier to
+        follow and generalizes smoothly to many other forms.</p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../notes/privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

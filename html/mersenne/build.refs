@@ -1,0 +1,135 @@
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+# This file scans files with the given extentions (see $extentions)
+# for references to our database (refs.cgi/* ...).  It will then
+# place these references into the file $output_to if it
+# finds the necessary containers (see $a $b) to encase them in.
+
+
+use FindBin qw($Bin);  # For portability when mirroring...
+use lib "$Bin/../bin";
+use File::Find;
+use SlurpFile;
+
+use Getopt::Std;
+getopts('dtsS');
+our($opt_d,$opt_t,$opt_s,$opt_S);
+
+$opt_s or print "Usage: $0 [flags] [path]
+  -d	debug node--many messages
+  -t	test mode--do not write to files
+  -s	silent operation (except for errors)
+  -S	print summary (included in debug)
+";
+
+if ($opt_d) {
+  $opt_s = 0;  $opt_S = 1;
+  print "In debug mode--copious messages!";
+}
+$opt_t and print "testing mode: will scan for, count and check references,\n".
+	"but will not write them in the output file.\n";
+
+my $path = shift || '.';  # start searching from where?
+my %Refs; # key = ref (e.g., BR95), value = #times
+my $extentions = 'htm html'; # blank delimited
+
+$| = 1;  #don't buffer output
+
+$opt_s or print "Seeking references in files in \"$path\".\n";
+
+# Now let's do it.
+
+my $files = 0;
+my $name = ''; # set in find, used in &wanted
+my $output_to = 'references.html';
+
+find(\&wanted,$path);
+
+# Now say what we did.
+my $count = 0;    # total number of references
+my $distinct = 0; # distinct references
+my $reflist = ''; # Comma delimited list for ReadBibHTML
+if (keys %Refs) {
+  $opt_s or $opt_S and print "\nSummary of references found:\n";
+  foreach (sort keys %Refs) {
+    $opt_s or $opt_S and print "\t$_",' 'x(25-length($_)),"$Refs{$_}\n";
+    $reflist .= "$_,";
+    $count += $Refs{$_};
+    $distinct += 1;
+  }
+  chop $reflist;
+  $opt_d and print "References as comma delimit list:\n\n$reflist\n\n";
+}
+$opt_s or print "scanned $files files and found $count references to $distinct items.\n";
+
+# Now attempt to match these to references--if they match, form HTML output in $text.
+#  If they do not match, an error messaage will be printed to stderr
+
+use ReadBibHTML;
+&ReadBibHTML::configure('QuietError','NoRawLink','NoAuthorLinks');
+#       'QuietError'    : Print error to StdErr (rather than inlcuding
+#                         an error message in the string returned).
+#       'NoRawLink'     : will not link the item BibKey to raw BibTeX
+#       'NoAuthorLinks' : do not link authors to the refs.cgi?author=...
+my $text = &ReadBibHTML::ShowItems($reflist,undef,'[mersenne/build.refs]');
+
+# Put them in the file (unless in test more)
+
+unless ($opt_t) {
+  my $file = &SlurpFile::SlurpFile($output_to);
+  my $a = '<!-- ReferencesBegin -->';
+  my $b = '<!-- ReferencesEnd -->';
+  my $aq = quotemeta($a);
+  my $bq = quotemeta($b);
+  $file =~ s/$aq(.*?)$bq/$a\n$text\n$b/s
+	or die "Could not find\n\n\t$a(.*?)$b\n\nin $output_to";
+  &SlurpFile::WriteFile($output_to,$file);
+  $opt_s or print "References added to $output_to\n";
+}
+
+exit;
+
+######################## subroutines ###########################
+
+# This is called by find (I use it to call my search file)
+# apparantly $name is also set in find and path is $_
+
+sub wanted {
+  -f && ++$files && &searchfile($_)
+}
+
+sub searchfile {
+  my $path = shift or die 'No path passed to &searchfile';
+  my $text = &SlurpFile::SlurpFile($path);
+  my %LocalRefs; # Store refs found in *this* file
+
+  (my $extention) = ($path =~ /(\w+)$/o);
+  unless ($extentions =~ /\b$extention\b/) {
+    $opt_d and print "skipping $path\n";
+    return;
+  }
+
+  # Usual
+  $text =~ s/refs.cgi\/([\w\-]+)/$LocalRefs{$1}++;''/geo;
+
+  # Links to references page
+  $text =~ s/refs.cgi[">\S]//go;
+
+  # There should be no more!
+  $text =~ s/(refs.cgi\S*)/
+	warn "unrecognized reference in $path
+	$1\n"/geo;
+
+  if (keys %LocalRefs) {
+    $opt_d and print "\nSummary of references found in $name:\n";
+    foreach (sort keys %LocalRefs) {
+      $Refs{$_} = (defined $Refs{$_} ? $Refs{$_} : 0 )
+	+ $LocalRefs{$_};
+      $opt_d and print "\t$_\t$LocalRefs{$_}\n";
+    }
+  }
+
+}
+

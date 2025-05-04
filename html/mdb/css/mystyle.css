@@ -1,0 +1,183 @@
+body a:hover {
+  text-decoration: underline;
+}
+
+body blockquote {
+  font-size: 100% !important;
+  margin-left: 1rem;
+}
+
+body {
+  font-weight: 400;
+}
+
+a.glossary {
+  color: #003300;
+  border: 1px dashed rgba(0, 51, 0, .25);
+  padding: 0px 2px 0px 2px;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a[href$="/references"] {
+  color: #E00;
+}
+
+/* can't make this work */
+
+dt {
+  margin-left: 1em;
+}
+
+dd {
+  margin-left: 3em;
+}
+
+/* Grey small font technical note--oftem bottom of the page: Used in /bios/ and ??  */
+.technote {
+  background-color: silver;
+  font-size: 75%;
+  padding: 0ex 1ex;
+}
+
+.font-large {
+  font-size: 140%;
+}
+
+/* BS has a "small" */
+
+.brdr td {
+  border: 0.2px solid silver;
+}
+
+/* Bootstrap's "table-bordered" sometimes borders extra space on right */
+.brdr th {
+  border: 0.2px solid silver;
+}
+
+.td2 td {
+  padding: 0.1rem 0.3rem;
+}
+
+/* tighter tables */
+.td2 th {
+  padding: 0.2rem 0.3rem;
+}
+
+.td4 td {
+  padding: 0.2rem 0.4rem;
+}
+
+/* loser tables.  Still tighter than bootstraps table-sm*/
+.td4 th {
+  padding: 0.2rem 0.3rem;
+}
+
+a.none {
+  color: #000;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+/* print styles */
+/* print styles */
+/* Notes are italics in a blue box floated left except on XS where full width */
+.note {
+  background-color: #CCEEFF;
+  font-style: italic;
+  text-align: left;
+  border: 2px dashed blue;
+  line-height: 1.3em;
+  width: 40%;
+  float: right;
+  padding: 1em;
+}
+
+.note a {
+  background-color: #CCEEFF;
+}
+
+.note a:hover {
+  background-color: #F0F9FF;
+}
+
+@media (max-width: 576px) {
+  .note {
+    width: 100%;
+  }
+
+  .prover-index a {
+    padding: 4px;
+  }
+}
+
+.record {
+  border: 2px double #0000CC;
+  padding: 1em;
+}
+
+.record table td {
+  border: 2px double #00CC00;
+  padding: 1em;
+}
+
+@media print {
+  body {
+    margin: 0;
+    color: #000;
+    background-color: #fff;
+  }
+
+  @page {
+    margin: 0.8in;
+    orphans: 4;
+    widows: 2;
+  }
+
+  a.glossary {
+    text-decoration: none;
+    border: none;
+  }
+
+  body {
+    font: 14pt Georgia, "Times New Roman", Times, serif;
+    line-height: 1.3;
+  }
+
+  footer {
+    display: none;
+  }
+
+  h1 {
+    font-size: 24pt;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  h2 {
+    font-size: 18pt;
+    margin-top: 25px;
+  }
+
+  h3,
+  h4 {
+    font-size: 16pt;
+    margin-top: 25px;
+  }
+
+  blockquote,
+  ul {
+    margin: 0.25cm;
+    border: none;
+    font-size: 100% !important;
+  }
+
+  /* force a column ... to print full width */
+  .col-print-12 {
+    max-width: 100%;
+    flex: 0 0 100%;
+  }
+}
+
+
+}

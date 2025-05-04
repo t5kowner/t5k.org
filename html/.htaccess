@@ -1,0 +1,36 @@
+RedirectMatch permanent (.*)/template.php	https://t5k.org/
+RedirectMatch permanent ^/lists/all.txt		https://t5k.org/primes/lists/all.txt
+RedirectMatch permanent ^/ftp(.*)		https://t5k.org/primes/lists$1
+RedirectMatch permanent ^/+top20/page.php/(.*)/(copyright.php)$ https://t5k.org/top20/includes/$2
+RedirectMatch permanent ^/+top20/page.php/(.*)/(home|index|search).php$ https://t5k.org/top20/$2.php
+# Remove this next? The 404 page has a link to it...  
+RedirectMatch permanent ^/curios/(\d+).html	https://t5k.org/curios/page.php/$1.html
+Redirect permanent /curios/page.php/includes	https://t5k.org/cpi_doesnotexist.html?t=cpi
+Redirect permanent /curios/page.php/page.php	https://t5k.org/cpp_doesnotexist.html?t=cpp
+Redirect permanent /curios/home.php/includes	https://t5k.org/chi_doesnotexist.html?t=chi
+RedirectMatch permanent (.*)/includes/bios/(.*)	https://t5k.org/ibX_doesnotexist.html?t=ib
+RedirectMatch permanent (.*)/includes/includes/(.*)	https://t5k.org$1/includes/$2
+RedirectMatch permanent (.*)/top20/page.php/includes/(.*)  https://t5k.org/tpiX_doesnotexist.html?t=tpi
+Redirect permanent /curios/includes/file.php https://t5k.org/curios/includes/primetest.php
+
+# RedirectMatch permanent (.*)shtml$		https://t5k.org$1html
+
+##  Redirect all requests for favicon.ico that are calls for files that do not exist
+RewriteEngine on
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^primes.utm.edu$ [NC]
+RewriteRule ^(.*)$ https://t5k.org/$1 [L,R=301]
+
+RewriteCond %{REQUEST_fileNAME} !-f
+RewriteRule  favicon\.ico$  /var/www/html/favicon.ico [L]
+RewriteRule .*<(?:select|delete|declare|script|set|cast|exec|char|nvarchar|iframe|body)>.* - [NC,F]
+
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+<Files ~ "\.(inc|pm|pl|cnf|conf)$">
+    deny from all
+</Files>
+
+AddHandler cgi-script .cgi
+Options ExecCGI SymLinksIfOwnerMatch

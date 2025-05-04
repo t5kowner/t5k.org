@@ -1,0 +1,21 @@
+<!-- the side menu bar for prime pages -->
+<B><A HREF="/" class=side title="Prime Pages' home">Home</A></B>
+<BR><A HREF="/search/" class=side>Search Site</A><BR>
+<BR>
+<B><A HREF="/largest.html" class=side>Largest</A></B>
+<BR><A HREF="/prove/" class=side>Finding</A>
+<BR><A HREF="/howmany.html" class=side>How Many?</A>
+<BR><A HREF="/mersenne/" class=side>Mersenne</A><BR>
+<img src="/gifs/space.gif" width=90 height=1 alt=" ">
+<BR>
+<B><A HREF="/glossary/" class=side>Glossary</A></B><BR>
+<br><a href="/curios/" class=side>Prime Curios!</a>
+<BR>
+<A HREF="https://groups.yahoo.com/neo/groups/primenumbers/info" class=side>e-mail list</A><BR>
+<BR>
+<B><A HREF="/notes/faq/" class=side>FAQ</A></B>
+<BR><A HREF="/lists/" class=side>Prime Lists</A>
+<br><a href="/bios/index.php" class=side>Titans</a>
+<br>
+<br><a href="/bios/submission.php" class=side>Submit primes</a>
+<!-- end menu bar -->

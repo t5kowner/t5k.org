@@ -1,0 +1,3 @@
+cd /var/www/html/prove/
+./build.refs -s
+./merge -s

@@ -1,0 +1,68 @@
+############# Configuration section #################
+
+# The system wants to know who is working on the prime
+# (who to talk to if something goes wrong.... who to
+# query about odd results...)
+
+# $person_id is your id in the person table of the prime
+# database--so must be an integer.
+
+$person_id = 9;               
+
+# You may have multiple machines--use $machine to 
+# indicate which machine is running the script.  This may
+# help track down troubles (e.g., suppose pfgw is shown to have
+# a bug on Pentium 4's which causes false results...)
+# This should be unique--used to see if this routine already
+# attemped this prime to avoid a loop.
+
+# $machine = 'WinXP P4 1.8GHz';
+$machine = 'Digital Ocean Droplet';
+
+# What program are you using?  (null just gets the prime, sends back no response)
+
+$clients = 'pfgw';
+# $clients = 'pfgw, llr';
+
+# I have fast and slow machines.  Use 'ASC' for slow 
+# machines and 'DESC' for fast.  Eventually  will do 
+# something different...
+
+$direction = 'ASC';
+# $direction = 'DESC';
+
+# Wouldn't it be great if pfgw was in the same spot
+# on every machine?  But of course windows likes .exe ...
+# and I had crontab problems without a full
+# path on Linux
+
+$pfgw      = '/var/www/clientpool/1/pfgw64';
+$llr	= 'llr.pl';
+$ecpp  =  'ecpp.pl';  # Script to call ECPP
+
+# We can limit the type of primes we seek.  See
+# $url for more info.  
+
+# $type = 'n-1';
+# $type = 'n+1';
+# $type	= 'GF';
+$type = 'any';
+# $type = 'any composite';
+# $type = 'special';	# Used once for special case
+
+# Now this last one just says where the server is.  
+# Should not change--but while my campus was having name
+# server problems, using localhost cured several ills.
+
+#$url   = 'https://t5k.org/primes/verify.php';
+#$url   = 'https://127.0.0.53/primes/verify.php';
+$url   = 'https://localhost/primes/verify.php';
+
+# Authentication key
+$password = 'must match value in environment.inc'
+
+# Want some noisey output for debug?  Call verify with
+# the command line parameter -d or uncomment this line
+# This overides the command line setting.
+
+# $opt_d = 1;

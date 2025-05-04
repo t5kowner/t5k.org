@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 2.1: Finding very small primes</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->2.1: Finding very small
+                primes<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove2.html">Chapter
+                  Two</a> &gt; Small Primes <!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p>For finding all the small primes, say all those less than 10,000,000,000; one
+    of the most efficient ways is by using <b>the Sieve of Eratosthenes</b> (ca 240
+    BC):</p>
+  <blockquote> Make a list of all the integers less than or equal to <i>n</i> (greater
+    than one) and strike out the multiples of all primes less than or equal to the
+    square root of <i>n</i>, then the numbers that are left are the primes. (See
+    also <a href="/glossary/page.php?sort=SieveOfEratosthenes">our glossary
+      page</a>.) </blockquote>
+  <p>For example, to find all the odd primes less than or equal to 100 we first
+    list the odd numbers from 3 to 100 (why even list the evens?)&nbsp; The first
+    number is 3 so it is the first odd prime--cross out all of its multiples.&nbsp;
+    Now the first number left is 5, the second odd prime--cross out all of its multiples.&nbsp;
+    Repeat with 7 and then since the first number left, 11, is larger than the square
+    root of 100, all of the numbers left are primes.</p>
+  <p>This method is so fast that there is no reason to store a large list of primes
+    on a computer--an efficient implementation can find them faster than a computer
+    can read from a disk.&nbsp; </p>
+  <p>Bressoud has a pseudocode implementation of this algorithm [<a
+      href="../references/refs.cgi/Bressoud89">Bressoud89</a>,
+    p19] and Riesel a PASCAL implementation [<a href="/references/refs.cgi/Riesel94">Riesel94</a>,
+    p6].&nbsp; It is also possible to create an even faster sieve
+    based on quadratic forms.</p>
+  <p id="trial">To find individual small primes <b>trial division</b>
+    works well.&nbsp; To test <i>n</i> for primality (to see if it is prime) just
+    divide by all of the primes less than the square root of <i>n</i>.&nbsp; For
+    example, to show is 211 is prime, we just divide by 2, 3, 5, 7, 11, and 13.
+    (Pseudocode [<a href="../references/refs.cgi/Bressoud89">Bressoud89</a>, pp
+    21-22], PASCAL [<a href="/references/refs.cgi/Riesel94">Riesel94</a>, pp 7-8].)&nbsp;
+    Sometimes the form of the number <i>n</i> makes this especially effective (for
+    examples, <a href="../notes/proofs/MerDiv.html">Mersenne divisors</a> have a
+    special form). </p>
+  <p>Rather than divide by just the primes, it is sometimes more practical to divide
+    by 2, 3 and 5; and then by all the numbers congruent to 1, 7, 11, 13, 17, 19,
+    23, and 29 modulo 30--again stopping when you reach the square root.&nbsp; This
+    type of factorization is sometimes called
+    <b><a href="/glossary/page.php?sort=WheelFactorization">wheel
+        factorization</a></b>.&nbsp; It
+    requires more divisions (because some of the divisors will be composite), but
+    does not require us to have a list of primes available.
+  </p>
+  <p>Suppose <i>n</i> has twenty-five or more digits, then it is impractical to
+    divide by the primes less than its square root.&nbsp; If <i>n</i> has two hundred
+    digits, then trial division is impossible--so we need much faster tests.&nbsp;
+    We discuss several such tests below.</p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" --> [ <a href="prove2_2.html"><b>next
+                  page</b></a> | <a href="prove1.html">previous page</a> ] <!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

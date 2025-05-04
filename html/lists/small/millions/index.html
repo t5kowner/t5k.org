@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The first fifty million primes</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="This page indexes lists of small primes such as: the first 100,000 primes; lists of 100 digit primes...
+">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/lists/">Lists</A></li>
+          <li class="breadcrumb-item"><a class="white-text" href="/lists/small/">Small</A></li>
+          <li class="breadcrumb-item active">Millions</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->The first
+        fifty million primes<!-- #EndEditable --></h1>
+      <!-- #BeginEditable "content" -->
+      <p>In this directory I have the first fifty million primes in blocks of one million.&nbsp;
+        Usually it is faster to run a program on your own computer than to download them, but by popular demand,
+        here they are!</p>
+
+      <div class=highlight>
+        Just click on "The first million" below to get the file (or on ** for the mirror site).</div>
+
+      <div class="container mt-4">
+        <table class="table table-sm table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>file (mirror)</th>
+              <th>first prime</th>
+              <th>last prime</th>
+              <th class="primary-color">&nbsp;</th>
+              <th>file (mirror)</th>
+              <th>first prime</th>
+              <th>last prime</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align=left><a href=primes1.zip>first <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes1.zip">**</A>)</td>
+              <td>2</td>
+              <td>15,485,863</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes26.zip>twenty-sixth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes26.zip">**</A>)</td>
+              <td>472,882,049</td>
+              <td>492,876,847</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes2.zip>second <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes2.zip">**</A>)</td>
+              <td>15,485,867</td>
+              <td>32,452,843</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes27.zip>twenty-seventh <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes27.zip">**</A>)</td>
+              <td>492,876,863</td>
+              <td>512,927,357</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes3.zip>third <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes3.zip">**</A>)</td>
+              <td>32,452,867</td>
+              <td>49,979,687</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes28.zip>twenty-eighth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes28.zip">**</A>)</td>
+              <td>512,927,377</td>
+              <td>533,000,389</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes4.zip>fourth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes4.zip">**</A>)</td>
+              <td>49,979,693</td>
+              <td>67,867,967</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes29.zip>twenty-ninth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes29.zip">**</A>)</td>
+              <td>533,000,401</td>
+              <td>553,105,243</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes5.zip>fifth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes5.zip">**</A>)</td>
+              <td>67,867,979</td>
+              <td>86,028,121</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes30.zip>thirtieth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes30.zip">**</A>)</td>
+              <td>553,105,253</td>
+              <td>573,259,391</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes6.zip>sixth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes6.zip">**</A>)</td>
+              <td>86,028,157</td>
+              <td>104,395,301</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes31.zip>thirty-first <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes31.zip">**</A>)</td>
+              <td>573,259,433</td>
+              <td>593,441,843</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes7.zip>seventh <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes7.zip">**</A>)</td>
+              <td>104,395,303</td>
+              <td>122,949,823</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes32.zip>thirty-second <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes32.zip">**</A>)</td>
+              <td>593,441,861</td>
+              <td>613,651,349</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes8.zip>eighth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes8.zip">**</A>)</td>
+              <td>122,949,829</td>
+              <td>141,650,939</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes33.zip>thirty-third <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes33.zip">**</A>)</td>
+              <td>613,651,369</td>
+              <td>633,910,099</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes9.zip>ninth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes9.zip">**</A>)</td>
+              <td>141,650,963</td>
+              <td>160,481,183</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes34.zip>thirty-forth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes34.zip">**</A>)</td>
+              <td>633,910,111</td>
+              <td>654,188,383</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes10.zip>tenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes10.zip">**</A>)</td>
+              <td>160,481,219</td>
+              <td>179,424,673</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes35.zip>thirty-fifth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes35.zip">**</A>)</td>
+              <td>654,188,429</td>
+              <td>674,506,081</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes11.zip>eleventh <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes11.zip">**</A>)</td>
+              <td>179,424,691</td>
+              <td>198,491,317</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes36.zip>thirty-sixth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes36.zip">**</A>)</td>
+              <td>674,506,111</td>
+              <td>694,847,533</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes12.zip>twelfth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes12.zip">**</A>)</td>
+              <td>198,491,329</td>
+              <td>217,645,177</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes37.zip>thirty-seventh <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes37.zip">**</A>)</td>
+              <td>694,847,539</td>
+              <td>715,225,739</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes13.zip>thirteenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes13.zip">**</A>)</td>
+              <td>217,645,199</td>
+              <td>236,887,691</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes38.zip>thirty-eigtht <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes38.zip">**</A>)</td>
+              <td>715,225,741</td>
+              <td>735,632,791</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes14.zip>fourteenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes14.zip">**</A>)</td>
+              <td>236,887,699</td>
+              <td>256,203,161</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes39.zip>thirty-ninth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes39.zip">**</A>)</td>
+              <td>735,632,797</td>
+              <td>756,065,159</td>
+            </tr>
+            <tr>
+              <td align=left><a href=primes15.zip>fifteenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes15.zip">**</A>)</td>
+              <td>256,203,221</td>
+              <td>275,604,541</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes40.zip>fortieth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes40.zip">**</A>)</td>
+              <td>756,065,179</td>
+              <td>776,531,401</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes16.zip>sixteenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes16.zip">**</A>)</td>
+              <td>275,604,547</td>
+              <td>295,075,147</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes41.zip>forty-first <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes41.zip">**</A>)</td>
+              <td>776,531,419</td>
+              <td>797,003,413</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes17.zip>seventeenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes17.zip">**</A>)</td>
+              <td>295,075,153</td>
+              <td>314,606,869</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes42.zip>forty-second <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes42.zip">**</A>)</td>
+              <td>797,003,437</td>
+              <td>817,504,243</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes18.zip>eighteenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes18.zip">**</A>)</td>
+              <td>314,606,891</td>
+              <td>334,214,459</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes43.zip>forty-third <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes43.zip">**</A>)</td>
+              <td>817,504,253</td>
+              <td>838,041,641</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes19.zip>nineteenth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes19.zip">**</A>)</td>
+              <td>334,214,467</td>
+              <td>353,868,013</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes44.zip>forty-forth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes44.zip">**</A>)</td>
+              <td>838,041,647</td>
+              <td>858,599,503</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes20.zip>twentieth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes20.zip">**</A>)</td>
+              <td>353,868,019</td>
+              <td>373,587,883</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes45.zip>forty-fifth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes45.zip">**</A>)</td>
+              <td>858,599,509</td>
+              <td>879,190,747</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes21.zip>twenty-first <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes21.zip">**</A>)</td>
+              <td>373,587,911</td>
+              <td>393,342,739</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes46.zip>forty-sixth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes46.zip">**</A>)</td>
+              <td>879,190,841</td>
+              <td>899,809,343</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes22.zip>twenty-second <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes22.zip">**</A>)</td>
+              <td>393,342,743</td>
+              <td>413,158,511</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes47.zip>forty-seventh <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes47.zip">**</A>)</td>
+              <td>899,809,363</td>
+              <td>920,419,813</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes23.zip>twenty-third <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes23.zip">**</A>)</td>
+              <td>413,158,523</td>
+              <td>433,024,223</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes48.zip>forty-eighth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes48.zip">**</A>)</td>
+              <td>920,419,823</td>
+              <td>941,083,981</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes24.zip>twenty-fourth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes24.zip">**</A>)</td>
+              <td>433,024,253</td>
+              <td>452,930,459</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes49.zip>forty-ninth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes49.zip">**</A>)</td>
+              <td>941,083,987</td>
+              <td>961,748,927</td>
+            </tr>
+
+            <tr>
+              <td align=left><a href=primes25.zip>twenty-fifth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes25.zip">**</A>)</td>
+              <td>452,930,477</td>
+              <td>472,882,027</td>
+              <td class="primary-color">&nbsp;</td>
+              <td align=left><a href=primes50.zip>fiftieth <span class="d-none d-md-inline">million</span></A>
+                (<a href="http://www.utm.edu/~caldwell/primes/millions/primes50.zip">**</A>)</td>
+              <td>961,748,941</td>
+              <td>982,451,653</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      For about ten years I resisted placing large files of primes on the Prime Pages
+      because it can be a waste of bandwidth.&nbsp; Programs can find them far
+      faster than they can be downloaded.&nbsp; So instead I linked to others who had
+      such files.&nbsp; But
+      these sites kept disappearing and the requests for the primes did not.&nbsp; So
+      here they are.&nbsp; Besides, downloading primes is a better use of bandwidth
+      then much of the downloading done on the Internet. <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a
+        href="../../../notes/privacy.html">Privacy notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

@@ -1,0 +1,2 @@
+cd /var/www/clientpool/1 
+nice ./verify1.pl -s 

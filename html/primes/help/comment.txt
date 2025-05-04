@@ -1,0 +1,55 @@
+Note, these are user comments and the editors have not verified their accuracy or appropriateness.&nbsp; Please let us
+know (using the links on the left) if you have any questions or comments.
+
+<a name="why"></a>
+<h3>Why allow comments?</h3>
+
+The purpose of the database is to encourage the sharing of information about prime numbers.&nbsp;  Often the large 
+primes are found for special purposes or using special techniques.&nbsp;  The comments should support this 
+mission.&nbsp; 
+
+<a name="what"></a>
+<h3>Guidelines for comments:</h3>
+
+We would like to see:
+<ol>
+ <li>Proof information for primes this site has not yet verified (usually because the proof technique is long or 
+involved).
+ <li>Comments that explain why a prime is *mathematically* interesting (e.g., "this is the eighth prime found by the 
+Seventeen or Bust project in its effort to prove the Sierpinski conjecture" with appropriate links).
+</ol>
+
+We created the comments to allow:
+<ol>
+  <li>Properties of primes that are not archivable yet still have mathematical merit.  For example, we have deemed 
+a very short list of Generalized Fermat divisibility properties archivable.  You might list other small bases for which 
+there is divisibility.
+</ol>
+But this is <b>not</b> a place for <a href="/curios">Prime Curios!</a>, we have an entire database for those.
+
+<p>We would like to avoid:
+<ol>
+ <li>Silly names attached to primes: "Caldwell prime of the second kind"
+</ol>
+
+We will remove (and possible block posters from writing future comments):
+<ol>
+ <li>Messages between users, attacks, complements, congratulations...&nbsp;  This is an informational
+     database, not a bulletin board.
+ <li>Incorrect comments.
+ <li>Improper or foul language--this site should be appropriate for learners of all ages!
+ <li>Distracting or annoying HTML code.
+</ol>
+So always use common sense and just post what would be acceptable to the 
+mathematical community.
+
+<a name="who"></a>
+<h3>Who can comment</h3>
+
+Currently commenting is limited to those provers in the database that have at least one prime, and who have not yet 
+lost the privilege to post comments.&nbsp;
+
+<h3>Final note</h3>
+
+User comments are an experimental feature of this database and these rules and conditions are all subject to change at
+anytime without notice.&nbsp;

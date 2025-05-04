@@ -1,0 +1,90 @@
+
+<dl>
+<dt><a name=code></a>Proof-Codes
+  <dd>Proof-codes are used by the system as a short way to give credit for each
+submitted prime.&nbsp; These are short strings (never more than four letters &
+digits) which are linked to the list of the persons, programs and projects which
+worked together to prove that number prime.&nbsp; An individual may join different
+project at different times, or may switch software...&nbsp;So each human prover has
+one prover-account, but may own many proof-codes (BOINC users typically have just
+one).&nbsp; Similarly each program/project has one prover-account, but may belong to
+many proof-codes.&nbsp; These codes make prime submission easier and also serve as a
+short way of giving credit on the text versions of the prime list.<p>
+
+<dt><a name=wild></a>Wild Codes
+  <dd>Wild codes are generalized regular expressions used when a program is a member
+of many proof-codes.&nbsp; For example, Proth.exe has the wild code '^GF\d+' to show
+that every proof-code which starts with a lower case 'g' followed by one or more
+digits is a code that uses Proth.exe during the primality proof.&nbsp; Since there are
+several hundred of these, we do not want to list them all on the Proth.exe
+prover-account page.<p>
+
+<dt><a name=email></a>E-mail address
+  <dd>The Prime Pages editors respect the privacy of all of its submitters.&nbsp; To
+submit primes, they must provide an e-mail address so we can ask questions or verify
+submitted data.&nbsp; We will not share this information with third parties and will
+not post this e-mail address <b>unless</b> they request it using the 'edit biography'
+page.&nbsp; If you allow the system to print your address, we suggest you have it
+munged (an option when you edit your account) otherwise you are very likely to get
+spammed.&nbsp; See our <a href="/notes/privacy.html">privacy
+statement</a>.<p>
+
+<dt><a name=name></a>Name
+  <dd>The full name of the human prover or a short descriptive name of the program or
+project.&nbsp; We prefer that the names are listed personal name first then the
+family name: "John W. Smith". Please do not use all capitals.  Save your creativity
+for the username.&nbsp; Finding a record prime is a good reason to use your
+real name.<p>  
+
+<dt><a name=sort></a>Last name
+  <dd>The last name is used for sorting and to indicate an individual person, program
+or project on the prime list.&nbsp; It must be short, contain no white spaces, and
+unique.&nbsp; It is used in many lists to identify the prover and is used to sort
+the prover index. <P> Though it is sometimes possible to link to these pages using the
+last name, you should not--use the prover's id instead.&nbsp; The id will not change,
+but the username might.&nbsp; (Editors may change them to improve readability, to
+take them out of all upper-case form, to shorten them...)<p>
+
+<dt><a name=id></a>Prover id
+  <dd>A unique positive integer specifying the prover-account.&nbsp; Use this as the
+primary means to link to a biography page (e.g.
+https://t5k.org/bios/page.php?id=9).&nbsp; Prover id's should never change.<p>
+
+<dt><a name=total></a>Number of Primes
+  <dd>The 'current list' contains the list of the 5,000 largest proven primes plus
+select smaller primes.&nbsp; However, the database stores the list of all of the
+primes that have every made this list.&nbsp; So there are two numbers indicated here:
+the number of primes on the current list (which may change hourly) and the total
+number that ever made any of the lists.&nbsp; These numbers do not include primes
+awaiting verification.&nbsp; <font color=red>(Note that at first the database does
+contain some primes that never made any list--these will be purged when I get a
+chance, so this total number may drop once for some folks.)</font><p>
+
+  <P><a name=adjusted></a>The total shown for persons or projects (not programs) is
+adjusted by dividing by the number of other humans (or projects) in each relevant
+code.&nbsp; <P>For example, suppose the persons '<a
+href=/bios/page.php?id=239>Carmody</a>' and '<a
+href="/bios/page.php?id=9">Caldwell</a>' worked together and used the program '<a
+href="/bios/page.php?id=411">PRP</a>' to test candidates selected by the '<a
+href="/bios/page.php?id=441">GFN 2^13 Sieving project</a>', then completed their
+proofs using '<a href="/bios/page.php?id=432">Proth.exe</a>'.&nbsp; Then the persons
+'Carmody' and 'Caldwell' would get 1/2 credit for each prime found; but the project
+'GFN 2^13 Sieving project' and the programs 'PRP' and 'Proth.exe' would each get full
+credit.<p>
+
+<dt><a name=score></a>Production Score
+  <dd>The production score is an attempt to rate the amount of effort used to find
+primes.&nbsp; See the bottom of the <a
+href="/bios/top20.php?type=person&by=ScoreRank">Top Twenty
+Prover</a> pages for an explanation.<p>
+
+<dt><a name=bio></a>Autobiographical data
+  <dd>The autobiographical data is information provided by the person, programmer or
+project coordinator.&nbsp; It may be edited if necessary to remove any inappropriate
+text or code.&nbsp; The Prime Pages are not responsible for what individual write
+themselves.&nbsp;
+   <P>Young provers should always leave this section blank or make <b>very</b> sure that the
+do not include any identifying information.
+
+
+</dl>

@@ -1,0 +1,3 @@
+RedirectMatch Permanent code.php/code=(.*)$ https://t5k.org/bios/code.php?code=$1
+RedirectMatch Permanent page.php/lastname=(.*)$ https://t5k.org/bios/page.php?lastname=$1
+RedirectMatch Permanent home.php$ https://t5k.org/bios/

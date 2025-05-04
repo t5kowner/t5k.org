@@ -1,0 +1,243 @@
+#!/usr/bin/perl -w
+
+# The routine resets the digit_rank on the primes.  Its default
+# behavior is to just do those sets of primes with equal number of
+# digits, one of which has the DigitRank flag set (or a digit_rank of
+# NULL).
+
+# Use -h for info on options and stop.
+
+# Note: When doing an ORDER BY, NULL values are always sorted first,
+# even if you are using DESC.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib ("$Bin/math","$Bin/modules",$Bin);
+
+use Getopt::Std;	# Allow for command line options
+use compare;		# Comparison functions for hard cases
+use canonical;		# Rewrite primes in a canonical for (for option c)
+use constants;		# Like $eps for parser
+use open ':std', ':encoding(UTF-8)';
+
+getopts('stchadw:');
+$opt_s or opt_h or print "usage: redigitrank [options].  Use rereank -h to see the options.\n\n";
+
+$opt_h and print "This routine resets the digit_rank on the primes.  Its default
+behavior is to just do those sets of primes with equal number of digits, one of
+which has the DigitRank flag set (or a digit_rank of NULL).
+
+usage: redigitrank [options]    where the options are
+
+	-a	all primes -- reset all digit_ranks (overides -w)
+	-c	adjust description if necessary via &canonical::adjust
+	-d	debug -- lots of output
+	-w 	state which primes (-w \"comment LIKE '%win%'\")
+	-h 	print this help then exist.
+	-s	silent -- only errors printed.
+        -t      test mode--will not change the database
+
+-a forces it to redigitrank all (slow!).  Use -s for crontab operation... and
+-d to watch the (now noisey) progress.
+
+Note that -c only rewrites those primes examined, so use -ac to rewrite all.\n\n";
+
+$opt_h and exit;
+
+$opt_a and ($opt_s or print "-a set : Will revisit all primes.\n");
+$opt_c and not $opt_s and print "-c set : Adjusting prime description if necessary.\n";
+$opt_w and not $opt_s and print "-w set : Just those primes matching 'WHERE $opt_w'.\n";
+$opt_t and not $opt_s and print "-t set : Test mode, will not alter the database.\n";
+$opt_a and $opt_w and print "-a overides -w \n";
+$opt_s or print "\n";
+
+# Open database handle
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_d and print "Connected to database.\n";
+
+# First, select the primes that you need to look at.  Either all ($opt_a set)
+# or those with digit_rank NULL (new items).
+
+my $query;
+if ($opt_a) { 	# Doing all primes ??
+  if ($opt_c) {
+    # Grab all primes period (for rewriting)
+    $query = "SELECT digits FROM prime 
+	GROUP BY digits";
+  } else {
+    # Grab all the values of digits for which there are multiple primes
+    $query = "SELECT digits FROM prime 
+	GROUP BY digits
+	HAVING COUNT(*) > 1";
+  }
+} else {
+  # There should be none with digit_rank NULL without DigitRank flag set, but just in case...
+  my $where = ($opt_w ? "WHERE $opt_w" :
+	"WHERE status LIKE '%DigitRank%' OR status LIKE '%Duplicate%' OR digit_rank is NULL");
+  $query = "SELECT digits FROM prime
+	$where
+	GROUP BY digits";
+}
+$opt_d and print "The query is\n\n$query\n";
+
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+$opt_s or print "Have selected the set of digits for which the primes must all be checked.\n";
+
+# Second, loop through the values of digits, and rerank each group of primes
+
+$opt_s or print "Current value of parser eps is $defaults::eps.\n";
+$defaults::eps or die "eps unset.";
+
+# Set some counting variables for reporting what we did
+my $number_checked    = 0; # Total number checked to see if need reranking
+my $number_updated    = 0; # Total number reranked.
+my $number_close      = 0; # Incremented in &prime_sort (counts those hard to compare)
+my $number_unresolved = 0; # Number the parser failed on
+my $number_different  = 0; # Number of different values of "digits" checked (groups)
+
+# Loop through this list of digits, processing each group  
+while ($p = $sth->fetchrow_hashref) {
+  my $digits = $$p{'digits'};
+  $opt_d and print "Those with $digits digits: ";
+
+  # Select all with $digits digits (need log10, description to sort; 
+  # also status to see if updates required) (submitted for duplicates in prime sort)
+  $query = "SELECT id, digit_rank, log10, description, status, submitted+0 as submitted, comment
+	FROM prime WHERE digits = '$digits'
+	ORDER BY log10 DESC";
+  $sth1 = $dbh->prepare($query) || die $sth1->errstr;
+  $sth1->execute() || die $sth1->errstr;
+
+  # Now rank them.  We can not assume the "ORDER BY log10 DESC" above gave
+  # us the right order (e.g., twin primes have the same log10 value).
+  # So we put them in a hash array, then use an external comparison 
+  # function to sort, then set digit_ranks.
+
+  my @primes = ();	# An array of hash references (primes with $digits digits)
+  while (my $q = $sth1->fetchrow_hashref) {  push (@primes,$q); }
+
+  my $system_error = 0;	# Look for sort failures--
+  @primes = sort prime_sort @primes;
+  if ($system_error) {
+    warn "Not digit-ranking the primes with $digits because of a system error.\n".
+	"Please fix the system (probably compare module) and rerun.\n";
+    next;
+  }
+
+  my $digit_rank = 0;
+  my $desc = '';
+  foreach (reverse @primes) {	# Largest prime ranks 1 of course!
+
+    # Adjust description (it would be best if this was done before sorting...)
+    if ($opt_c and $$_{'description'} ne ($desc = &canonical::adjust($$_{'description'}))) {
+      $query = "UPDATE prime
+          SET description = ".($dbh->quote($desc))."
+          WHERE id = '$$_{id}'";
+      $sth2 = $dbh->prepare($query) || die $sth2->errstr;
+      $opt_t or ($sth2->execute() || die $sth2->errstr);
+      $opt_s or print "Adjusted id $$_{id}:\n\t$$_{'description'}\tto\n\t$desc\n";
+      $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'modified', "prime.id=$$_{id}",
+                "Adjusted $$_{'description'} to $desc");  
+      $number_updated++;
+    }
+
+    $digit_rank++;
+    # Now adjust the digital rank
+    # Skip if it is unnecessary to update ('digit_rank' fine and 'DigitRank' unset)
+    next if (defined($$_{'digit_rank'}) and $$_{'digit_rank'} == $digit_rank
+	and $$_{'status'} !~ /DigitRank/o);
+    $query = "UPDATE prime
+        SET digit_rank = '$digit_rank', status = REPLACE(status,'DigitRank','Rerank'),
+	modified=modified WHERE id = '$$_{id}'";
+    $sth2 = $dbh->prepare($query) || die $sth2->errstr;
+    $opt_t or ($sth2->execute() || die $sth2->errstr);
+    # State changes to the digitrank only if -d set
+    $opt_d and print "Adjusted id $$_{id}:\n\t digitrank from $$_{'digit_rank'} to $digit_rank\tto\n\t$desc\n";
+    $number_updated++; 
+  }
+  $number_different++;			# Number of differerent values of digits
+  $number_checked += $digit_rank;	# Number of differerent priems
+  $opt_d and print "$digit_rank\n";
+}
+
+# Proclaim success
+
+$opt_s or print "$number_different different values of 'digits' checked,
+    $number_checked prime's digit_rank values examined, and $number_updated updated.  
+    ($number_close were within eps ($defaults::eps, relative) of each other.)\n";
+$number_unresolved and print "There were $number_unresolved unresolved case of 
+	primes (unsortable pairs).  THIS SHOULD NEVER HAPPEN!\n\n";
+exit;
+
+# Want to define $a <=> $b for sorting the primes above
+
+sub prime_sort {
+  # Called via SORT, so $a and $b automatically set
+  if ($$a{'log10'} and  $$b{'log10'}) {
+
+    # log10 is enough info to sort most primes!
+    return  1 if $a->{'log10'} - $b->{'log10'} >  $defaults::eps * $a->{'log10'};
+    return -1 if $a->{'log10'} - $b->{'log10'} < -$defaults::eps * $b->{'log10'};
+
+    # hard cases -- use external module
+    $opt_d and print "\t(#$$a{id} and #$$b{id} close!)\n";
+    $number_close++;
+    my $out = &compare::desc_cmp($$a{'description'},$$b{'description'});
+    if (defined($out)) {	# desc_comp returns -1, 0, 1 or undef.
+      return $out if $out;	# 1, -1
+      if ($$a{'description'} eq $$b{'description'} and $$a{'comment'} eq $$b{'comment'}) {
+        my $id = ($$a{'submitted'} < $$b{'submitted'} ? $$b{'id'} : $$a{'id'});
+	if ($$a{'submitted'} == $$b{'submitted'}) {
+	  $id = ($$a{'id'} < $$b{'id'} ? $$b{'id'} : $$a{'id'});
+  	}
+        print "Identical primes (cat/comm/desc match so marking newer/2nd (id $id) 'Remove')\n";
+        $query = "UPDATE prime SET status = CONCAT(status,',Remove') WHERE id = '$id'";
+        $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+        $opt_t or ($sth3->execute() || die $sth3->errstr);
+      } else {
+        print "Identical primes (marking both 'Duplicate'):\n";
+ 
+        $query = "UPDATE prime SET status = CONCAT(status,',Duplicate'),
+		modified=modified WHERE id = '$$a{id}'";
+        $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+        $opt_t or ($sth3->execute() || die $sth3->errstr);
+
+        $query = "UPDATE prime SET status = CONCAT(status,',Duplicate'), 
+		modified=modified WHERE id = '$$b{id}'";
+        $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+        $opt_t or ($sth3->execute() || die $sth3->errstr);
+      }
+      print "   $$a{id}:(".($$a{log10}||'???').") $$a{description} $$a{comment} #$$a{submitted}\n";
+      print "   $$b{id}:(".($$b{log10}||'???').") $$b{description} $$b{comment} #$$b{submitted}\n";
+
+      return 0;
+    } # leaves undef case to be handled below
+  }
+
+  # Should not get here!!
+  $number_unresolved++;
+  print "SYSTEM FAILURE: Could not sort the following primes (setting DigitRank and Reparse flags):
+	$$a{id} : (".($$a{log10}||'???').") $$a{description}
+	$$b{id} : (".($$b{log10}||'???').") $$b{description}\n";
+
+  # Concat'ing two new fields at once failed--why?
+
+  $query = "UPDATE prime SET status = CONCAT(status,',Reparse') WHERE id = '$$a{id}'";
+  $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+  $opt_t or ($sth3->execute() || die $sth3->errstr);
+
+  $query = "UPDATE prime SET status = CONCAT(status,',DigitRank') WHERE id = '$$a{id}'";
+  $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+  $opt_t or ($sth3->execute() || die $sth3->errstr);
+
+  $query = "UPDATE prime SET status = CONCAT(status,',Reparse') WHERE id = '$$b{id}'";
+  $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+  $opt_t or ($sth3->execute() || die $sth3->errstr);
+
+  $query = "UPDATE prime SET status = CONCAT(status,',DigitRank') WHERE id = '$$b{id}'";
+  $sth3 = $dbh->prepare($query) || die $sth3->errstr;
+  $opt_t or ($sth3->execute() || die $sth3->errstr);
+
+  return 0;
+}

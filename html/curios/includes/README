@@ -1,0 +1,24 @@
+These are support files for this collection
+
+  mail.php	(specific to collection) allows mailing the editors
+
+  file.php	(generic) allows txt files to be printed in the template
+		and allows editing over the internet.  The *.txt files must
+		be world readable/writable to edit.  Should also be linked
+		from the test version to the actual for backups to work right.
+		Note that we use *.html in the url and translated it to *.txt
+		(lynx needs the .html extension, I wanted .txt locally to
+		keeps these files separate from the rest!)
+ 
+  README	This file
+
+Images and style sheets for the collection
+
+  PrimeCur.gif
+  background.gif
+  space2.gif
+  template.css
+
+Note 
+
+  gifs/		Links to the real copy so updates there match here...

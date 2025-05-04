@@ -1,0 +1,453 @@
+#!/usr/bin/perl -w
+use warnings;
+# use strict;
+
+use Getopt::Std;	# Allow for command line options
+getopts('stv');
+our($opt_s,$opt_t,$opt_v);
+
+use Time::HiRes 'time'; # More accurate timming
+our $time = time;
+
+# This program (1) reads in the BibTex database via &PopItem and stores it into
+#
+#   %Items		keys = BibTeX key (\w+\d+ or \w+),
+#          		values = hash array of BibTeX fields
+#
+#   %string    		keys = abbreviation,
+#		 	values = expanded form (TeX washed in &LookUp)
+#              		(standard month names added jan=January...)
+#   %processed_string   Same as %string, but now TeX-washed
+#
+# BibTex preamble ignored.
+#
+# (2) Next the entries are used to create several more hash arrays via &print_item
+#
+#  %ItemsHTML 		keys = BibTeX key, abstract::BibTex key, annote::BibTex key
+#                               or ignore::BiBTeX key
+#             		values = HTML form of these entries
+#
+#  %formats::publist	keys = Authors/Editors last names (created in &formats::NameList)
+#			values = null delimited list of BibTeX keys
+#
+#  %types		keys = the BibTeX types (book, article...) in database
+#			values = the number of entries of this type
+#
+# (3) Finally these are each placed into dbm arrays via &WriteDBM.   The enries that
+# are too long to fit (see $DBM_max_record_length) into the database are written
+# into the subdirectory long with the name key.txt.  In their place is just
+# "\0filepath" (see &InsertHTML for details)  The reference cgi will read these
+# from the subdirectory.
+
+our(%Items, %string, %processed_string);  # As discussed above
+my(%types, %ItemsHTML);  # As discussed above
+
+# records can only be so long--system dependent
+
+my $DBM_max_record_length = 50000;
+
+# Where is the raw BibTeX database to be found?
+
+# If it finds the database (first thing we do), then we are in the right spot
+my $RefsRoot = '/var/www/html/references/';
+my $FilePath= $RefsRoot.'primes.bib';
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin, "$Bin/../bin";
+
+use SlurpFile;   # Read/write files.
+use formats;     # Does the work of cleaning the TeX
+
+# Command lime options -s silence, -v verbose, -r summary only
+
+$opt_s = 0 if $opt_v;  # verbose overrides silence
+$opt_s or print "This program creates the DBM databases for the reference page.  Use
+  \t-s for silent operation
+  \t-t to test by reading bib.., but not updating,  and
+  \t-v for very verbose.\n";
+
+# Month names should be abbreviated in BibTeX databases
+
+%processed_string = ('jan' => 'January', 'feb' => 'February',
+   'mar' => 'March',   'apr' => 'April', 'may' => 'May',
+   'jun' => 'June',    'jul' => 'July',  'aug' => 'August',
+   'sep' => 'September',  'oct' => 'October', 'nov' => 'November',
+   'dec' => 'December');
+
+# Delimiters and their matches (used in &PopValue to find the end of fields)
+
+my %match = ('{' => '}', '}'=>'{', '"'=> '"', ',' => "\0", '=' => "\0");
+
+### Step (1) Read in the raw data, use it to fill %Items and %string
+
+print("Program compiled.",&ShowTime) unless $opt_s;
+my $File = &SlurpFile::SlurpFile($FilePath) or die "No raw BibTeX database at $FilePath.";
+
+while (&PopItem) {  # Do all the work
+  last unless $File;
+}
+
+# Pause to do some counting ($Count used again below in displaying %CountByLetter)
+
+my $Count = 0;
+my $CountOut = "Summary of items in this database:\n".
+  "(database last updated ".&Date.")\n\n";
+foreach (keys %types) {
+  my $space = 4-length($types{$_});
+  $CountOut .= "\t".' 'x$space."$types{$_}\t$_\n";
+  $Count += $types{$_};
+}
+my $space = ($Count > 999 ? '' : ' ');
+$CountOut .= "\t----\t----------\n\t$space$Count\ttotal\n";
+if ($opt_v) {
+  print "\n\n$CountOut";
+} else {
+  print "$Count items read.\n" unless $opt_s;
+}
+
+&SlurpFile::WriteFile("${RefsRoot}count.txt",$CountOut) unless $opt_t;
+
+
+$opt_s or print "Done reading raw BibTeX data, beginning processing.",&ShowTime,"\n";
+
+### Step (2) Reformat into HTML, store into %ItemsHTML.
+
+# Counting the number of keys starting with each letter while we are at it
+
+my %CountByLetter;
+foreach ('A'..'Z') { $CountByLetter{$_} = 0 }
+
+foreach my $name (sort keys %Items) {
+  (my $FirstLetter) = ($name =~ /(^.)/o);  #14
+  $CountByLetter{$FirstLetter} += 1;
+  &print_item($name);
+}
+
+if ($opt_v) {  # Print count by first letter to help ballance html directory
+  print "\n\n";
+  foreach (sort keys %CountByLetter) {
+    print "$_ : $CountByLetter{$_}\t(",int($CountByLetter{$_}*100/$Count),"%)\n";
+  }
+}
+
+# Did we use all of the strings in the BibTex database?
+
+$opt_v and print "\nUsed strings:\n\t";
+foreach (sort keys %processed_string) {
+  print("$_, ") if $opt_v;
+  delete $string{$_};
+}
+if (%string and not $opt_s) {
+ print "\n\nUnused strings:\n\t";
+ foreach (sort keys %string) {
+   print "$_, ";
+ }
+ print "\n\n";
+}
+
+$opt_s or print "Items processed, now writing databases.",&ShowTime;
+
+### Now lets write the entries into the databases
+
+&WriteDBM($RefsRoot.'References',\%ItemsHTML) unless $opt_t;
+&WriteDBM($RefsRoot.'ByAuthor',\%formats::PubList) unless $opt_t;
+
+$opt_s or print "Done.",&ShowTime;
+
+exit;  # Unnecessary, but makes it easier for you to read eh?
+
+
+
+###########################################################################
+########################## Support routines ###############################
+###########################################################################
+
+sub ShowTime {
+  sprintf(" Time used: %.4f seconds.\n",time-$time);
+}
+
+
+# &print_item($name)
+#    Uses the formatting hash arrays defined by the module formats.pm
+#    to turn the raw BibTeX data from %Items into printable HTML
+#    in %ItemsHTML with the same keys.  Well, almost.  There are
+#    two exceptions.  (1) If the BibTeX field is set to separate
+#    (e.g., $Books->abstract->separate=1 is set in formats.pm)
+#    then places it in %ItemsHTML with a name like 'abstract::BS96'
+#    (field name :: item name).  (2) Entries that are too long
+#    are each written in a sudirectory $RefsRoot.long and in the
+#    array %ItemsHTML we just include "\0filename".  Too long
+#    is longer than $DBM_max_record_length defined above.  This
+#    distinction (of where text goes) is made by &InsertHTML
+
+sub my_warn { # Uses global $name and $Field to provide smarn warn for &print_item
+  # &my_warn(string) prints a warning but adds ' in item...'
+  warn ((shift or 'Unknown error').' in item '.($main::name||'(unknown)')
+    .':'.($main::Field||'')."\n");
+}
+
+sub print_item {
+  our $name = shift or die "No item name passed to print_item";
+  my %item   = %{$Items{$name}};
+  my $type = $item{'Format_'};  # For error messages
+
+  print " $name," if $opt_v;
+
+  # Step one, grab the correct format hash array
+
+  my %Format = %{'formats::'.(uc(delete $item{'Format_'}).'S')};
+  unless (%Format) {
+     my_warn "Format undefined for $type, using default";
+     %Format = %formats::Default;
+  }
+
+  # Should I fix this so we only sort once per type?  If so,
+  # do it in the end of formats.pm ...  store as arrays there
+
+  my @Fields = sort
+      { ($Format{$a}->{'sequence'}||999) <=>
+        ($Format{$b}->{'sequence'}||999) }
+         keys %Format;
+
+  # Okay, lets form the print string in $out
+
+  our $Field = 'All_Items';  # Left global for &my_warn
+  my $out = $Format{$Field}->{'PreText'}||'';
+  my $transform = $Format{$Field}->{'Transform'} || sub { };
+  &$transform(\%item);
+  my $dateflag = delete $item{'dateflag'} or die "No dateflag in $name";
+
+  my $data;
+  foreach my $Field (@Fields) {  # Go through the field list for this type
+    next if ($Field eq 'All_Items');  # Special field (used above and below)
+    if (not defined ($item{$Field})) { # Missing, check if thst is okay
+      next unless $Format{$Field}->{'required'};
+      &my_warn("$type requires field \"$Field\"");
+      $item{$Field} = "$Field unknown";
+    }
+    $data = $Format{$Field}->{'PreText'} || ' ';
+    $transform = $Format{$Field}->{'Transform'} || \&formats::strip;
+    $data .= &$transform(delete $item{$Field});
+    $data .= $Format{$Field}{'PostText'} if $Format{$Field}{'PostText'};
+    unless ($Format{$Field}->{'separate'}) {  # Store separate in the dbm?
+      $out .= $data;
+    } else { # Yes==store as item "$Field::$name" e.g., abstract::BS96
+      &InsertHTML($Field.'::'.$name,$data);
+    }
+  }
+
+  $Field = 'All_Items';
+  $out .= $Format{'All_Items'}->{'PostText'}||'';
+  foreach $Field (keys %item) {
+    &my_warn("$type ignores field \"$Field\"");
+  }
+
+  &InsertHTML("$name;$dateflag",$out);
+}
+
+# &InsertHTML(name,value) places data into %ItemsHTML or a separate file
+# if too long for the database
+
+sub InsertHTML {
+  my $name = shift or die 'must have item name in &InsertHTML';
+  my $out = shift or warn "\%ItemsHTML has missing or undefined value at $name";
+
+  # Sometimes when fields are combined extra spaces are left over (usually
+  # ment to separate an optional field...)
+  $out =~ s/\&nbsp;\s*$//o;
+  $out =~ s/\s\s+/ /go;
+
+  if (length($out) <= $DBM_max_record_length) {
+    $ItemsHTML{$name} = $out;
+  } else {
+    &SlurpFile::WriteFile("${RefsRoot}long/$name.txt",$out);
+    $opt_v and print("Long entry written: $name is too long (by ",
+      length($out)-$DBM_max_record_length,") length=",length($out),"\n");
+    $ItemsHTML{$name} = "\0long/$name.txt";
+  }
+}
+
+# Removes an item, placing strings into %string; items into %Items... 
+
+sub PopItem {
+  my $name;  # name of item
+  my $type;  # type
+  my $a;     # fields...
+  my $b;
+  if ($File =~ s/^\s*@(\w+)\s*{\s*//o) {
+    $type = $1;
+    if (lc($type) eq 'string') {         ####### STRINGS ########
+      $a = &PopValue('=',1,1);
+      if ($File =~ s/^\s*"//so) {
+        $b = &PopValue('"',1);
+      } else {      
+        die "Should not be here?";
+        $b = &PopValue("\n",1);
+      }
+      $b =~ s/\s+/ /sog;
+      warn "String $a defined twice, using second definition\n" 
+	if (exists $string{$a});
+      $string{$a} = $b;
+      mydie ("Bad STRING, expected }") unless ($File =~ s/^\s*}\s*//o);
+    } elsif ($type =~ /^preamble$/io) {  ####### PREAMBLE ########
+      # delete preamble
+      &PopValue('}',1,1);
+    } else {                         ####### true ITEMS ######
+      $name = &PopValue(',',1);
+      mydie("Bad name $name")  if ($name !~ /\w+(\d+\w?|\*\*|)$/o);
+      warn "Item $name defined twice,  using second definition\n" 
+ 	if defined $Items{$name};
+      print " $name," if $opt_v;
+      $types{$type} = (defined $types{$type} ? $types{$type}+1 : 1);
+      $Items{$name} = { };
+      while ($File !~ s/^\}\s*//so) {
+        $a = lc(&PopValue('=',1,1));
+        $b = &PopValue(',',1);
+        $b =~ s/\s+$//o;  # Fields that terminate entry have extra space...
+
+        if ($b =~ /^\d+$/so) { 				# integer
+        } elsif ($b =~ s/^\s*\{\s*(.*?)\s*\}$/$1/so) {  # string
+###### to check for misformated string references:
+######	  print "$name: short string \"$b\"\n" if ($1 !~ /^\d+/so and length($b) < 5);
+        } else {					# string variable
+          $b = &LookUp($b);
+        }
+        $Items{$name}->{$a} = $b;
+      }
+      $Items{$name}->{'Format_'} = $type;
+    }
+  } elsif ($File =~ s/^\\Sort\{//o) { ######### Sort ########
+    # delete \Sort field
+    &PopValue('}',1,1);
+  } else {
+    &mydie('did not recognize item');
+  }
+}
+
+# usage &PopValue(terminator,remove,required,whitespace)
+#   Reads until finds, and removes (if second parameter set),
+#   first unmatched case of terminator.  Must find it if third
+#   flag set (otherwise may be terminated via }).  Do not remove 
+#   leading and padding whitespace (whitespace before the delimiters)
+#   if the fourth parameter set
+ 
+sub PopValue {
+  my $terminator = shift or die "PopValue not passed a terminator"; 
+  defined $match{$terminator} or die "Not match defined for $terminator";
+  my $match = $match{$terminator};
+  my $remove = shift || 0;     # remove $terminator when found
+  my $required = shift || 0;   # $terminator required?
+  my $whitespace = shift || 0; # remove padding whitespace?
+
+  my ($chars,$space,$end);
+  if ($required) {
+    ($chars,$space,$end) = ($File =~ /^(.*?)(\s*)([$match$terminator\{])/s);
+    $end or mydie("Expected $terminator or }");
+    $File =~ s/^(.*?)(\s*)([$match$terminator\{])//s;
+### Chris: why not s/$chars$space$end//s -- or do we need to quote metas?
+  } else {
+    ($chars,$space,$end) = ($File =~ /^(.*?)(\s*)([$match$terminator\{\}])/s);
+    $end or mydie("Expected $terminator or }");
+    $File =~ s/^(.*?)(\s*)([$match$terminator\{\}])//s;
+  }
+  my $out = ($whitespace ? $chars.$space : $chars);
+
+  if ($end eq '{') {
+    $out .= $space.'{'.&PopValue('}').&PopValue($terminator,$remove,$required,1);
+  } elsif ($end eq $terminator) {
+    ($out .= $terminator) unless $remove;
+  } elsif ($end eq $match) {
+    $out .= $end.&PopValue($terminator).&PopValue($terminator,$remove,$required);
+  } elsif ($end eq '}') {
+    ### Hummm.......
+    $File = $end.$File;
+  }
+  ($whitespace ? $out =~ s/^\s+/ /so : $out =~ s/^\s+//so);
+  return $out;
+}
+
+# &mydie prints and error message and shows where the error is (via &show)
+sub mydie {
+  print("Error:", shift || '', ' at', &show);
+  exit;
+}
+
+# &show is used to show the error in the tail of the global $File (rawBibTeX)
+sub show {
+  (my $out) = ($File =~ /(.{0,50})/so);
+  $out =~ s/\n/\n\t/go;
+  return "\n\t$out\n";
+}
+
+# &WriteDBM(path,\%hash) writes the has at the given path--leave off .dir, .pad
+
+sub WriteDBM {
+  my $dbmpath = shift or die 'No dbm path specified to &WriteDBM';
+  my $Items = shift;
+  unless (%$Items) {
+    warn "I refuse to write an empty database at $dbmpath, why is it empty?";
+    exit;  # Perhaps the old one still works!
+  }
+
+  (! -e $dbmpath.'.dir') or unlink($dbmpath.'.dir') or die('could not delete old dbm file');
+  (! -e $dbmpath.'.pag') or unlink($dbmpath.'.pag') or die('could not delete old dbm file');
+
+
+#  if (($ENV{'HOSTNAME'}||'') =~ /^primes/) {
+#   require NDBM_File;      # Built manually , but fails--comes with 5.6.1
+#   require GDBM_File;      # Perl module not installed--comes with 5.6.1
+#    require BerkeleyDB;     # Working, but can't get PHP to read it
+#    import  BerkeleyDB; 
+#  } else {
+   require AnyDBM_File;    # Works, but don't know what format! 
+   import  AnyDBM_File;
+#  }
+  # Perl doc says require/import equiv to use, but use fails in this context
+
+  dbmopen(my %Out,$dbmpath,0644) or die("Failed to dbmopen $dbmpath for write");
+
+  my($name,$out);
+  foreach $name (keys %$Items) { 
+    $out = $$Items{$name} or warn "wrote empty item at $name in WriteDBM";
+    die("Entry $name is too long!") if (length($out) > $DBM_max_record_length);
+     # Should never be to long, tested above in &InsertHTML
+    $Out{$name} = $out;
+  }
+
+  dbmclose(%Out) or die("Failed to dbmclose $dbmpath");
+}
+
+# &LookUp(string)
+#
+#   Just strips if the input has the form {...} or is more than one word,
+#   otherwise looks it up in the list of strings.  If it does not find it,
+#   then it just returns the &strip'ed string (and warns).
+
+sub LookUp {
+  my $string = shift or die('no string passed to lookup');
+  if ($string =~ /^\w+$/o) {
+    my $lcstring = lc($string);  # Not case sensitive
+    if (defined $processed_string{$lcstring}) {
+      return $processed_string{$lcstring};
+    } elsif (defined $string{$lcstring}) {
+      $string = &formats::strip($string{$lcstring});
+      $processed_string{$lcstring} = $string;
+      return $string;
+    } else {
+      &my_warn("undefined abbreviation (STRING): \"$string\"");
+    }
+  }
+  # should not reach here
+  &formats::strip($string)
+}
+
+
+sub Date {
+  my @Months = ('Null', 'January', 'February', 'March', 'April', 'May', 'June',
+     'July', 'August', 'September', 'October', 'November', 'December');
+  (my $month, my $day, my $year, my $rest) =
+    (`/bin/date +"%D, %I:%M%p"` =~ m#0?(\d+)/0?(\d+)/(\d+)(.*)#o);
+  $year = ($year < 50 ? '20' : '19').$year;
+  "$day $Months[$month] $year".lc($rest);
+}
+

@@ -1,0 +1,88 @@
+#!/usr/bin/perl -w
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+
+use DBI;                # Generic database interface
+use Getopt::Std;        # Allow for command line options
+use Time::HiRes 'time'; # More accurate timming
+my $time = time;
+use modify;		# My modification routines
+
+getopts('defls');
+unless ($opt_s) {
+  print "Finds any new references in the glossary database...\n
+	-s	silent operation
+	-f	force all to be updated
+	-e	show entites to be translated (and then stop)
+	-l	show potential links to glossary
+	-d	debug mode (verbose!)\n\n";
+  $opt_f and print "Selecting all entries. \n";
+}
+
+if ($opt_e or $opt_e) {
+  &Modify::ShowEntities();
+  exit;
+}
+
+if ($opt_l or $opt_l) {
+  &Modify::ShowLinks();
+  exit;
+}
+
+
+$count = &Modify::LoadDatabase('glossary'); # Loads the glossary info into the array @$glossary
+$opt_s or print "Loaded $count glossary terms.  ";
+$opt_s or printf("(Total time used: %.4f seconds.)\n",time-$time);
+
+# Lets see if we can connect to database
+use DBI;
+use connect_db;
+my $dbh = &connect_db::connect();
+
+$days = 3655;
+
+if ($opt_f) {
+  $query = "SELECT id, name, description, description2, sort, mathjax FROM archivable;";
+} else {
+  $query = "SELECT id, name, description, description2, sort, mathjax FROM archivable WHERE
+    modified > DATE_SUB(CURRENT_DATE,INTERVAL $days DAY);";
+}
+
+$modified = $dbh->selectall_arrayref($query) || die $dbh->errstr;
+$opt_s or print "Found " . @$modified .
+	" entries that were modified in the last $days days.  ";
+$opt_s or printf("(Total time used: %.4f seconds.)\n",time-$time);
+
+foreach (@$modified) {
+  # Grab the row selected -- MUST MATCH $query!!
+  my ($id, $name, $description, $description2, $sort, $mathjax) = @$_;
+
+  # Skip if no description
+  $opt_d and print "Adjusting entry id = $id: name = '$name'\n";
+  if (! $description) {
+    $opt_d and print "\tskipping--no description\n";
+    next;
+  }
+
+  # Adjust description
+  my $new_description2 = &Modify::ModifyEntities(&Modify::Modify($description),$mathjax);
+
+  if ($new_description2 eq $description2) {
+    $opt_d and print "\tskipping--description unchanged\n";
+    next;
+  }
+
+  # Store description
+  if ($opt_d) {
+    print "\tChanged, so updating database\n";
+  } else {
+    $opt_s or print "Adjusting entry id = $id: name = '$name'\n";
+  }
+  $new_description2 = $dbh->quote($new_description2);
+  $query = "UPDATE archivable SET description2 = $new_description2 WHERE id = $id;";
+  $dbh->do($query) || die("update failed at $id : $name\n");
+}
+
+$opt_s or printf("(Total time used: %.4f seconds.)\n",time-$time);
+

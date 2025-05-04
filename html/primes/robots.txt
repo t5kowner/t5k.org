@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: generic_edit
+Disallow: search.php
+Disallow: edit.php
+Disallow: submit
+

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 4.3: A polynomial-time algorithm</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->4.3: A Polynomial-Time
+                Algorithm <!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove4.html">Chapter
+                  Four</a> &gt; A Polynomial-Time Algorithm<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p> As we mentioned before, many of the primality proving methods are conjectured
+    to be polynomial-time.&nbsp; For example, <a href="prove2_3.html#MillersERHTest">Miller's
+      test</a> is polynomial if ERH is true (and Rabin gave a version of this test
+    that was unconditionally randomized polynomial-time
+    [<a href="../references/refs.cgi/Rabin80">Rabin80</a>]).&nbsp; Adleman and Hang [<a
+      href="../references/refs.cgi/AH1992">AH1992</a>]
+    modified the Goldwasser-Killian algorithm [<a href="../references/refs.cgi/GK86">GK86</a>]
+    to produce a randomized polynomial time algorithm that always produced a certificate
+    of primality...&nbsp; So it is not surprising that there exists a polynomial-time
+    algorithm for proving primality.&nbsp; But what is surprising is that in 2002
+    Agrawal, Kayal and Saxena [<a href="../references/refs.cgi/AKS2002">AKS2002</a>]
+    found a relatively simple <i>deterministic</i> algorithm which relies on <i>no
+      unproved assumptions</i>.&nbsp; We present this algorithm below then briefly
+    refer to a related algorithm of Bernstein.</p>
+  <p>The key to AKS' result is another simple version of <a href="prove2_2.html#FLittleT">Fermat's
+      Little Theorem</a>:</p>
+  <blockquote>
+    <p><b>Theorem:</b>&nbsp; Suppose that <i>a</i> and <i>p</i> are relatively prime
+      integers with <i>p</i> &gt; 1.&nbsp; <i>p</i> is prime if and only if</p>
+    <div style="text-align: center;">
+      (<i>x</i>-<i>a</i>)<sup><i>p</i></sup> ≡ (<i>x<sup>p</sup></i>-<i>a</i>) &nbsp;
+      (mod <i>p</i>)
+    </div>
+  </blockquote>
+  <blockquote><b>Proof.</b>&nbsp; If <i>p</i> is prime, then <i>p</i> divides the
+    binomial coefficients <sub><i>p</i></sub>C<sub><i>r</i></sub> for <i>r</i> =
+    1, 2, ... <i>p</i>-1.&nbsp; This shows that (<i>x</i>-<em>a</em>)<sup><i>p</i></sup> ≡
+    (<i>x<sup>p</sup></i>-<i>a<sup>p</sup></i>) (mod <i>p</i>), and the equation
+    above follows via Fermat's Little Theorem.&nbsp; On the other hand, if <i>p</i> &gt; 1 is composite, then it has a
+    prime divisor <i>q</i>.&nbsp; Let <i>q<sup>k</sup></i> be the greatest power of <i>q</i> that divides <i>p</i>. Then
+    <i>q<sup>k</sup></i> does not divide <sub><i>p</i></sub>C<sub><i>q</i></sub> and is relatively prime
+    to <i>a<sup>p-q</sup></i>, so the coefficient of the term <i>x<sup>q</sup></i> on the left of the equation in the
+    theorem is not zero, but it is on the right.
+  </blockquote>
+  <p>(This result was used to create a randomized polynomial-time algorithm by Agrawal
+    and Biswas [<a href="../references/refs.cgi/AB1999">AB1999</a>].)</p>
+  <p>Of course in this form it is too difficult to use because there are just far
+    too many coefficients to check.&nbsp; Their idea was to look at the simpler
+    condition: </p>
+  <div style="align-content:center">
+    (<i>x</i>-<i>a</i>)<sup><i>p</i></sup> ≡ (<i>x<sup>p</sup></i>-<i>a</i>) &nbsp;
+    (mod <i>x<sup>r</sup></i>-1,<i>p</i>)
+  </div>
+  <p>This must hold if <i>p</i> is prime and it is conjectured (see [<a href="../references/refs.cgi/BP2001">BP2001</a>,
+    <a href="../references/refs.cgi/KS2002">KS2002</a>]) that if <i>r</i> &gt;1
+    does not divide <i>p</i> and the above congruence holds, then either <i>p</i> is prime or <i>p</i><sup>2</sup> is 1
+    modulo <i>r</i>.
+  </p>
+  <p>Agrawal, Kayal and Saxena managed to reformulate this into the following algorithm
+    which they proved would run in at most O((log <i>n</i>)<sup>12</sup><i>f</i>(log
+    log <i>n</i>)) time where <i>f</i> is a polynomial. (This means the time it
+    takes to run the algorithm is at most a constant times the number of digits
+    to the twelfth power times a polynomial evaluated at the log of the number of
+    digits.) </p>
+  <blockquote> <code>Input: Integer <i>n</i> &gt; 1<br>
+  <br>
+  if (<i>n</i> is has the form <i>a<sup>b</sup></i> with <i>b</i> &gt; 1) then 
+  output COMPOSITE<br>
+  <br>
+  <i>r</i> := 2<br>
+  while (<i>r</i> &lt; <i>n</i>) {<br>
+  &nbsp; &nbsp; if (gcd(<i>n</i>,<i>r</i>) is not 1) then output COMPOSITE<br>
+  &nbsp; &nbsp; if (<i>r</i> is prime greater than 2) then {<br>
+  &nbsp; &nbsp; &nbsp; &nbsp; let <i>q</i> be the largest factor of <i>r</i>-1<br>
+  &nbsp; &nbsp; &nbsp; &nbsp; if (<i>q</i> &gt; 4sqrt(<i>r</i>)log <i>n</i>) and 
+  (<i>n</i><sup>(<i>r</i>-1)/<i>q</i></sup> is not 1 (mod <i>r</i>)) then break<br>
+  &nbsp; &nbsp; }<i><br>
+  &nbsp; &nbsp; r</i> := <i>r</i>+1<br>
+  }<br>
+  <br>
+  for <i>a</i> = 1 to 2sqrt(<i>r</i>)log <i>n</i> {<br>
+  &nbsp; &nbsp; if ( (<i>x</i>-<i>a</i>)<sup><i>n</i></sup> is not (<i>x</i><i><sup>n</sup></i>-<i>a</i>) 
+  (mod <i>x</i><i><sup>r</sup></i>-1,<i>n</i>) ) then output COMPOSITE<br>
+  }<br>
+  <br>
+  output PRIME;</code> </blockquote>
+  <p>The proof [<a href="../references/refs.cgi/AKS2002">AKS2002</a>] is relatively
+    straightforward, and perhaps the most advanced result necessary is a sieve result
+    required to show the necessary <i>q</i> exists for each composite ([<a
+      href="../references/refs.cgi/F1985">F1985</a>],
+    [<a href="../references/refs.cgi/BH1996">BH1996</a>]).&nbsp; (Note that the first
+    step, determining if the number is a perfect power, can be done in essentially
+    linear time [<a href="../references/refs.cgi/Bernstein1998b">Bernstein1998b</a>].) </p>
+  <p>AKS also showed that if <a class="glossary" title="glossary"
+      href="/glossary/page.php?sort=SophieGermainPrime">Sophie
+      Germain primes</a> have the expected distribution [<a href="../references/refs.cgi/HL23">HL23</a>]
+    (and they certainly should!), then the exponent 12 in the time estimate can
+    be reduced to 6, bringing it much closer to the (probabilistic) <a href="prove4_2.html">ECPP
+      method</a>.&nbsp; But of course <b>when actually finding primes it is the unlisted
+      constants<sup><a href="#note1">1</a></sup> that make all of the difference</b>!&nbsp;
+    We will have to wait for efficient implementations of this algorithm (and hopefully
+    clever restatements of the painful<code> for loop</code>) to see how it compares
+    to the others for integers of a few thousand digits.&nbsp; Until then, at least
+    we have learned that there is a polynomial-time algorithm for all integers that
+    both is deterministic and relies on no unproved conjectures! </p>
+  <p id="note1">Note: D. J. Bernstein's <a href="http://cr.yp.to/papers.html#aks">exposition
+      of the Agrawal-Kayal-Saxena theorem</a> (mentioned above) contains improvements
+    by many diferent researchers which reduce the constants involved in the time
+    analysis by at least a factor of 2,000,000.&nbsp; This is perhaps the best source
+    for the present state of the algorithm. </p>
+  <h3>Related Approaches</h3>
+  <p> Berrizbeitia [<a href="../references/refs.cgi/Berrizbeitia2003">Berrizbeitia2003</a>]
+    found a way to save time in AKS-type primality proofs for some primes <i>n</i>,
+    reducing the exponent from 6+o(1) to 4+o(1).&nbsp; Cheng [<a href="../references/refs.cgi/Cheng2003">Cheng2003</a>]
+    extended Berrizbeitia's idea to more primes <i>n</i>, and Bernstein [<a
+      href="../references/refs.cgi/Bernstein2003">Bernstein2003</a>]
+    extended it to all primes <i>n</i>.&nbsp; The algorithm for finding these proofs
+    relies on some randomness, unlike the original AKS algorithm. </p>
+  <p>It seems plausible that a variant of AKS may soon compete in practice with
+    ECPP for 'general' primality proofs.&nbsp; This field is in great deal of flux.</p>
+  <p> Other useful links:</p>
+  <ul>
+    <li><a href="http://www.instantlogic.net/publications/PRIMES%20is%20in%20P%20little%20FAQ.htm">Primes
+        in P little faq</a> by Anton Stiglic </li>
+    <li><a href="https://en.wikipedia.org/wiki/AKS_primality_test">AKS primality test</a> Wikipedia</li>
+    <li><a href="http://cr.yp.to/primetests.html">Distinguishing prime numbers from
+        composite numbers</a> by D. J. Bernstein (an excellent comparision of many
+      methods).</li>
+  </ul>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <b><a href="prove5.html">next
+                  page</a></b> | <a href="prove4_2.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

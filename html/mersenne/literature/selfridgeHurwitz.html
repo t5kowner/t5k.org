@@ -1,0 +1,441 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Fermat Numbers and Mersenne Numbers</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#C000C0" ALINK="#FF0000" TEXT="#000000">
+	<BASEFONT SIZE=3>
+	<BR><BR><BR><BR><BR>
+	<CENTER>
+		<TABLE WIDTH=75%>
+			<TR>
+				<TD>
+					<CENTER>
+						<FONT SIZE=+2>
+							Fermat Numbers and Mersenne Numbers<P>
+						</FONT>
+						<FONT SIZE=+1>
+							By J. L. Selfridge and Alexander Hurwitz
+						</FONT>
+					</CENTER>
+					<P>
+
+						&nbsp;&nbsp;&nbsp; An IBM 7090 computer program, and results of
+						testing Mersenne numbers <I>M</I><SUB>
+							<FONT SIZE=-2><I>p</I></FONT>
+						</SUB>&nbsp;=
+						2<sup>
+							<FONT SIZE=-2><I>p</I></FONT>
+						</sup>&nbsp;-&nbsp;1 with <I>p</I> prime,
+						<I>p</I>&nbsp;&lt;&nbsp;5000, have been described by Hurwitz [<A HREF=#foot_1>1</A>].
+						This paper describes modifications made to his program, and further computational
+						results. The main results are that the Fermat number
+						<I>F</I><SUB>
+							<FONT SIZE=-2>14</FONT>
+						</SUB> is composite and that
+						2<sup>
+							<FONT SIZE=-2><I>p</I></FONT>
+						</sup>&nbsp;-&nbsp;1
+						is composite if 5000&nbsp;&lt;&nbsp;<I>p</I>&nbsp;&lt;&nbsp;6000.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; The computer program, originally written with
+						the idea of testing 2<sup>
+							<FONT SIZE=-2><I>n</I></FONT>
+						</sup>&nbsp;-&nbsp;1
+						for <I>n</I>&nbsp;=&nbsp;<I>M</I><SUB>
+							<FONT SIZE=-2>13</FONT>
+						</SUB>,
+						soon showed that the machine makes occasional errors. At least four
+						machine errors occured during runs on this number before two results
+						agreed. Due partly to the immediate availability of standby time,
+						the program was then launched in the region
+						3300&nbsp;&lt;&nbsp;<I>p</I>&nbsp;&lt;&nbsp;5000.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; When this work was nearly complete, the routine
+						was modified to incorporate a check modulo 2<sup>
+							<FONT SIZE=-2>35</FONT>
+						</sup>&nbsp;-&nbsp;1
+						after each squaring and another after each reduction modulo
+						2<sup>
+							<FONT SIZE=-2><I>p</I></FONT>
+						</sup>&nbsp;-&nbsp;1. These checks
+						enabled the routine to recover and proceed automatically after a
+						machine error. A message was printed that a squaring (or reduction)
+						error had occured. In fact, this happened several times.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; Another modification enabled the program to compute
+						3<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I></FONT>
+							</sup>
+						</sup>&nbsp;
+						modulo&nbsp; the&nbsp; Fermat&nbsp; number&nbsp;
+						<I>F<SUB>
+								<FONT SIZE=-2>m</FONT>
+							</SUB></I>&nbsp;=&nbsp;2<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>m</I></FONT>
+							</sup>
+						</sup>&nbsp;+&nbsp;1.
+						When <I>n</I>&nbsp;=&nbsp;2<sup>
+							<FONT SIZE=-2><I>m</I></FONT>
+						</sup>&nbsp;-&nbsp;1
+						the residue was output, with a result congruent to -1 if and only if
+						<I>F<SUB>
+								<FONT SIZE=-2>m</FONT>
+							</SUB></I> is prime.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; After testing the program using
+						<I>F</I><SUB>
+							<FONT SIZE=-2>10</FONT>
+						</SUB>
+						(see Robinson [<A HREF=#foot_5>5</A>]), we proceeded to test
+						<I>F</I><SUB>
+							<FONT SIZE=-2>14</FONT>
+						</SUB>.
+						The computation was divided into 64 parts, and the results of the
+						first 25 of these were checked against those of Paxson [<A HREF=#foot_3>3</A>], who
+						very kindly sent us copies of his intermediate residues. The rest
+						of the computation was done twice, with complete agreement. We
+						have also checked the final residue obtained by Paxson [<A HREF=#foot_3>3</A>] in the
+						testing of <I>F</I><SUB>
+							<FONT SIZE=-2>13</FONT>
+						</SUB>. The result that
+						<I>F</I><SUB>
+							<FONT SIZE=-2>14</FONT>
+						</SUB> is composite was announced in
+						[<A HREF=#foot_2>2</A>].
+					<P>
+
+						<CENTER>
+							T<FONT SIZE=-1>ABLE</FONT> 1<BR>
+							<TABLE BORDER CELLSPACING=0 WIDTH=100%>
+								<TR>
+									<TH><I>m</I></TH>
+									<TH><I>n</I></TH>
+									<TH><I>R</I> mod 2<sup>
+											<FONT SIZE=-2>36</FONT>
+										</sup></TH>
+									<TH><I>R</I> mod 2<sup>
+											<FONT SIZE=-2>36</FONT>
+										</sup>&nbsp;-&nbsp;1</TH>
+									<TH><I>R</I> mod 2<sup>
+											<FONT SIZE=-2>35</FONT>
+										</sup>&nbsp;-&nbsp;1</TH>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>7</TD>
+									<TD>127</TD>
+									<TD>035100542404</TD>
+									<TD>514165207640</TD>
+									<TD>053153335617</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>8</TD>
+									<TD>255</TD>
+									<TD>531023263263</TD>
+									<TD>407614543114</TD>
+									<TD>344141643032</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>13</TD>
+									<TD>8191</TD>
+									<TD>607301005536</TD>
+									<TD>611677367012</TD>
+									<TD>031455470517</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>14</TD>
+									<TD>16383</TD>
+									<TD>622476273512</TD>
+									<TD>016631677043</TD>
+									<TD>161031465216</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>17</TD>
+									<TD>20</TD>
+									<TD>176536764625</TD>
+									<TD>415751561367</TD>
+									<TD>155276133751</TD>
+							</TABLE>
+						</CENTER><BR><BR>
+
+						<CENTER>
+							T<FONT SIZE=-1>ABLE</FONT> 2<BR>
+							<TABLE BORDER CELLSPACING=0 WIDTH=100%>
+								<TR>
+									<TH><I>p</I></TH>
+									<TH><I>R</I></TH>
+									<TH><I>p</I></TH>
+									<TH><I>R</I></TH>
+									<TH><I>p</I></TH>
+									<TH><I>R</I></TH>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5023</TD>
+									<TD>35472</TD>
+									<TD>5479</TD>
+									<TD>17227</TD>
+									<TD>5783</TD>
+									<TD>15446</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5077</TD>
+									<TD>27063</TD>
+									<TD>5503</TD>
+									<TD>26142</TD>
+									<TD>5813</TD>
+									<TD>25753</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5081</TD>
+									<TD>74607</TD>
+									<TD>5527</TD>
+									<TD>41614</TD>
+									<TD>5839</TD>
+									<TD>24031</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5099</TD>
+									<TD>67662</TD>
+									<TD>5573</TD>
+									<TD>34740</TD>
+									<TD>5851</TD>
+									<TD>37460</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5113</TD>
+									<TD>20010</TD>
+									<TD>5581</TD>
+									<TD>31446</TD>
+									<TD>5857</TD>
+									<TD>11252</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5153</TD>
+									<TD>52273</TD>
+									<TD>5591</TD>
+									<TD>52563</TD>
+									<TD>5869</TD>
+									<TD>00764</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5309</TD>
+									<TD>40357</TD>
+									<TD>5641</TD>
+									<TD>21342</TD>
+									<TD>5879</TD>
+									<TD>52670</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5333</TD>
+									<TD>44244</TD>
+									<TD>5647</TD>
+									<TD>40775</TD>
+									<TD>5879</TD>
+									<TD>52670</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5351</TD>
+									<TD>05171</TD>
+									<TD>5653</TD>
+									<TD>50244</TD>
+									<TD>5923</TD>
+									<TD>16616</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5387</TD>
+									<TD>54357</TD>
+									<TD>5669</TD>
+									<TD>57031</TD>
+									<TD>5953</TD>
+									<TD>32461</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5407</TD>
+									<TD>51133</TD>
+									<TD>5689</TD>
+									<TD>32731</TD>
+									<TD>5987</TD>
+									<TD>66731</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5419</TD>
+									<TD>70701</TD>
+									<TD>5693</TD>
+									<TD>47014</TD>
+									<TD>&nbsp;</TD>
+									<TD>&nbsp;</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5443</TD>
+									<TD>51737</TD>
+									<TD>5701</TD>
+									<TD>33577</TD>
+									<TD>&nbsp;</TD>
+									<TD>&nbsp;</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5471</TD>
+									<TD>52563</TD>
+									<TD>5737</TD>
+									<TD>07151</TD>
+									<TD>&nbsp;</TD>
+									<TD>&nbsp;</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>5477</TD>
+									<TD>33022</TD>
+									<TD>5749</TD>
+									<TD>47641</TD>
+									<TD>&nbsp;</TD>
+									<TD>&nbsp;</TD>
+								</TR>
+							</TABLE>
+						</CENTER><BR>
+
+						&nbsp;&nbsp;&nbsp; In addition, as a debugging aid for those who
+						wish to test <I>F</I><SUB>
+							<FONT SIZE=-2>17</FONT>
+						</SUB>, we computed
+						3<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2>20</FONT>
+							</sup>
+						</sup>
+						modulo <I>F</I><SUB>
+							<FONT SIZE=-2>17</FONT>
+						</SUB>.
+						The complete testing of <I>F</I><SUB>
+							<FONT SIZE=-2>17</FONT>
+						</SUB>
+						would take 128 full weeks of machine time on an IBM 7090. It seems
+						much more economical to search for small factors of
+						<I>F</I><SUB>
+							<FONT SIZE=-2>17</FONT>
+						</SUB> than to perform this test.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; The final residues in the testing of
+						<I>F</I><SUB>
+							<FONT SIZE=-2>7</FONT>
+						</SUB>,
+						<I>F</I><SUB>
+							<FONT SIZE=-2>8</FONT>
+						</SUB>,
+						<I>F</I><SUB>
+							<FONT SIZE=-2>13</FONT>
+						</SUB>,
+						and <I>F</I><SUB>
+							<FONT SIZE=-2>14</FONT>
+						</SUB>, and the residue of
+						3<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2>20</FONT>
+							</sup>
+						</sup>
+						(mod&nbsp;<I>F</I><SUB>
+							<FONT SIZE=-2>17</FONT>
+						</SUB>), have
+						been put on punched cards, together with check sums. A summary
+						of these residues is given in Table 1, and copies of the cards are
+						available for checking purposes. The seven intermediate residues
+						of 3<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I></FONT>
+							</sup>
+						</sup>
+						(mod&nbsp;<I>F</I><SUB>
+							<FONT SIZE=-2><I>14</I></FONT>
+						</SUB>)
+						where <I>n</I>&nbsp;<IMG SRC="selfridgeHurwitzImg/congruen.gif" ALT="congruent to">&nbsp;0
+						(mod&nbsp;2048), and the complete values of 3<sup>
+							<FONT SIZE=-2>1024</FONT>
+						</sup>
+						and 3<sup>
+							<FONT SIZE=-2>65536</FONT>
+						</sup> are also on cards in the same format.
+						In Table 1 the residue of
+						3<sup>
+							<FONT SIZE=-2>2</FONT><sup>
+								<FONT SIZE=-2><I>n</I></FONT>
+							</sup>
+						</sup>
+						(mod&nbsp;<I>F</I><SUB>
+							<FONT SIZE=-2><I>m</I></FONT>
+						</SUB>) is described by
+						listing its 12 least significant octal digits, and its remainder in octal modulo
+						2<sup>
+							<FONT SIZE=-2>36</FONT>
+						</sup>&nbsp;-&nbsp;1 and modulo
+						2<sup>
+							<FONT SIZE=-2>35</FONT>
+						</sup>&nbsp;-&nbsp;1.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; Early in 1962, again partly because of available
+						standy time, the Mersenne program, modified to check modulo
+						2<sup>
+							<FONT SIZE=-2>35</FONT>
+						</sup>&nbsp;-&nbsp;1, was run for all
+						2<sup>
+							<FONT SIZE=-2><I>p</I></FONT>
+						</sup>&nbsp;-&nbsp;1
+						for which no factor was known, with 5000 &lt;&nbsp;<I>p</I>&nbsp;&lt;&nbsp;6000.
+						No primes were found. As in Hurwitz [<A HREF=#foot_1>1</A>], the five least significant
+						octal digits of <I>S</I><SUB>
+							<FONT SIZE=-2><I>p</I>&nbsp;-&nbsp;1</FONT>
+						</SUB>
+						are listed in Table 2.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; The results for <I>p</I>&nbsp;&lt;&nbsp;3300, mentioned by
+						Hurwitz [<A HREF=#foot_1>1</A>], have all been checked against the
+						corresponding SWAC [<A HREF=#foot_5>5</A>]
+						and BESK [<A HREF=#foot_4>4</A>] results. Reruns confirmed four 7090 errors, four BESK
+						errors (2957, 2969, 3049 and 3109), and an incorrect SWAC result for
+						1889. The SWAC (October 1962) confirmed the 7090 residue.
+					<P>
+
+						UCLA Computing Facility<BR>
+						University of California, Los Angeles
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_1">1</A>. A<FONT SIZE=-1>LEXANDER</FONT>
+						H<FONT SIZE=-1>URWITZ</FONT>, "New Mersenne primes,"
+						<A HREF="../biblio.html#hurwitz"><I>Math. Comp.</I>, v.&nbsp;16, 1962, p.&nbsp;249-251</A>.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_2">2</A>. A. H<FONT SIZE=-1>URWITZ</FONT> &
+						J. L. S<FONT SIZE=-1>ELFRIDGE</FONT>, "Fermat numbers and perfect
+						numbers," <I>Notices Amer. Math. Soc.</I>, v.&nbsp;8, 1961, p.&nbsp;601,
+						abstract 587-104.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_3">3</A>. G. A. P<FONT SIZE=-1>AXSON</FONT>, "The
+						compositeness of the thirteenth Fermat number," <I>Math. Comp.</I>,
+						v.&nbsp;15, 1961, p.&nbsp;420.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_4">4</A>. H<FONT SIZE=-1>ANS</FONT>
+						R<FONT SIZE=-1>IESEL</FONT>, "Mersenne numbers,"
+						<A HREF="../biblio.html#riesel"><I>MTAC</I>, v.&nbsp;12, 1958, p.&nbsp;207-213</A>.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_5">5</A>. R<FONT SIZE=-1>APHAEL</FONT>
+						M. R<FONT SIZE=-1>OBINSON</FONT>, "Mersenne and Fermat numbers,"
+						<A HREF="../biblio.html#robinson"><I>Proc. Amer. Math. Soc.</I>, v.&nbsp;5, 1954,
+							p.&nbsp;842-846</A>.<BR>
+
+						<HR NOSHADE WIDTH=100 ALIGN=LEFT>
+						&nbsp;&nbsp;&nbsp; Received August 12, 1963. The preparation of this
+						paper was sponsored by the Office of Naval Research.
+
+				</TD>
+			</TR>
+		</TABLE>
+	</CENTER>
+</BODY>
+
+</HTML>

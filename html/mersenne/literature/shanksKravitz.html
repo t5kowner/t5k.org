@@ -1,0 +1,454 @@
+<HTML>
+
+<HEAD>
+	<TITLE>On the Distribution of Mersenne Divisors</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#C000C0" ALINK="#FF0000" TEXT="#000000">
+	<BASEFONT SIZE=3>
+	<BR><BR><BR><BR><BR>
+	<CENTER>
+		<TABLE WIDTH=75%>
+			<TR>
+				<TD>
+					<CENTER>
+						<FONT SIZE=+2>
+							TECHNICAL NOTES AND SHORT NOTICES<P>
+						</FONT>
+						<FONT SIZE=+3>
+							On the Distribution of Mersenne Divisors<P>
+						</FONT>
+						<FONT SIZE=+1>
+							By Daniel Shanks and Sidney Kravitz<P>
+						</FONT>
+					</CENTER><BR><BR>
+					&nbsp;&nbsp;&nbsp; The Mersenne numbers are those of the form
+					<I>M</I><SUB>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</SUB>&nbsp;=
+					2<sup>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</sup>&nbsp;-&nbsp;1 with <I>p</I>
+					prime. The only possible divisors of <I>M</I><SUB>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</SUB>
+					are those of the form 2<I>kp</I>&nbsp;+&nbsp;1. Let
+					<I>f</I><SUB>
+						<FONT SIZE=-2><I>k</I></FONT>
+					</SUB>(x) be the number
+					of <I>M</I><SUB>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</SUB> with
+					<I>p</I>&nbsp;<U>&lt;</U>&nbsp;<I>x</I>
+					that have a prime divisor <I>d</I>&nbsp;=&nbsp;2<I>kp</I>&nbsp;+&nbsp;1.
+					As is known, it has not been proven, even for a single <I>k</I>, that<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(1)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>f</I><SUB>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</SUB>(<I>x</I>)
+								<IMG SRC="shanksKravitzImg/toinfini.gif" ALT="-> oo">
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					as <I>x</I>&nbsp;<IMG SRC="shanksKravitzImg/toinfini.gif" ALT="-> oo">. It is also known that<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=33%>(2)</TD>
+							<TD ALIGN=CENTER WIDTH=33%>
+								<I>f</I><SUB>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</SUB>(<I>x</I>)&nbsp;=&nbsp;0
+							</TD>
+							<TD ALIGN=RIGHT WIDTH=33%>
+								(k&nbsp;=&nbsp;2,&nbsp;6,&nbsp;10,&nbsp;...&nbsp;)
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					for all <I>k</I> of the form 4<I>m</I>&nbsp;+&nbsp;2, but, with these values
+					of <I>k</I> excluded, one expects, heuristically, that (1) is true
+					for all other <I>k</I>&nbsp;= 1, 3, 4, 5, 7, 8, .... We conjecture, in
+					fact, a stronger result that includes both (1) for these allowed
+					<I>k</I>, and (2) for those excluded:<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(3)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<IMG ALIGN=CENTER SRC="shanksKravitzImg/eq3.gif" ALT="Equation 3">
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					In (3) the product is taken over all odd prime <I>q</I>, if any, that
+					divide <I>k</I>, and <IMG SRC="shanksKravitzImg/zbar.gif" ALT="Zbar">(<I>x</I>) is the
+					well-known conjectured estimate for the number of twin-prime pairs
+					<U>&lt</U>&nbsp;<I>x</I>:<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(4)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<IMG SRC="shanksKravitzImg/eq4.gif" ALT="Equation 4">
+							</TD>
+						</TR>
+					</TABLE>
+
+					&nbsp;&nbsp;&nbsp In a recent note [<A HREF="#foot_1">1</A>],
+					one of us presented a table of
+					<I>f</I><SUB>
+						<FONT SIZE=-2><I>k</I></FONT>
+					</SUB>(10<sup>
+						<FONT SIZE=-2>5</FONT>
+					</sup>)
+					for <I>k</I>&nbsp;<U>&lt;</U>&nbsp;200. In Table 1 we present a
+					table of <I>f</I><SUB>
+						<FONT SIZE=-2><I>k</I></FONT>
+					</SUB>(x) for<P>
+
+						<CENTER>
+							<I>k</I> <IMG SRC="shanksKravitzImg/notequal.gif" ALT="<>">
+							4<I>m</I>&nbsp;+&nbsp;2&nbsp;<U>&lt;</U>&nbsp;60,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<I>x</I>&nbsp;=
+							10<sup>
+								<FONT SIZE=-2>5</FONT>
+							</sup>(10<sup>
+								<FONT SIZE=-2>5</FONT>
+							</sup>)10<sup>
+								<FONT SIZE=-2>6</FONT>
+							</sup>.
+						</CENTER>
+					<P>
+
+						The larger range of <I>x</I> here, and the sufficient range of <I>k</I>,
+						enables us to make a significant test of (3). We find it convenient,
+						however, to replace the <IMG SRC="shanksKravitzImg/zbar.gif" ALT="Zbar">(x) in (3) by
+						the <I>actual number</I> of twins, <I>Z(x)</I>, since these are simple
+						integers which are in sufficiently good agreement with
+						<IMG SRC="shanksKravitzImg/zbar.gif" ALT="Zbar">(x). Further, while such a
+						change in (3) makes the infinitude of
+						<I>f</I><SUB>
+							<FONT SIZE=-2><I>k</I></FONT>
+						</SUB>(<I>x</I>)
+						depend upon that of <I>Z(x)</I>, we do not regard this as a defect.
+						On the contrary, it is highly likely that any proof of
+					<P>
+
+						<CENTER>
+							<I>Z(x)</I><IMG SRC="shanksKravitzImg/toinfini.gif" ALT="->oo">
+						</CENTER>
+					<P>
+
+						could be readily adapted to prove<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=33%></TD>
+							<TD ALIGN=CENTER WIDTH=33%>
+								<I>f</I><SUB>
+									<FONT SIZE=-2><I>k</I></FONT>
+								</SUB>(<I>x</I>)
+								<IMG SRC="shanksKravitzImg/toinfini.gif" ALT="-> oo">
+							</TD>
+							<TD ALIGN=RIGHT WIDTH=33%>
+								(<I>k</I>&nbsp;<IMG SRC="shanksKravitzImg/notequal.gif"
+									ALT="<>">&nbsp;4<I>m</I>&nbsp;+&nbsp;2)
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					also, and we prefer to emphasize this relationship.<P>
+
+						<CENTER>
+							T<FONT SIZE=-1>ABLE</FONT> 1<BR>
+							<I>f</I><SUB>
+								<FONT SIZE=-2><I>k</I></FONT>
+							</SUB>(x)<P>
+								<IMG SRC="shanksKravitzImg/table1.gif" ALT="Table 1">
+						</CENTER>
+					<P>
+
+						&nbsp;&nbsp;&nbsp; In Table 2 we list the ratios:<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(5)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<IMG SRC="shanksKravitzImg/eq5.gif" ALT="Equation 5">
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					The counts <I>Z</I>(<I>x</I>) were taken from [<A HREF="#foot_2">2</A>],
+					and are repeated here in Table 3 for convenience.<P>
+
+						&nbsp;&nbsp;&nbsp; Table 2 suggests that our conjectures (3) are true
+						for all <I>k</I>. The deviations from unity seen there are not
+						excessive considering the limited value of <I>x</I>, and the rather
+						small totals found in certain cases, e.g.,
+						<I>f</I><SUB>
+							<FONT SIZE=-2>59</FONT>
+						</SUB>(10<sup>
+							<FONT SIZE=-2>6</FONT>
+						</sup>)&nbsp;=&nbsp;57.
+						The deviation seen, in fact, no doubt are due mostly to fluctuation terms of
+						approximate order <I>O</I>(<IMG SRC="shanksKravitzImg/sqrt.gif" ALT="sqrt"><I>x</I>),
+						since these temporarily dominate (at these values of <I>x</I>) the conjectured
+						actual second term involving log (2<I>k</I>)/log <I>x</I>.
+					<P>
+
+						<CENTER>
+							T<FONT SIZE=-1>ABLE</FONT> 2<BR>
+							<I>r</I><SUB>
+								<FONT SIZE=-2><I>k</I></FONT>
+							</SUB>(x)<P>
+								<IMG SRC="shanksKravitzImg/table2.gif" ALT="Table 2">
+						</CENTER>
+					<P>
+
+						&nbsp;&nbsp;&nbsp; The heuristic argument for (3) is quite convincing,
+						especially in view of previous successes for similiar arguments. A
+						Hardy-Littlewood conjecture is<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(6)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<I>Z</I>(<I>x</I>) &#126 <IMG SRC="shanksKravitzImg/zbar.gif" ALT="Zbar">(<I>x</I>),
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					and, similarly, cf. [<A HREF="#foot_3">3</A>], the number of integers
+					<I>n</I>&nbsp;<U>&lt;</U>&nbsp;<I>x</I> such that <I>n</I> and
+					2<I>kn</I>&nbsp;+&nbsp;1 are both prime should be asymptotic to<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(7)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<IMG SRC="shanksKravitzImg/eq7.gif" ALT="Equation 7">
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					<CENTER>
+						<FONT SIZE=+1>T</FONT>
+						<FONT SIZE=-1>ABLE</FONT> 3<BR>
+						<I>Z</I>(x)<P>
+						<TABLE BORDER CELLSPACING=0 CELLPADDING=2 WIDTH=50%>
+							<TR ALIGN=CENTER>
+								<TH><I>x</I>&middot10<sup>
+										<FONT SIZE=-2>-5</FONT>
+									</sup></TH>
+								<TH><I>Z</I>(<I>x</I>)</TH>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>1</TD>
+								<TD>1224</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>2</TD>
+								<TD>2160</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>3</TD>
+								<TD>2994</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>4</TD>
+								<TD>3804</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>5</TD>
+								<TD>4565</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>6</TD>
+								<TD>5331</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>7</TD>
+								<TD>6061</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>8</TD>
+								<TD>6766</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>9</TD>
+								<TD>7472</TD>
+							</TR>
+							<TR ALIGN=CENTER>
+								<TD>10</TD>
+								<TD>8169</TD>
+							</TR>
+						</TABLE>
+					</CENTER><BR>
+
+					&nbsp;&nbsp;&nbsp; Now the factor<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(8)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<IMG SRC="shanksKravitzImg/eq8.gif" ALT="Equation 8">
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					for <I>k</I>&nbsp;= 1, 2, 3, or 4 (mod&nbsp;4), respectively, and therefore
+					represents the fraction of the primes 2<I>kn</I>&nbsp;+&nbsp;1 which have 2 as
+					a quadratic residue:<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=1%>(9)</TD>
+							<TD ALIGN=CENTER WIDTH=100%>
+								<IMG SRC="shanksKravitzImg/eq9.gif" ALT="Equation 9">
+							</TD>
+						</TR>
+					</TABLE><BR>
+
+					Finally, for such a possible prime divisor 2<I>kn</I>&nbsp;+&nbsp;1,
+					we assume that 1/<I>k</I> is the probability that 2 is a (2<I>k</I>)ic
+					residue of 2<I>kn</I>&nbsp;+&nbsp;1, for if <I>g</I> is a primitive
+					root of 2<I>kn</I>&nbsp;+&nbsp;1, by (9) we have<BR>
+
+					<TABLE CELLSPACING=20 WIDTH=100%>
+						<TR>
+							<TD ALIGN=LEFT WIDTH=33%></TD>
+							<TD ALIGN=CENTER WIDTH=33%>
+								<I>g</I><sup>
+									<FONT SIZE=-2>2<I>s</I></FONT>
+								</sup>
+								<IMG SRC="shanksKravitzImg/congruen.gif" ALT="congruent to">&nbsp;2
+							</TD>
+							<TD ALIGN=RIGHT WIDTH=33%>(mod 2<I>kn</I>&nbsp;+&nbsp;1)</TD>
+						</TR>
+					</TABLE><BR>
+
+					for some <I>s</I>, and we assume, that the probability of
+					2<I>k</I>&nbsp;|&nbsp;2<I>s</I> is 1/<I>k</I>. For these primes, <I>n</I>
+					and 2<I>kn</I>&nbsp;+&nbsp;1, we therefore have
+					2<I>kn</I>&nbsp;+&nbsp;1&nbsp;|&nbsp;2<sup>
+						<FONT SIZE=-2><I>n</I></FONT>
+					</sup>&nbsp;-&nbsp;1.<P>
+
+						&nbsp;&nbsp;&nbsp; Combination of (7), (8), and (4) now yields (3).
+					<P>
+
+						&nbsp;&nbsp;&nbsp; Now we wish to suggest two extensions of this work
+						to others, since we think these to be of some importance, but are not
+						satisfied with any efforts that we ourselves have made.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; (A) We note, first, that only the case <I>k</I>&nbsp;=&nbsp;1
+						in (3) is a special case of the Bateman-Horn conjecture [<A HREF="#foot_3">3</A>].
+						What <I>generalization</I> is needed to include other values of <I>k</I>?
+						Consider first <I>k</I>&nbsp;=&nbsp;3. As is known, any
+						<I>p</I>&nbsp;=&nbsp;6<I>n</I>&nbsp;+&nbsp;1 can be written
+					<P>
+
+						<CENTER>
+							<I>p</I>&nbsp;=&nbsp;6<I>n</I>&nbsp;+&nbsp;1&nbsp;=
+							<I>a</I><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>&nbsp;+&nbsp;3<I>b</I><sup>
+								<FONT SIZE=-2>2</FONT>
+							</sup>,
+						</CENTER>
+					<P>
+
+						but only those <I>p</I> where 3&nbsp;|&nbsp;b have 2 as a cubic residue. By
+						Landau's generalization of the prime number theorem to <I>prime ideals</I>,
+						it follows that 3&nbsp;|&nbsp;<I>b</I> occurs
+						<FONT SIZE=-2><sup>1</sup>/<SUB>3</SUB></FONT> of the time,
+						asymptotically speaking. This verifies one case or our "assumption" above,
+						namely, that the probability for <I>k</I>&nbsp;=&nbsp;3 is
+						<FONT SIZE=-2><sup>1</sup>/<SUB>3</SUB></FONT>.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; It is clear, then, that we wish a generalization of
+						the Bateman-Horn conjecture [<A HREF="#foot_3">3</A>], and also its extension
+						by Schinzel [<A HREF="#foot_4">4</A>], to include not only primes but also
+						prime ideals. But we have not satisfied ourselves that we have obtained
+						this with full generality and proper exactitude.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; (B) For no <I>k</I> has (3) been proven. Each such
+						conjecture is essentially equivalent to the twin-prime conjecture (6),
+						and, no doubt, will be proven when, and only when, (6) is proven. As
+						is known, a <I>much weaker</I> conjecture has never been proven, namely,
+						that there are infinitely many <I>Mersenne composites</I>. If (3)
+						were true for even a single <I>k</I>, then there would be infinitely
+						many composites.
+					<P>
+
+						&nbsp;&nbsp;&nbsp; It seems to us that this weaker conjecture is
+						provable, but we have not proved it. While (6) has not been proven,
+						one can also examine the sequences
+					<P>
+
+						<CENTER>
+							<I>p</I>,&nbsp;&nbsp;&nbsp;<I>p</I>&nbsp;+&nbsp;2<I>k</I>
+						</CENTER>
+					<P>
+
+						<I>collectively</I>, for all <I>k</I>. This has been done by Lavrik
+						[<A HREF="#foot_5">5</A>], and results have been obtained there
+						concerning "almost all" <I>k</I>. If the generalization suggested
+						in (A) is carried out successfully, it seems to us that Lavrik's
+						techniques applied to our (3) should suffice to prove that there
+						are infinitely many Mersenne composites, and probably also stronger
+						results concerning a lower bound on their number. Further, one would
+						then also have an upper bound on the number of Mersenne primes.
+					<P>
+
+						David Taylor Model Basin<BR>
+						Washington, D.C. 20007<BR>
+						<BR>
+						592 Herrick Drive<BR>
+						Dover, New Jersey 07801
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_1">1</A>. S. K<FONT SIZE=-1>RAVITZ</FONT>,
+						"Distribution of Mersenne divisors," <I>Math.
+							Comp.</I>, v.&nbsp;20, 1966, pp.&nbsp;448-449.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_2">2</A>. F. G<FONT SIZE=-1>RUENBERGER</FONT> & G.
+						A<FONT SIZE=-1>RMERDING</FONT>, <I>Statistics on the First Six Million
+							Prime Numbers</I>, copy deposited in UMT file and reviewed in RMT&nbsp;73,
+						<I>Math. Comp.</I>, v.&nbsp;19, 1965, pp.&nbsp;503-505.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_3">3</A>.
+						P. T. B<FONT SIZE=-1>ATEMAN</FONT> & R. A.
+						H<FONT SIZE=-1>ORN</FONT>, "A heuristic asymptotic formula concerning
+						the distribution of prime numbers," <I>Math. Comp.</I>, v.&nbsp;16, 1962,
+						pp.&nbsp;363-367. MR&nbsp;26&nbsp;#6139<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_4">4</A>. A. S<FONT SIZE=-1>CHINZEL</FONT>,
+						"A remark on a paper of Bateman and Horn," <I>Math. Comp.</I>, v.&nbsp;17, 1963,
+						pp.&nbsp;445-447. MR&nbsp;27&nbsp;#3609.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_5">5</A>. A. F. L<FONT SIZE=-1>AVRIK</FONT>,
+						"On the twin prime hypothesis of the theory of primes by the method of I.&nbsp;M.
+						Vinogradov," <I>Dokl. Akad. Nauk SSSR</I>, v.&nbsp;132, 1960, pp.&nbsp;1013-1015
+						= <I>Soviet Math. Dokl.</I>, v.&nbsp;1, 1960, pp.&nbsp;700-702. MR&nbsp;28&nbsp;#1183.<BR>
+
+						<HR NOSHADE WIDTH=100 ALIGN=LEFT>
+						&nbsp;&nbsp;&nbsp; Received August 25, 1966.
+
+				</TD>
+			</TR>
+		</TABLE>
+	</CENTER>
+</BODY>
+
+</HTML>

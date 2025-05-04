@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 2.2: Fermat, probable-primality and pseudoprimes</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->2.2: Fermat,
+                probable-primality and pseudoprimes<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove2.html">Chapter
+                  Two</a> &gt; Probable Primes<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p>Fermat's &quot;biggest&quot;, and also his &quot;last&quot; theorem states that <i>x<sup>n</sup> + y<sup>n</sup> =
+      z<sup>n</sup></i> has no solutions in positive integers <i>x,
+      y, z</i> with <i>n</i> &gt; 2.&nbsp; This has finally been proven by Wiles in
+    1995 [<a href="/references/refs.cgi/Wiles95">Wiles95</a>].&nbsp; What concerns
+    us here is his &quot;little&quot; theorem:</p>
+  <blockquote id="FLittleT"><b>Fermat's (Little) Theorem:</b>&nbsp; If <i>p</i> is a prime and if <i>a</i> is any
+    integer, then <i>a<sup>p</sup> ≡
+      a</i> (mod <i>p</i>).&nbsp; In particular, if <i>p</i> does not divide <i>a</i>,
+    then <i>a<sup>p</sup></i><sup>-1</sup> ≡ 1 (mod <i>p</i>). ([<a
+      href="/notes/proofs/FermatsLittleTheorem.html">proof</a>]) </blockquote>
+  <p>Fermat's theorem gives us a powerful test for compositeness: Given <i>n</i> &gt; 1, choose <i>a</i> &gt; 1 and
+    calculate <i>a</i><sup><i>n</i>-1</sup> modulo <i>n</i> (there is a very easy way to do quickly by repeated
+    squaring,
+    see the glossary page &quot;<a class="glossary" title="glossary"
+      href="/glossary/page.php?sort=BinaryExponentiation">binary
+      exponentiation</a>&quot;).&nbsp; If the result is not one modulo <i>n</i>, then <i>n</i> is composite.&nbsp; If it
+    is one modulo <i>n</i>, then <i>n might</i> be prime
+    so <i>n</i> is called a weak <b>probable prime base <i>a</i></b> (or just an <b><i>a</i>-PRP</b>).&nbsp;
+    Some early articles call all numbers satisfying this test pseudoprimes, but now
+    the term <b>pseudoprime</b> is properly reserved for composite probable-primes.</p>
+  <p>The smallest examples of pseudoprimes (composite PRPs) are the following.&nbsp;
+    (There are more examples on the glossary page &quot;<a class="glossary" title="glossary"
+      href="/glossary/page.php?sort=PRP">probable
+      prime </a>&quot;.)</p>
+  <ul>
+    <li>341 = 11.31 is a 2-PRP, (Sarrus 1819)</li>
+    <li>91 = 7.13 is a 3-PRP,</li>
+    <li>217 = 7.31 is a 5-PRP and,</li>
+    <li>25 = 5.5 is a 7-PRP.</li>
+  </ul>
+  <p>There are 1,091,987,405 primes less than 25,000,000,000; but only 21,853
+    pseudoprimes base two [<a href="/references/refs.cgi/PSW80">PSW80</a>], so
+    Henri Cohen joked that 2-PRP's are &quot;industrial grade primes&quot; [<a
+      href="/references/refs.cgi/Pomerance84">Pomerance84</a>,
+    p5].&nbsp; Fortunately, the larger <i>n</i>, the more likely (on the average)
+    that a PRP test is correct--see the page &quot;<a href="/notes/prp_prob.html">How
+      probable?</a>&quot;.</p>
+  <p>It is interesting to note that in 1950 Lehmer, using the weaker definition <i>a<sup>n</sup></i> ≡ <i>a</i> (mod
+    <i>n</i>) for probable/pseudo-prime, discovered 2*73*1103 =
+    161038 is an even &quot;pseudoprime&quot; base two.&nbsp; See [<a
+      href="/references/refs.cgi/Ribenboim95">Ribenboim95</a> Chpt. 2viii] for a summary of results and
+    history--including a debunking of the
+    Chinese connection.&nbsp; Richard Pinch listed the pseudoprimes to 10<sup>21</sup> (by various definitions) at his
+    website.
+  </p>
+  <p>There may be relatively few pseudoprimes, but there are still <a
+      href="/notes/proofs/a_pseudoprimes.html">infinitely
+      many of them for every base</a> <i>a</i>&gt;1, so we need a tougher test.&nbsp;
+    One way to make this test more accurate is to use multiple bases (check base 2,
+    then 3, then 5,...).&nbsp; But still we run into an interesting obstacle called
+    the <a id="carm" class="glossary" title="glossary" href="/glossary/page.php?sort=CarmichaelNumber">Carmichael
+      numbers</a>.</p>
+  <blockquote> <b>Definition:</b>&nbsp; The composite integer <i>n</i> is a <b>Carmichael
+      number</b> if <i>a</i><sup><i>n</i>-1</sup>≡1 (mod&nbsp;<i>n</i>) for every
+    integer <i>a</i> relatively prime to <i>n</i>. </blockquote>
+  <p>Here is the bad news: repeated PRP tests of a Carmichael number will fail to
+    show that it is composite until we run across one of its factors.&nbsp; Though
+    Carmichael number are 'rare' (only 2,163 are less than 25,000,000,000), it has
+    recently been shown that there are infinitely many [<a href="/references/refs.cgi/AGP94">AGP94</a>].&nbsp;
+    The Carmichael numbers under 100,000 are</p>
+  <blockquote> 561, 1105, 1729, 2465, 2821, 6601, 8911, 10585, 15841, 29341, 41041, 46657,
+    52633, 62745, 63973, and 75361. </blockquote>
+  <p>Richard Pinch listed the Carmichael's to 10<sup>16</sup> (see [<a
+      href="/references/refs.cgi/Pinch93">Pinch93</a>]).</p>
+  <p>Note: Jon Grantham developed the idea of <b>Frobenius Pseudoprime</b> [<a
+      href="/references/refs.cgi/Grantham2000">Grantham2000</a>]
+    to generalize many of the standard types (Fermat, Lucas...), and to make the
+    tests more accurate. His papers are <a href="http://www.pseudoprime.com/pseudo.html">available
+      on-line</a>.<br>
+  </p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove2_3.html"><b>next
+                  page</b></a> | <a href="prove2_1.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

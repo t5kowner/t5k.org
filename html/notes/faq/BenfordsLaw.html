@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+
+  <title>Does Benford's law apply to prime numbers?</title>
+
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/">Notes</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/faq/">FAQ</a></li>
+          <li class="breadcrumb-item active">Benford's Law and Primes</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->FAQ: Does
+
+        Benford's Law Apply to Primes?<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <p> Perhaps the most difficult to quantify question we address in this FAQ
+        is:</p>
+      <blockquote class="blockquote">If we pick several random prime numbers, will they begin with
+        the digits 1, 2, 3, . 9 equally often, or will the digit 1 be more common
+        (as Benford's law might suggest)?</blockquote>
+      <p>The short answer, <em>in the cases when there is an answer</em>, is "yes,
+        the leading digit 1 occurs more often, in fact over 30% (log<sub>10</sub>
+        2) of the time."&nbsp; And this has little to do with the &quot;primeness&quot;
+        of the numbers, it is a common feature of many distributions.&nbsp; But
+        we are in truly treacherous territory here--we&nbsp;will first define
+        the question much more carefully, then we can explain why <a class="glossary" title="glossary"
+          href="/glossary/page.php?sort=BenfordsLaw">Benford's
+          law</a>does indeed apply to primes.</p>
+      <h3>Pick a random integer or two...</h3>
+      <p> The answer to our question clearly depends on where the prime numbers
+        come from.&nbsp; It is very difficult to quantify the instructions "pick
+        a random integer" or "pick a random prime" in a way in which satisfies
+        the most basic laws of probability.</p>
+      <p>To see what we mean let <em>A</em> and <em>B</em> be subsets of the positive
+        integers <b>N</b>.&nbsp; If P(<em>A</em>) is the probability that the
+        "random" integer we pick is in the set <em>A</em> , then we would need
+        that</p>
+      <blockquote class="blockquote">
+        <ul>
+          <li>0 <u>&lt;</u> P(<em>A</em> ) <u>&lt;</u> 1, </li>
+          <li>P(<b>N</b>) = 1, and </li>
+          <li>if <em>A</em> and <em>B</em> are disjoint, then P(<em>A</em> &cup;
+            <em>B</em>) = P(<em>A</em>) + P(<em>B</em>).
+          </li>
+        </ul>
+      </blockquote>
+
+      <p>Now if each integer is equally likely, we then have</p>
+      <blockquote class="blockquote">P( {1, 2, 3, ..., <i>n</i>} ) = <i>n</i>P( {1} ), </blockquote>
+      <p>so &nbsp;P( {1} )&nbsp;<u>&lt;</u> 1/<i>n</i>&nbsp; for every integer
+        <i>n</i>.&nbsp; The probability of picking any one integer (hence&nbsp;any
+        set of integers), would have to be zero!&nbsp; So when we say "pick a
+        random integer" we can not pick from the whole set of positive integers
+        with each integer being equally likely. (See [<a href="/references/refs.cgi/Raimi1969">Raimi1969</a>]
+        and [<a href="/references/refs.cgi/Raimi1976">Raimi1976</a>]
+        for a deeper discussion of these issues and Benford's law.)
+      </p>
+      <h3>Okay, what are our options?</h3>
+      <p>One way of addressing this problem is to just consider a finite subset
+        of the integers at a time. &nbsp;Then take the limit as the finite sets
+        expands towards the whole set.&nbsp; For example, <strong>the natural
+          density</strong> of a set A is defined to be the limit as <i>n</i> goes
+        to infinity of the sequence</p>
+      <blockquote class="blockquote">( the number of elements in A that are less than <i>n</i> )
+        / <i>n</i></blockquote>
+      <p>The even numbers have natural density 1/2. &nbsp;The set of integers
+        divisible by the prime <i>p</i> has natural density 1/<i>p</i>. &nbsp;The
+        set of prime numbers has natural density 0. &nbsp;But sadly, the set of
+        integers with leading digit one (as well as the prime numbers with leading
+        digit one) have no natural density. &nbsp;For these sets the ratio above
+        oscillates as <em>n</em> increases and never approaches any single value.</p>
+      <div align="center">
+        <p><img src="gifs/n_first.gif" width="475" height="160"></p>
+        <p><img src="gifs/n_first9.gif" width="475" height="160"></p>
+      </div>
+      <p> To handle this problem some have suggest that we&nbsp;find an "average
+        value" of this oscillating ratio.&nbsp;&nbsp;For the set of integers beginning
+        with the digit <i>d,</i> the average value is log<sub>10</sub>(1 + 1/<i>d</i>)
+        [<a href="/references/refs.cgi/Flehinger1966">Flehinger1966</a>].
+        &nbsp;The same is true for the average value of the relative number of
+        primes beginning with the digit <i>d</i>.&nbsp; Implicitly the methods
+        chosen for averaging in these articles give more weight to the smaller
+        integers, this leads us to our next approach.</p>
+      <div align="center"><img src="gifs/p_first.gif" width="475" height="160"></div>
+      <h3>Other distributions...</h3>
+      <p>One way to interpret "pick a random integer" is to assign non-zero probabilities
+        (also called densities) to&nbsp;each integer, and to do this in a way
+        that the sum of the densities is one. &nbsp;(This of course means the
+        integers can not be equally likely, and usually our choice ensures that
+        the smaller integers are more likely than the larger.)&nbsp; For example,
+        the Zeta density d(<i>A</i>) of a set of positive integers <i>A</i> is
+        defined to be </p>
+      <blockquote class="blockquote">d(<i>A</i>) = &nbsp;<img src="gifs/zetadist.gif" width="113" height="41"
+          align="middle">.</blockquote>
+      <p>When the natural density exists, then so does the Zeta density and the
+        two agree [Diaconis].&nbsp; For the positive integers the Zeta density
+        follows Benford's law.&nbsp; Bombieri showed that the same is true for
+        the relative Zeta density for the primes [<a href="/references/refs.cgi/Serre1974">Serre1974</a>].</p>
+      <p>Here is another way of defining density, called the logarithmic density,
+        is </p>
+      <blockquote class="blockquote">d(A) = <img src="gifs/logdist.gif" width="113" height="52" align="middle">.
+      </blockquote>
+      <p>Again this this complies with Benford'' law for both the positive integers
+        and the (relative densities of) primes [<a href="/references/refs.cgi/Whitney1972">Whitney1972</a>].</p>
+      <p>These densities might looked be on favorably by those interested in primes
+        (recall the natural density of the set of multiples of <i>p</i> is 1/<i>p</i>).&nbsp;
+        But here is the good news--we do not need to explicitly choose to answer
+        the question!&nbsp; For the set of integers, Cohen showed that a distribution
+        following Benford's' law must result for any selection of finitely additive
+        density that agrees with the natural density when it is defined and satisfies
+        the one extra condition:</p>
+      <blockquote class="blockquote">density of any set S = density of the set { <i>n</i> | <i>n</i>/2
+        or (<i>n</i>-1)/2&nbsp; is in S }.</blockquote>
+      The proof is quite short [<a href="/references/refs.cgi/Cohen1976">Cohen1976</a>].&nbsp;
+      Note this condition above is just a combination of the utterly reasonable
+      conditions that
+      <p></p>
+      <blockquote class="blockquote">
+        <ul>
+          <li>the density of 2S is 1/2 of the density of S, and </li>
+          <li>the density of S+1 (add 1 to each element of S) is the density S. </li>
+        </ul>
+      </blockquote>
+      <p>Later Cohen and Katz showed that an even larger set of choices of density
+        give the same result for the set of primes [<a href="/references/refs.cgi/CK1984">CK1984</a>].&nbsp;
+        That is, if you can think of any "reasonable density" to apply when addressing
+        the question of this page (one that agrees with the natural one when possible
+        plus meets a couple extra criteria), then the answer is in keeping with
+        Benford's law: the string of leading digits <i>d</i> occur with relative
+        frequency log<sub>10</sub>(1 + 1/<i>d</i>).</p>
+      <h3>A couple examples</h3>
+      <p>For example, Blair Kelly collects prime factors of Lucas and Fibonacci
+        numbers.&nbsp; When David Broadhurst scanned about 25 thousand such primes
+        greater than a million, he found (December 2001):</p>
+      <blockquote class="blockquote">
+        <b>First Digit of factors of Lucas and Fibonacci numbers</b>: <br><br>
+        <table bordercolor="#66CCFF" border="1" cellpadding="3">
+          <tr align="right">
+            <th>leading digit <i>d&nbsp;</i></th>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+          </tr>
+          <tr align="right">
+            <th>number&nbsp;of primes </th>
+            <td>7869</td>
+            <td>4456</td>
+            <td>3107</td>
+            <td>2342</td>
+            <td>1977</td>
+            <td>1665</td>
+            <td>1360</td>
+            <td>1255</td>
+            <td>1107</td>
+          </tr>
+          <tr align="right">
+            <th>percentage&nbsp;</th>
+            <td>31.3%</td>
+            <td>17.7%</td>
+            <td>12.3%</td>
+            <td>9.3%</td>
+            <td>7.8%</td>
+            <td>6.6%</td>
+            <td>5.4%</td>
+            <td>4.9%</td>
+            <td>4.4%</td>
+          </tr>
+          <tr align="right">
+            <th>predicted by Benford's law&nbsp;</th>
+            <td>30.1%</td>
+            <td>17.6%</td>
+            <td>12.5%</td>
+            <td>9.7%</td>
+            <td>7.9%</td>
+            <td>6.7%</td>
+            <td>5.8%</td>
+            <td>5.1%</td>
+            <td>4.6%</td>
+          </tr>
+        </table>
+      </blockquote>
+      <p><a href="http://groups.yahoo.com/group/primenumbers/message/4457">Andy
+          Steward responded</a>to David's data with the following table formed
+        by scanning his files of factors of <a href="/glossary/page.php?sort=GeneralizedRepunit">Generalized
+          Repunit Numbers</a>, these include results from the <a
+          href="/glossary/page.php?sort=CunninghamProject">Cunningham
+          project</a>as well as those from Brent, Edgington, Mishima and Morimoto.&nbsp;
+        His list of 926,663 prime factors of GRU's with at least 5 digits yielded
+        (early December 2001):</p>
+      <blockquote class="blockquote">
+        <b>First Digit of Generalized Repunit Prime Factors:</b><br><br>
+        <table bordercolor="#66CCFF" border="1" cellpadding="3">
+          <tr align="right">
+            <th>leading digit <i>d&nbsp;</i></th>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+          </tr>
+          <tr align="right">
+            <th>number&nbsp;of primes </th>
+            <td>291554</td>
+            <td>165388</td>
+            <td>115234</td>
+            <td>87749</td>
+            <td>71989</td>
+            <td>59433</td>
+            <td>50697</td>
+            <td>44610</td>
+            <td>40009</td>
+          </tr>
+          <tr align="right">
+            <th>percentage&nbsp;</th>
+            <td>31.5%</td>
+            <td>17.8%</td>
+            <td>12.4%</td>
+            <td>9.5%</td>
+            <td>7.8%</td>
+            <td>6.4%</td>
+            <td>5.5%</td>
+            <td>4.8%</td>
+            <td>4.3%</td>
+          </tr>
+          <tr align="right">
+            <th>predicted by Benford's law&nbsp;</th>
+            <td>30.1%</td>
+            <td>17.6%</td>
+            <td>12.5%</td>
+            <td>9.7%</td>
+            <td>7.9%</td>
+            <td>6.7%</td>
+            <td>5.8%</td>
+            <td>5.1%</td>
+            <td>4.6%</td>
+          </tr>
+        </table>
+      </blockquote>
+
+      <blockquote class="blockquote">
+        <b>Second Digit of Generalized Repunit Factors:</b><br><br>
+        <table bordercolor="#66CCFF" border="1" cellpadding="3">
+          <tr align="right">
+            <th>second digit <i>d&nbsp;</i></th>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+          </tr>
+          <tr align="right">
+            <th>number&nbsp;of primes </th>
+            <td>111386</td>
+            <td>106782</td>
+            <td>101980</td>
+            <td>97322</td>
+            <td>92176</td>
+            <td>89854</td>
+            <td>85939</td>
+            <td>83585</td>
+            <td>79475</td>
+            <td>78164</td>
+          </tr>
+          <tr align="right">
+            <th>percentage&nbsp;</th>
+            <td>12.0%</td>
+            <td>11.5%</td>
+            <td>11.0%</td>
+            <td>10.5%</td>
+            <td>9.9%</td>
+            <td>9.7%</td>
+            <td>9.3%</td>
+            <td>9.0%</td>
+            <td>8.6%</td>
+            <td>8.4%</td>
+          </tr>
+          <tr align="right">
+            <th>predicted by Benford's law&nbsp;</th>
+            <td>12.0%</td>
+            <td>11.4%</td>
+            <td>10.9%</td>
+            <td>10.4%</td>
+            <td>10.0%</td>
+            <td>9.7%</td>
+            <td>9.3%</td>
+            <td>9.0%</td>
+            <td>8.8%</td>
+            <td>8.5%</td>
+          </tr>
+        </table>
+      </blockquote>
+      <p>Benford's law requires that the significant digits are dependent, so it
+        might be interesting to use this data and find the number beginning with
+        given two-digit initial digit strings.</p>
+
+      <h3>Final comments</h3>
+
+      <p>Benford's law shows up in many unexpected places: surface areas of rivers,
+        house addresses, ... One of the reason for this is that there is a sort
+        of central limit theorem which states that if we repeatedly pick random
+        entries from random distributions, the result tends towards the distribution
+        of Benford's law [<a href="/references/refs.cgi/Hill1996">Hill1996</a>].&nbsp;
+        It has been used to catch check fraud, and is used to analyze computer
+        storage methods [<a href="/references/refs.cgi/Knuth97">Knuth97</a>,
+        sect. 4.2].&nbsp; But does it have a use in prime number theory?&nbsp;
+        Not that I know of (<a href="/curios/page.php/0.3010299956639811952....html">but
+          it is indeed curious</a>).</p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

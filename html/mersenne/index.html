@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Mersenne Primes: History, Theorems and Lists</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="The definitive pages on the Mersenne primes and the related mathematics!">
+  <meta name="keywords" content="Mersenne, Mersennes, prime, primes, perfect numbers, number theory, mathematics">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item active">Mersennes</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" --> Mersenne Primes:
+        History, Theorems and Lists <!-- #EndEditable --></h1>
+      <!-- #BeginEditable "content" -->
+      <h3>Contents:</h3>
+      <ol>
+        <li><a href="#hist">Early History</a> </li>
+        <li><a href="#theorems">Perfect Numbers and a Few Theorems</a> </li>
+        <li><a href="#known">Table of Known Mersenne Primes</a> </li>
+        <li><a href="#test">The Lucas-Lehmer Test and Recent History</a> </li>
+        <li><a href="#unknown">Conjectures and Unsolved Problems</a> </li>
+        <li>See also <a href="/notes/faq/NextMersenne.html">Where is the next larger
+            Mersenne prime?</a> and <a href="heuristic.html">Mersenne heuristics</a></li>
+      </ol>
+      <h2 id="hist">1. Early History</h2>
+      <p>Many early writers felt that the numbers of the form 2<i><sup>n</sup></i>-1 were
+        prime for <i>all</i> primes <i>n</i>, but in 1536 Hudalricus Regius showed that
+        2<sup>11</sup>-1 = 2047 was not prime (it is 23<sup>.</sup>89).&nbsp; By 1603 <a
+          href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Cataldi.html">Pietro
+          Cataldi</a> had correctly verified that 2<sup>17</sup>-1 and 2<sup>19</sup>-1
+        were both prime, but then incorrectly stated 2<i><sup>n</sup></i>-1 was also
+        prime for 23, 29, 31 and 37.&nbsp; In 1640 <a
+          href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Fermat.html">Fermat</a> showed Cataldi was
+        wrong about 23 and 37; then <a
+          href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Euler.html">Euler</a> in 1738 showed Cataldi
+        was also wrong about 29.&nbsp; <a href="../notes/by_year.html#31">Sometime later</a> Euler showed Cataldi's
+        assertion about 31 was correct.</p>
+      <p id="monk">Enter French monk <a
+          href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Mersenne.html">Marin Mersenne</a>
+        (1588-1648).&nbsp; Mersenne stated in the preface to his <i>Cogitata Physica-Mathematica</i> (1644) that the
+        numbers 2<i><sup>n</sup></i>-1 were prime for</p>
+      <blockquote class="blockquote"><i>n</i> = 2, 3, 5, 7, 13, 17, 19, <b>31, 67, 127 and 257</b>&nbsp; </blockquote>
+      <p>and were composite for all other positive integers <i>n</i> &lt; 257.&nbsp; Mersenne's
+        (incorrect) conjecture fared only slightly better than Cataldi's, but still got
+        his name attached to these numbers.</p>
+      <blockquote class="blockquote"><b>Definition:</b> When 2<i><sup>n</sup></i>-1 is prime it is said to be a
+        <b>Mersenne prime</b>.
+      </blockquote>
+      <p>It was obvious to Mersenne's peers that he could not have tested all of these
+        numbers (in fact he admitted as much), but they could not test them either.&nbsp;
+        It was not until over 100 years later, in 1750, that Euler verified the next number
+        on Mersenne's and Regius' lists, 2<sup>31</sup>-1, was prime.&nbsp; After another
+        century, in 1876, <a href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Lucas.html">Lucas</a>
+        verified 2<sup>127</sup>-1 was also prime.&nbsp; Seven years later Pervouchine showed 2<sup>61</sup>-1 was
+        prime, so Mersenne had missed this one.&nbsp; In the early 1900's Powers showed that Mersenne had also missed
+        the primes 2<sup>89</sup>-1 and 2<sup>107</sup>-1.&nbsp; Finally, by 1947 Mersenne's range, <i>n</i> <u>&lt;</u>
+        258, had been completely checked and it was determined that the correct list is:</p>
+      <blockquote class="blockquote"><i>n</i> = 2, 3, 5, 7, 13, 17, 19, 31, 61, 89, 107 and 127. </blockquote>
+      <p>See the <a href="#known">table of known Mersenne</a> primes below.</p>
+      <h2 id="theorems">2. Perfect Numbers and a Few Theorems</h2>
+      <p>Many ancient cultures were concerned with the relationship of a number with the
+        sum of its divisors, often giving mystic interpretations.&nbsp; Here we are concerned
+        only with one such relationship:</p>
+      <blockquote class="blockquote"><b>Definition:</b> A positive integer <i>n</i> is called a <b>perfect
+          number</b> if it is equal to the sum of all of its positive divisors, excluding <i>n</i> itself. </blockquote>
+      <p>For example, 6 is the first perfect number because 6=1+2+3.&nbsp; The next is 28=1+2+4+7+14.&nbsp;
+        The next two are 496 and 8128. These four were all known before the time of Christ.&nbsp;
+        Look at these numbers in the following partially factored form:</p>
+      <blockquote class="blockquote">2<sup>.</sup>3, 4<sup>.</sup>7, 16<sup>.</sup>31, 64<sup>.</sup>127. </blockquote>
+      <p>Do you notice they all have the same form 2<sup><i>n</i>-1</sup>(2<i><sup>n</sup></i>-1)
+        (for <i>n</i> = 2, 3, 5, and 7 respectively)?&nbsp; And that in each case 2<i><sup>n</sup></i>-1 was a Mersenne
+        prime?&nbsp; In fact it is easy to show the following theorems:</p>
+      <blockquote class="blockquote" id="theorem1"><b>Theorem One:</b>&nbsp; <i>k</i> is an even perfect
+        number if and only if it has the form 2<sup><i>n</i>-1</sup>(2<i><sup>n</sup></i>-1)
+        and 2<i><sup>n</sup></i>-1 is prime. [<a href="../notes/proofs/EvenPerfect.html">Proof.</a>] <br>
+        <b>Theorem Two:</b>&nbsp; If 2<i><sup>n</sup></i>-1 is prime, then so is <i>n</i>.
+        [<a href="../notes/proofs/Theorem2.html">Proof.</a>]
+      </blockquote>
+      <p>So the search for Mersennes is also the search for even perfect numbers!</p>
+      <p>You may have also noticed that the perfect numbers listed above (6, 28, 496,
+        8128) all end with either the digit 6 or the digit 8--this is also very easy
+        to prove (but no, they do not continue to alternate 6, 8, 6, 8,...).&nbsp; If
+        you like that digit pattern, look at the first four perfect numbers in binary:</p>
+      <blockquote class="blockquote"> 110<br>
+        11100<br>
+        111110000<br>
+        1111111000000 </blockquote>
+      <p>(The binary digit pattern is a consequence of Theorem One.)&nbsp; It is <a href="#unknown">not known</a>
+        whether or not there is an odd perfect number, but if there is one it is big!&nbsp; This is probably the oldest
+        unsolved problem in all of mathematics. </p>
+      <p>When checking to see if a Mersenne number is prime, we usually first look for
+        any small divisors.&nbsp; The following theorem of Euler and Fermat is very
+        useful in this regard.</p>
+      <blockquote class="blockquote"><b>Theorem Three:</b>&nbsp; Let <i>p</i> and <i>q</i> be odd primes. If <i>q</i>
+        divides M<i><sub>p</sub></i> = 2<i><sup>p</sup></i>-1, then
+        <p class="mt-n1 ml-3 mb-n4"><i>q</i> = +/-1 (mod 8)&nbsp;&nbsp;&nbsp;&nbsp; and&nbsp;&nbsp;&nbsp;&nbsp; <i>q</i>
+          = 2<i>kp</i> + 1</p>
+      </blockquote>
+      <p>for some integer <i>k</i> &nbsp; [<a href="../notes/proofs/MerDiv.html">Proof</a>].
+        Finally, we offer the following for your perusal:</p>
+      <blockquote class="blockquote"><b>Theorem Four:&nbsp;</b> Let <i>p</i> = 3 (mod 4) be prime. 2<i>p</i>+1
+        is also prime if and only if 2<i>p</i>+1 divides M<sub><i>p</i></sub>. [<a
+          href="../notes/proofs/MerDiv2.html">Proof</a>]. </blockquote>
+      <blockquote class="blockquote"><b>Theorem Five:&nbsp;</b> If you sum the digits of any even perfect number
+        (except 6), then sum the digits of the resulting number, and repeat this process
+        until you get a single digit, that digit will be one. [<a href="../notes/proofs/Theorem3.html">Proof</a>.]
+      </blockquote>
+
+      <h2 id="known">3. Table of Known Mersenne Primes</h2>
+
+      <p>Let M(<i>p</i>) = 2<i><sup>p</sup></i>-1 and P(<i>p</i>) =
+        2<sup><i>p</i>-1</sup>(2<i><sup>p</sup></i>-1).&nbsp;
+        The list of all known primes <i>p</i> for which M(<i>p</i>) is a Mersenne prime
+        (therefore P(<i>p</i>) is a perfect number) follows:</p>
+
+      <table class="td4 brdr my-4 mx-auto table-hover">
+        <thead class="blue lighten-4 text-center">
+          <tr>
+            <th>##</th>
+            <th><i>p</i><br>
+              (exponent)</th>
+            <th>digits<br>
+              in M<sub><i>p</i></sub></th>
+            <th>digits<br>
+              in P<sub><i>p</i></sub></th>
+            <th>year</th>
+            <th>discoverer</th>
+            <th>notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-center">
+            <td>1</td>
+            <td> 2</td>
+            <td> 1</td>
+            <td> 1</td>
+            <td>----</td>
+            <td class="text-left">----</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>2</td>
+            <td> 3</td>
+            <td> 1</td>
+            <td> 2</td>
+            <td>----</td>
+            <td class="text-left">----</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>3</td>
+            <td> 5</td>
+            <td> 2</td>
+            <td> 3</td>
+            <td>----</td>
+            <td class="text-left">----</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>4</td>
+            <td> 7</td>
+            <td> 3</td>
+            <td> 4</td>
+            <td>----</td>
+            <td class="text-left">----</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>5</td>
+            <td> 13</td>
+            <td> 4</td>
+            <td> 8</td>
+            <td> 1456</td>
+            <td class="text-left"> anonymous</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>6</td>
+            <td> 17</td>
+            <td> 6</td>
+            <td> 10</td>
+            <td> 1588</td>
+            <td class="text-left"> Cataldi</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>7</td>
+            <td> 19</td>
+            <td> 6</td>
+            <td> 12</td>
+            <td> 1588</td>
+            <td class="text-left"> Cataldi</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>8</td>
+            <td>31</td>
+            <td> 10</td>
+            <td> 19</td>
+            <td> 1772</td>
+            <td class="text-left"> Euler</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>9</td>
+            <td>61</td>
+            <td> 19</td>
+            <td> 37</td>
+            <td> 1883</td>
+            <td class="text-left"> Pervushin</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>10</td>
+            <td> 89</td>
+            <td> 27</td>
+            <td> 54</td>
+            <td> 1911</td>
+            <td class="text-left"> Powers</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>11</td>
+            <td> 107</td>
+            <td> 33</td>
+            <td> 65</td>
+            <td> 1914</td>
+            <td class="text-left"> Powers</td>
+            <td><a href="../notes/fauquem.html">note</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>12</td>
+            <td> 127</td>
+            <td> 39</td>
+            <td> 77</td>
+            <td> 1876</td>
+            <td class="text-left"> Lucas</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>13</td>
+            <td> 521</td>
+            <td> 157</td>
+            <td> 314</td>
+            <td> 1952</td>
+            <td class="text-left"> Robinson</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>14</td>
+            <td> 607</td>
+            <td> 183</td>
+            <td> 366</td>
+            <td> 1952</td>
+            <td class="text-left"> Robinson</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>15</td>
+            <td> 1279</td>
+            <td> 386</td>
+            <td> 770</td>
+            <td> 1952</td>
+            <td class="text-left"> Robinson</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>16</td>
+            <td> 2203</td>
+            <td> 664</td>
+            <td> 1327</td>
+            <td> 1952</td>
+            <td class="text-left"> Robinson</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>17</td>
+            <td> 2281</td>
+            <td> 687</td>
+            <td> 1373</td>
+            <td> 1952</td>
+            <td class="text-left"> Robinson</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>18</td>
+            <td> 3217</td>
+            <td> 969</td>
+            <td> 1937</td>
+            <td> 1957</td>
+            <td class="text-left"> Riesel</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>19</td>
+            <td> 4253</td>
+            <td> 1281</td>
+            <td> 2561</td>
+            <td> 1961</td>
+            <td class="text-left"> Hurwitz</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>20</td>
+            <td> 4423</td>
+            <td> 1332</td>
+            <td> 2663</td>
+            <td> 1961</td>
+            <td class="text-left"> Hurwitz</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>21</td>
+            <td> 9689</td>
+            <td> 2917</td>
+            <td> 5834</td>
+            <td> 1963</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Gillies">Gillies</a></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>22</td>
+            <td> 9941</td>
+            <td> 2993</td>
+            <td> 5985</td>
+            <td> 1963</td>
+            <td class="text-left"> Gillies</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>23</td>
+            <td> 11213</td>
+            <td> 3376</td>
+            <td> 6751</td>
+            <td> 1963</td>
+            <td class="text-left"> Gillies</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>24</td>
+            <td> 19937</td>
+            <td> 6002</td>
+            <td> 12003</td>
+            <td> 1971</td>
+            <td class="text-left"> Tuckerman</td>
+            <td>[<a href="../references/refs.cgi/Tuckerman71">Tuckerman71</a>]</td>
+          </tr>
+          <tr class="text-center">
+            <td>25</td>
+            <td> 21701</td>
+            <td> 6533</td>
+            <td> 13066</td>
+            <td> 1978</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Noll">Noll</a> &amp; Nickel</td>
+            <td>[<a href="../references/refs.cgi/NN80">NN80</a>]</td>
+          </tr>
+          <tr class="text-center">
+            <td>26</td>
+            <td> 23209</td>
+            <td> 6987</td>
+            <td> 13973</td>
+            <td> 1979</td>
+            <td class="text-left"> Noll</td>
+            <td>"</td>
+          </tr>
+          <tr class="text-center">
+            <td>27</td>
+            <td> 44497</td>
+            <td> 13395</td>
+            <td> 26790</td>
+            <td> 1979</td>
+            <td class="text-left"> Nelson &amp; <a href="/bios/page.php?lastname=Slowinski">Slowinski</a></td>
+            <td>[<a href="../references/refs.cgi/Slowinski79">Slowinski79</a>]</td>
+          </tr>
+          <tr class="text-center">
+            <td>28</td>
+            <td> 86243</td>
+            <td> 25962</td>
+            <td> 51924</td>
+            <td> 1982</td>
+            <td class="text-left"> Slowinski</td>
+            <td>[<a href="../references/refs.cgi/Ewing83">Ewing83</a>]</td>
+          </tr>
+          <tr class="text-center">
+            <td>29</td>
+            <td> 110503</td>
+            <td> 33265</td>
+            <td> 66530</td>
+            <td> 1988</td>
+            <td class="text-left"> Colquitt &amp; Welsh</td>
+            <td>[<a href="../references/refs.cgi/CW91">CW91</a>]</td>
+          </tr>
+          <tr class="text-center">
+            <td>30</td>
+            <td> 132049</td>
+            <td> 39751</td>
+            <td> 79502</td>
+            <td> 1983</td>
+            <td class="text-left"> Slowinski</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>31</td>
+            <td> 216091</td>
+            <td> 65050</td>
+            <td> 130100</td>
+            <td> 1985</td>
+            <td class="text-left"> Slowinski</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>32</td>
+            <td> 756839</td>
+            <td> 227832</td>
+            <td> 455663</td>
+            <td> 1992</td>
+            <td class="text-left"> Slowinski &amp; <a href="/bios/page.php?lastname=Gage">Gage</a> et al. </td>
+            <td>(<a href="../notes/756839.html">web page</a>)</td>
+          </tr>
+          <tr class="text-center">
+            <td>33</td>
+            <td> 859433</td>
+            <td> 258716</td>
+            <td> 517430</td>
+            <td> 1994</td>
+            <td class="text-left"> Slowinski &amp; Gage</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="text-center">
+            <td>34</td>
+            <td> 1257787</td>
+            <td> 378632</td>
+            <td> 757263</td>
+            <td> 1996</td>
+            <td class="text-left"> Slowinski &amp; Gage</td>
+            <td><a href="../notes/1257787.html">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>35</td>
+            <td> 1398269</td>
+            <td> 420921</td>
+            <td> 841842</td>
+            <td> 1996</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Armengaud">Armengaud</a>, <a
+                href="/bios/page.php?lastname=Woltman">Woltman</a>, <br>
+              <a href="/bios/page.php?lastname=GIMPS">et al.</a> (<a href="http://www.mersenne.org/prime.htm">GIMPS</a>)
+            </td>
+            <td><a href="../notes/1398269/">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>36</td>
+            <td> 2976221</td>
+            <td> 895932</td>
+            <td>1791864</td>
+            <td> 1997</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Spence">Spence</a>, Woltman,<br>
+              et al. (GIMPS)</td>
+            <td><a href="../notes/2976221/">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>37</td>
+            <td> 3021377</td>
+            <td> 909526</td>
+            <td>1819050</td>
+            <td> 1998</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Clarkson">Clarkson</a>, Woltman, <a
+                href="/bios/page.php?lastname=Kurowski">Kurowski</a><br>
+              et al. (GIMPS, <a href="http://www.mersenne.org/ips/">PrimeNet</a>)</td>
+            <td><a href="../notes/3021377/">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>38</td>
+            <td> 6972593</td>
+            <td> 2098960</td>
+            <td>4197919</td>
+            <td> 1999</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Hajratwala">Hajratwala</a>,
+              Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="../notes/6972593/">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>39</td>
+            <td> 13466917</td>
+            <td> 4053946</td>
+            <td>8107892</td>
+            <td> 2001</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Cameron">Cameron</a>, Woltman,
+              Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="../notes/13466917/index.html">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>40</td>
+            <td> 20996011</td>
+            <td> 6320430</td>
+            <td>12640858</td>
+            <td> 2003</td>
+            <td class="text-left"><a href="/bios/page.php?lastname=Shafer">Shafer</a>,
+              Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="../notes/20996011/index.html">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>41</td>
+            <td> 24036583<br></td>
+            <td> 7235733<br></td>
+            <td>14471465<br></td>
+            <td> 2004</td>
+            <td class="text-left"><a href="/bios/page.php?id=644">Findley</a>,
+              Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://www.mersenne.org/primes/?press=M24036583">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>42</td>
+            <td> 25964951<br></td>
+            <td> 7816230 <br></td>
+            <td>15632458<br></td>
+            <td> 2005</td>
+            <td class="text-left"><a href="/bios/page.php?id=741">Nowak</a>,
+              Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://www.mersenne.org/primes/?press=25964951">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>43</td>
+            <td> 30402457 <br></td>
+            <td> 9152052 <br></td>
+            <td>18304103<br></td>
+            <td> 2005</td>
+            <td class="text-left"><a href="/bios/page.php?id=402">Cooper</a>, <a href="/bios/page.php?id=834">Boone</a>,
+              Woltman,
+              Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://www.mersenne.org/primes/?press=M30402457">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>44</td>
+            <td>32582657</td>
+            <td>9808358</td>
+            <td>19616714</td>
+            <td>2006</td>
+            <td class="text-left">Cooper, Boone,
+              Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://www.mersenne.org/primes/?press=M32582657">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>45</td>
+            <td>37156667</td>
+            <td>11185272</td>
+            <td>22370543</td>
+            <td>2008</td>
+            <td class="text-left">Elvenich, Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://mersenne.org/m45and46.htm">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td>46</td>
+            <td> 42643801 </td>
+            <td>12837064</td>
+            <td>25674127</td>
+            <td>2009</td>
+            <td class="text-left"> Strindmo, Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td>(web page)</td>
+          </tr>
+          <tr class="text-center">
+            <td>47</td>
+            <td>43112609</td>
+            <td>12978189</td>
+            <td>25956377</td>
+            <td>2008</td>
+            <td class="text-left"> Smith, Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://mersenne.org/m45and46.htm">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td><a href="/primes/page.php?id=111120">48</a></td>
+            <td>57885161</td>
+            <td>17425170</td>
+            <td>34850339</td>
+            <td>2013</td>
+            <td class="text-left">Cooper, Woltman, Kurowski<br>
+              et al. (GIMPS, PrimeNet)</td>
+            <td><a href="http://www.mersenne.org/various/57885161.htm">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td><a href="/primes/page.php?id=120909">49?</a></td>
+            <td>74207281</td>
+            <td>22338618</td>
+            <td>44677235</td>
+            <td>2016</td>
+            <td class="text-left">Cooper, Woltman (prime95), Kurowski &amp; Blosser (PrimeNet),
+              GIMPS et al.</td>
+            <td><a href="../notes/74207281.htm">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td><a href="/primes/page.php?id=124104">50?</a></td>
+            <td>77232917</td>
+            <td>23249425</td>
+            <td>46498850</td>
+            <td>2017</td>
+            <td class="text-left">Pace, Woltman (prime95), Kurowski &amp; Blosser (PrimeNet), GIMPS et al.</td>
+            <td><a href="https://www.mersenne.org/primes/?press=M77232917">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td><a href="/primes/page.php?id=125874">51?</a></td>
+            <td>82589933</td>
+            <td>24862048</td>
+            <td>49724095</td>
+            <td>2018</td>
+            <td class="text-left"><a href="/bios/code.php?code=G16" class="none">Laroche, Woltman (prime95), Blosser
+                (PrimeNet), GIMPS et al.</a></td>
+            <td><a href="https://www.mersenne.org/primes/?press=M82589933">(web page)</a></td>
+          </tr>
+          <tr class="text-center">
+            <td><a href="/primes/page.php?id=138668">52?</a></td>
+            <td>136279841</td>
+            <td>41024320</td>
+            <td>82048640</td>
+            <td>2024</td>
+            <td class="text-left"><a href="/bios/code.php?code=MP1" class="none">Durant, Preda, Woltman, Blosser, et
+                al.</a></td>
+            <td><a href="https://www.mersenne.org/primes/?press=M136279841">(web page)</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <p> We put question marks instead of a number for the last of the Mersenne
+        primes because it will not be known if there are other Mersenne's in between
+        these until a check and double check has been completed by GIMPS.&nbsp; See
+        the <a href="http://www.mersenne.org/status.htm">GIMPS Status Page</a> for more information.&nbsp;
+        Not all smaller exponents have been tested.</p>
+      <h2 id="test">4. The Lucas-Lehmer Test and Recent History</h2>
+      <p>Mersenne primes (and therefore even <a href="#theorems">perfect numbers</a>) are
+        found using the following theorem:</p>
+      <blockquote class="blockquote"><b>Lucas-Lehmer Test:</b>&nbsp; For <i>p</i> an odd prime, the Mersenne
+        number 2<i><sup>p</sup></i>-1 is prime if and only if 2<i><sup>p</sup></i>-1
+        divides S(<i>p</i>-1) where S(<i>n</i>+1) = S(<i>n</i>)<sup>2</sup>-2, and S(1)
+        = 4. [<a href="../notes/proofs/LucasLehmer.html">Proof</a>.]</blockquote>
+      <p>(It is also possible to start with S(1)=10 and certain other values depending
+        on <i>p</i>.)&nbsp; In pseudo-code this test is:</p>
+
+      <blockquote class="blockquote">
+        <pre>Lucas_Lehmer_Test(p):
+&nbsp; s := 4;
+&nbsp; for i from 3 to p do s := s<sup>2</sup>-2 mod 2<sup>p</sup>-1;
+&nbsp; if s == 0 then
+&nbsp;&nbsp;&nbsp; 2<sup>p</sup>-1 is prime
+&nbsp; else
+&nbsp;&nbsp;&nbsp; 2<sup>p</sup>-1 is composite;</pre>
+      </blockquote>
+      <p>The theory for this test was initiated by <a
+          href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Lucas.html">Lucas</a> in the late 1870's and
+        then made into this simple test about 1930 by Lehmer. The sequence S(<i>n</i>) is computed modulo
+        2<i><sup>p</sup></i>-1 to save time.&nbsp;
+        This test is ideal for binary computers because the division by 2<i><sup>p</sup></i>-1
+        (in binary) can be done using rotation and addition only.&nbsp; (See <a href="../prove/proving.html">the pages
+          on proving primality</a> for more information
+        of proving numbers are prime.)</p>
+      <p>In 1811 <a href="http://www-groups.dcs.st-and.ac.uk/~history/Mathematicians/Barlow.html">Peter
+          Barlow</a> wrote in his text Theory of Numbers that 2<sup>30</sup>(2<sup>31</sup>-1)
+        "is the greatest [perfect number] that will be discovered; for as they are merely
+        curious, without being useful, it is not likely that any person will attempt
+        to find one beyond it."&nbsp; I wonder what he would have made of the first
+        attempts to climb Mount Everest, to run faster miles, or to jump a longer broad
+        jump--other tasks that are curious but not useful.&nbsp; Obviously no one in
+        the late 1800's had any idea of the power of modern computers.&nbsp; What might
+        we know about the machines of 50 years from now?&nbsp; (See also <a href="../notes/faq/why.html">"Why
+          find big primes?"</a>)</p>
+      <p><img SRC="../gifs/stamp.gif" alt="U-Illinois postage stamp" class="float-right" width="287" height="94"> After
+        the 23rd Mersenne prime was
+        found at the University of Illinois, the mathematics department was so proud
+        that the chair of their department, Dr. Bateman, had their postage meter changed
+        to stamp "2<sup>11213</sup>-1 is prime" on each envelope.&nbsp; This was used
+        until the four color theorem was proved in 1976. (In 1985 Dr. Bateman printed
+        several copies of the earlier imprint--the image on the left is from one of
+        these.)</p>
+      <p>The 25th and 26th Mersenne primes were found by high-school students Laura
+        Nickel and <a href="/bios/page.php?lastname=Noll">Landon Curt Noll</a>, who, though
+        they had little understanding of the mathematics involved, used Lucas' simple
+        test on the local university's mainframe (CSUH's CDC 174) to find the next two
+        primes.&nbsp; Their discovery of the first prime made the national television
+        news and the front page of the New York times.&nbsp; They went their separate
+        ways after finding the first prime, but Noll kept the program running to find
+        the second--so Noll claims complete ownership.&nbsp; Noll searched later, and
+        though he never found another Mersenne prime, he is one of a team that holds
+        the record for the largest non-Mersenne prime.&nbsp; He currently works for
+        Silicon Graphics.</p>
+      <p><a href="/bios/page.php?lastname=Slowinski">Slowinski</a>, who works for Cray computers,
+        has written a version of the Lucas test that he has convinced many Cray labs
+        around the world to run in their spare time (time that would be lost otherwise).&nbsp;
+        He had to delay announcing one of his prime records until he got permission
+        to begin looking for it.&nbsp; Slowinski's search for record primes is "not
+        so organized as you would suppose" (his words), as he does not search systematically.&nbsp;
+        In fact, looking at the table of Mersennes you see he missed the 29th prime
+        but found the 30th and 31st.&nbsp; Colquitt &amp; Welsh worked to fill in the
+        gaps and found the 29th.</p>
+      <p>Enter <a href="/bios/page.php?lastname=Woltman">George Woltman</a>, an excellent
+        programmer and organizer.&nbsp; Starting in late 1995 he gathered up the disparate
+        databases and combined them into one. Then he placed this database, and a free,
+        highly optimized program for search for Mersennes onto the web.&nbsp; This began <a
+          href="http://www.mersenne.org/prime.htm">GIMPS</a> (the Great Internet Mersenne
+        Prime Search) which: has now found the largest known Mersennes, has scanned
+        all of the regions left unexplored between the previous record primes, combines
+        the efforts of dozens of experts and thousands of
+        amateurs, and which offers <a href="http://www.mersenne.org/freesoft.htm">free
+          software</a> for most computer platforms.</p>
+      <p>In late 1997 <a href="/bios/page.php?lastname=Kurowski">Scott Kurowski</a> (and
+        others) established <a href="http://www.mersenne.org/ips/">PrimeNet</a> to automate
+        the selection of ranges and reporting of results for GIMPS, now almost anyone
+        can join this search!</p>
+      <h2 id="unknown">5. Conjectures and Unsolved Problems</h2>
+      <dl>
+        <dt> <b>Is there an odd perfect number?</b>&nbsp;</dt>
+        <dd class="ml-4">We know that all even perfect numbers are a Mersenne prime times a power
+          of two (<a href="#theorem1">Theorem One above</a>), but what about odd perfect
+          numbers?&nbsp; If there is one, then it is a perfect square times an odd
+          power of a single prime; it is divisible by at least eight primes and
+          has at least 75 prime factors (not necessarily distinct [<a
+            href="../references/refs.cgi/Hare2006">Hare2006</a>],
+          [<a href="../references/refs.cgi/Hare2005">Hare2005</a>],
+          [<a href="../references/refs.cgi/IS2003">IS2003</a>]) with at least 9 distinct [<a
+            href="../references/refs.cgi/Nielsen2006">Nielsen2006</a>];
+          it has at least 300 decimal digits [<a href="../references/refs.cgi/BCR91">BCR91</a>]; and it has a prime
+          divisor greater
+          that 10<sup>20</sup> [<a href="../references/refs.cgi/Cohen87">Cohen87</a>].&nbsp; For more information see
+          [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>] or [<a
+            href="../references/refs.cgi/Guy94">Guy94</a>].
+        </dd>
+        <dt> <b>Are there infinitely many Mersenne primes?</b>&nbsp;</dt>
+        <dd class="ml-4"> Equivalently we could ask: Are there infinitely many even perfect numbers?&nbsp;
+          The answer is <i>probably</i> yes (because the harmonic series diverges).<br>
+        </dd>
+        <dt> <b>Are there infinitely many Mersenne composites?</b>&nbsp;</dt>
+        <dd class="ml-4"> Euler showed:<br>
+          <blockquote class="blockquote"><strong>Theorem</strong>:&nbsp; If&nbsp; <i>k</i>&gt;1 and&nbsp;
+            <i>p</i>=4<i>k</i>+3&nbsp; is prime, then 2<i>p</i>+1 is prime if and only
+            if 2<i><sup>p</sup></i> = 1 (mod 2<i>p</i>+1).
+          </blockquote>
+          So if <i>p</i>=4<i>k</i>+3 and 2<i>p</i>+1 are prime then the Mersenne number
+          2<i><sup>p</sup></i>-1 is composite (and it seems reasonable to conjecture that
+          there are infinitely many primes pairs such <i>p</i>, 2<i>p</i>+1). <br>
+        </dd>
+        <dt id="bsw"><b>The New Mersenne Conjecture</b>:</dt>
+        <dd class="ml-4"> Bateman, Selfridge and Wagstaff have conjectured [<a
+            href="../references/refs.cgi/BSW89">BSW89</a>] the following.<br>
+          <blockquote class="blockquote">Let <i>p</i> be any odd natural number. If two of the following conditions
+            hold, then so does the third:
+            <ol class="mb-n2">
+              <li> <i>p</i> = 2<i><sup>k</sup></i>+/-1&nbsp;&nbsp; or&nbsp;&nbsp; <i>p</i> = 4<i><sup>k</sup></i>+/-3
+              </li>
+              <li> 2<i><sup>p</sup></i>-1 is a prime (obviously a Mersenne prime)</li>
+              <li> (2<i><sup>p</sup></i>+1)/3 is a prime.</li>
+            </ol>
+          </blockquote>
+          Notice how this conjecture is related to the theorem in the previous conjecture.&nbsp;
+          See our page on <a href="NewMersenneConjecture.html">The New Mersenne Conjecture</a> for status
+          information.<br>
+        </dd>
+        <dt> <b>Is every Mersenne number 2<sup><i>p</i></sup>-1 square free?</b></dt>
+        <dd class="ml-4"> This falls more in the category of an open question (to which we do not
+          know the answer), rather than a conjecture (which we guess is true) [<a
+            href="../references/refs.cgi/Guy94">Guy94</a> section A3].&nbsp; It is <a
+            href="../notes/proofs/SquareMerDiv.html">easy
+            to show</a> that if the square of a prime <i>p</i> divides a Mersenne, then <i>p</i> is a <a
+            class="glossary" title="glossary" href="/glossary/page.php?sort=WieferichPrime">Wieferich
+            prime</a> and these are rare!&nbsp; Only two are known below 4,000,000,000,000
+          and neither of these squared divide a Mersenne.<br>
+        </dd>
+        <dt id="c"> <b>Let C<sub>0</sub> = 2, then let C<sub>1</sub> = 2<sup>C<sub>0</sub></sup>-1,
+            C<sub>2</sub> = 2<sup>C<sub>1</sub></sup>-1, C<sub>3</sub> = 2<sup>C<sub>2</sub></sup>-1,
+            ... Are these all prime?</b>&nbsp;</dt>
+        <dd class="ml-4"> According to Dickson [<a href="../references/refs.cgi/Dickson19">Dickson</a> v1p22] Catalan
+          responded in 1876 to Lucas' stating 2<sup>127</sup>-1 (C<sub>4</sub>)
+          is prime with this sequence.&nbsp; These numbers grow very quickly:<br>
+          <blockquote class="blockquote">
+            <table>
+              <tr>
+                <td>C<sub>0</sub> = 2</td>
+                <td class="text-center">(prime)</td>
+              </tr>
+              <tr>
+                <td>C<sub>1</sub> = 3</td>
+                <td class="text-center">(prime)</td>
+              </tr>
+              <tr>
+                <td>C<sub>2</sub> = 7</td>
+                <td class="text-center">(prime)</td>
+              </tr>
+              <tr>
+                <td>C<sub>3</sub> = 127</td>
+                <td class="text-center">(prime)</td>
+              </tr>
+              <tr>
+                <td>C<sub>4</sub> = 170141183460469231731687303715884105727</td>
+                <td class="text-center">(prime)</td>
+              </tr>
+              <tr>
+                <td>C<sub>5</sub> &gt; 10<sup>51217599719369681875006054625051616349</sup></td>
+                <td class="text-center">(is C<sub>5</sub> prime ?)</td>
+              </tr>
+            </table>
+          </blockquote>
+          It seems very unlikely that C<sub>5</sub> (or many of the larger terms) would
+          be prime, so this is no doubt another example of Guy's <a
+            href="https://t5k.org/glossary/page.php?sort=LawOfSmall">strong law of small
+            numbers</a>.&nbsp; Notice that if there is even one composite term in this
+          sequences, then by<a href="#theorem1"> theorem one</a> all of the following
+          terms are composite.&nbsp;
+          (<a href="/bios/page.php?lastname=Noll">Landon Curt Noll</a> tells
+          me he has used his program <a href="http://www.isthe.com/chongo/tech/comp/calc/index.html">calc</a> to verify
+          that C<sub>5</sub> has no prime divisors below 5*10<sup>51</sup>.)<br>
+        </dd>
+        <dt><b>Are there more double-Mersenne primes?</b> </dt>
+        <dd class="ml-4">Another common early misconception was that if <i>n</i>=M<sub><i>p</i></sub> is prime, then so
+          is M<sub><i>n</i></sub>; lets call this number MM<sub><i>p</i></sub> (a "double-Mersenne").&nbsp; Indeed each
+          of the first four such numbers are
+          prime:
+          <blockquote class="blockquote"> MM<sub>2</sub> &nbsp;=&nbsp; 2<sup>3</sup>-1&nbsp;&nbsp; =&nbsp; 7,<br>
+            MM<sub>3</sub> &nbsp;=&nbsp; 2<sup>7</sup>-1&nbsp;&nbsp; =&nbsp; 127,<br>
+            MM<sub>5</sub> &nbsp;=&nbsp; 2<sup>31</sup>-1&nbsp; =&nbsp; 2147483647,<br>
+            MM<sub>7</sub> &nbsp;=&nbsp; 2<sup>127</sup>-1 =&nbsp; 170141183460469231731687303715884105727.
+          </blockquote>
+          However, the next four (MM<sub>13</sub> MM<sub>17</sub> MM<sub>19</sub> and
+          MM<sub>31</sub>) all have known factors--so are composite.&nbsp; Are there
+          any more primes in this sequence?&nbsp; Probably not, but it remains an open
+          question.&nbsp; Tony Forbes is leading <a href="http://sites.google.com/site/anthonydforbes/mm61.htm">a
+            project to search for a factor of the next term</a>: MM<sub>61</sub>, you
+          might want to join and help!
+          <p>Notice the <a href="#c">Catalan sequence</a> above is a subsequence of
+            this one.</p>
+        </dd>
+      </dl>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../notes/privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

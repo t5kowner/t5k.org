@@ -1,0 +1,92 @@
+body {
+	background-color: white;
+	color: black;
+	max-width: 60em;
+}
+
+hr {
+	color: #000099;
+	background-color: white;
+}
+
+a {
+	color: #000033;
+	background-color: #F0F9FF;
+	text-decoration: none
+}
+
+a:hover {
+	color: black;
+	background-color: #CCEEFF;
+	text-decoration: underline;
+}
+
+a.glossary {
+	color: #000033;
+	border: 1px dashed blue;
+	padding: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	text-decoration: none;
+}
+
+/* Error messages in Red (sort-of) to stand out */
+.error {
+	display: block;
+	background-color: #FFBFBF;
+	border-color: red;
+	border-style: double;
+	color: #000;
+	padding: 1em
+}
+
+a.none {
+	background-color: transparent;
+	color: #000;
+	text-decoration: underline
+}
+
+/* Colorful aligned right notes for in text */
+
+.note {
+	background-color: #CCEEFF;
+	font-style: italic;
+	text-align: right;
+	z-index: 4;
+	top: 3cm;
+	float: right;
+	border-right: thick solid #CCCCCC;
+	margin-left: 1em;
+	margin-top: 0em;
+	margin-bottom: 0.5em;
+	padding: 1em
+}
+
+/* Grey small font technical note--oftem bottom of the page */
+
+.technote {
+	background-color: silver;
+	font-size: 75%;
+	padding: 0ex 1ex;
+}
+
+/* The link formats for the sidebar menu items */
+
+A.menu {
+	/*	font-family : Comic Sans MS, serif; */
+	color: black;
+	font-size: 12pt;
+	background-color: #66CCFF;
+	text-decoration: none;
+}
+
+A.menu:Hover {
+	color: rgb(00, 00, 255);
+	background-color: rgb(204, 255, 255);
+	text-decoration: underline;
+}
+
+.highlight {
+	background: #66CCFF;
+	color: black;
+}

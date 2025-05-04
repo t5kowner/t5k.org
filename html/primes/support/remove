@@ -1,0 +1,126 @@
+#!/usr/bin/perl -w
+use strict;
+use warnings;
+
+# The routine removes the primes for which the status flags include Remove or is marked Composite.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use connect_db;
+use Getopt::Std;	# Allow for command line options
+
+our($opt_h,$opt_s,$opt_t);
+getopts('hst');
+$opt_s or $opt_h or print "usage: remove [options].  Use remove -h to see the ".
+	"options.\n\n";
+
+$opt_h and print "The routine removes the primes for which the status flags ".
+	"include Remove or is marked Composite.
+
+usage: remove [options]    where the options are
+	-s	silent: only errors printed.
+	-t	test mode: do not actually change the database or mail
+";
+
+$opt_h and exit;
+$opt_t and print "Test mode: will not alter the database, mail written to ".
+	"stdout (only).\n\n";
+
+# Open database handle
+
+my $dbh = &connect_db::connect();
+
+# First, for the log and to email, make a list of the id's being removed
+
+my $query = "SELECT prime.id, prime.submitted, credit, display_text, prime.description,
+	prime.comment, prime.prime FROM prime, code WHERE credit=code.name and
+	(status LIKE '%Remove%' OR prime='Composite')";
+my($sth, $sth2);
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+my $list = '';
+while (my $p = $sth->fetchrow_hashref) {
+  $list .= "deleted.id=$$p{'id'}, ";
+  $opt_s or print "The prime with id $$p{'id'} will be deleted.\n";
+  if ($$p{'display_text'} =~ /^(\w+)/) {  # the first name on list of provers
+    my $query2 = "SELECT email FROM person WHERE surname='$1' LIMIT 1";
+    $sth2 = $dbh->prepare($query2) || die $sth2->errstr;
+    $sth2->execute() || die $sth2->errstr;
+    my $q = $sth2->fetchrow_hashref;
+    $opt_s or print "delete prime id $$p{'id'} : $$p{'description'} ($$q{'email'}) \n";
+    # Note $$p{'prime'} is enum('Composite','Untested','InProcess','PRP',
+    # 'Proven','External')
+    mail( $$q{'email'}, $$p{'id'}, $$p{'description'}, $$p{'comment'},
+	$$p{'prime'}, $$p{'submitted'} );
+  }
+  $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'deleted',
+	"deleted.id=$$p{'id'}", "Deleted $$p{'description'}./re	 by $$p{'credit'}.");
+}
+chop($list);
+chop($list);
+unless ($list) {
+  $opt_s or print "No primes to be deleted (i.e., no primes marked ".
+	"prime.status=remove or prime.prime=Composite).\n";
+  exit;
+}
+
+# this is technically a race condition - what if something is marked for removal after emails are sent above but before this?
+# it should be a tiny enough chance that I'm ignoring it for now
+$query = "DELETE FROM prime WHERE status LIKE '%Remove%' OR prime='Composite'";
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$opt_t or $sth->execute() || die $sth->errstr;
+my $rows = $sth->rows;
+$opt_s or print "Done, $rows rows deleted.\n";
+# $rows and &connect_db::log_action($dbh,'SYSTEM','deleted',$list,
+# "Deleted $rows prime(s).");
+
+exit;
+
+
+
+sub mail {
+  my $email = shift || 'admin@t5k.org';
+  my $id = shift || 'unknown';
+  my $desc = shift || 'unknown';
+  my $comm = shift || '(no comment)';
+  my $why = shift || 'unknown';
+  my $submittedTime = shift || 'unknown time';
+
+  my $content = "Hello,\n\nUnfortunately the number you submitted, \n\n\t$desc".
+	" $comm submitted at $submittedTime\n\nhad to be removed from the PrimePages' web site.\n\n".
+	"Only proven-primes which meet the site's size criteria should be ".
+	"submitted, see\n\n\thttps://t5k.org/top20/sizes.php\n\n";
+
+  if ($why eq 'Composite') {
+     $content .= "This number was composite!  Please do not submit numbers ".
+	"unless they have been proven prime.";
+  } else {
+     $content .= "This number was probably too small (which usually happens ".
+	"because of an invalid comment).";
+  }
+
+  $content .=  "  Please contact the admin if you have questions.\n\n".
+	"admin\@t5k.org".
+	"\n\n\n\nDatabase id: $id\nStatus: $why\n";
+
+  if ($opt_t) {
+     print "\n\n".('='x40)."\nTo: $email\n\n$content\n".('='x40)."\n\n";
+     return 1;
+  }
+
+  unless(open (MAIL, "|/usr/sbin/sendmail -t")) {
+     print "error.\n";
+     warn "Error starting sendmail: $!";
+  } else {
+     print MAIL "From: PrimePages <admin\@t5k.org>\n";
+     print MAIL "To: ".$email."\n";
+     print MAIL "Bcc: admin\@t5k.org\n";
+     print MAIL "Subject: PrimePages: The number $desc has been removed.\n\n";
+     print MAIL $content;
+     close(MAIL) || warn "Error closing mail: $!";
+     $opt_s or print "Mail sent.\n";
+  }
+}

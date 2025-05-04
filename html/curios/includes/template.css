@@ -1,0 +1,175 @@
+BODY {
+	background-image: url("/curios/includes/background.gif");
+	background-color: rgb(252, 252, 252);
+	font-family: "Comic Sans MS", Georgia, sans-serif;
+	color: rgb(0, 0, 0);
+	font-size: 12pt;
+}
+
+/* position list chunks side by side */
+div.column2 {
+	direction: ltr;
+	float: left;
+	width: 49%;
+}
+
+/* position list chunks side by side */
+div.column3 {
+	direction: ltr;
+	float: left;
+	width: 33%;
+}
+
+div.column4 {
+	direction: ltr;
+	float: left;
+	width: 24%;
+}
+
+div.column5 {
+	direction: ltr;
+	float: left;
+	width: 19%;
+}
+
+div.column6 {
+	direction: ltr;
+	float: left;
+	width: 16%;
+}
+
+ul.column {
+	display: block;
+	list-style-type: none;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+UL,
+P,
+TD,
+TH,
+LI {
+	font-family: "Comic Sans MS", Georgia, sans-serif;
+}
+
+H1,
+H2,
+H3,
+H4,
+H5 {
+	font-family: "Comic Sans MS", Georgia, sans-serif;
+	font-weight: bold;
+	color: black;
+	text-shadow: 3px 3px 5px;
+}
+
+A {
+	color: rgb(0, 51, 255);
+}
+
+A:Visited {
+	color: rgb(0, 0, 204);
+}
+
+A.glossary {
+	color: #000033;
+	border: 1px dashed blue;
+	padding: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	text-decoration: none;
+}
+
+a.none {
+	color: #000;
+	background-color: transparent;
+	text-decoration: underline
+}
+
+/* The link formats for the menu items */
+
+LI.menu,
+A.menu {
+	color: rgb(0, 51, 255);
+	font-size: 12pt;
+}
+
+A.menu:Active {
+	color: rgb(255, 255, 255);
+}
+
+A.menu:Hover {
+	background-color: rgb(255, 255, 204);
+	color: rgb(51, 74, 255);
+	text-decoration: underline;
+}
+
+/* Formats for the index page and links to it */
+
+HR.index {
+	background-color: rgb(252, 252, 252);
+	color: rgb(204, 204, 153);
+}
+
+div.index {
+	background: rgb(204, 204, 153);
+	color: green;
+	text-align: center;
+}
+
+A.mono {
+	font-weight: bold;
+	font-family: "MS Courier New", Courier, Prestige, "Everson Mono", Monospaced;
+}
+
+.highlight {
+	background: rgb(204, 204, 153);
+	color: black;
+}
+
+div.number {
+	background: rgb(204, 204, 153);
+	color: black;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 10pt;
+}
+
+A.index:Hover {
+	color: rgb(51, 74, 255);
+	background-color: rgb(204, 204, 153);
+	text-decoration: underline;
+}
+
+A.mono {
+	font-weight: bold;
+	font-family: "MS Courier New", Courier, Prestige, Everson Mono, Monospaced;
+}
+
+A.mono:HOVER {
+	color: rgb(51, 74, 255);
+	background-color: rgb(204, 204, 153);
+	text-decoration: underline;
+}
+
+/* Error messages in Red (sort-of) to stand out */
+.error {
+	color: #000000;
+	background-color: #FFBFBF;
+	border-style: double;
+	border-color: #FF0000;
+	padding: 1em;
+}
+
+.technote {
+	background-color: silver
+}
+
+div.technote {
+	font-size: smaller;
+	padding: .3em
+}
+
+blockquote.technote {
+	margin: 0 1em
+}

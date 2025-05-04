@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The Prime lexicon</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="Since words are numbers, it makes sense to divide them into the usual number categories: primes, composites, squares, perfect numbers... This is a collection of prime words (that is each of these words is a prime when viewed as a number base 36).">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/">Notes</a></li>
+          <li class="breadcrumb-item active">Prime Lexicon</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->The
+        Prime Lexicon<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <p class="mt-4">When writing numbers in bases (radii) larger than ten we use the letters as digits: setting A =
+        10, B = 11, ...,&nbsp; In hexadecimal (base 16), for example, we use the letters A, B, C, D, E and F.&nbsp; So
+        in hexadecimal we have</p>
+      <blockquote class="blockquote"> (FACE)<sub>16</sub> = 15 ⋅ 16<sup>3</sup> + 10 ⋅ 16<sup>2</sup> + 12 ⋅ 16 + 14.
+      </blockquote>
+      <p>When we work in base 36 all the letters are used - hence <b>all words are numbers</b>.
+        For example, in base 36 the word "FACE" is the number </p>
+      <blockquote class="blockquote"> (FACE)<sub>36</sub> = 15 ⋅ 36<sup>3</sup> + 10 ⋅ 36<sup>2</sup> + 12 ⋅ 36 + 14.
+      </blockquote>
+      <p>Since words are numbers, it makes sense to divide them into the usual number categories:
+        primes, composites, squares, perfect numbers... <b>This is a collection of prime
+          words</b> (that is each of these words is a prime when viewed as a number base
+        36).</p>
+      <p>The following 2500 plus primes were found by testing the words in a 92000 plus
+        word dictionary (compiled from three spelling checkers) for probable-primality
+        (ie strong pseudo-primality) using the bases 2, 3, 5, 7, 11, 13 and 17. This was
+        done with a Turbo-Pascal (Borland) program. Later primality was <b>proved</b>
+        using a muSIMP (Soft Warehouse) program based on the theorems of [<a
+          href="/references/refs.cgi/BLS75">BLS75</a>].</p>
+      <ol>
+        <li>No distinction is made between upper and lower case letters. Example: "Rose"
+          = "rose" = "rOsE".</li>
+        <li>All non-letters are ignored. Examples: "isn't" = "isnt", and "high-school"
+          = "highschool".</li>
+        <li>Not all of these are words in a narrow sense -- no effort was made to screen
+          out names and abbreviations (but they were all in at least one lexicon).</li>
+        <li>This lexicon is a supplement to my article "Prime Words," <i>Journal of
+            Recreational Mathematics,</i> 27:2 (1995) 83-91. This article breifly introduces
+          discussed the history of converting words to numbers (e.g., germetia, contests,
+          algebraic operationg system), and then discusses the prime words (as listed
+          here).</li>
+      </ol>
+      <br>
+      <a name="contents">
+        <p align="center"><b>index:</b> <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a><a
+            href="#E">E</a><a href="#F">F</a><a href="#G">G</a><a href="#H">H</a><a href="#I">I</a><a href="#J">J</a><a
+            href="#K">K</a><a href="#L">L</a><a href="#M">M</a><a href="#N">N</a><a href="#O">O</a><a href="#P">P</a><a
+            href="#Q">Q</a><a href="#R">R</a><a href="#S">S</a><a href="#T">T</a><a href="#U">U</a><a href="#V">V</a><a
+            href="#W">W</a><a href="#X">X</a><a href="#Y">Y</a><a href="#Z">Z</a></p>
+
+        <a name="A"></a>
+        <p align="center"><a href="#contents"><b>A</b></a></p>
+        <p> AAH ABANDON ABDOMEN ABDUCTED ABERRATION ABJURED ABLEST ABLUTION ABOLISH ABOMINATED
+          ABORT ABORTIONIST ABOUNDED ABRIDGED ABRUPT ABSORB ABSTENTION ABSTRACT ABUTTED
+          ACCEPT ACCEPTED ACCESSED ACCIDENT ACCLIMATIZATION ACCOMMODATION ACCREDITED ACID
+          ACORN ACOUSTICIAN ACT ACTED ACUTEST AD ADAMANT ADD ADDUCTION ADJOINED ADMIXED
+          ADORN ADULTHOOD ADVOCATED ADZ AERATED AFFORDED AFORESAID AFTERTHOUGHT AGNIZED
+          AGRONOMIST AHEAD AIRED AIRIEST AIRMEN AKRON ALBEIT ALDERMEN ALEVIN ALLAYED ALLEGATION
+          ALLEGED ALLERTON ALSIP ALVIN AMAH AMAZED AMENDED AMERINDIAN AMOEBOID AMPHIPLOID
+          AN ANAPEST ANEROID ANGERED ANGOLAN ANIMATED ANIMATION ANNISTON ANNUALIZED ANODIZATION
+          ANOINT ANTEED ANTICIPATED ANTITOXIN ANTITRUST AORIST APOGEAN APPALLED APPOSED
+          AQUEDUCT ARCH ARGUMENT ARIGHT AROUND ARRAIGN ARROWHEAD ARTICLED ARYAN ASAP ASSASSIN
+          ASSERT ASSERTED ASSESSED ASSEVERATED ASSN ASSUAGED ASSUMPTION ASTEROID ASTOUND
+          AT ATHIRST ATOP ATT ATTENUATED ATTITUDINIZED ATTRACT ATTRIBUTION ATTRITED AUCTION
+          AUDIENT AUDITED AUTOSUGGESTION AVANT AVIARIST AVIATION AVOCATION AVOIDED AVOUCH
+          AVOWED AWED AWKWARD</p>
+
+        <a name="B"></a>
+        <P align="center"><a href="#contents"><b>B</b></a>
+          <p> B BABOONISH BACKDROP BAD BADINAGED BAGGIEST BAH BAIT BALANCED BALLOONIST BAN
+            BANED BANGLADESH BANTERED BARB BARD BAREBACKED BAROGRAPH BARONET BASALT BASEBOARD
+            BASILICAN BASINED BASSOON BATH BATON BATTEMENT BATTEN BATTENED BEACHHEAD BEAMIEST
+            BEATEN BEATIFIED BECKON BECLOUDED BEETLED BEFUDDLEMENT BEGGARED BEGOT BEGUILED
+            BEHOLDEN BEHOOVED BELAYED BELLIGERENT BEMUSEMENT BEN BENEATH BENNINGTON BEQUEATHED
+            BERRIED BERWYN BESEECHED BETAKEN BETH BETTERED BEWITCHMENT BIBBED BIDDEFORD
+            BIFURCATED BIGHEARTED BIKED BILKED BILLET BIPARTITION BIPED BIRTH BISCUIT BISECTION
+            BITCH BITTED BITTEREST BIVOUACKED BLAB BLACKBIRD BLADED BLAH BLAIN BLIND BLINDED
+            BLINDFOLDED BLITHEST BLONDEST BLOODIED BLOODSHOT BLOODSTAIN BLOWOUT BLOWZIEST
+            BLUED BLUEFIELD BLUEPRINT BOB BOLD BOND BONNET BOOBED BOOED BOOKSHOP BOOST BOOT
+            BOOZED BORON BORROWED BORSCHT BOSOMED BOTCH BOUNDED BOUT BOWED BRAGGED BRAN
+            BRASH BRASHEST BRAWN BREAKFAST BREED BRIDLED BRIGHT BROADCASTED BROOD BROODIEST
+            BROOKLYN BROTH BROWN BROWNED BUCKET BUD BUDDHIST BUILDUP BUILT BULKHEAD BULLETIN
+            BULLHEAD BULLISH BULRUSH BUMP BUMPIEST BUN BUNION BURBLED BURIEN BURP BURRED
+            BURT BUSHELED BUSIED BUSSED BUTTERFLIED</p>
+
+          <a name="C"></a>
+          <P align="center"><a href="#contents"><b>C</b></a>
+          <p> CAB CABARET CABIN CABINET CACHED CAESAREAN CAJOLEMENT CAKED CALMEST CALUMET
+            CANAAN CANDID CANED CANON CAP CAPPED CARD CARET CARNATION CARP CARROLTON CARTLOAD
+            CASEMENTED CATALOGED CATALOGUED CATALYST CATCHWORD CATECHIST CATECHIZED CATENATION
+            CELLIST CEREBRATION CHAINED CHAMP CHAMPAIGN CHAMPION CHANSON CHAPLET CHATTED
+            CHAUFFEURED CHEAP CHEAPENED CHEAPEST CHEAPIST CHECKED CHEVRON CHEWIEST CHICKWEED
+            CHIFFON CHILD CHILDBIRTH CHINTZ CHIRRUP CHISELLED CHLORINATION CHOP CHOPPIEST
+            CHORTLED CHRONOLOGIST CHUNKIEST CHURCHMANSHIP CHURNED CIRCUITED CIT CLACKED
+            CLAMPED CLAP CLEARED CLEAT CLENCH CLERGYMEN CLINCH CLINGIEST CLOSEMOUTHED CLOTHESPIN
+            CLOUDED CLUMPIEST CLUTCH CLUTCHED COAGULATED COALITION COARSEST COAXED COB COBWEB
+            COBWEBBED COFFEEPOT COGNITION COIL-START COITION COLLATERALIZED COLLIMATED COMB
+            COMMANDANT COMMENCED COMMENT COMMISSION COMMITTEEMEN COMMUNION COMPANION COMPENSATED
+            COMPLAISANT COMPLIMENTED COMPOSITION CONCERNMENT CONCERT CONCESSION CONCOCTED
+            CONCUSSION CONDEMNED CONDITIONED CONDUCT CONED CONFECTION CONFIDANT CONFINED
+            CONFLICTION CONFOUNDED CONFUCIAN CONGEALMENT CONGEST CONGESTED CONGRATULATION
+            CONGREGATED CONJOIN CONJURED CONNED CONSECRATION CONSENT CONSOLIDATED CONSTITUTED
+            CONSUMED CONTEMPLATED CONTEST CONTEXT CONTINUATION CONTRIVED CONVOLVED COOKOUT
+            COON COOPERATED COPENHAGEN COPILOT CORDON CORELATED CORINTHIAN CORNISH CORP
+            CORRELATION COSMONAUT COSTUMED COUGH COULDN'T COUNCILMEN COUNTERFEITED COUNTERMAND
+            COVENANT COVERT COWBIRD COWMAN COZ CP CRAWFISH CREMATION CREPT CRIB CRIMPED
+            CRITERION CROTCH CROWD CRT CRUCIFIED CRUD CRUMPET CRUSHED CT CULT CUMQUAT CUP
+            CURATORSHIP CURBED CURED CUSHIONED CUT CUTEST CYAN CYST CZ</p>
+
+          <a name="D"></a>
+          <P align="center"><a href="#contents"><b>D</b></a>
+          <p> D DAFFIEST DAMN DAMOCLEAN DAMPEN DAN DANDIFICATION DANDIFIED DANISH DANKEST
+            DARTED DARWINIST DAUB DAVIT DAWN DAZZLED DB DEADBEST DEBAUCH DEBAUCHED DECADENT
+            DECAPOD DECEIVED DECOMPRESSED DECOYED DEFERRED DEFIED DEFLATED DEFLECT DEFOREST
+            DEGENERATED DEIST DELTOID DEMANDED DEMOLISHED DEMON DEMONSTRATION DENOMINATION
+            DENT DENTED DEODORANT DEPARTMENT DEPEND DEPICT DEPOLARIZATION DEPORTATION DERELICT
+            DERVISH DESICCATED DESOLATED DESPONDENT DESTINATION DETACHED DETERMINANT DETERRED
+            DETONATION DEVEST DEVESTED DEVOTION DEVOURED DEVOUT DID DILAPIDATION DILATED
+            DILATION DIMMEST DIMOUT DIMWIT DIN DINED DINT DIPLOMAT DIRTIEST DISALLOWED DISASSOCIATION
+            DISCIPLESHIP DISCOMFORT DISENCHANT DISENTANGLEMENT DISFRANCHISED DISFRANCHISEMENT
+            DISGUST DISHEARTENMENT DISINTEREST DISINTERMENT DISMOUNTED DISOBLIGED DISPATCHED
+            DISPUTATION DISRESPECT DISSIPATION DISTAIN DISTRAIN DISTRICTED DIVED DIVVIED
+            DIXIELAND DJ DOBERMAN DOCKETED DOCUMENTATION DODGED DOESN'T DOGFISH DOGSLED
+            DOLLIED DOLPHIN DOMINATION DON'T DOORSTEP DOTHAN DOUBTED DOWDIEST DOWNIEST DOWNRIGHT
+            DOWNWARD DOYEN DOZ DOZEN DRAB DRABBED DRAFT DRAFTSMAN DRAMATIST DRAT DRIEST
+            DRIFT DROWSED DRUID DRUNKARD DUB DUCAT DUCKED DUET DUMONT DUMPED DURST DWARFED
+            DWELT DYED DYNAST DYSFUNCTION DZ</p>
+
+          <a name="E"></a>
+          <P align="center"><a href="#contents"><b>E</b></a>
+          <p> EAGLET EARTH EASED EAST ECLAT ECOLOGIST EDEN EERIEST EFFERENT EFFORT EFT EH
+            EIGHTH EIGHTIETH EJECTION ELAN ELECTROPLATED ELEVATION ELIZABETHAN ELOQUENT
+            EMASCULATION EMBALMED EMBALMMENT EMBOLDENED EMBRACEMENT EMIGRANT EMIT EMITTED
+            EMPATHIZED EMPTIEST ENAMELED ENCODED ENCORED ENCRYPT ENDICOTT ENERGIZED ENFIELD
+            ENGENDERED ENGROSSED ENHANCEMENT ENID ENLIVENMENT ENNOBLED ENROLMENT ENSCONCED
+            ENSHRINED ENTOMB ENTRAP ENTREAT ENTRENCHED ENWIND ENWRAPPED EON EPITOMIZED ERSATZ
+            ESCHEAT ESCROWED EST ETCHED EVACUANT EVALUATED EVANESCENT EVENT EVICT EVICTION
+            EVOLUTION EVOLVEMENT EXCLAIMED EXCLAMATION EXCUSED EXECRATED EXEMPLIFIED EXEMPT
+            EXHILARATED EXHILARATION EXILED EXISTED EXIT EXITED EXPECTORATION EXPENDED EXPIRED
+            EXPLOIT EXPORT EXPORTATION EXPRESSION EXPURGATED EXTERMINATION EXTINCTION EXTOLMENT
+            EXTORT EXTROVERSION EXTRUSION EYEWASH</p>
+
+          <a name="F"></a>
+          <P align="center"><a href="#contents"><b>F</b></a>
+          <p> FABRICATED FACT FACTIONALIST FAD FAIR-TRADED FAIRYLAND FAITH FAKED FALSIFIED
+            FASCINATED FASTED FASTEST FAUN FEINT FELON FERGUSON FERMAT FERMENTED FERRIED
+            FERVID FETID FETISH FEZ FICKLEST FID FIERIEST FILL-IN FILLIP FINNED FIORD FIREBOAT
+            FIREFIGHT FIREPROOFED FIRMED FISTED FIT FIXED FLAB FLATBED FLATBOAT FLATTED
+            FLATTOP FLESHED FLIED FLIP FLIPPANT FLIT FLITTED FLOCCULENT FLOODLIGHT FLOWERPOT
+            FLOYD FLUID FLUORIDATED FOCALIZATION FOLD FONDANT FOOD FOOTSTEP FORECAST FOREMEN
+            FORESTED FOREWARN FOREWARNED FORFEITED FORMALIZATION FORMAT FORNICATION FORSOOTH
+            FORTIETH FOURFOLD FOXED FRAGMENTED FRANKLIN FRAUGHT FRAYED FRENCHMAN FREON FREQUENT
+            FRESH FRESHEST FRINGIEST FRIZZIEST FROGMAN FROGMEN FRONT FROTHIEST FROWNED FRUCTIFIED
+            FT FUD FUELLED FUN FUNDED FUNNED FUNNELLED FUSSED FUSTIEST</p>
+
+          <a name="G"></a>
+          <P align="center"><a href="#contents"><b>G</b></a>
+          <p> GAB GADSDEN GALLIVANT GALLOP GALVANIZATION GAMIEST GAMUT GANGED GANGLAND GAP
+            GARAGED GARISH GARMENT GARRET GASIFIED GASP GAUD GAUGED GAUNTEST GELATIN GELD
+            GENT GEORGIAN GERALD GERARD GERRYMANDERED GERUND GET GETUP GHETTOIZED GHZ GIGGED
+            GIGGLED GILBERT GIMP GIN GIRTH GLARED GLEN GLOP GLUT GNAT GNAWN GNP GOAT GOB
+            GOD GONAD GOODHEARTED GORDON GOUT GP GRAD GRAINED GRANDILOQUENT GRANDSON GRAPHED
+            GRAVELED GRAVEN GREAT GREEN GRID GRIDDED GRIND GRISTLIEST GROOVED GROSSEST GROT
+            GROTON GROUPED GROWNUP GRUDGED GUARANTEED GUARD GUARDSMEN GUDGEON GUEST GUIDED
+            GUIDON GUMMIEST GUMPTION GUN GUNMAN GUNSMITH GUTTED</p>
+
+          <a name="H"></a>
+          <P align="center"><a href="#contents"><b>H</b></a>
+          <p> H HACKLED HADN'T HAGGISH HAH HAIRED HALLOWEEN HALOED HAMMERHEAD HAMPERED HANDGUN
+            HAND-ME-DOWN HANDOUT HANDWOVEN HANDYMEN HARD HARDHEADED HARPSICHORD HART HARTFORD
+            HARVEST HASN'T HASTED HATBAND HAUNCH HAVERFORD HAWAIIAN HAWKWEED HAYWARD HEARKENED
+            HEART HEARTBURN HEARTEN HEAVENWARD HEBRON HECATOMB HE'D HEDGED HEFTED HEIGHT
+            HELEN HELLBROTH HELLCAT HELMETED HEMMED HEMOSTAT HENCEFORTH HERBERT HERD HEREIN
+            HICCUP HIGH HIGHEST HIGHHANDED HIGH-PRESSURED HIGHT HILLCREST HILLIEST HIND
+            HINDERED HINDSIGHT HINGED HINT HIT HOARSEN HOB HOCKSHOP HOED HOGSHEAD HOGWASH
+            HOISTED HOLDOUT HOLLAND HOLLOWED HOMEBOUND HOMEGROWN HOMESTRETCH HOMIEST HONEYCOMBED
+            HONIED HOOCH HOP HOPPED HORSED HORTICULTURIST HOTCHPOT HOTHEAD HOUNDED HOUSEBOAT
+            HOUSEBROKEN HT HUDDLED HUFFED HUFFIEST HUGGED HULLED HUMANKIND HUMBLEST HUMPH
+            HUNCHBACKED HUNT HURLED HURRAH HURT HUSH HUSTLED HUTCHINSON HYPED HYPERTROPHIED
+            HYPNOTIST HZ
+
+          </p><a name="I"></a>
+          <P align="center"><a href="#contents"><b>I</b></a>
+          <p> IAMB IB ICELAND ICONOCLAST ID IDIOT ILLUMINATED ILLUSION IMITATED IMMOLATION
+            IMMURED IMPAIRMENT IMPALED IMPART IMPERSONATED IMPLEMENT IMPORTANT IMPOTENT
+            IMPRINT INACTIVATED INCRUST INCUBATION INDEMNIFIED INDIRECTION INDUCED INEDITED
+            INEXISTENT INFANT INFLECT INFLECTED INFRACT INFRACTION INGROWN INHERIT INHIBIT
+            INKBLOT INKSTAND INMOST INN INNERVATED INPUTTED INSCRIBED INSECT INSIST INSTRUMENTALIST
+            INSULTED INTERACT INTERBRED INTERCEPT INTERCEPTED INTERCONNECTION INTERDEPENDENT
+            INTERESTED INTERFERON INTERLARDED INTERLOCUTION INTERRUPT INTIMIDATED INVEIGH
+            INVERSION INVIGORATED INVIGORATION INVOKED IRAN IRRELIGION IRRIGATED IRRITATION
+            IRRUPTED IT IVAN</p>
+
+          <a name="J"></a>
+          <P align="center"><a href="#contents"><b>J</b></a>
+          <p> J JABBED JABOT JACKETED JANGLED JAUNDICED JAUNT JAUNTED JAVELIN JAWED JAZZ
+            JEEP JERKIN JILT JINN JOAN JOCUND JOHNSON JOLT JOSTLED JOYPOP JUDGMENT JUICED
+            JUKED JULIAN JUMP JUNCTION JUT</p>
+
+          <a name="K"></a>
+          <P align="center"><a href="#contents"><b>K</b></a>
+          <p> KAPH KAPUT KAT KEELBOAT KEELSON KEEN KENTWOOD KENYON KETCH KEYPUNCHED KIBBLED
+            KILOBIT KIN KIND KINDLED KINGBOLT KINGLET KINGPIN KINSHIP KIRKLAND KIT KITED
+            KLATCH KLUDGED KNELT KNISH KNOBBIEST KNOWN KNUCKLEHEADED KOBOLD KOLITSCH KRUGERRAND
+            KUMQUAT KURT</p>
+
+          <a name="L"></a>
+          <P align="center"><a href="#contents"><b>L</b></a>
+          <p> LAGOON LAID LAIN LAKED LAMBASTED LANDED LASED LASERJET LASHED LATIN LAUREATION
+            LAYTON LEAFIEST LEAFLET LEAPT LEAST LED LEEBOARD LEERED LEEWARD LEGALIZATION
+            LEGGIEST LEGION LEGITIMIZED LEND-LEASED LENGTHIEST LENSED LENTEN LEOTARD LEPRECHAUN
+            LESSEN LEST LET LEV LEVERED LIAISON LIBBED LIBYAN LIED LIEN LIFE-SIZED LIKENED
+            LILT LIMB LIMIT LIMPET LINDENWOLD LINEAMENT LINEMAN LINEN LINEUP LINNAEAN LIONIZED
+            LIPPED LISP LIST LIT LIVID LOBATED LOCATED LOGAN LOLLED LOMBARD LONGED LONGWOOD
+            LORDSHIP LOST LOT LOTION LOUD LOUSIEST LUCKIEST LUGLUGGED LUMBERTON LURID LUST
+            LYNNWOOD</p>
+
+          <a name="M"></a>
+          <P align="center"><a href="#contents"><b>M</b></a>
+          <p> MAIDENHOOD MAIMED MAJORED MALLARD MANDATED MANIFEST MANSION MARKED MARKET
+            MARMOSET MARRIED MARSH MARSHIEST MASHED MAT MATURATION MAUDLIN MAXIMALIST MAYWOOD
+            MAZED MAZIEST MEADOWSWEET MELIORATED MELTED MENTION MERCHANTMAN MERCURATED MERGED
+            MESHED MESMERIST MESSIAH MESSIEST METED MICHIGAN MICROFILMED MID MIDMOST MIGHT
+            MIGRATION MILBURN MILEPOST MILKMAID MILKMAN MILQUETOAST MILTON MISANTHROPIST
+            MISCEGENATION MISCONDUCT MISCONSTRUED MISCREANT MISDIRECT MISFILED MISGUIDED
+            MISQUOTED MISTRUST MISTYPED MISUSED MOAN MOB MOD MODELED MOIST MOISTEN MOLDED
+            MON MONETIZED MONGOLIAN MONIST MONITION MONITORED MONKEYED MONOVALENT MOOED
+            MOON MOONLIGHT MOONLIGHTED MOP MORTON MOTH MOTTLED MOUNT MOUSIEST MOUTHED MOUTHWASH
+            MOWN MPH MT MULCT MULISH MULLION MULTIMILLION MULTIPLICAND MULTIPRONGED MUNCH
+            MURED MUSHED MUSHIEST MUSTERED MUTANT MYCOLOGIST MYELIN MYOSIN</p>
+
+          <a name="N"></a>
+          <P align="center"><a href="#contents"><b>N</b></a>
+          <p> N NAT NATION NAUGHTIEST NEAP NEAPOLITAN NEED NEGLIGENT NEST NET NEUROLOGIST
+            NIB NIGGARD NIGH NIGHTSHIRT NIMCOMPOOP NOBBIEST NOBBLED NOBELWOMAN NOBLEWOMAN
+            NONACID NONACQUISITION NONCITIZEN NONCONSIDERATION NONDESCRIPT NONFAT NONMEMBERSHIP
+            NONRESISTANT NONSLIP NORMALIZATION NORMAN NOSH NOURISH NOV NOVEMDECILLION NTH
+            NUDIST NUN NURTURED NV</p>
+
+          <a name="O"></a>
+          <P align="center"><a href="#contents"><b>O</b></a>
+          <p> OARED OBEISANT OBFUSCATED OBJECT OBSCURANTIST OBSOLESCENT OBSTETRICIAN OBTRUSION
+            OCCULT OCCULTATION OCHERED OCTANT OCTET OCTODECILLIONTH OD ODIN OFFERED OFFHAND
+            OFFPRINT OH OILBIRD OLD OLDEST OLDISH OMELET OMIT ON ONRUSH ONSET ONSLAUGHT
+            OPENED OPPRESSED OPTION OPULENT ORBITED ORCHESTRATED ORCHID ORDAINED ORDERED
+            OREGON ORLAND OTHERWORLD OUCH OUST OUT OUTCROP OUTFITTED OUTLAST OUTLASTED OUTPUT
+            OUTSHOUT OUTSIT OUTSMARTED OUTSPEND OVEN OVERCONFIDENT OVERDRIVEN OVERINDULGED
+            OVERMATCHED OVERRAN OVERSKIRT OVERSOFT OVERTRUMP OXEN OXYHEMOGLOBIN</p>
+
+          <a name="P"></a>
+          <P align="center"><a href="#contents"><b>P</b></a>
+          <p> PACED PACKED PAGED PAGINATED PAIN PAINED PAIRED PALEONTOLOGIST PALLED PALMIST
+            PALTRIEST PAMPHLET PAN PANNED PARATROOP PARCELLED PARCHMENT PARKLAND PARRED
+            PARRIED PARROT PARROTED PARTED PAST PASTELIST PAT PATCH PATIENT PATRON PATRONIZED
+            PAWTUCKET PAYED PAYLOAD PEALED PEANUT PEAT PEBBLED PECTIN PECULATION PEDANT
+            PEDESTALLED PEDIATRIST PEELED PEEN PEERED PEEVED PELLET PELLETED PELT PELTED
+            PENDED PENETRATION PEOPLED PEPPERED PERAMBULATION PERFORMED PERILED PEROXIDED
+            PERSIST PERSON PERSUASION PERVERT PET PETULANT PHONED PHONETICIAN PHYSIOGNOMIST
+            PIGGED PIN PINED PINFISH PINIONED PINKEST PINNACLED PINNED PINPOINTED PIP PISTOLLED
+            PITCHOUT PITH PLAID PLAIT PLANCHET PLANET PLANTAIN PLANTATION PLASTID PLATTED
+            PLAYFIELD PLAYPEN PLOD PLUMB PLURALIZED PLUSH POET POINTED POLAND POLAROID POLLINATION
+            POLYGAMIST POMADED POMP POMPON POMPTON POOCH POP PORIFERAN PORTENT POSED POSIT
+            POSTPAID POSTULATION POTION POTTSTOWN POULTICED POWERED PREDICAMENT PREDICATION
+            PREDISPOSED PREDOMINATED PREEXIST PREEXISTENT PREFECT PREFERRED PREFIGURED PREHEAT
+            PRESERVED PRETTIEST PREVAILED PREVARICATION PREVIEWED PRIED PRIMETEST PRIMMED
+            PROCTOLOGIST PROCURED PROD PROHIBIT PROMOTION PRONOUN PROSED PROSPECT PROSTRATED
+            PROTON PROTRACT PROVOKED PROWLED PT PUBESCENT PULLED PULLMAN PULP PULVERIZED
+            PUMPKIN PUN PUNISH PUNNED PURDAH PURIST PUTOUT PUTT PYTHON</p>
+
+          <a name="Q"></a>
+          <P align="center"><a href="#contents"><b>Q</b></a>
+          <p> QED QUIESCENT QUIET QUIETEST QUINTUPLED QUIP QUOIN QUOIT</p>
+
+          <a name="R"></a>
+          <P align="center"><a href="#contents"><b>R</b></a>
+          <p> RABBET RACIST RADICALIZED RADIOCARBON RADIOLOGIST RADON RAFT RAGGED RAGOUT
+            RAID RAIN RAINSPOUT RAMBLED RAMJET RAMMED RANKED RAPPED RAT RATION RATLIN RATTRAP
+            RAUNCHIEST RAVELMENT RAVISH REACT READIED READOPT READORN REAPPEARED REARMED
+            REARRANGEMENT REATTACH REATTEMPT REBIND REBOUNDED REBUILD REBUTTED RECALCITRANT
+            RECALCULATION RECALLED RECLAIMED RECOIN RECOLORED RECONFIRMATION RECONSIDERATION
+            RECOUNTED RECRUDESCENT RED REDD REDEMANDED REDESCEND REDIRECTION REDOUBLED REDSKIN
+            REED REEDIEST REEKED REENACT REFITTED REFLOURISH REFORMED REFRACTION REFRAIN
+            REFROZEN REFURNISH REFUSED REFUTATION REGENERATED REGIMENT REGIMENTATION REGRANT
+            REGRETTED REHEATED REIMPLANTED REIN REINSERTED REINSTALLED REINVITED RELAPSED
+            RELICT RELIGHT RELOCATION RELUCTATED REMANDED RENT REP REPAINTED REPAIRMAN REPASSED
+            REPLANTATION REPLENISH REPOLISH REPORT REPROACH REPROBATION REPUBLISH REPUTATION
+            REPUTED RERUN RESECTED RESH RESINATED RESONANT RESORTED RESOWED RESPECT RESPECTED
+            RESPIRED RESTART RESTAURANT RESTRICTION RESURGENT RETAIN RETCH RETEST RETOOLED
+            RETRACED RETRIEVED RETURNED REUNIFICATION REV REVALUATION REVAMPED REVELED REVERT
+            REVIVED REVOLT RHEUMATOID RHOMB RHYMED RICHLAND RICHMOND RIDERSHIP RIDGEFIELD
+            RIND RIVED RIVEN RIVETED ROD ROILED ROILIEST RON RONALD ROOKED ROOSTED ROOTED
+            ROUGH ROUGHEN ROUNDEST ROUNDLET ROUTED ROVED ROWELLED RUB RUBICUND RUDIMENT
+            RUDOLPH RUFFED RUGGED RUNAROUND RUNDOWN RUNT RUSHIEST RUSSET RUTH RUTHANN RUTTED
+          </p>
+
+          <a name="S"></a>
+          <P align="center"><a href="#contents"><b>S</b></a>
+          <p> SACRED SADDEN SAFEGUARD SAGGED SAILED SALAD SALESWOMAN SALT SAMOAN SAN SANDBLAST
+            SANDED SANDWORT SAPPIEST SASH SAT SAUNTERED SAWFISH SAXHORN SB SCABBED SCAFFOLD
+            SCALLION SCALP SCAN SCARFPIN SCATTERED SCHMALTZ SCHMALTZIEST SCHOOLED SCOOP
+            SCOOTED SCORECARD SCOT SCOTSMAN SCRAGGIEST SCRAMMED SCRAPED SCREECHIEST SCREED
+            SCRUBBED SCRUNCH SCULLED SCULPTED SCULPTURED SCUMBLED SCUMMED SCUTCH SD SEABIRD
+            SEALSKIN SECTARIAN SEDATED SEEDED SENSATIONALIST SENTIENT SEQUENCED SERIALIST
+            SERIALIZED SERVICED SESAMOID SET SEVENTY-SIXTH SEXAGENARIAN SEXTANT SEXTILLION
+            SEXTUPLED SHAH SHAN SHAPEUP SHARED SHEEN SHELVED SHIP SHIRTWAIST SHOD SHOED
+            SHOPPED SHORED SHOREFRONT SHORTEN SHORTHAND SHOTTEN SHOVELLED SHOWN SHREWD SHRIVELLED
+            SHUDDERED SHUNNED SHUNT SHUT SIB SIDEBOARD SIDEMAN SIDESPIN SIEGED SIEVED SIGNALMAN
+            SIGNET SIGNPOST SILKEN SILKIEST SILUROID SILVERSMITH SINEWED SIPPED SIRRAH SIZZLED
+            SKEIN SKID SKILLET SKIN SKINTIGHT SKULKED SKYLIGHT SLAGGED SLANDERED SLAVISH
+            SLED SLEDDED SLEEKEN SLENDEREST SLIPKNOT SLIPPED SLITHERED SLOPPIEST SLOT SLOVEN
+            SLUBBED SLUGGED SLUICED SLUMPED SLURP SMART SMEARED SMIDGEN SMILED SMIRCH SMITH
+            SMOKED SMUT SNAP SNATH SNEAKED SNIGGERED SNITCH SNOUT SNUB SOAPED SOAPIEST SOARED
+            SOBERED SOBERIZED SOCIALIZED SOFT SOLARIZATION SOLATION SOLD SOLEMN SOLEMNIZED
+            SONANT SONNETIZED SORPTION SORT SOT SOWN SPACEBAND SPACKLED SPARKIEST SPARTAN
+            SPAT SPEARMAN SPECIATED SPECTATED SPELTZ SPEND SPHEROID SPIKELET SPILT SPLINTERED
+            SPOKED SPOOLED SPOONED SPORRAN SPOT SPOUSED SPREAD SPRINGIEST SPURT SQUALID
+            SQUAT SQUEALED SQUEEGEED SQUELCH SQUIB SQUIBBED SQUIFFED SQUIRISH SQUIRRELED
+            STABBED STALINIST STALLED STALLION STALWART STAMPED STANCHION STANDARD STANDPOINT
+            STAPHYLINID STEADFAST STEADIEST STEPCHILDREN STERILANT STERN STICKMAN STICKUP
+            STIMULATED STIRRED STOCKIST STODGIEST STOLEN STOMATILOGIST STONEWALLED STOUTENED
+            STOUTEST STP STRAGGLIEST STRAIT STRANGEST STRAPPED STRAWBOARD STREAMWOOD STREET
+            STREWN STRIDENT STRIKEBOUND STRINGBOARD STRIPT STROLLED STRONGMAN STROWN STUDENTSHIP
+            STUFFIEST STULTIFICATION STUMPIEST STYED SUB SUBEDIT SUBINFEUDATED SUBJACENT
+            SUBLATION SUBREGION SUBSCRIBED SUBSTANDARD SUBTENANT SUBTITLED SUCKED SUDSIEST
+            SUET SUFFRAGIST SUGARED SULFONATED SULFURETED SUMMARIZED SUMMED SUNDERED SUNKEN
+            SUNLAMP SUPERADDITION SUPERCONDUCT SUPERINTEND SUPERMARKET SUPERVENTION SUPINATION
+            SUPPOSED SUPPRESSED SUPPURATION SURROUNDED SUSPECT SUSPECTED SWAB SWAGMAN SWAIN
+            SWAMP SWAN SWANNED SWASHBUCKLED SWATH SWAYED SWEETEST SWERVED SWIRLED SWITCH
+            SWOT SYMBOLED SYNCH SYNCOPATED SYNOD</p>
+
+          <a name="T"></a>
+          <P align="center"><a href="#contents"><b>T</b></a>
+          <p> T TABBED TABLESPOON TACH TAD TAGSTART TAINT TAJ TALKATHON TALLISH TAMP TAMPION
+            TAN TANKED TANTALIZATION TANZANIAN TARBUSH TARGETED TARN TARPAULIN TARTLET TAUNTED
+            TAUTENED TAVERN TAXED TAXICAB TAXIDERMIST TEARDROP TECHED TECHNICALIZATION TEENIEST
+            TEGUMENT TELEGRAPH TELEOSTEAN TELETYPED TENANT TENET TENSION TENTED TEPID TERREPLEIN
+            TERRORIZED TESSERACT TEUTON TH THEGN THEORIST THEURGIST THEY'D THIEVED THIEVISH
+            THIN THINCLAD THIRDHAND THISTLEDOWN THOUGHT THOUSAND THREADIEST THRIVEN THRUMMED
+            THYROCALCITONIN THYROID TICKETED TICKLED TIDBIT TIFFED TIGERISH TILT TILTH TIMBERED
+            TIMEOUT TIMIDEST TINCT TINGED TINIEST TINKLED TIT TOAD TOADIED TOASTIEST TOBOGGANIST
+            TOD TODDLED TOEHOLD TOFT TOLERANT TOLERATED TOMCOD TONED TONSURED TOOTHBRUSH
+            TOPNOTCH TORRENT TORRID TOTALITARIAN TOTIPOTENT TOURED TOWBOAT TOWHEADED TOWN
+            TOWNSWOMAN TOXICANT TOYON TRACTION TRADESMAN TRAINBAND TRAIPSED TRAMMELED TRANSECT
+            TRANSFIXION TRANSHIP TRANSPORT TRANSPOSED TRAUMATIZED TRAVAILED TRENCHANT TRESPASSED
+            TRICKISH TRICORNERED TRIDENT TRIFLURALIN TRIGGERMAN TRIGLYPH TRIJET TRILLED
+            TRIPLICATED TRIPLICATION TRISTEARIN TRIVET TROLLEYED TROLLOP TROOP TROOPED TROUBLED
+            TRUCKLED TRUCKMAN TRUDGED TRUEST TRUMPET TRUST TUBIFICID TUCKERED TUCKET TUFT
+            TUGBOAT TURBINATED TURBORAMJET TURD TURNED TURNOUT TURRET TURRETED TUSCAN TUSSAH
+            TUT TWENTY-FIRST TWIGGED TWILLED TWIN TWIXT TYPESET TYROCIDIN TYROTHRICIN
+
+          </p>
+          <a name="U"></a>
+          <P align="center"><a href="#contents"><b>U</b></a>
+          <p> UCB UGLIFICATION UMBILICATION UMLAUT UMPTEEN UN UNABBREVIATED UNABSORBED UNACCOMMODATED
+            UNACCOMPLISHED UNACCUSTOMED UNAMAZED UNAMBIVALENT UNAMPLIFIED UNANELED UNANIMATED
+            UNAPPRECIATION UNASSUAGED UNATTESTED UNAVOWED UNAWED UNBAKED UNBARBED UNBEKNOWNST
+            UNBELT UNBIGOTED UNBLOWN UNBLUNTED UNBOLT UNBURNISHED UNBURNT UNCAGED UNCILIATED
+            UNCOFFINED UNCOMPLETED UNCONCERN UNCOUPLED UNCREASED UNCRITICIZED UNCROSSED
+            UNCROWDED UNCURDLED UNDEAD UNDEEDED UNDEFACED UNDEFENDED UNDELIVERED UNDERACT
+            UNDERBRED UNDERFED UNDERVALUED UNDERWEIGHT UNDIAGNOSED UNDIGESTED UNDIGNIFIED
+            UNDILATED UNDISTRACTED UNDIVERSIFIED UNDOCKED UNDOCUMENTED UNDULATED UNENGAGED
+            UNENTANGLED UNENVIED UNESCORTED UNEXAGGERATED UNEXPIRED UNFANNED UNFATHERED
+            UNFEDERATED UNFETTERED UNFLAWED UNFLEXED UNFRIEND UNFROZEN UNFUSED UNGIRD UNGIRT
+            UNGLAMORIZED UNGLAZED UNGRASPED UNHANGED UNHARMED UNHEARD UNHIRED UNHUNTED UNIMAGINED
+            UNIMFLECTED UNIMPLEMENTED UNIMPROVED UNINTERESTED UNION UNIONIZED UNIONTOWN
+            UNISON UNITIZATION UNIV UNJADED UNJOINT UNJUST UNLADED UNLEVIED UNLICKED UNLINED
+            UNLIST UNLIT UNLOAD UNLOOSENED UNMAN UNMARRED UNMENTIONED UNMONEYED UNMOVED
+            UNNOTED UNOBLITERATED UNPADDED UNPARALYZED UNPARDONED UNPARTED UNPARTITIONED
+            UNPERVERTED UNPLASTERED UNPRACTICED UNPRESSED UNPRINCIPLED UNPROSTITUTED UNPURGED
+            UNQUESTIONED UNRATED UNRECLAIMED UNREDEEMED UNREELED UNREEVED UNRESERVED UNREVEALED
+            UNRIVALED UNROASTED UNSCATHED UNSETTLEMENT UNSHELLED UNSNAP UNSOPHISTICATED
+            UNSPLIT UNSPOKEN UNSTAINED UNSTUDIED UNSWEPT UNTAMED UNTAPPED UNTHATCHED UNTORN
+            UNTREAD UNUSED UNUTTERED UNWEARIED UNWEDDED UNWISH UNWOVEN UNWROUGHT UPPED UPSHIFT
+            UPSHOT URINATION UROCHORD UROPOD USURPED UT UTAH UTMOST UTOPIAN</p>
+
+          <a name="V"></a>
+          <p align="center"><a href="#contents"><b>V</b></a>
+          <p> V VACUOLATED VACUUMED VALANCED VALUATED VAN VAPID VAPORIZATION VAPORIZED VASOTOCIN
+            VAULT VAULTED VAWARD VD VEHEMENT VELD VENDITION VENERATION VENTED VERSIFICATION
+            VERT VESICATION VESTIBULED VET VETERINARIAN VEXILLOLOGIST VICED VIDICON VILLAIN
+            VINEGARISH VINELAND VIP VISAED VISED VISION VISITANT VITIATED VIVANT VIVERRID
+            VIVID VOLANT VOMITED VOTED</p>
+
+          <a name="W"></a>
+          <p align="center"><a href="#contents"><b>W</b></a>
+          <p> WAFTED WAILED WAIN WAISTCOATED WALKOUT WAMBLED WANGLED WANT WANTON WARED WARIEST
+            WARRANT WASH WASHBOARD WASHWOMAN WATCHBAND WATCHED WATERIEST WATERWORN WEEN
+            WELKIN WELT WEN WEND WESLEYAN WESTERN WESTFIELD WESTPORT WETLAND WHALED WHAT
+            WHEATEN WHELP WHINED WHIP WHIRRED WHIST WHITEHEAD WHITETHROAT WHOLESALED WIDEST
+            WIDTH WIEFERICH WIENERWURST WIFEHOOD WIGEON WIGGED WILDWOOD WINCH WIND WINDBURNED
+            WINDSCREEN WINESHOP WIREMAN WITCH WITHOUT WITTIEST WOAD WOLCOTT WOMAN WOMB WON
+            WONDERMENT WONT WOODENHEAD WOODLOT WOOLSHED WORKMEN WORKUP WORRYWART WORSEN
+            WORSTED WORTHINGTON WOULDN'T WOULDST WRESTED WRETCH WRIT WT WYLIECOAT WYND</p>
+
+          <a name="X"></a>
+          <P align="center"><a href="#contents"><b>X</b></a></p>
+
+          <p> XENOLITH XYLOGRAPH</p>
+
+          <a name="Y"></a>
+          <P align="center"><a href="#contents"><b>Y</b></a></p>
+
+          <p> YACKED YAMEN YAP YARDMAN YARN YD YEASTIEST YELLED YIDDISH YIELDED YOGHURT
+            YOU'D</p>
+
+          <a name="Z"></a>
+          <P align="center"><a href="#contents"><b>Z</b></a>
+          <p> ZEN ZENITH ZEST ZONATED ZOOPLANKTON
+            <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

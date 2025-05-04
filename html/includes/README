@@ -1,0 +1,24 @@
+These are the server side include items for my pages
+Example:
+
+  &lt;!--#include virtual="/includes/menubar.txt"-->
+  &lt;!--#include virtual="/includes/jumpbar.txt"-->
+  &lt;!--#include virtual="/includes/signature.txt"-->
+  &lt;!--#include virtual="/includes/signature1.txt"-->
+  &lt;!--#include virtual="/includes/header.txt"-->
+
+which are respectively 
+
+  the side (vertical) menu for the "minor" pages
+  the jumpbar (horizontal menu) for the "major" pages
+  the signature lines (for those with and then without a sidebar respectively)
+  lines to include in all headers (author, RASC rating...).
+ 
+Need to make sure the document is parsed, so in .htaccess have
+
+  AddType text/x-server-parsed-html .html
+
+or on newer machines
+
+  AddType text/html .html 
+  AddOutputFilter INCLUDES .html

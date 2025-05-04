@@ -1,0 +1,143 @@
+#!/usr/bin/perl -w
+
+# This routine should remove those codes that were created but never used.
+# Will try to log its actions
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use open ':std', ':encoding(UTF-8)';
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use GetCodes;		# Get the list of codes from the person table
+
+getopts('dhn:stw:W:'); 
+$opt_s or print "This routine removes the unused codes over 24 hours old; so
+  make sure you run reweight_codes first (perhaps combine these two!).
+  Use remove_unused_codes -h to see the options.\n\n";
+
+$opt_h and print "usage: remove_unused_codes [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-d	print debug messages.
+	-n n	number of hours before deleting (default is 24)
+	-t	just show what you would do, don't do it (turns on -d)
+	-h	print this help and exit
+	-w s	remove the one with name 's' (careful!) Turns off -n
+	-W s	same as -w, but with no safety checks--just does it!
+";
+
+if ($opt_t) {
+  $opt_d = 1;
+  print "Will show what changes we would make to database, but will not make them.\n";
+}
+$opt_h and exit;
+$opt_d and print "Noisey -d option turned on!\n";
+$opt_w = $opt_W if $opt_W;
+if ($opt_w) {
+  print "Will just remove the code with \"code.name = '$opt_w'\".\n"; 
+}
+
+# How old ($age) in hours do we allow entries to live before deleting?
+if (not $opt_w) { # $opt_w overrides the age limit
+  if ($opt_n and  $opt_n =~ /^\d+$/) {
+    $opt_s or print "Will remove codes older than $opt_n hours\n";
+    $age = $opt_n;
+  } else {
+    $age = 24;
+  }
+}
+
+# Could probably do this in two database calls--one to update the persons which include
+# the codes and the second to remome the code entries--but then informative messages
+# would be hard to generate. Also speed is no object--so we will do it slow and steady.
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# Get a list of the codes to remove (display_html will be used when logging the deletion)
+# Must not remove entries with primes or non-primes still on the list
+
+my $query;
+if ($opt_w) {				# Select the one specified entry, or...
+  $query = "SELECT name, display_html, PrimesTotal, NonPrime, comment, id FROM code 
+	WHERE name='$opt_w'";
+} else {				# all of those that are old enough
+  $query = "SELECT name, display_html, id FROM code 
+	WHERE (NOT PrimesTotal) AND (modified < NOW()-INTERVAL $age hour) AND (NOT NonPrime)";
+}
+
+$opt_d and print "QUERY: $query\n";
+$sth = $dbh->prepare($query);
+$sth->execute();
+ 
+# Loop through this list of codes; adjusting person.codes where necessary
+
+# Okay, here is my problem.  AT least in the current MySQL I can not force FIND_IN_SET
+# to be case sensitive.  Also, if we want to remove the code 'g3' from a string like
+# 'g3,g34,g35' we do not want to end up with '4,5'!  And if the person.codes is just
+# g3 there is no comma to match...  So I pull the string into perl and work there
+
+while (my $c = $sth->fetchrow_hashref) {
+  my $name = $$c{'name'};
+next if $name eq 'gb2';  ############## temporary exception for Keller
+  my $id = $$c{'id'} || '(missing id)';
+  unless ($name) {
+    warn "Skipping bad entry in code table: (id=$id) has empty name.  Includes\n$$c{'display_html'}\n ";
+    next;
+  }
+  $opt_d and print "Code: $name\n";
+
+  # First, some protection for $opt_w (refuse if there are primes or a comment)
+  die "Can not remove a code with primes (currently has $$c{'PrimesTotal'})\n" 
+	if ($opt_w and $$c{'PrimesTotal'} and not $opt_W);
+  die "Can not remove a code with non-primes (curently has $$c{'NonPrime'})\n" 
+	if ($opt_w and $$c{'NonPrime'} and not $opt_W);
+  die "Can not remove a code with a comment\n\n($$c{'comment'})\n" 
+	if ($opt_w  and $$c{'comment'} and not $opt_W);
+
+  # Get the list of persons using this dead code
+
+  $query = "SELECT id, name, codes FROM person WHERE codes REGEXP '\\\\b$name\\\\b'";
+  $opt_d and print "\tquery: $query\n";
+  $sth2 = $dbh->prepare($query);
+  $sth2->execute();
+  while (my $p = $sth2->fetchrow_hashref) {
+    # In the future might there be legal names that have metacharacters?
+    die "problem with $name" if $name ne quotemeta($name);
+    # okay, remove $name from the list, then any unneccessary commas
+    (my $new_codes = $$p{'codes'}) =~ s/\b$name\b//;
+    $new_codes =~ s/(^,|,$)//o; # if $name was on the end of the list
+    $new_codes =~ s/,,/,/o;	# if $name was in the middle of the list
+    $opt_s or print "\t$$p{'id'} $$p{'name'}\n\t\t$$p{'codes'} --> $new_codes\n";
+    next if $new_codes eq $$p{'codes'};  # Skip update if unchanged
+
+    $query = "UPDATE person SET codes='$new_codes' WHERE id=$$p{'id'}";
+    $opt_d and print "\tquery: $query\n";
+    $sth3 = $dbh->prepare($query);
+    $opt_t or $sth3->execute();
+    $sth3->finish;
+  }
+
+  $sth2->finish;
+
+  # Now remove the entry from the code table
+
+  $query = "DELETE FROM code WHERE name='$name'";
+  $opt_d and print "\tquery: $query\n";
+  $sth2 = $dbh->prepare($query);
+  $opt_t or $sth2->execute();
+  $sth2->finish;
+
+  # Now log
+
+  $opt_t or &connect_db::log_action($dbh, 'SYSTEM', 'deleted', "code.name='$name'", 
+	"included $$c{'display_html'}");
+}
+$sth->finish;
+
+$opt_s or print "Done.\n";
+

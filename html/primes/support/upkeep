@@ -1,0 +1,57 @@
+# Jump to the upkeep directory
+
+cd /var/www/html/primes/support
+
+# This will be the hourly tasks... so try to make these do nothing
+# unless they have to
+
+#echo reparse
+./reparse -s
+#echo redigitrank
+./redigitrank -s
+#./remove  -s
+#echo rerank
+./rerank  -s
+#echo relint
+./relint  -s
+#echo reranktags
+./reranktags -s
+#echo reweighttags
+./reweighttags -s
+#echo other
+
+# now the provers too
+# These are not optimized, so they run even when unnecessary, but they are quick
+
+./buildcodes -s # Only manual database changes should cause this
+
+
+# but also might reorder entries in a single code if we coded the web page wrong
+
+./reweightcodes -s
+./reweight -s
+
+
+
+# Remove any unused codes after 24 hours and unused persons after 60 days
+
+./remove_unused_codes -s
+./remove_unused_persons -s
+
+# Using the -F flags will run these only if necessary
+
+./list.print -LF  /var/www/html/primes/lists/all.dat   -s
+./list.print -LtF /var/www/html/primes/lists/all.txt   -s
+#./list.print -LxF /var/www/html/primes/lists/all.tex   -s
+
+# zip stores paths relative to where the command was given
+# q=quite, u=add/update, l=convert \n to DOS
+cd /var/www/html/primes/lists/
+zip -lqu all all.txt
+
+# Can't get latex to be silent!
+###  It is quiet run directly from crontab!
+###   /var/www/html/primes/support/use_latex &> /dev/null
+
+# Rebuild ~/html/largest.html (using that page as the template!)
+/var/www/html/top20/support/make.largest -s

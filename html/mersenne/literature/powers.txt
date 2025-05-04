@@ -1,0 +1,112 @@
+                                   THE
+                                AMERICAN
+                         MATHEMATICAL MONTHLY
+Entered at the Post-office at Springfield, Missouri, as second-class matter.
+============================================================================
+VOL. XVIII.                  NOVEMBER, 1911                          NO. 11.
+============================================================================
+                       THE TENTH PERFECT NUMBER
+                            -------------
+                  By R. E. POWERS, Denver Colorado
+                            -------------
+       A number which is equal to the sum of all its divisors is called a
+"perfect number."  Thus, the divisors of 6 are 1, 2, and 3, the sum of which
+is equal to 6; the divisors of 28 are 1, 2, 4, 7, and 14, whose sum is 28.
+Euclid (IX, 36) proved that if 2^p-1 is prime, then 2^(p-1)(2^p - 1) is a
+perfect number, and no other perfect numbers are known.  In 1644 Mersenne,
+in the preface to his Cogitata Physico-Mathematica, stated, in effect, that
+the only  values of p not greater than 257 which make 2^p-1 prime are 2, 3,
+5, 7, 13, 17, 19, 31, 67, 127, and 257.  Regarding these "Mersenne's
+Numbers" (2^p-1), W. W. Rouse Ball, in his Mathematical Recreations and
+Essays (4th Edition, pages 262, 263, 269),  says:                      "
+       "I assume that the number 67 is a misprint for 61.  With this corre-
+tion, we have no reason to doubt the truth of the statement, but it has not
+been defnitely established. . . . Seelhoff showed that 2^p-1 is prime when
+p=61. . . . and Cole gave the Factors when p=67. . . .  One of the unsolved
+riddles of higher arithmetic. . . . is the discovery of the method by which
+Mersenne or his contemporaries determined values of p which make a number
+of the form 2^p-1 a prime. . . . The riddle is still, after nearly 250 years
+unsolved."
+      No exception to Mersenne's assertion  (corrected by the substitution
+of 61 for 67) is known at the present time.  Below we show, however, that
+2^89-1 is a prime number, contrary to his statement.
+      Following is a list of Mersenne's Numbers thus far proved to be prime,
+with the corresponding perfect numbers:
+
+        p                       2^p-1                        Perfect Numbers
+        2                                      3                           6
+        3                                      7                          28
+        5                                     31                         496
+        7                                    127                       8,128
+       13                                  8,191                  33,550,336
+       17                                131,071               8,589,869,056
+       19                                524,287             137,438,691,328            
+       31                          2,147,483,647                 (19 digits)
+       61              2,305,843,009,213,693,951                 (37 digits)
+
+
+     To these must now be added the prime number 2^89-1, so that the
+tenth perfect number is 2^88(2^89-1), or
+
+         191561942608236107294793378084303638130997321548169216    
+
+(it is known that 2^p-1 is composite for all other values of p not greater
+than 100).
+      In his Théorie des Nombres, page 376, Lucas says:  "Nous pensons
+avoir démontré par de très longs calculs qu'il n'existe pas de nombres par-
+fait pour p=67 et p=89."   While this result has since been verified for
+p=67, the opinion has been expressed that also the case p=89 needed an in-
+dependent examination.  The result here shown that 2^89-1 is a prime
+is therefore in conflict with Lucas'computation.   The same writer, in an
+article entitled "Théorie des Fonctions Numériques Simplement Périodques,"
+Section XXIX, in the American Journal of Mathematics, Volume 1 (1878),
+proved the following remarkable theorem (thw theorem appears on page 316
+of the volume):
+       "If P=2^(4q+1)-1, and we form the series of residues (modulo P)
+
+                            4, 14, 194, 37634, ...,
+
+each of which is equal to the square of the preceding, diminished by two
+units: the number P is composite if none of the 4q+1 first residues is equal
+to 0; P is prime if the first residue 0 lies between the 2qth and the
+(4q+1)th term."
+      Applying the above theorem to the number 2^89-1, and denoting the
+terms of the series by L(1), L(2), L(3), ..., we found the following
+residues (modulo 2^89-1):
+            m                              L(m)
+            1                                                4
+            2                                               14
+            3                                              194
+            .      .      .      .      .      .      .      .
+           10             -115,113,975,804,653,882,052,836,464
+           20               36,000,517,785,442,762,303,479,300
+           30             -204,144,540,641,167,292,618,604,303
+           40             -126,791,709,316,676,382,795,042,761
+           50              -90,990,560,635,837,660,454,542,648
+           60             -206,308,592,424,355,282,693,419,690
+           70               99,498,791,857,820,493,810,407,653
+           80              269,783,273,665,984,523,074,966,550
+            .      .      .      .      .      .      .      .
+           86             -309,403,333,482,440,150,628,882,422
+           87                              -35,184,372,088,832
+           88                                                0
+
+      Since the first (and only) residue 0 occurs at the 88th term of the
+above the series, it follows, from the foregoing theorem, that 2^89-1, or
+
+                      618,970,019,642,690,137,449,562,111
+
+is a PRIME NUMBER.
+       As M. Lucas points out, his method used above is free from any un-
+certainty as to the accuracy of the conclusion that the number under consid-
+eration is prime, in case our attempt to arrive at the residue 0 meets with
+success, since an error in calculating any term of the series would have the
+effect of preventing the appearance of the residue 0.  We would add that,
+denoting the number 2^89-1 by N, we have verified that
+
+                           3^(N-1)-1 is divisible by N,
+
+which is in accordance with Fermat's well-known theorem.
+
+     Denver, Colorado, June, 1911.
+

@@ -1,0 +1,69 @@
+#!/usr/bin/perl -w
+
+use lib qw(/var/www/html/bin/ /var/www/html/top20/support/);
+
+# Need the ability to create bibliographic lists
+use ReadBibHTML;
+&ReadBibHTML::configure('QuietError','NoRawLink','NoAuthorLinks');
+   # Warn about reference errors, but do not add them to pages
+   # Avoid extra links to refs database
+
+use Getopt::Std;
+getopts('sdfg');
+unless ($opt_s) {
+  print "Finds any new references in the glossary database...\n
+	-s	silent operation
+	-f	force all to be updated
+	-g	update glossary.terms instead of top20.archivable
+	-d	verbose!\n\n";
+  $opt_f and print "Selecting all entries. \n";
+}
+
+# Lets see if we can connect to database
+use DBI;
+use connect_db;
+my $database = $opt_g ? "glossary" : "primes";
+my $table = $opt_g ? "terms" : "archivable";
+my $dbh = &connect_db::connect({database => $database});
+
+$days = 3655;
+
+if ($opt_f) {
+  $query = "SELECT id, name, refs, refs_tr, sort FROM $table;";
+} else {
+  $query = "SELECT id, name, refs, refs_tr, sort FROM $table WHERE
+    modified > DATE_SUB(CURRENT_DATE,INTERVAL $days DAY);";
+}
+
+$modified = $dbh->selectall_arrayref($query) || die $dbh->errstr;
+$opt_s or print "Found " . @$modified .
+	" entries that were modified in the last $days days.\n";
+
+foreach (@$modified) {
+  # Grab the row selected -- MUST MATCH $query!!
+  my ($id, $name, $refs, $refs_tr, $sort) = @$_;
+
+  # Skip if no references
+  $opt_d and print "Adjusting entry id = $id: name = '$name'\n";
+  if (! $refs) {
+    $opt_d and print "\tskipping--no references\n";
+    next;
+  }
+
+  # Adjust references
+  my $new_refs_tr = &ReadBibHTML::ShowItems($refs,'medium',$sort);
+  if ($refs_tr and $new_refs_tr eq $refs_tr) {
+    $opt_d and print "\tskipping--references unchanged\n";
+    next;
+  }
+
+  # Store references
+  if ($opt_d) {
+    print "\tChanged, so updating database\n";
+  } else {
+    $opt_s or print "Adjusting entry id = $id: name = '$name'\n";
+  }
+  $new_refs_tr = $dbh->quote($new_refs_tr);
+  $query = "UPDATE $table SET refs_tr = $new_refs_tr WHERE id = $id;";
+  $dbh->do($query) || die("update failed at $id : $name\n");
+}

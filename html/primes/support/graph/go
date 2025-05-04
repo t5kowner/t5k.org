@@ -1,0 +1,10 @@
+cd /var/www/html/primes/support/graph/
+./get -s > snapshottab.txt
+
+# export LD_LIBRARY_PATH=/usr/local/lib
+/usr/bin/gnuplot plot5.gplt
+mv 5year.png ../../../top20/includes/gifs/
+rm snapshottab.txt
+#/usr/local/bin/gnuplot plot_tex.gplt 
+#perl -i -pe 's/(\\begin\{picture\}\(1349,900\))\(0,0\)/$1(50,0)/' 5year.tex
+#cp 5year.tex /home/caldwell/public_html/curios/TeX/work/

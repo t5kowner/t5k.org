@@ -1,0 +1,31 @@
+This is a collection of the references used by the local <A
+href="/">Prime Pages</A> (plus a few related
+entries).&nbsp;  It is not an attempt at a complete bibliography for
+primes.
+
+<P>If you are just beginning to read books on number theory and prime
+numbers, then I would suggest you start with a good elementary number
+theory text, followed by <A
+href="refs.cgi?long=Ribenboim95">Ribenboim95</A>.&nbsp; For those 
+with a solid mathematical background there is the excellent text 
+on the state of the art by Crandall and Pomerance <a 
+href="refs.cgi?long=CP2001">CP2001</A>.&nbsp;
+
+If you wish a start at programming some of these algorithms see <A
+href="refs.cgi?long=Riesel94">Riesel94</A> (and perhaps <A
+href="refs.cgi?long=Bressoud89">Bressoud89</A> and <A
+href="refs.cgi?long=Knuth97">Knuth97</A>).&nbsp;
+
+If you have a solid foundation in number theory, and are looking for
+theoretical information on algorithms (with an excellent summary of recent
+research), see the impressive text <A
+href="refs.cgi?long=BS96">BS96</A>.&nbsp;
+
+For a more historical prospective, consider <a
+href="refs.cgi?long=Williams98">Williams98</a> These last two texts, as well
+as those by Ribenboim and Riesel (above)  have <i>extensive</i>
+reference lists.&nbsp; 
+
+<P>Please <a href="mailto:admin@t5k.org">send us</a> any corrections and
+suggested additions (hopefully in BibTeX format). 
+

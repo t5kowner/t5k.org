@@ -1,0 +1,77 @@
+#!/usr/bin/perl -w
+
+# This progarm will open up the whatever database connect_db connects to and scan most of its tables
+# for non-ascii characters.  They are displayed using the tables id field.  In curios.curios it also
+# points out if an LaTeX version is defined for that entry.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use DBI;		# Generic database interface
+use warnings;
+use strict;
+use Text::Unidecode;	# decodes uni to ascii
+use open ':std', ':encoding(UTF8)';
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+# $opt_s or print "Connected to database.\n";
+
+# our %summary;
+our %counts;
+
+my $query = "SHOW tables;";
+my $sth = $dbh->prepare($query);
+$sth->execute();
+
+while (my $t = $sth->fetchrow_hashref) {
+  foreach my $key (keys %$t) {
+#    next if $$t{$key} eq 'person';		# table names to ignore (but why?)
+    next if $$t{$key} eq 'log';
+    next if $$t{$key} eq 'failed';
+    &test($$t{$key});
+  }
+}
+
+print "\nProblems found:\n";
+my $total = 0;
+foreach my $key (sort {$counts{$a} <=> $counts{$b}} keys %counts) {
+   my $temp = join ":", map { ord } split //, $key;
+   print "\t$key (".unidecode($key)."; $temp) -> $counts{$key}\n";
+   $total += $counts{$key};
+}
+print "$total non-ascii entites.\n";
+
+exit;
+
+
+sub test {
+  my $table = shift || die 'must give &test a table name';
+
+  my $query = "SELECT * FROM $table;";
+  my $sth = $dbh->prepare($query);
+  $sth->execute();
+  # $opt_s or print "Have selected the items in $table.\n";
+
+  while (my $p = $sth->fetchrow_hashref) {
+    foreach my $key (keys %$p) {
+      next unless defined $$p{$key};
+      my $temp = ($table eq 'curios' and $key eq 'text' and $$p{'latex'}) ? ' but LaTeX is defined' : '';
+#      if ($$p{$key} =~ /([^[:ascii:]])/ ) {
+#        print $table.'.'.$$p{'id'}."\t $key has '$1' $temp \n";
+#        $counts{$1} = $counts{$1} ? ++$counts{$1} : 1;
+#      }
+
+
+      $$p{$key} =~ s/([^[:ascii:]])/
+	print $table.'.'.$$p{'id'}."\t $key has '$1' $temp \n";
+	$counts{$1} = $counts{$1} ? ++$counts{$1} : 1;
+	warn "ERROR: $table.$$p{'id'}.$key has '$1' ".unidecode($1)." (unrecognized)\n" unless unidecode($key);
+	$1;
+      /ge;
+
+
+    }
+  }
+}

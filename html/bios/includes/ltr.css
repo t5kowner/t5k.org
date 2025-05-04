@@ -1,0 +1,29 @@
+body {
+	padding-right: 10%;
+	padding-left: 0em
+}
+
+td.menu {
+	border-right: solid thin #009;
+}
+
+ul.menu {
+	margin: 1em 0 1em 1.2em;
+	padding: 0;
+}
+
+.gradient {
+	background-image: url(/assets/ltr_title_bg.jpg);
+	background-position: 0 0;
+	background-repeat: repeat-y;
+}
+
+table.gradient {
+	background-position: 2px 0;
+}
+
+/* position list chunks side by side */
+div.column {
+	float: left;
+	width: 33%;
+}

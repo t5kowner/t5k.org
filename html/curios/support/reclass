@@ -1,0 +1,165 @@
+#!/usr/bin/perl -w
+
+### PROBLEM: The para client decides when to use ispseudoprime vs isprime
+
+# This routine checks the numbers in the database to set the class as
+# 'other' (non-integers and zero), 'unknown' (not yet decided), 'composite',
+# 'unit' (-1, or 1), and 'prime'.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+use Time::HiRes 'time'; # Just cuious how long they take
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+
+$Big = 20000;	# The -B skips big numbers.  How big is big (log_10)?
+
+getopts('abBhsn:pR:');
+$opt_s or opt_h or print "usage: reclass [options].  Use reclass -h to see the options.\n\n";
+
+$opt_h and print "The routine reclasses (decides if prime, prp, unit, other)
+the numbers which have curios (visible or not) for primality...
+
+usage: reclass [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-h	print this help and exit
+	-n n	just n numbers
+	-a	do all 'unknown' numbers (even if no curios attached)
+	-p	redo those marked prp
+	-B	limit to those with log_10 less than $Big
+	-R n	redo number with id and print any differences (do all if n=x, that is 'x')
+
+Warning: grabs whole list to process first, so if you manually update one
+while it is running, it will still process it.\n";
+$opt_h and exit;
+$opt_s or $opt_n and print "Will only do $opt_n numbers.\n";
+$opt_s or $opt_B and print "Will skip numbers whose log base 10 exceeds $Big.\n";
+$opt_s or $opt_p and print "Redoing (just) those marked as prp (look at the pari client for the limit on prp vs prime tests).\n";
+$opt_s or $opt_a and print "Will also do numbers with no curios attached.\n";
+$opt_s or $opt_R and print "Reclassifying, will print any changes.\n";
+
+$opt_n or $opt_n = 1000; # Limit on how many to process
+
+# This is not pari itself, but a pari client which knows the grammar
+my $pari = $Bin.'/pari.client';
+(-e $pari) or die("\$pari in $0 must point to the pari client.");
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+
+# WHERE curios.number_id=numbers.id AND curios.visible='yes' AND class='unknown'
+
+# Default is just numbers with curios
+
+$query = "SELECT numbers.id, log10, long_, short, equation, count(*) as count_, class
+	FROM numbers, curios
+	WHERE curios.number_id=numbers.id AND class='unknown'
+	GROUP BY numbers.id
+	ORDER BY numbers.log10
+	LIMIT $opt_n";
+
+# But maybe do them all?
+
+if ($opt_a) {
+$query = "SELECT numbers.id, log10, long_, short, equation, class
+	FROM numbers WHERE class='unknown'
+	ORDER BY numbers.log10
+	LIMIT $opt_n";
+}
+
+if ($opt_R) {
+$temp = ($opt_R == 'x' ? '' : "WHERE id=$opt_R");
+$query = "SELECT numbers.id, log10, long_, short, equation, class
+	FROM numbers $temp
+	ORDER BY numbers.log10
+	LIMIT $opt_n";
+}
+
+if ($opt_p) {
+$query = "SELECT numbers.id, log10, long_, short, equation, class
+	FROM numbers WHERE class='prp'
+	ORDER BY numbers.log10
+	LIMIT $opt_n";
+}
+
+
+$sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or print "Have selected the set of numbers to reclass.\n";
+
+# Loop through this list
+# The modified = modified is an attempt to keep this value from
+# being updated when setting the class; as I do not consider this "modification"
+# when called from search routines (e.g., what's new?)
+
+my $sth2 = $dbh->prepare('UPDATE numbers SET class = ?, modified=modified WHERE id = ?') or die;
+
+while ($p = $sth->fetchrow_hashref) {
+  if (!$$p{'count_'}) { $$p{'count_'} = 'no'; }  # The -a option will bring numbers with no curios
+  $temp = ($opt_R ? "                  \r" : "\n");
+  $opt_s or print "testing $$p{short} ($$p{count_} curios, id is $$p{'id'}) ".($$p{'equation'}||'').$temp;
+  if ($$p{'short'} =~ /\d\.\.\.\d/o) {
+    $short = $$p{'short'};
+    $$p{'short'} = $$p{'long_'};
+    $$p{'short'} =~ s/\s+//go;  # long_ may have whitespace!
+  }
+
+  if ($opt_B and $$p{'log10'} > $Big) {
+    # Too big, skip it
+    $opt_s or print "Skipping prime $$p{'id'}: $short as too big (log10 is $$p{'log10'})\n";
+  } elsif ($$p{'short'} =~ /^-?(\d+)$/o) {
+    my $n = $1;
+    if ($n eq '1') {  					# 1, -1 are units
+      if ($$p{'class'} ne 'unit') {
+        $sth2->execute('unit',$$p{'id'}) or die;
+        print "\tinteger $n => unit (was $$p{'class'})\n";
+      }
+    } elsif ($n eq '0') {				# 0 is 'other'
+      if ($$p{'class'} ne 'other') {
+        $sth2->execute('other',$$p{'id'}) or die;
+        print "\tzero $n => other (was $$p{'class'})\n";
+      }
+    } else {
+      my $command = "$pari '$n' 2>&1";
+      my $time = time;
+      my $notes = `$command`;
+      $time = sprintf("(took %9.4f seconds)\n",time-$time);
+      if ($notes eq 'prime') {
+        if ($$p{'class'} ne 'prime') {
+          $sth2->execute('prime',$$p{'id'}) or die;
+          $opt_s or print "\tinteger $n => prime $time (was $$p{'class'})\n";
+        }
+      } elsif ($notes eq 'prp') {
+        if ($$p{'class'} ne 'prp') {
+          $opt_s or print "\tinteger $n => prp $time (was $$p{'class'})";
+          $sth2->execute('prp',$$p{'id'}) or die;
+          $opt_s or print ".\n";
+        }
+      } elsif ($notes eq 'composite') {
+        if ($$p{'class'} ne 'composite') {
+          $sth2->execute('composite',$$p{'id'}) or die;
+          $opt_s or print "\tinteger $n => composite $time (was $$p{'class'})\n";
+        }
+      } else {
+        print "\tinteger $n => ?? (pari.client failed)\n";
+      }
+    }
+  } elsif ($$p{'short'} =~ /\d\.\d/o) {			# decimal point means other
+    if ($$p{'class'} ne 'other') {
+      $sth2->execute('other',$$p{'id'}) or die;
+      print "\tnon-integer => other (was $$p{'class'})\n";
+    }
+  } else {
+    print "not recognized!\n";
+  }
+}
+
+$opt_s or print "Done.\n";
+
+exit;

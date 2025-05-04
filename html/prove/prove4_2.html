@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 4.2: Elliptic curves and the ECPP test</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->4.2:
+                Using elliptic curves and the ECPP test<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove4.html">Chapter
+                  Four</a> &gt; Elliptic Curves <!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <h3>Elliptic Curves</h3>
+  <p>What is the next big leap in primality proving?&nbsp; To switch from Galois groups
+    to some other, perhaps easier to work with groups--in this case the points on
+    Elliptic Curves modulo <i>n</i>.&nbsp; An Elliptic curve is a curve of genus one,
+    that is a curve that can be written in the form</p>
+  <blockquote><b>E(<i>a</i>,<i>b</i>)</b> : <i>y</i><sup>2</sup> = <i>x</i><sup>3</sup>
+    + <i>ax</i> + <i>b</i> (with 4<i>a</i><sup>3</sup> + 27<i>b</i><sup>2</sup>
+    not zero)</blockquote>
+  <p>They are called &quot;elliptic&quot; because these equations first arose in
+    the calculation of the arc-lengths of ellipses.&nbsp; </p>
+  <p><img src="assets/elliptic_curve.gif" width="202" height="162" style="float: right;"
+      alt="Sketch of the cord and tangent method">The
+    rational points on such a curve form a group with addition defined using the
+    &quot;chord and tangent method:&quot;&nbsp; That is, if the two points P<sub>1</sub>
+    and P<sub>2</sub> are rational (have rational coefficients), then the line through
+    P<sub>1</sub> and P<sub>2</sub> intersects the curve again in a third rational
+    point which we call -(P<sub>1</sub>+P<sub>2</sub>) (the negative is to make
+    the associative law work out).&nbsp; Reflect through the <i>x</i>-axis to get
+    P<sub>1</sub>+P<sub>2</sub>.&nbsp; (If P<sub>1</sub> and P<sub>2</sub> are not
+    distinct, then use the tangent line at P<sub>1</sub>.)</p>
+  <p>If we then reduce this group modulo a prime <i>p</i> we get a small group E(<i>a</i>,<i>b</i>)/<i>p</i>
+    whose size can be used in roughly the way we use the size of (<b>Z</b>/<i>p</i><b>Z</b>)<sup>*</sup>
+    in the first of the classical tests.&nbsp; Let |E| be the order (the size) of the
+    group E: </p>
+  <blockquote><b>Theorem:</b> |E(<i>a</i>,<i>b</i>)/<i>p</i>| lies in the interval
+    (<i>p</i>+1-2sqrt(<i>p</i>),<i>p</i>+1+2sqrt(<i>p</i>)) and the orders are fairly
+    uniformly distributed (as we vary <i>a</i> and <i>b</i>).</blockquote>
+  Obviously we are again getting out of our depth, but perhaps you see that we now
+  have replaced the groups of order <i>n</i>-1 and <i>n</i>+1 used in the classical
+  test with a far larger range of group sizes.&nbsp; We can keep switching curves
+  until we find one we can &quot;factor.&quot;&nbsp; This improvement comes at the
+  cost of having to do a great deal of work to find the actual size of these groups.
+  <p>About 1986, S. Goldwasser &amp; J. Kilian [<a href="../references/refs.cgi/GK86">GK86</a>] and A. O. L. Atkin [<a
+      href="../references/refs.cgi/Atkin86">Atkin86</a>] introduced elliptic curve primality
+    proving methods.&nbsp; Atkin's method, ECPP, was implemented by a number of
+    mathematicians, including Atkin &amp; Morain [<a href="../references/refs.cgi/AM93">AM93</a>]. Fran&ccedil;ois
+    Morain's C-code
+    (discussed in [<a href="../references/refs.cgi/AM93">AM93</a>]) is <a
+      href="http://www.lix.polytechnique.fr/~morain/Prgms/ecpp.english.html">available
+      on the web</a> for many platforms.&nbsp; For Windows based platforms <a href="http://www.ellipsa.eu/">the
+      Primo implementation</a> is easier to use. </p>
+  <p><i>Heuristically</i>, the best version of ECPP is O((log <i>n</i>)<sup>4+<i>eps</i></sup>) for
+    some <i>eps</i> &gt; 0 [<a href="../references/refs.cgi/LL90">LL90</a>] (see also D. J. Bernstein's page <a
+      href="http://cr.yp.to/primetests.html">http://cr.yp.to/primetests.html</a>).&nbsp; It has been proven to
+    be polynomial time for almost all choices of inputs.</p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <b><a href="prove4_3.html">next
+                  page</a></b> | <a href="prove4_1.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

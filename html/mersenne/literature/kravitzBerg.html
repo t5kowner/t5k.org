@@ -1,0 +1,305 @@
+<HTML>
+
+<HEAD>
+	<TITLE>Lucas' Test for Mersenne Numbers, 6000 < p < 7000</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#C000C0" ALINK="#FF0000" TEXT="#000000">
+	<BASEFONT SIZE=3>
+	<BR><BR><BR><BR><BR>
+	<CENTER>
+		<TABLE WIDTH=75%>
+			<TR>
+				<TD>
+					<CENTER>
+						<FONT SIZE=+2>
+							Lucas' Test for Mersenne Numbers, 6000&nbsp;&lt;&nbsp;p&nbsp;&lt;&nbsp;7000
+						</FONT><BR><BR>
+						<FONT SIZE=+1>
+							By Sidney Kravitz and Murray Berg
+						</FONT>
+					</CENTER><BR><BR>
+
+					&nbsp;&nbsp;&nbsp; Alexander Hurwitz [<A HREF="#foot_1">1</A>] reported that he had
+					applied Lucas' test to investigate the primality of the Mersenne
+					Numbers <I>M</I><SUB>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</SUB>&nbsp;=
+					2<sup>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</sup>&nbsp;-&nbsp;1,
+					<I>p</I> a prime, 3300&nbsp;&lt;&nbsp;<I>p</I>&nbsp;&lt;&nbsp;5000, and&nbsp; discovered
+					that&nbsp; <I>M</I><SUB>
+						<FONT SIZE=-2>4253</FONT>
+					</SUB> and
+					<I>M</I><SUB>
+						<FONT SIZE=-2>4423</FONT>
+					</SUB> are prime numbers.
+					Hurwitz [<A HREF="#foot_2">2</A>] further states<A HREF="#foot_cross">&#134</A>
+					that he tested all prime exponents between 5000 and 6000, where the corresponding
+					<I>M</I><SUB>
+						<FONT SIZE=-2><I>p</I></FONT>
+					</SUB> was not known to have a factor,
+					without discovering any new Mersenne Primes.<P>
+
+						<CENTER>
+							<TABLE WIDTH=100%>
+								<CAPTION>T<FONT SIZE=-2>ABLE</FONT>
+								</CAPTION>
+								<TR>
+									<TD COLSPAN=6>
+										<HR NOSHADE WIDTH=100%>
+									</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD><I><B>p</B></I></TD>
+									<TD><I><B>R</B></I></TD>
+									<TD><I><B>p</B></I></TD>
+									<TD><I><B>R</B></I></TD>
+									<TD><I><B>p</B></I></TD>
+									<TD><I><B>R</B></I></TD>
+								</TR>
+
+								<TR>
+									<TD COLSPAN=6>
+										<HR NOSHADE WIDTH=100%>
+									</TD>
+								</TR>
+								<TR ALIGN=CENTER>
+									<TD>6007</TD>
+									<TD>07707&nbsp;</TD>
+									<TD>6247</TD>
+									<TD>00472&nbsp;</TD>
+									<TD>6659</TD>
+									<TD>75241*</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6037</TD>
+									<TD>21420&nbsp;</TD>
+									<TD>6257</TD>
+									<TD>36710&nbsp;</TD>
+									<TD>6661</TD>
+									<TD>27165&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6043</TD>
+									<TD>21605&nbsp;</TD>
+									<TD>6269</TD>
+									<TD>57356&nbsp;</TD>
+									<TD>6679</TD>
+									<TD>13275&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6047</TD>
+									<TD>37000&nbsp;</TD>
+									<TD>6299</TD>
+									<TD>71037*</TD>
+									<TD>6701</TD>
+									<TD>07636&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6053</TD>
+									<TD>53471&nbsp;</TD>
+									<TD>6329</TD>
+									<TD>25136*</TD>
+									<TD>6709</TD>
+									<TD>05700&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6073</TD>
+									<TD>41646&nbsp;</TD>
+									<TD>6337</TD>
+									<TD>21676*</TD>
+									<TD>6733</TD>
+									<TD>35544&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6079</TD>
+									<TD>15712&nbsp;</TD>
+									<TD>6359</TD>
+									<TD>51351&nbsp;</TD>
+									<TD>6763</TD>
+									<TD>01753&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6089</TD>
+									<TD>32615&nbsp;</TD>
+									<TD>6361</TD>
+									<TD>10027*</TD>
+									<TD>6779</TD>
+									<TD>74306*</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6091</TD>
+									<TD>02043&nbsp;</TD>
+									<TD>6451</TD>
+									<TD>23476&nbsp;</TD>
+									<TD>6791</TD>
+									<TD>41143&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6133</TD>
+									<TD>42630&nbsp;</TD>
+									<TD>6469</TD>
+									<TD>51252&nbsp;</TD>
+									<TD>6823</TD>
+									<TD>14573*</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6151</TD>
+									<TD>63451&nbsp;</TD>
+									<TD>6547</TD>
+									<TD>06546&nbsp;</TD>
+									<TD>6833</TD>
+									<TD>26431&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6211</TD>
+									<TD>71252&nbsp;</TD>
+									<TD>6571</TD>
+									<TD>67142&nbsp;</TD>
+									<TD>6857</TD>
+									<TD>63102&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6217</TD>
+									<TD>07377&nbsp;</TD>
+									<TD>6577</TD>
+									<TD>45051*</TD>
+									<TD>6907</TD>
+									<TD>46461*</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6221</TD>
+									<TD>24166&nbsp;</TD>
+									<TD>6581</TD>
+									<TD>74210*</TD>
+									<TD>6911</TD>
+									<TD>63345&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD>6229</TD>
+									<TD>06517&nbsp;</TD>
+									<TD>6599</TD>
+									<TD>77554&nbsp;</TD>
+									<TD>6971</TD>
+									<TD>65345&nbsp;</TD>
+								</TR>
+
+								<TR ALIGN=CENTER>
+									<TD></TD>
+									<TD></TD>
+									<TD></TD>
+									<TD></TD>
+									<TD>6991</TD>
+									<TD>50365&nbsp;</TD>
+								</TR>
+
+								<TR>
+									<TD COLSPAN=6>
+										<HR NOSHADE WIDTH=100%>
+									</TD>
+								</TR>
+							</TABLE>
+						</CENTER><BR>
+
+						&nbsp;&nbsp;&nbsp; The authors have tested the Mersenne Numbers
+						6000&nbsp;&lt;&nbsp;p&nbsp;&lt;&nbsp;7000 without finding any new primes.
+						A list of the five least significant octal digits of the
+						<I>S</I><SUB>
+							<FONT SIZE=-2><I>p</I>&nbsp;-&nbsp;1</FONT>
+						</SUB>th
+						remainder from the Lucas test
+						(<I>S</I><SUB>
+							<FONT SIZE=-2>1</FONT>
+						</SUB>&nbsp;=&nbsp;4) is given
+						in the Table. Where a prime is missing from the list it indicates
+						that a factor of the corresponding Mersenne Number was found by Riesel
+						[<A HREf="#foot_3">3</A>,<A HREF="#foot_4">4</A>] or that
+						an unpublished<A HREF="#foot_cross">&#134</A> factor was found
+						by John Brillhart. At the time of completion of these results we
+						learned of similiar work<A HREF="#foot_cross">&#134</A> by Donald
+						B. Gillies on Illiac&nbsp;II. We compared our residues with his
+						and found ten discrepancies. A check revealed that one of our three
+						supposedly identical program decks contained an error. The questionable
+						residues were recalculated and found to agree with Dr. Gillies' values.
+						These residues are marked by an asterisk(*).
+					<P>
+
+						&nbsp;&nbsp;&nbsp; The authors have verified that Riesel's
+						<I>M</I><SUB>
+							<FONT SIZE=-2>3217</FONT>
+						</SUB> and Hurwitz's
+						<I>M</I><SUB>
+							<FONT SIZE=-2>4253</FONT>
+						</SUB> and
+						<I>M</I><SUB>
+							<FONT SIZE=-2>4423</FONT>
+						</SUB> are prime. Hurwitz's octal
+						remainder [<A HREF="#foot_1">1</A>] of 72013 for the prime exponent 3301
+						was also verified. The running time for <I>p</I> near 6500 was three
+						hours, using an IBM&nbsp;7090.
+					<P>
+
+						Picatinny Arsenal<BR>
+						Dover, New Jersey<BR>
+						Standard Oil Company of California<BR>
+						San Fransico, California
+					<P>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_1">1</A>. A. H<FONT SIZE=-1>URWITZ</FONT>,
+						"New Mersenne primes",
+						<A HREF="../biblio.html#hurwitz"><I>Math. Comp.</I>, v.&nbsp;16. 1962, p.&nbsp;249-51</A>.
+						<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_2">2</A>. A. H<FONT SIZE=-1>URWITZ</FONT>, Private
+						communication to the authors dated March&nbsp;12, 1962.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_3">3</A>. H. R<FONT SIZE=-1>IESEL</FONT>,
+						"Mersenne numbers",
+						<A HREF="../biblio.html#riesel"><I>MTAC</I>, v.&nbsp;12, 1958, p.&nbsp;207</A>.
+						<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_4">4</A>. H. R<FONT SIZE=-1>IESEL</FONT>,
+						"All factors <I>q</I>&nbsp;&lt;&nbsp;10<sup>
+							<FONT SIZE=-2>8</FONT>
+						</sup>
+						in all Mersenne numbers, 2<sup>
+							<FONT SIZE=-2><I>p</I></FONT>
+						</sup>&nbsp;-&nbsp;1,
+						<I>p</I> a prime &lt;&nbsp;10<sup>
+							<FONT SIZE=-2>4</FONT>
+						</sup>",
+						<I>Math. Comp.</I>, v.&nbsp;16, 1962,
+						p.&nbsp;478-82. Errata, <I>Math. Comp.</I>, v.&nbsp;17, 1963, p.&nbsp;486.<BR>
+
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_5">5</A>. S. K<FONT SIZE=-1>RAVITZ</FONT> &
+						M. B<FONT SIZE=-1>ERG</FONT>, "Recent research in Mersenne numbers"
+						<I>Recreational Mathematics Magazine</I>, October, 1962, p.&nbsp;40.
+
+						<HR NOSHADE WIDTH=100 ALIGN=LEFT>
+						&nbsp;&nbsp;&nbsp; Received February 6, 1963. Revised April 26, 1963.<BR>
+						&nbsp;&nbsp;&nbsp; <A NAME="foot_cross">&#134;</A>See Pages
+						<A HREF="../biblio.html#selfridgeHurwitz">146</A>,
+						87, and 93 of this issue of <I>Mathematics of Computation</I>.
+
+			</TR>
+			</TD>
+		</TABLE>
+</BODY>
+
+</HTML>

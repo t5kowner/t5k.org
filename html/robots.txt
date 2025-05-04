@@ -1,0 +1,28 @@
+User-agent: *
+Disallow: /avoid_this/
+Disallow: /manual/
+Disallow: /en_US/
+Disallow: /usage/
+Disallow: /TE/
+Disallow: /bin/
+Disallow: /bios/newcode.php
+Disallow: /bios/edit.php
+Disallow: /primes/newcode.php
+Disallow: /primes/submit.php
+Disallow: /curios/submit.php
+Disallow: /curios/page.php?rank
+Disallow: *generic_edit.php
+Disallow: /primes/search.php
+Disallow: /primes/generic_edit.php
+Disallow: /bios/top20.php?type
+Disallow: /bios/top20.php\?type
+
+User-agent: LinkChecker
+Disallow:
+
+## Due to a bug in linklint, must first specify a disallow in order for 
+## for all other directories to be allowed. Feel free to add other
+## disallows below the first disallow line.
+User-agent: LinkLint
+Disallow: /workaroundForLinkLintRandomDirForConfig
+Allow: *

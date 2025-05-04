@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The New Mersenne Prime Conjecture</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="Bateman, Selfridge and Wagstaff made 'The new Mersenne conjecture' in 1989 that if two of three conditions hold, so must the third.  We look at these conditions and the numerical evidence.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="index.html">Mersennes</a></li>
+          <li class="breadcrumb-item active">New Mersenne Conjecture</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->The
+        New Mersenne Prime Conjecture<!-- #EndEditable --></h1>
+      <!-- #BeginEditable "content" -->
+      <p>Leonhard Euler showed:</p>
+
+      <blockquote class="blockquote font-small">
+        <strong>Theorem</strong>:&nbsp; If&nbsp; <i>k</i>&gt;1 and&nbsp;
+        <i>p</i>=4<i>k</i>+3&nbsp; is prime, then 2<i>p</i>+1 is prime if and
+        only if 2<i>p</i>+1 divides 2<i><sup>p</sup></i>-1.
+      </blockquote>
+
+      <p>It is also clear that if <i>p</i> is an odd composite, then 2<sup><i>p</i></sup>-1 and
+        (2<sup><i>p</i></sup>+1)/3 are composite.&nbsp; Looking at these theorems and various numerical results,
+        Bateman, Selfridge and Wagstaff (<em>The new Mersenne conjecture</em>, Amer. Math. Monthly, 96 (1989) 125-128
+        [<a href="/references/refs.cgi/BSW89">BSW89</a>]) have conjectured the following.</p>
+
+      <blockquote class="blockquote font-small">
+        <strong>Conjecture</strong> (<a href="/glossary/page.php?sort=Conjecture">*</a>):
+        Let <i>p</i> be any odd natural number.&nbsp; If two of the following
+        conditions hold, then so does the third:
+        <ol>
+          <li> <i>p</i> = 2<i><sup>k</sup></i>+/-1&nbsp;&nbsp; or&nbsp;&nbsp; <i>p</i> = 4<i><sup>k</sup></i>+/-3</li>
+          <li> 2<i><sup>p</sup></i>-1 is a prime (obviously a <a href="/mersenne/index.html">Mersenne prime</a>)</li>
+          <li> (2<i><sup>p</sup></i>+1)/3 is a prime.</li>
+        </ol>
+      </blockquote>
+
+      <p>Below we list all of the primes <i>p</i> where </p>
+
+      <ul>
+        <li><i>&nbsp; p</i> &lt; 10000000 and <i>p</i> = 2<sup><i>k</i></sup>
+          &plusmn; 1 or <i>p</i> = 4<sup><i>k</i></sup> &plusmn; 3.</li>
+        <li> &nbsp;2<sup><i>p</i></sup> - 1 is known to be prime.</li>
+        <li><i>&nbsp;</i>(2<sup><i>p</i></sup> + 1)/3 is known to be prime or
+          a <a href="/glossary/page.php?sort=PRP">probable-prime</a>.</li>
+      </ul>
+
+      <p>Details are in the table and <a href="#notes">notes</a> below.&nbsp;
+        (The conjecture is that if any two of the entries in a row is yes, so
+        is the third.)</p>
+
+      <p>(There is more current data at <a
+          href="https://sites.google.com/site/bearnol/math/mersenneplustwo">https://sites.google.com/site/bearnol/math/mersenneplustwo</a>)
+      </p>
+
+      <table BORDER="0" cellpadding="5">
+        <tr>
+          <th bgcolor="#CCEEFF"><i>p</i></th>
+          <th bgcolor="#CCEEFF"><i>p</i> = 2<sup><i>k</i></sup>&plusmn;1 or 4<sup><i>k</i></sup>&plusmn;3?</th>
+          <th bgcolor="#CCEEFF">2<sup><i>p</i></sup> - 1 prime?</th>
+          <th bgcolor="#CCEEFF">(2<sup><i>p</i></sup> + 1)/3 prime?</th>
+        </tr>
+        <tr>
+          <td align="right">3 </td>
+          <td align="center">yes (-1)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">5 </td>
+          <td align="center" bgcolor="#F0F9FF">yes (+1)</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">7 </td>
+          <td align="center">yes (-1 or +3)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">11</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 23</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">13</td>
+          <td align="center">yes (-3)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">17</td>
+          <td align="center" bgcolor="#F0F9FF">yes (+1)</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">19</td>
+          <td align="center">yes (+3)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">23</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 47</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">31</td>
+          <td align="center">yes (-1)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">43</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 431</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">61</td>
+          <td align="center">yes (-3)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">67</td>
+          <td align="center" bgcolor="#F0F9FF">yes (+3)</td>
+          <td bgcolor="#F0F9FF">no: 193707721</td>
+          <td bgcolor="#F0F9FF">no: 7327657</td>
+        </tr>
+        <tr>
+          <td align="right">79</td>
+          <td align="center">no</td>
+          <td>no: 2687</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">89</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 179</td>
+        </tr>
+        <tr>
+          <td align="right">101</td>
+          <td align="center">no</td>
+          <td>no: 7432339208719</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">107</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 643</td>
+        </tr>
+        <tr>
+          <td align="right">127</td>
+          <td align="center">yes (-1)</td>
+          <td>yes</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">167</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 2349023</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">191</td>
+          <td align="center">no</td>
+          <td>no: 383</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">199</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 164504919713</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">257</td>
+          <td align="center">yes (+1)</td>
+          <td>no: 535006138814359</td>
+          <td>no: 37239639534523</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">313</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 10960009</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">347</td>
+          <td align="center">no</td>
+          <td>no: 14143189112952632419639</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">521</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 501203</td>
+        </tr>
+        <tr>
+          <td align="right">607</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 115331</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">701</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 796337</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">1021</td>
+          <td align="center">yes (-3)</td>
+          <td>no: 40841</td>
+          <td>no: 10211</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">1279</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 706009</td>
+        </tr>
+        <tr>
+          <td align="right">1709</td>
+          <td align="center">no</td>
+          <td>no: 379399</td>
+          <td>yes [<a href="/">Morain1990a</a>]</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">2203</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 13219</td>
+        </tr>
+        <tr>
+          <td align="right">2281</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 22811</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">2617</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 78511</td>
+          <td bgcolor="#F0F9FF">yes [<a href="/">Morain1990a</a>]</td>
+        </tr>
+        <tr>
+          <td align="right">3217</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 7489177</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">3539</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 7079</td>
+          <td bgcolor="#F0F9FF">yes [<a href="/">Morain1990a</a>]</td>
+        </tr>
+        <tr>
+          <td align="right">4093</td>
+          <td align="center">yes (-3)</td>
+          <td>no: 2397911088359</td>
+          <td>no: 3732912210059</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">4099</td>
+          <td align="center" bgcolor="#F0F9FF">yes(+3)</td>
+          <td bgcolor="#F0F9FF">no: 73783</td>
+          <td bgcolor="#F0F9FF">no: 2164273</td>
+        </tr>
+        <tr>
+          <td align="right">4253</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 118071787</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">4423</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 2827782322058633</td>
+        </tr>
+        <tr>
+          <td align="right">5807</td>
+          <td align="center">no</td>
+          <td>no: 139369</td>
+          <td>yes (note <a href="#notes">6</a>)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">8191</td>
+          <td align="center" bgcolor="#F0F9FF">yes (-1)</td>
+          <td bgcolor="#F0F9FF">no: 338193759479</td>
+          <td bgcolor="#F0F9FF">no</td>
+        </tr>
+        <tr>
+          <td align="right">9689</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 19379</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">9941</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 11120148512909357034073</td>
+        </tr>
+        <tr>
+          <td align="right">10501</td>
+          <td align="center">no</td>
+          <td>no: 2160708549249199</td>
+          <td>yes (note <a href="#notes">5</a>)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">10691</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 21383</td>
+          <td bgcolor="#F0F9FF">yes (note <a href="#notes">1</a>)</td>
+        </tr>
+        <tr>
+          <td align="right">11213</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 181122707148161338644285289935461939</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">11279</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 2198029886879</td>
+          <td bgcolor="#F0F9FF">yes (note <a href="#notes">4</a>)</td>
+        </tr>
+        <tr>
+          <td align="right">12391</td>
+          <td align="center">no</td>
+          <td>no: 198257</td>
+          <td>yes (note <a href="#notes">3</a>)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">14479</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 27885728233673</td>
+          <td bgcolor="#F0F9FF">yes (note <a href="#notes">2</a>)</td>
+        </tr>
+        <tr>
+          <td align="right">16381</td>
+          <td align="center">yes (-3)</td>
+          <td>no: 8114899840326779533679915276470289950126585679</td>
+          <td>no: 163811</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">19937</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no</td>
+        </tr>
+        <tr>
+          <td align="right">21701</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 43403</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">23209</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 4688219</td>
+        </tr>
+        <tr>
+          <td align="right">42737</td>
+          <td align="center">no</td>
+          <td>no</td>
+          <td>yes (note <a href="#notes">7</a>)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">44497</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 2135857</td>
+        </tr>
+        <tr>
+          <td align="right">65537</td>
+          <td align="center">yes (+1)</td>
+          <td>no: 513668017883326358119</td>
+          <td>no: 13091975735977</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">65539</td>
+          <td align="center" bgcolor="#F0F9FF">yes (+3)</td>
+          <td bgcolor="#F0F9FF">no: 3354489977369</td>
+          <td bgcolor="#F0F9FF">no: 58599599603</td>
+        </tr>
+        <tr>
+          <td align="right">83339</td>
+          <td align="center">no</td>
+          <td>no: 166679</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">86243</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 1627710365249</td>
+        </tr>
+        <tr>
+          <td align="right">95369</td>
+          <td align="center">no</td>
+          <td>no: 297995890279</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">110503</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 48832113344350037579071829046935480686609</td>
+        </tr>
+        <tr>
+          <td align="right">117239</td>
+          <td align="center">no</td>
+          <td>no</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">127031</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 12194977</td>
+          <td bgcolor="#F0F9FF">yes</td>
+        </tr>
+        <tr>
+          <td align="right">131071</td>
+          <td align="center">yes (-1)</td>
+          <td>no: 231733529</td>
+          <td>no: 2883563</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">132049</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 618913299601153</td>
+        </tr>
+        <tr>
+          <td align="right">138937</td>
+          <td align="center">no</td>
+          <td>no: 100068818503</td>
+          <td>yes</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">141079</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 458506751</td>
+          <td bgcolor="#F0F9FF">yes (prp)</td>
+        </tr>
+        <tr>
+          <td align="right">216091</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 10704103333093885136919332089553661899</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">262147</td>
+          <td align="center" bgcolor="#F0F9FF">yes (+3)</td>
+          <td bgcolor="#F0F9FF">no: 268179002471</td>
+          <td bgcolor="#F0F9FF">no: 4194353</td>
+        </tr>
+        <tr>
+          <td align="right">267017</td>
+          <td align="center">no</td>
+          <td>no: 1602103</td>
+          <td>yes (prp)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">269987</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">no: 1940498230606195707774295455176153</td>
+          <td bgcolor="#F0F9FF">yes (prp)</td>
+        </tr>
+        <tr>
+          <td align="right">374321</td>
+          <td align="center">no</td>
+          <td>no</td>
+          <td>yes (prp)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">524287</td>
+          <td align="center" bgcolor="#F0F9FF">yes (-1)</td>
+          <td bgcolor="#F0F9FF">no: 62914441</td>
+          <td bgcolor="#F0F9FF">no</td>
+        </tr>
+        <tr>
+          <td align="right">756839</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 1640826953</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">859433</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 1718867</td>
+        </tr>
+        <tr>
+          <td align="right">986191</td>
+          <td align="center">no</td>
+          <td>no</td>
+          <td>yes (prp)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">1048573</td>
+          <td align="center" bgcolor="#F0F9FF">yes (-3)</td>
+          <td bgcolor="#F0F9FF">no: 73400111</td>
+          <td bgcolor="#F0F9FF">no</td>
+        </tr>
+        <tr>
+          <td align="right">1257787</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 20124593</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">1398269</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 23609117451215727502931</td>
+        </tr>
+        <tr>
+          <td align="right">2976221</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 434313978089</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">3021377</td>
+          <td align="center" bgcolor="#F0F9FF">no</td>
+          <td bgcolor="#F0F9FF">yes</td>
+          <td bgcolor="#F0F9FF">no: 95264016811</td>
+        </tr>
+        <tr>
+          <td align="right">4031399</td>
+          <td align="center">no</td>
+          <td>no: 8062799</td>
+          <td>yes (prp)</td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#F0F9FF">4194301</td>
+          <td align="center" bgcolor="#F0F9FF">yes (-3)</td>
+          <td bgcolor="#F0F9FF">no: 2873888432993463577</td>
+          <td bgcolor="#F0F9FF">no: 14294177809</td>
+        </tr>
+        <tr>
+          <td align="right">6972593</td>
+          <td align="center">no</td>
+          <td>yes</td>
+          <td>no: 142921867730820791335455211</td>
+        </tr>
+      </table>
+
+      <p>When a small factor is known we listed it above.</p>
+
+      <h4>Notes:<a name="notes" id="notes"></a></h4>
+
+      <table width="100%" border="0" cellspacing="5">
+        <tr>
+          <th bgcolor="#CCEEFF" class="text-center">##</th>
+          <th bgcolor="#CCEEFF" class="text-center">prime</th>
+          <th bgcolor="#CCEEFF">note</th>
+        </tr>
+        <tr>
+          <td align="center">*</td>
+          <td align="center">(any)</td>
+          <td>The integers listed after 'no' are small factors of the corresponding
+            composite.</td>
+        </tr>
+        <tr>
+          <td align="center">**</td>
+          <td align="center">(any)</td>
+          <td>The expression prp means <a href="/glossary/page.php?sort=PRP">probable-prime</a></td>
+        </tr>
+        <tr>
+          <td align="center">1</td>
+          <td align="center">10691</td>
+          <td>ECPP primality proof by David Broadhurst via Primo, certificate
+            n10691.zip</td>
+        </tr>
+        <tr>
+          <td align="center">2</td>
+          <td align="center">14479</td>
+          <td>ECPP primality proof by David Broadhurst via Primo, certificate
+            n14479.zip</td>
+        </tr>
+        <tr>
+          <td align="center">3</td>
+          <td align="center">12391</td>
+          <td>Proof by Fran&ccedil;ois Morain, see his <a
+              href="http://listserv.nodak.edu/scripts/wa.exe?A2=ind9604&L=nmbrthry&P=R1977&D=0">notes</a>.</td>
+        </tr>
+        <tr>
+          <td align="center">4</td>
+          <td align="center">11279</td>
+          <td>Proof by Preda Mihailescu, see his <a
+              href="http://listserv.nodak.edu/scripts/wa.exe?A2=ind9801&L=nmbrthry&P=R1038&D=0">notes</a>.</td>
+        </tr>
+        <tr>
+          <td align="center">5</td>
+          <td align="center">10501</td>
+          <td>Proof by Fran&ccedil;ois Morain, see his <a
+              href="http://listserv.nodak.edu/scripts/wa.exe?A2=ind9604&L=nmbrthry&P=R647&D=0">notes</a>.</td>
+        </tr>
+        <tr>
+          <td align="center">6</td>
+          <td align="center">5807</td>
+          <td>Proof by Preda Mihailescu, see his <a
+              href="http://listserv.nodak.edu/scripts/wa.exe?A2=ind9801&L=nmbrthry&P=R2&D=0">notes</a>.</td>
+        </tr>
+        <tr>
+          <td align="center">7</td>
+          <td align="center">42737</td>
+          <td>Proof by Fran&ccedil;ois Morain, see his <a href="/primes/page.php?id=82071#user">notes</a>
+            on the prime's page.</td>
+        </tr>
+        <tr>
+          <td align="center">&nbsp;</td>
+          <td align="center">&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+
+      <p>This page was originally created based off Conrad Curry's excellent New Mersenne Conjecture
+        page.&nbsp;&nbsp;Thanks to Alex Kruppa and David Broadhurst for the suggestion.</p> <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../notes/privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

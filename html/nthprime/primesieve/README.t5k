@@ -1,0 +1,5 @@
+Grab and install the source code from http://primesieve.org/downloads/, following the direction in INSTALL.
+
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+c++ -ocarr_pi carr_pi.cpp -lprimesieve
+

@@ -1,0 +1,163 @@
+#!/usr/bin/perl -w
+
+# Obviously gp muct be installed!
+use warnings;
+use strict;
+
+# Here is the problem:  Calculating partitions is possible, but slow.  So
+# I want to do so just once and store.  Also, I have not yet got Math::Pari
+# to recompile with the new code...  so will do it externally...
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use constants;		# For $system_account_id
+use Time::HiRes 'time'; # More accurate timming
+my $time0 = time;
+
+our ($opt_h, $opt_s, $opt_d);
+getopts('hsd');
+$opt_s or $opt_h or print "usage: adjust_partitions [options].  "
+	."Use rerank -h to see the options.\n\n";
+
+$opt_h and print "Checking if all partition numbers calculated--if not, does so
+
+usage: adjust_partitions [options]    where the options are
+
+	-s	silent -- only errors printed
+	-d	debug mode (not silent!)
+	-h	print this help and exit
+
+This routine seeks partition numbers on the list /^p(\\d+)\$/ which
+are not linked to a blob and then links them so that full-digit lookup
+speed will be reasonable.
+";
+
+$opt_h and exit;
+$opt_d and $opt_s = 0;  # Never silent when debugging!
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# First grab the partiton numbers without blob entries, so blob_id should be
+# NULL (or in rare cases 0)
+
+my $query = "SELECT description,digits,log10,id FROM prime
+	WHERE description LIKE 'p(%)' AND (blob_id IS NULL OR NOT blob_id)";
+my $sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or print "Have selected the partiton numbers without blob entries (if any).\n";
+$opt_d and print "Query\n\t$query\n";
+
+# Loop through this list of primes
+
+my $count = 0;
+while (my $p = $sth->fetchrow_hashref) {
+  my $id = $$p{'id'};
+  my $digits = $$p{'digits'};
+  my $log10 = $$p{'log10'};
+  my $description = $$p{'description'};
+  ++$count;
+
+  if ($description =~ /^p\((\d+)\)$/o) {
+    $opt_s or print "id:$id $description ($log10)\n";
+    my $n = $1;
+    my $command = "echo \"print(numbpart($n))\" | /usr/bin/gp -q";
+    $opt_s or print "\tExecuting: $command:\n";
+    my $time = time;
+    my $expansion = `$command`;
+    $opt_s or printf("\tDone. Used %9.4f seconds total.\n",time-$time);
+    $expansion =~ s/\n//;
+    $opt_d and print "\texpansion '$expansion'\n";
+    my $blob_digits = length($expansion);
+
+    my $leading_digits;
+    if ($expansion =~ /^(\d{16})/) {
+      $leading_digits = $1;
+    } else {
+      die "less than 16 digits?";
+    }
+    # print "match: \t$1\ndigits: \t$blob_digits\n'$expansion'\n\n";
+
+    my $blob_log10 = $digits - 16 + log($leading_digits)/log(10);
+    $opt_d and print "\tdigits: prime  $digits blob $blob_digits\n";
+    $opt_d and print "\tdigits: prime  $log10 blob $blob_log10\n";
+
+    my $d2 = $digits+1;
+    if ($expansion =~ /^\s*\d{$digits}\s*$/) {
+
+      # Create_Blob(description,text,decimal_expansion,log10,digits);
+      my $out = Create_Blob("p($n)",
+	"The number of unrestricted integer partitions of $n is p($n).",
+	$expansion,$blob_log10,$blob_digits);
+      print "Successfully calculated p($n) if the following is 1: $out\n";
+    } else {
+      print "\nError in $0: `$command` failed to produce the expected number of
+	digits. p($n) expected $digits (log10 $log10) got ".length($expansion);
+      exit;
+    }
+  }
+}
+
+$opt_s or print(($count > 0 ? 'D' : 'N')."one.\n");
+exit;
+
+############ support code #############
+
+# Create_Blob(description,text,decimal_expansion,log10,digits);
+
+sub Create_Blob {
+# GLOBAL $dbh;  # Database handle
+
+  # The blob will belong to the system account id
+  my $person_id = $defaults::system_account_id;
+  $person_id =~ /^\d+$/o
+	or die "Create_Blob given non-numeric system id '$person_id'.";
+
+  # What is the description of the number?
+  my $desc = shift or die "Create_Blob not passed description.";
+  $desc = $dbh->quote($desc);
+
+  # What is the text for the blob?
+  my $text = shift or die "Create_Blob not passed text.";
+  $text = $dbh->quote($text);
+
+  # What is the expansion?
+  my $full_digit = shift;
+  $full_digit =~ /^\d+$/o
+	or die "Create_Blob passed non-numeric expansion '$full_digit'.";
+  # Split the expansion into blocks of digits
+  my $leading = (length($full_digit) % 10);
+  $opt_d and print "\t$leading leading digits\n";
+  $full_digit =~ s/^(\d{$leading})(?=\d)/$1 /;
+  $full_digit =~ s/(\d{10})(?=\d)/$1 /g;
+  # Now quote it for the database
+  $full_digit = $dbh->quote($full_digit);
+
+  # Log base 10 and digits?
+  my $log10 = shift;
+  $log10 = $dbh->quote($log10);
+
+  my $digits = shift;
+  $digits =~ /^\d+$/o
+	or die "Create_Blob passed non-integer digits '$digits'.";
+
+  my $set = "description=$desc,
+	text       = $text,
+	log10      = $log10,
+	digits     = $digits,
+	full_digit = $full_digit,
+	person_id  = $person_id,
+	created	   = NOW()";
+
+  $opt_d and print "\&connect_db::ReplaceRow({set=>\n$set, table=>'prime_blob'})\n";
+
+  return &connect_db::ReplaceRow({set=>$set, table=>'prime_blob'});
+  #  Performs "REPLACE $table SET $set" and returns 0 if fails, 1 if the row
+  #       was inserted, 2 if the row was already there (deletes old, inserts new)
+}

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primes just less than a power of two (301--400 bits)</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Lists of primes that are just one less than a power of two for testing algorithms.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/lists/">Lists</A></li>
+          <li class="breadcrumb-item"><a class="white-text" href="/lists/small/">Small</A></li>
+          <li class="breadcrumb-item active">2<sup>n</sup>-k</sup> (4 of 4)</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" --> Primes just less
+        than a power of two <!-- #EndEditable --></h1>
+      <!-- #BeginEditable "content" -->
+      <h4>8 to 100 bits (page 4 of 4)</h4>
+      <p>Here is a <A href="/notes/faq/">frequently asked question</A> at the <A href="/">Prime Pages</A>:
+      <BLOCKQUOTE class="blockquote">I am working on an algorithm and need a few of the largest primes with 64
+        bits.&nbsp; Where can I find them?</BLOCKQUOTE>
+      To which we answer "here!"&nbsp; Below, for each consecutive value of <I>n</I> we give the ten least positive
+      integers <I>k</I> such that 2<I><SUP>n</SUP></I>-<I>k</I> is a prime.&nbsp; In each case these are proven primes
+      (proven using UBASIC's&nbsp; <A href="/prove/prove4_1.html">APRT-CL</A>). Note that 2<I><SUP>n</SUP></I>-<I>k</I>
+      will be an <I>n</I> bit number (for these <I>k</I>'s).
+      </p>
+      <div class="border-top border-bottom border-primary my-3"> <A NAME="top"></A><B>Pages:</B> <A
+          href="0bit.html">8-100 bits</A>, <A href="100bit.html">101-200 bits</A>, <A href="200bit.html">201-300
+          bits</A>, <b>301-400 bits</b>.&nbsp; </div>
+      <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+          <th class="text-center"><I>n</I></th>
+          <th>ten least <I>k</I>'s for which 2<I><SUP>n</SUP></I>-<I>k</I> is
+
+            prime.</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td class="text-center">300</td>
+            <td>153, 185, 383, 413, 483, 539, 693, 779, 1047, 1097&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">301</td>
+            <td>265, 523, 861, 1249, 1299, 1309, 1365, 1869, 1963, 1981&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">302</td>
+            <td>267, 293, 647, 1043, 1307, 1581, 1601, 2037, 2141, 2241&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">303</td>
+            <td>121, 207, 241, 249, 321, 381, 549, 637, 835, 955&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">304</td>
+            <td>75, 1403, 1685, 1707, 1739, 1883, 1937, 2219, 2255, 2307&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">305</td>
+            <td>103, 429, 453, 1195, 1339, 1581, 2019, 2581, 2989, 3043&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">306</td>
+            <td>503, 947, 1017, 1797, 2063, 2093, 2175, 2597, 2655, 2817&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">307</td>
+            <td>99, 147, 187, 255, 319, 369, 511, 631, 879, 1021&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">308</td>
+            <td>159, 189, 615, 777, 959, 1025, 1079, 1139, 1409, 1443&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">309</td>
+            <td>493, 2673, 2733, 2949, 3243, 3525, 3595, 3799, 3969, 4051&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">310</td>
+            <td>77, 255, 635, 645, 755, 1097, 1127, 1235, 1377, 1533&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">311</td>
+            <td>45, 75, 181, 199, 271, 297, 471, 789, 885, 1071&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">312</td>
+            <td>203, 689, 753, 1385, 1449, 1547, 1575, 1655, 1683, 1799&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">313</td>
+            <td>139, 343, 439, 669, 675, 759, 915, 1893, 1993, 2371&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">314</td>
+            <td>113, 453, 677, 695, 981, 1013, 1037, 1067, 1121, 1277&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">315</td>
+            <td>465, 691, 1041, 1417, 1479, 1515, 1795, 2217, 2769, 2839&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">316</td>
+            <td>57, 243, 267, 293, 353, 399, 507, 899, 1259, 1323&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">317</td>
+            <td>33, 379, 523, 609, 1009, 1065, 1351, 1521, 1773, 1821&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">318</td>
+            <td>165, 275, 681, 807, 1337, 1427, 1617, 1931, 2075, 2295&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="text-center">319</td>
+            <td>795, 865, 1191, 1911, 2059, 2475, 2989, 3435, 3855, 4045</td>
+          </tr>
+          <tr>
+            <td class="text-center">320</td>
+            <td>197, 743, 825, 843, 873, 1007, 1017, 1217, 1815, 2955 </td>
+          </tr>
+          <tr>
+            <td class="text-center">321</td>
+            <td>9, 45, 609, 769, 1053, 1165, 1389, 1395, 1431, 1675 </td>
+          </tr>
+          <tr>
+            <td class="text-center">322</td>
+            <td>11, 185, 923, 1121, 1233, 1307, 2307, 2373, 2583, 2717 </td>
+          </tr>
+          <tr>
+            <td class="text-center">323</td>
+            <td>141, 247, 309, 919, 1269, 1345, 1431, 1629, 1731, 1951 </td>
+          </tr>
+          <tr>
+            <td class="text-center">324</td>
+            <td>23, 177, 777, 923, 1055, 1299, 1329, 1385, 1449, 1799 </td>
+          </tr>
+          <tr>
+            <td class="text-center">325</td>
+            <td>399, 433, 1051, 1219, 1261, 1485, 1701, 2013, 2349, 2413 </td>
+          </tr>
+          <tr>
+            <td class="text-center">326</td>
+            <td>101, 117, 215, 731, 1731, 1823, 1833, 1995, 2603, 2807 </td>
+          </tr>
+          <tr>
+            <td class="text-center">327</td>
+            <td>595, 951, 979, 1077, 1297, 1549, 1939, 2667, 2961, 3055 </td>
+          </tr>
+          <tr>
+            <td class="text-center">328</td>
+            <td>155, 437, 629, 693, 843, 977, 1019, 1119, 1475, 1503 </td>
+          </tr>
+          <tr>
+            <td class="text-center">329</td>
+            <td>139, 243, 273, 339, 489, 531, 1665, 1963, 2145, 2343 </td>
+          </tr>
+          <tr>
+            <td class="text-center">330</td>
+            <td>255, 437, 927, 1001, 1217, 1445, 1595, 1911, 3185, 3435 </td>
+          </tr>
+          <tr>
+            <td class="text-center">331</td>
+            <td>61, 459, 745, 969, 1261, 1449, 1599, 1771, 2029, 2737 </td>
+          </tr>
+          <tr>
+            <td class="text-center">332</td>
+            <td>707, 1077, 1109, 1217, 1293, 1485, 1487, 1613, 2789, 2987 </td>
+          </tr>
+          <tr>
+            <td class="text-center">333</td>
+            <td>483, 741, 805, 913, 955, 1041, 1083, 1131, 1243, 1353 </td>
+          </tr>
+          <tr>
+            <td class="text-center">334</td>
+            <td>243, 603, 711, 981, 1085, 1425, 1637, 1901, 1953, 2423 </td>
+          </tr>
+          <tr>
+            <td class="text-center">335</td>
+            <td>321, 511, 541, 759, 871, 1227, 1399, 1821, 2131, 2337 </td>
+          </tr>
+          <tr>
+            <td class="text-center">336</td>
+            <td>3, 17, 303, 585, 627, 707, 723, 1047, 1413, 1479 </td>
+          </tr>
+          <tr>
+            <td class="text-center">337</td>
+            <td>75, 1443, 1579, 1615, 1659, 1693, 1741, 1785, 1915, 2793 </td>
+          </tr>
+          <tr>
+            <td class="text-center">338</td>
+            <td>15, 275, 315, 401, 467, 603, 623, 843, 951, 1053 </td>
+          </tr>
+          <tr>
+            <td class="text-center">339</td>
+            <td>147, 415, 751, 865, 901, 921, 1311, 1375, 1881, 1911 </td>
+          </tr>
+          <tr>
+            <td class="text-center">340</td>
+            <td>293, 299, 437, 699, 1187, 1203, 1209, 1217, 1389, 1439 </td>
+          </tr>
+          <tr>
+            <td class="text-center">341</td>
+            <td>229, 631, 765, 861, 951, 1071, 1101, 1203, 1263, 1503 </td>
+          </tr>
+          <tr>
+            <td class="text-center">342 </td>
+            <td> 65, 237, 263, 317, 707, 1017, 1085, 1353, 1517, 1755 </td>
+          </tr>
+          <tr>
+            <td class="text-center">343 </td>
+            <td> 199, 291, 495, 501, 561, 589, 691, 841, 915, 1377 </td>
+          </tr>
+          <tr>
+            <td class="text-center">344 </td>
+            <td> 119, 219, 527, 569, 617, 845, 993, 1079, 1107, 1253 </td>
+          </tr>
+          <tr>
+            <td class="text-center">345 </td>
+            <td> 475, 493, 859, 951, 1083, 1113, 1521, 2425, 2443, 2491 </td>
+          </tr>
+          <tr>
+            <td class="text-center">346 </td>
+            <td> 45, 57, 197, 363, 407, 1467, 1565, 1601, 1623, 1995 </td>
+          </tr>
+          <tr>
+            <td class="text-center">347 </td>
+            <td> 211, 367, 451, 1065, 1417, 1455, 1507, 1659, 1777, 2109 </td>
+          </tr>
+          <tr>
+            <td class="text-center">348 </td>
+            <td> 117, 143, 257, 359, 629, 759, 1085, 1295, 1469, 1533 </td>
+          </tr>
+          <tr>
+            <td class="text-center">349 </td>
+            <td> 285, 433, 579, 673, 859, 895, 1009, 2071, 2175, 2419 </td>
+          </tr>
+          <tr>
+            <td class="text-center">350 </td>
+            <td> 113, 131, 401, 425, 513, 555, 923, 1097, 1461, 2073 </td>
+          </tr>
+          <tr>
+            <td class="text-center">351 </td>
+            <td> 61, 135, 291, 429, 691, 1159, 2139, 2155, 2901, 3517 </td>
+          </tr>
+          <tr>
+            <td class="text-center">352 </td>
+            <td> 657, 879, 963, 999, 1263, 1305, 1323, 1439, 1449, 1865 </td>
+          </tr>
+          <tr>
+            <td class="text-center">353 </td>
+            <td> 139, 489, 523, 595, 621, 735, 1029, 1489, 1879, 1951 </td>
+          </tr>
+          <tr>
+            <td class="text-center">354 </td>
+            <td> 153, 251, 525, 537, 573, 783, 1371, 1563, 1605, 1691 </td>
+          </tr>
+          <tr>
+            <td class="text-center">355 </td>
+            <td> 49, 369, 589, 717, 957, 1221, 1609, 2185, 2197, 2355 </td>
+          </tr>
+          <tr>
+            <td class="text-center">356 </td>
+            <td> 173, 227, 393, 759, 803, 855, 989, 1385, 1497, 1623 </td>
+          </tr>
+          <tr>
+            <td class="text-center">357 </td>
+            <td> 243, 541, 739, 1033, 1075, 1105, 1621, 1725, 2575, 2739 </td>
+          </tr>
+          <tr>
+            <td class="text-center">358 </td>
+            <td> 671, 1005, 1161, 1211, 1247, 1365, 1491, 1793, 2681, 2957 </td>
+          </tr>
+          <tr>
+            <td class="text-center">359 </td>
+            <td> 411, 855, 901, 925, 1275, 1791, 2179, 2277, 2995, 3027 </td>
+          </tr>
+          <tr>
+            <td class="text-center">360 </td>
+            <td> 719, 1155, 1307, 1515, 1785, 1823, 2117, 2207, 2345, 2669 </td>
+          </tr>
+          <tr>
+            <td class="text-center">361 </td>
+            <td>369, 663, 1779, 2539, 2691, 2793, 3501, 3751, 3909, 4173 </td>
+          </tr>
+          <tr>
+            <td class="text-center">362 </td>
+            <td> 605, 663, 1073, 1563, 1571, 1955, 2297, 2327, 2385, 2553 </td>
+          </tr>
+          <tr>
+            <td class="text-center">363 </td>
+            <td> 75, 97, 105, 111, 1287, 2251, 2341, 2391, 2481, 2511 </td>
+          </tr>
+          <tr>
+            <td class="text-center">364 </td>
+            <td> 923, 1239, 1653, 1725, 1917, 1949, 2009, 2045, 2339, 2609 </td>
+          </tr>
+          <tr>
+            <td class="text-center">365 </td>
+            <td> 169, 261, 295, 325, 369, 493, 639, 723, 2079, 2241 </td>
+          </tr>
+          <tr>
+            <td class="text-center">366 </td>
+            <td> 167, 507, 635, 657, 747, 837, 1115, 1511, 1785, 1787 </td>
+          </tr>
+          <tr>
+            <td class="text-center">367 </td>
+            <td> 487, 801, 1279, 1407, 1509, 1827, 2365, 2409, 2467, 3049 </td>
+          </tr>
+          <tr>
+            <td class="text-center">368 </td>
+            <td> 315, 419, 785, 1139, 1289, 1953, 2567, 2595, 2799, 3107 </td>
+          </tr>
+          <tr>
+            <td class="text-center">369 </td>
+            <td> 25, 195, 445, 825, 1339, 1551, 1599, 1729, 1869, 1959 </td>
+          </tr>
+          <tr>
+            <td class="text-center">370 </td>
+            <td> 495, 813, 1797, 1977, 2001, 2063, 2303, 2315, 2505, 2913 </td>
+          </tr>
+          <tr>
+            <td class="text-center">371 </td>
+            <td> 741, 747, 925, 1077, 1485, 1647, 1815, 2115, 2305, 2319 </td>
+          </tr>
+          <tr>
+            <td class="text-center">372 </td>
+            <td> 177, 207, 563, 797, 1749, 1997, 2247, 2475, 2615, 2873 </td>
+          </tr>
+          <tr>
+            <td class="text-center">373 </td>
+            <td> 333, 489, 735, 843, 1813, 2295, 2491, 3189, 3513, 3519 </td>
+          </tr>
+          <tr>
+            <td class="text-center">374 </td>
+            <td> 65, 153, 371, 495, 855, 987, 1433, 1983, 2235, 2247 </td>
+          </tr>
+          <tr>
+            <td class="text-center">375 </td>
+            <td> 679, 979, 1089, 1119, 1669, 1767, 2065, 2547, 2635, 2697 </td>
+          </tr>
+          <tr>
+            <td class="text-center">376 </td>
+            <td> 57, 473, 519, 629, 1035, 1239, 1929, 2085, 2237, 2985 </td>
+          </tr>
+          <tr>
+            <td class="text-center">377 </td>
+            <td> 259, 321, 511, 663, 1485, 1693, 1791, 2253, 2409, 2553 </td>
+          </tr>
+          <tr>
+            <td class="text-center">378 </td>
+            <td> 417, 447, 825, 1991, 2207, 2693, 2993, 3101, 3177, 3287 </td>
+          </tr>
+          <tr>
+            <td class="text-center">379 </td>
+            <td> 19, 99, 319, 355, 679, 711, 795, 925, 1069, 1455 </td>
+          </tr>
+          <tr>
+            <td class="text-center">380 </td>
+            <td> 65, 483, 677, 723, 1133, 1139, 1175, 1263, 1347, 1469 </td>
+          </tr>
+          <tr>
+            <td class="text-center">381 </td>
+            <td> 313, 735, 1203, 2209, 2629, 3033, 3055, 3091, 3315, 4003 </td>
+          </tr>
+          <tr>
+            <td class="text-center">382 </td>
+            <td> 105, 227, 635, 677, 963, 1083, 1641, 2085, 2243, 2411 </td>
+          </tr>
+          <tr>
+            <td class="text-center">383 </td>
+            <td> 31, 187, 367, 421, 471, 567, 607, 747, 1035, 1699 </td>
+          </tr>
+          <tr>
+            <td class="text-center">384 </td>
+            <td> 317, 1437, 1557, 1617, 2147, 2319, 2729, 3087, 3093, 3273 </td>
+          </tr>
+          <tr>
+            <td class="text-center">385 </td>
+            <td> 265, 1215, 1911, 2005, 2101, 2401, 2449, 2455, 2565, 2679 </td>
+          </tr>
+          <tr>
+            <td class="text-center">386 </td>
+            <td> 231, 747, 881, 923, 1287, 1611, 2493, 2735, 2837, 3633 </td>
+          </tr>
+          <tr>
+            <td class="text-center">387 </td>
+            <td> 615, 621, 795, 919, 1021, 1111, 1255, 1287, 1689, 2095 </td>
+          </tr>
+          <tr>
+            <td class="text-center">388 </td>
+            <td> 45, 63, 269, 347, 483, 525, 717, 837, 875, 959 </td>
+          </tr>
+          <tr>
+            <td class="text-center">389 </td>
+            <td> 21, 51, 103, 313, 843, 871, 883, 1141, 1179, 1743 </td>
+          </tr>
+          <tr>
+            <td class="text-center">390 </td>
+            <td> 137, 293, 383, 461, 1017, 1283, 1773, 2057, 2693, 3047 </td>
+          </tr>
+          <tr>
+            <td class="text-center">391 </td>
+            <td> 105, 127, 399, 645, 675, 1671, 1791, 2085, 2227, 2275 </td>
+          </tr>
+          <tr>
+            <td class="text-center">392 </td>
+            <td> 107, 299, 623, 1035, 1389, 1437, 1589, 1827, 2285, 2607 </td>
+          </tr>
+          <tr>
+            <td class="text-center">393 </td>
+            <td> 93, 331, 549, 1113, 1411, 2523, 2551, 2719, 3393, 4291 </td>
+          </tr>
+          <tr>
+            <td class="text-center">394 </td>
+            <td> 377, 447, 987, 1161, 1497, 1571, 2043, 2187, 2303, 2615 </td>
+          </tr>
+          <tr>
+            <td class="text-center">395 </td>
+            <td> 531, 1137, 2161, 2205, 2215, 2907, 3055, 3151, 3481, 3655 </td>
+          </tr>
+          <tr>
+            <td class="text-center">396 </td>
+            <td> 605, 695, 909, 945, 1229, 1365, 1997, 2397, 2837, 3285 </td>
+          </tr>
+          <tr>
+            <td class="text-center">397 </td>
+            <td> 81, 463, 673, 1071, 1165, 1425, 1905, 1999, 2061, 2133 </td>
+          </tr>
+          <tr>
+            <td class="text-center">398 </td>
+            <td> 131, 231, 777, 951, 1457, 1547, 1673, 1893, 2145, 2241 </td>
+          </tr>
+          <tr>
+            <td class="text-center">399 </td>
+            <td> 91, 219, 937, 1731, 2749, 2875, 3201, 3489, 3729, 4149 </td>
+          </tr>
+          <tr>
+            <td class="text-center">400</td>
+            <td> 593, 663, 767, 879, 1205, 2457, 3107, 3195, 3263, 3267 </td>
+          </tr>
+        </tbody>
+      </TABLE>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a
+        href="../../notes/privacy.html">Privacy notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

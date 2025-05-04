@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The Riemann Hypothesis</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description"
+    content="Here we define, then discuss the Riemann hypothesis.  We provide several related links.">
+  <meta name="keywords"
+    content="prime numbers, primality, Riemann hypothesis, theorems, Euler's zeta function, zeta functions">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Notes</a></li>
+          <li class="breadcrumb-item active">Riemann Hypothesis</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->
+        The Riemann Hypothesis
+        <!-- #EndEditable -->
+      </h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <h4>Summary:</h4>
+      <blockquote class="blockquote">When studying the distribution of prime numbers Riemann extended
+        Euler's zeta function (defined just for <i>s</i> with real part greater
+        than one)
+        <center>
+          <img src="../gifs/zetafun1.gif" alt="zeta(s) = 1 + 2^(-s) + 3^(-s) + 4^(-s)..." height="60" width="300">&nbsp;
+        </center>
+        to the entire complex plane (<i>sans</i> simple pole at <i>s</i> = 1).&nbsp; Riemann
+        noted that his zeta function had trivial zeros at -2, -4, -6, ...;
+        that all nontrivial zeros were symmetric about the
+        line Re(<i>s</i>)
+        = 1/2; and that the few he calculated were on that line.&nbsp; <b>The Riemann hypothesis is that all nontrivial
+          zeros are
+          on this line.</b>&nbsp; Proving the Riemann Hypothesis would allow us
+        to greatly sharpen many number theoretical results.&nbsp; For example,
+        in 1901 von Koch showed that the Riemann hypothesis is equivalent to:&nbsp;
+        <center>
+          <img src="../gifs/pnt_1.gif" alt="[pnt + error term]" height="28" width="197">&nbsp;
+        </center>
+        <p>But it would not make factoring any easier!&nbsp; There
+          are a couple standard ways to generalize the Riemann hypothesis.</p>
+      </blockquote>
+
+      <h2>1. The Riemann Hypothesis:</h2>
+      <p>Euler studied the sum&nbsp;
+        <center>
+          <br>
+          <img src="../gifs/zetafun1.gif" alt="zeta(s) = 1 + 2^(-s) + 3^(-s) + 4^(-s)..." height="60" width="300">&nbsp;
+        </center>
+        for integers <i>s</i>&gt;1 (clearly&nbsp;<img src="../gifs/zeta.gif" alt="zeta" height="15" width="9"
+          ALIGN="ABSCENTER">(1) is infinite).&nbsp; Euler
+        discovered a formula relating&nbsp;<img src="../gifs/zeta.gif" ALT="zeta" height="15" width="9"
+          align="ABSCENTER">(2<i>k</i>) to the Bernoulli numbers yielding results
+        such as&nbsp;<img src="../gifs/zeta_2.gif" alt="zeta(2)=pi^2/6" height="21" width="75"> and&nbsp;<img
+          src="../gifs/zeta_4.gif" alt="zeta(4)=pi^4/90">.&nbsp; But
+        what has this got to do with the primes?&nbsp; The answer is in the following
+        product taken over the primes <i>p</i> (also discovered by Euler):&nbsp;
+        <center>
+          <br>
+          <img src="../gifs/zetafun2.gif" ALT="[Euler's Prod]" height="60" width="150">&nbsp;
+        </center>
+        Euler wrote this as&nbsp;
+        <center>
+          <br>
+          <img src="../gifs/zetafun3.gif" ALT="[Euler's Prod]" height="60" width="400">&nbsp;
+        </center>
+        Riemann later extended the definition of&nbsp;<img src="../gifs/zeta.gif" ALT="zeta">(<i>s</i>) to all complex
+        numbers <i>s</i> (except
+        the simple pole at <i>s</i>=1 with residue one).&nbsp; Euler's product still
+        holds if the real part of <i>s</i> is greater than one.&nbsp; Riemann derived
+        the functional equation of the Riemann zeta function:&nbsp;
+        <center>
+          <br>
+          <img src="../gifs/zeta_eq.gif" ALT="[Functional Eq]" height="44" width="275">&nbsp;
+        </center>
+        where the gamma function&nbsp;<img src="../gifs/gamma.gif" ALT="gamma">(<i>s</i>) is the well-known extension of
+        the factorial function (<img src="../gifs/gamma.gif" alt="gamma" nosave height="11" width="11">(<i>n</i>+1) =
+        <i>n</i>! for non-negative integers <i>n</i>):&nbsp;
+        <center>
+          <br>
+          <img src="../gifs/gammadef.gif" ALT="[def of gamma]" height="60" width="275">&nbsp;
+        </center>
+        (Here the integral form holds if the real part of <i>s</i> is greater
+        than one, and the product form holds for all complex numbers <i>s</i>.)
+      </p>
+      <p>The Riemann zeta function has the <b>trivial zeros</b> at -2, -4, -6,
+        ... (the poles of&nbsp;<img src="../gifs/gamma.gif" ALT="gamma">(<i>s</i>/2)).&nbsp; Using the Euler product
+        (with the functional equation) it is easy to show that all the other
+        zeros are in the <b>critical strip</b> of non-real complex numbers with
+        0 <u>&lt;</u> Re(<i>s</i>) <u>&lt;</u> 1, and that they are symmetric
+        about the <b>critical
+          line</b> Re(<i>s</i>)=1/2.&nbsp; The unproved <b>Riemann hypothesis </b>is
+        that all of the nontrivial zeros are actually on the critical line.</p>
+      <p>In 1986 it was shown that the first 1,500,000,001 nontrivial zeros of
+        the Riemann zeta function do indeed have real part one-half [<a
+          href="../references/refs.cgi/VTW86">VTW86</a>].&nbsp; Hardy
+        proved in 1915 that an infinite number of the zeros do occur on the critical
+        line and in 1989 Conrey showed that over 40% of the zeros in the critical
+        strip are on the critical line [<a href="../references/refs.cgi/Conrey89">Conrey89</a>].&nbsp; However, there is
+        still a chance that the Riemann hypothesis is false.&nbsp; From August
+        of 2001 through 2005, Sebastian Wedeniwski ran ZetaGrid which
+        verified that the first 100 billion zeros were on the critical line.</p>
+      <h2>2. Who cares? </h2>
+      <p>In 1900 Hilbert listed proving or disproving this hypothesis as one
+        of the most important unsolved problems confronting modern mathematics
+        and it is central to understanding the overall distribution of the primes.&nbsp;
+        When Hadamard and de la Vallee Poussin proved the <a href="/howmany.html#pnt">prime
+          number theorem</a>, they actually showed</p>
+      <p align="center">
+        <img src="../gifs/pnt_2.gif" alt="pi(x) = Li(x) + O(x*e^(-a*sqrt(log x)))" height="34" width="205">
+      </p>
+      <p>for some positive constant <i>a</i>, and they did this by bounding the
+        real part of the zeros in the critical strip away from 0 and 1.&nbsp; The
+        error term is directly dependent on what was known about the zero-free
+        region within the critical strip.&nbsp; As our
+        knowledge of the size of this region increases, the error term decreases.&nbsp; In
+        fact, in 1901 von Koch showed that the Riemann hypothesis is equivalent
+        to</p>
+      <p align="center">
+        <img src="../gifs/pnt_1.gif" ALT="pi(x) = Li(x) + O(x^(1/2)log x)" height="28" width="197">
+      </p>
+      <p> There are many results like this, see, for example [<a href="/references/refs.cgi/BS96">BS96</a>].
+      </p>
+
+      <h2>Generalizations of RH </h2>
+      <p>Recall again our starting point from Euler:</p>
+      <p align="center"><img src="../gifs/zetafun1.gif" alt="zeta(s) = 1 + 2^(-s) + 3^(-s) + 4^(-s)..." height="60"
+          width="300"></p>
+      <p><a name="erh"></a> Why should the numerators all be one?&nbsp; One important
+        way to alter the series is to replace the numerators with functions &chi;(<i>n</i>)
+        called Dirichlet characters (these can be viewed as functions for which
+        there exists a positive integer <i>k</i> with &chi;(<i>n</i> + <i>k</i>)
+        = &chi;(<i>n</i>)
+        for all <i>n</i>, and with &chi;(<i>n</i>) = 0 whenever gcd(<i>n</i>, <i>k</i>) &gt; 1).&nbsp; The
+        resulting infinite sum L(?,s) is a Dirichlet L-function.&nbsp; Once
+        again we analytically continue the function to one that is meromophic
+        on the entire complex plane. &nbsp; The <b>extended
+          Riemann Hypothesis</b> is that for every Dirichlet character &chi; and
+        the zeros L(&chi;,s) = 0 with 0 <u>&lt;</u> Re(<i>s</i>) <u>&lt;</u> 1, have
+        real part 1/2.&nbsp; The distributions of the zeros of these L-functions
+        are closely related to the number of primes in arithmetic progressions
+        with a fixed difference <i>k</i>.&nbsp; Should the extended Riemann Hypothesis
+        be proven, then <a href="../prove/prove2_3.html">Miller's
+          test</a> would provide an efficient primality proof for general numbers.&nbsp; See,
+        for example, [<a href="/references/refs.cgi/BS96">BS96</a> 8.5-6]. </p>
+
+
+      <p><a name="grh"></a> Another way to generalize Euler's sum is to leave the
+        field of rational numbers, and replace the denominators with the norms of
+        the non-zero ideals (special sets of elements) in a finite field extention
+        of the rationals <i>K</i> (called
+        a number field).&nbsp; The resulting sum is the Dedekind zeta-function of <i>K</i> and
+        can again be analytically continued.&nbsp; These zeta functions also have
+        a simple pole at zero and infinitely many zero in the critical region.&nbsp; The <b>generalized
+          Riemann Hypothesis</b> is again that the zeros in the critical region
+        all have real part 1/2.&nbsp; See, for example, [<a href="/references/refs.cgi/BS96">BS96</a> 8.7].</p>
+
+
+
+
+
+
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

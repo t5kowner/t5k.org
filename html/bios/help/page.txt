@@ -1,0 +1,36 @@
+
+<dl>
+  <dt><a name=code_name></a><b>Code name</b>
+  <dd>Each proof-code represents the method by which one (or more) primes were proven to be prime.&nbsp; These 
+proof-codes often involve multiple persons, programs and projects.&nbsp; To make them easier to refer to and print, 
+each is given a short code name.
+
+   <br><br>
+   <dt><a name=persons></a><b>Persons</b>
+   <dd>The number of 'persons' involved in this proof.&nbsp;  Persons split the credit for primes, whereas programs 
+and projects do not.
+
+   <br><br>  
+  <dt><a name=score></a><B>Score</b>
+  <dd>A measure of how difficult it is to find primes of this size:  
+log((log&nbsp;<I>n</I>)<sup>3</sup>&nbsp;log&nbsp;log&nbsp;<I>n</I>).&nbsp; See the bottom of the <a
+href="/bios/top20.php?type=person&by=ScoreRank">Top 20 by Score</a> page for an explanation.&nbsp; The normalized
+score is this score without the final (natural) log, divided by the same for the 5000th prime.&nbsp; See the bottom of
+the page <a href="/bios/top20.php?type=person&by=ScoreNormal">Top 20 by Normalized Score</a> for more information
+about normalized scores.
+
+  <br><br>
+  <dt><a name=e_rank></a><B>Entrance rank</b>
+  <dd>As new primes are added, the rank of any given prime slowly drops.  The 'entrance rank' is the rank the prime
+had when it was first added--so it is its highest rank.  This rank is less reliable on primes submitted before 2000
+because the submission time was less granular.  In fact, for some primes submitted before 1 January 1997 we only know
+what year they were submitted.  The mean, minimum and maximum given for the entrance rank are just for the active
+primes (the primes still on the list).
+
+
+  <br><br>
+  <dt><a name=removed></a><B>Removed (date)</b>
+  <dd>Primes eventually get pushed off the list by the new primes being added.&nbsp;  For primes that have been pushed 
+off, and have no comments, 'removed' is the date/time at which they were pushed off.&nbsp;  This feature has not yet 
+been implemented for primes with comments because that is much more difficult to do.
+ </dl> 

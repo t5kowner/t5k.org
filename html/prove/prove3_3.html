@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/PrimalityProving.dwt" --><!-- DW6 -->
+
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta NAME="author" CONTENT="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Primality Proving 3.3: Combined Tests</title>
+  <!-- #EndEditable -->
+  <script>
+    function MM_swapImgRestore() { //v3.0
+      var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_preloadImages() { //v3.0
+      var d = document; if (d.images) {
+        if (!d.MM_p) d.MM_p = new Array();
+        var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+          if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; }
+      }
+    }
+
+    function MM_findObj(n, d) { //v3.0
+      var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+        d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+      }
+      if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+      for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+      var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+        if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+  </script>
+  <style>
+    body {
+      /*  font-size: 14pt; */
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      background-color: white;
+    }
+
+    a:link {
+      color: #309;
+    }
+
+    a:visited {
+      color: #036;
+    }
+
+    a:active,
+    a:hover {
+      color: #00C;
+    }
+
+    .cc1 {
+      border: 2px solid black;
+      width: 100%;
+      padding: 0px;
+    }
+
+    .cc0 {
+      width: 100%;
+      margin: 0px;
+    }
+
+    .cc2 {
+      background-color: #cef;
+      vertical-align: middle;
+    }
+
+    .cc3 {
+      background-color: #0cf;
+    }
+
+    @media (max-width: 640px) {
+      .cc {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      body {
+        margin-left: 5%;
+        margin-right: 5%;
+      }
+    }
+
+    @media (min-width: 1201px) {
+      body {
+        max-width: 60em;
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body onLoad="">
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><span style="font-size: 150%">Finding primes &amp; proving
+                primality</span><br>
+              <span style="font-size: 120%"><!-- #BeginEditable "title" -->3.3: Combined
+                Tests<!-- #EndEditable --></span>
+            </td>
+            <td><a class="cc" href="index.html" onMouseOut="MM_swapImgRestore()"
+                onMouseOver="MM_swapImage('Image1','','assets/PrimalityProving2.gif',0)"><img name="Image1"
+                  src="assets/PrimalityProving.gif" width="233" height="60" alt="Primality Proving Icon"></a></td>
+          </tr>
+        </table>
+        <table class="cc0">
+          <tr class="cc3">
+            <td style="padding-left: 0.4em"><a href="../index.html"><b>Home</b></a> <b>&gt; <a
+                  href="index.html">Primality
+                  Proving</a> &gt; <!-- #BeginEditable "section" --><a href="prove3.html">Chapter
+                  Three</a> &gt; Combined Tests<!-- #EndEditable --> </b></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!-- #BeginEditable "content" -->
+  <p>In previous sections we have pointed out if the factored portion of <i>n</i>-1
+    or of <i>n</i>+1 is larger than the cube root of <i>n</i>, then we can prove
+    <i>n</i> is prime.&nbsp; In this section we discuss the case that the product
+    of these two factored portions is greater than the cube root of <i>n</i>, then
+    we can prove <i>n</i> prime using a combined test.&nbsp; (If we can not find
+    enough factors to prove <i>n</i> prime this way, then we must use the generalized
+    tests of the <a href="prove4_1.html">following chapter</a>.)
+  </p>
+  <p>Let <i>n</i> &gt; 1 be an odd integer.&nbsp; Let <i>n</i>-1 = F<sub>1</sub>R<sub>1</sub>
+    and <i>n</i>+1 = F<sub>2</sub>R<sub>2</sub> where F<sub>1</sub> and F<sub>2</sub>
+    are completely factored, and gcd(F<sub>1</sub>,R<sub>1</sub>) = gcd(F<sub>2</sub>,R<sub>2</sub>)
+    =&nbsp;1.&nbsp; The two types of tests we have applied to <i>n</i> in the previous
+    sections are as follows.</p>
+  <blockquote> <b>Condition I</b>.&nbsp; For each prime <i>p</i> dividing F<sub>1</sub>
+    there is an integer <i>a</i> such that
+    <ul>
+      <li><i>a<sup>n</sup></i><sup>-1</sup> ≡ 1 (mod <i>n</i>), but</li>
+      <li>gcd(<i>a</i><sup>(<i>n</i>-1)/<i>p</i></sup>-1,<i> n</i>) = 1.<br>
+      </li>
+    </ul>
+    <b>Condition II.&nbsp;</b> Let (<i>d</i>|<i>n</i>) = -1.&nbsp; For each prime
+    <i>p</i> dividing F<sub>2</sub> there is a Lucas sequence with discriminant
+    <i>d</i> such that
+    <ul>
+      <li>U(<i>n</i>+1) ≡ 0 (mod <i>n</i>), and</li>
+      <li>gcd(U((<i>n</i>+1)/<i>p</i>),<i> n</i>) = 1.</li>
+    </ul>
+  </blockquote>
+  <p>Pocklington's theorem tells us that if (I) is true, then each prime factor <i>q</i>
+    of <i>n</i> has the form <i>k</i>&middot;F<sub>1</sub>+1.&nbsp; About 60 years later
+    Morrison proved that if (II) held, then each prime factor <i>q</i>
+    of <i>n</i> has the form <i>k</i>&middot;F<sub>2</sub>&plusmn;1 [<a
+      href="../references/refs.cgi/Morrison75">Morrison75</a>].&nbsp;
+    Together these give us the following:</p>
+  <blockquote> <b>Combined Theorem 1:&nbsp;</b> Suppose <i>n</i>, F<sub>1</sub>,
+    F<sub>2</sub>, R<sub>1</sub>, R<sub>2</sub> are as above and conditions (I)
+    and (II) are satisfied.&nbsp; If <i>n</i>&nbsp;&lt;&nbsp;max(F<sub>1</sub><sup>2</sup>F<sub>2</sub>/2&nbsp;,
+    F<sub>1</sub>F<sub>2</sub><sup>2</sup>/2), then <i>n</i> is prime.
+    <p><b>Proof.</b>&nbsp; Let <i>q</i> be a prime factor of <i>n</i> and let <i>n</i>
+      = <i>mq</i>.&nbsp; From Condition I we have that <i>q</i> ≡ 1 (mod&nbsp;F<sub>1</sub>),
+      so since <i>n</i> is 1 (mod F<sub>1</sub>), so is <i>m</i>.&nbsp; From Condition
+      (II) we know <i>q</i> = &plusmn;1 (mod&nbsp;F<sub>2</sub>), so since <i>n</i> is -1
+      (mod&nbsp;F<sub>2</sub>), either <i>q</i> or <i>m</i> is 1 (mod&nbsp;F<sub>2</sub>).&nbsp;
+      We may assume that <i>m</i> = 1 (mod&nbsp;F<sub>2</sub>), because if every
+      prime factor <i>q</i> of <i>n</i> was 1 (mod&nbsp;F<sub>2</sub>), we'd have
+      the contradiction that <i>n</i> ≡ 1 (mod&nbsp;F<sub>2</sub>).&nbsp; Finally
+      gcd(F<sub>1</sub>,F<sub>2</sub>)=2, so we can combine these to get that <i>m</i>
+      ≡ 1 (mod&nbsp;F<sub>1</sub>F<sub>2</sub>/2). So for <i>n</i> to be composite
+      we must have both</p>
+    <ul>
+      <li><i>n </i> =&nbsp; <i>qm </i> &gt;&nbsp; ( 1 + F<sub>1</sub>)(1 + F<sub>1</sub>F<sub>2</sub>/2)&nbsp;
+        &gt;&nbsp; F<sub>1</sub><sup>2</sup>F<sub>2</sub>/2, and </li>
+      <li><i>n</i>&nbsp; =&nbsp; <i>qm</i>&nbsp; &gt;&nbsp; (-1 + F<sub>2</sub>)(1
+        + F<sub>1</sub>F<sub>2</sub>/2)&nbsp; &gt;&nbsp; F<sub>1</sub>F<sub>2</sub><sup>2</sup>/2. </li>
+    </ul>
+    <p>This completes the proof of the theorem.</p>
+  </blockquote>
+  <h3>Adding in a factoring bound</h3>
+  <p>Sometimes, if <i>n</i> is small enough that we have almost enough factors to
+    use the above (or similar) results, it can be helpful to bring in information
+    about how far we have tried to factor <i>n</i>&plusmn;1.&nbsp; Suppose, for example,
+    that all of the prime factors of R<sub>1</sub> and R<sub>2</sub> are greater
+    than B.&nbsp; Next apply the conditions above to R<sub>1</sub> and R<sub>2</sub></p>
+  <blockquote> <b>Condition III.&nbsp;</b> There is an integer <i>a</i> such that
+    <ul>
+      <li><i>a<sup>n</sup></i><sup>-1</sup> ≡ 1 (mod <i>n</i>), but</li>
+      <li>gcd(<i>a</i><sup>(<i>n</i>-1)/R<sub>1</sub></sup> -1,<i> n</i>) = 1.</li>
+    </ul>
+    <b>Condition IV.</b>&nbsp; Let (<i>d</i>|<i>n</i>) = -1.&nbsp; There is a Lucas
+    sequence with discriminant <i>d</i> (same <i>d</i> as used in condition II)
+    such that
+    <ul>
+      <li>U(<i>n</i>+1) ≡ 0 (mod <i>n</i>), and</li>
+      <li>gcd(U((<i>n</i>+1)/R<sub>2</sub>), <i>n</i>) = 1.</li>
+    </ul>
+  </blockquote>
+  <p>These two conditions inform us respectively that every prime factor <i>q</i>
+    of <i>n</i> has the form <i>k&middot;u</i>+1 where <i>u</i> is a prime factor of R<sub>1</sub>;
+    and every prime factor <i>q</i> also has the form <i>k&middot;v</i>&plusmn;1 where <i>v</i>
+    is a prime factor of R<sub>2</sub>.&nbsp; (Note that the factors <i>u</i> and
+    <i>v</i> are dependent on <i>q</i>.)&nbsp; Of course <i>u</i> and <i>v</i> must
+    each be larger than the factoring bound B.&nbsp; With the above notation we
+    can now state our final classical theorems.&nbsp; (For the first the proof is
+    virtually identical to the proof above.)
+  </p>
+  <blockquote> <b>Combined Theorem 2:&nbsp;</b> Suppose <i>n</i>, F<sub>1</sub>,
+    F<sub>2</sub>, R<sub>1</sub>, R<sub>2</sub>, B are as above and conditions (I)
+    through (IV) are satisfied.&nbsp; Define integers <i>r</i> and <i>s</i> by R<sub>1</sub>
+    = <i>s</i>F<sub>2</sub>/2 + <i>r</i> with 0 <u>&lt;</u> <i>r</i> &lt; F<sub>2</sub>/2.&nbsp;
+    If
+    <blockquote> <i>n</i> &lt; max(B&middot;F<sub>1</sub> + 1, B&middot;F<sub>2</sub><sup> </sup>-<sup>
+      </sup>1) (B<sup>2</sup>F<sub>1</sub>F<sub>2</sub>/2 + 1) </blockquote>
+    then <i>n</i> is prime.
+  </blockquote>
+  <blockquote> <b>Combined Theorem 3:&nbsp;</b> Suppose <i>n</i>, F<sub>1</sub>,
+    F<sub>2</sub>, R<sub>1</sub>, R<sub>2</sub>, B are as above and conditions (I)
+    through (IV) are satisfied.&nbsp; Again define integers <i>r</i> and <i>s</i>
+    by R<sub>1</sub> = <i>s</i>F<sub>2</sub>/2 + <i>r</i> with 0 <u>&lt;</u> <i>r</i>
+    &lt; F<sub>2</sub>/2.&nbsp; If for some integer <i>m</i>
+    <blockquote> <i>n</i> &lt; (<i>m</i>&middot;F<sub>1</sub>F<sub>2</sub>&nbsp;+&nbsp;r&middot;F<sub>1
+      </sub>+ 1) (B<sup>2</sup>F<sub>1</sub>F<sub>2</sub>/2 + 1) </blockquote>
+    <p>then either <i>n</i> is prime or <i>k</i>F<sub>1</sub>F<sub>2</sub>&nbsp;+&nbsp;
+      <i>r</i>F<sub>1&nbsp;</sub>+&nbsp;1
+      divides <i>n</i> for some non-negative integer <i>k</i> &lt; <i>m</i>.
+    </p>
+  </blockquote>
+  <p>Both of these results (and more) can be found in &quot;the&quot; paper on the
+    classical results: [<a href="../references/refs.cgi/BLS75">BLS75</a>].&nbsp;
+    Another excellent source on these theorems and their extensions is the excellent
+    text H. Williams &quot;&Eacute;douard Lucas and Primality testing&quot; [<a
+      href="../references/refs.cgi/Williams98">Williams98</a>]</p>
+  <p>How much further can we go?&nbsp; It is possible to consider higher powers
+    such as the factors of</p>
+  <blockquote>
+    <p><i>n</i><sup>6</sup> -1 = (<i>n</i> - 1)(<i>n</i><sup>2 </sup>+ <i>n </i>+
+      1)(<i>n </i>+ 1)(<i>n</i><sup>2 </sup>- <i>n </i>+ 1).</p>
+  </blockquote>
+  <p>(See [<a href="../references/refs.cgi/Williams78">Williams78</a>] for the theory
+    and examples of these techniques).&nbsp; But the cost in terms of mathematical
+    complication is very high.&nbsp; So in practice adding a few terms such as <i>n</i><sup>2</sup>+<i>n</i>+1
+    or <i>n</i><sup>2</sup>-<i>n</i>+1 is rarely worth the effort.&nbsp; Rather
+    it makes sense to just move on to the general primality proving methods of the
+    next chapter.</p>
+  <!-- #EndEditable -->
+  <table class="cc1">
+    <tr>
+      <td>
+        <table class="cc0">
+          <tr class="cc2">
+            <td style="padding-left: 0.4em"><!-- #BeginEditable "page_nav" -->[ <a href="prove4_1.html"><b>next
+                  page</b></a> | <a href="prove3_2.html">previous page</a> ]<!-- #EndEditable --></td>
+          </tr>
+          <tr class="cc3">
+            <td style="padding-left: 0.4em">Copyright © 2023 <a href="/primes/includes/copyright.php">PrimePages</a>
+              (Originally written by Chris Caldwell)</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+<!-- #EndTemplate -->
+
+</html>

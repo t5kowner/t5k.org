@@ -1,0 +1,2 @@
+RedirectMatch Permanent file.php/(.*)$ https://t5k.org/curios/includes/file.php?file=$1
+

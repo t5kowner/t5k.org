@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+
+# This routine tests the "canninical.pm" module which attempts to
+# rewrite the primes in a canonical form.
+
+#use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+#use lib ($Bin,"$Bin/..","$Bin/../math","$Bin/../../bin");
+use lib qw (
+/var/www/html/primes/support/modules
+/var/www/html/primes/support/math
+/var/www/html/primes/support
+/var/www/html/primes/bin
+);
+
+use canonical;         # Adjust prime descriptions;
+
+if (shift() eq "-e") {
+  $string = shift or exit;
+  print &canonical::adjust($string);
+} else {
+  # Interactive mode
+  while (1) {
+    print "expression: ";
+    $string = <>;
+    chop $string;
+    exit if ($string =~ /^[qre ]+/o);
+    $string = &canonical::adjust($string);
+    print &canonical::show_changes();
+    print "Returns: $string\n";
+  }
+}

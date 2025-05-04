@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The Gaps Between Primes </title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Definition and results on the gaps between primes.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/">Notes</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="/notes/faq/">FAQ</a></li>
+          <li class="breadcrumb-item active">Prime Gaps</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->The Gaps Between
+        Primes<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+      <h3> <img SRC="../gifs/here1.gif" width="20" height="20"> <a name="contents"></a>Contents:</h3>
+      <ol>
+        <li><a href="#intro">Introduction and definition of g(<i>n</i>)</a>
+        <li> <a href="#lim">lim inf g(<i>n</i>) = 1(?) and lim sup g(<i>n</i>)
+            = infinity</a>
+        <li> <a href="#table">A Table and Graph of Record Gaps</a>
+        <li> <a href="#bounds">Bounds on g(<i>p</i>)</a>
+        <li> <a href="#log">What about g(<i>p</i>)/log(<i>p</i>), g(<i>p</i>)/(log
+            <i>p</i>)</a><sup>2</sup> ?
+      </ol>
+      <h3 id="intro"><a href="#contents"><img SRC="../gifs/up1.gif" alt=up width="20" height="20"></a>1. Introduction
+        and definition of g(<i>n</i>)</h3>
+      <p>It is frequently asked how large the gap between consecutive primes may
+        get.&nbsp; Before we answer this, let us first carefully define gap (there are
+        two different standard definitions).&nbsp; For every prime <i>p</i> <b>let g(<i>p</i>)
+          be the number of composites between <i>p</i> and the next prime</b>.&nbsp; So
+        letting <i>p<sub>n</sub></i> be the <i>n</i>th prime we have:</p>
+      <p class="ml-4"><i>p<sub>n</sub></i><sub>+1</sub> = <i>p<sub>n</sub></i> + g(<i>p<sub>n</sub></i>)
+        + 1. </p>
+      <p>That is, <b>g(p<i><sub>n</sub></i>) is the (size of) gap</b> between <i>p<sub>n</sub></i> and
+        <i>p<sub>n</sub></i><sub>+1</sub>.
+      </p>
+
+      <p>By the <a href="/howmany.html#pnt">prime number theorem</a> we know there
+        are approximately <i>n</i>/log(<i>n</i>) (natural log) primes
+        less than <i>n</i>, so the "average gap" between primes less than <i>n</i>
+        is log(<i>n</i>).&nbsp; But how wide of range can these gaps have?&nbsp; We will discuss
+        several aspects of this question below.</p>
+
+      <h3 id="lim"> <a href="#contents"><img SRC="../gifs/up1.gif" alt=up width="20" height="20"></a>2. lim inf
+        g(<i>n</i>) = 1(?) and lim sup g(<i>n</i>)
+        = infinity</h3>
+      <p>First note that g(<i>p</i>) = 1 for twin primes <i>p</i>, <i>p</i>+2.&nbsp; So
+        from the twin prime conjecture we have the conjecture (almost certainly
+        true) that g(<i>p</i>) = 1 infinitely often (or equivalently lim inf g(<i>n</i>)
+        = 1). </p>
+
+      <p>Second note that g(<i>p</i>) can be arbitrarily large.&nbsp; To see this let
+        <i>n</i> be <i>any</i> integer greater than one and consider the following
+        sequence of consecutive integers:
+      </p>
+      <p class="ml-4"><i>n</i>!+2, <i>n</i>!+3, <i>n</i>!+4, <i>n</i>!+5, ..., <i>n</i>!+<i>n</i></p>
+
+      <p>Notice that 2 divides the first, 3 divides the second, ..., <i>n</i> divides
+        the <i>n</i>-1st, showing all of these numbers are composite!&nbsp; So
+        if <i>p</i>
+        is the largest prime less than <i>n</i>!+2 we have g(<i>p</i>) &gt; <i>n</i>-1.&nbsp; Obviously
+        there should be smaller numbers which produce the same gaps.&nbsp; For
+        example, there is a gap of 777 composites after the prime 42842283925351--this
+        is the least prime which produces a gap of 777 and it is far smaller than
+        778!+2 (which has 1914 digits).&nbsp; (Rather than use <i>n</i>!, one
+        can also use the smaller
+        <a href="/glossary/page.php?sort=Primorial" class="glossary" title="glossary"><i>n</i> primorial</a>:
+        <i>n</i>#).
+      </p>
+
+      <p>In the last paragraph we showed that lim sup g(<i>n</i>) = infinity,
+        but we expect much more since the "average gap" is about log(<i>n</i>).&nbsp; In 1931 Westzynthius [<a
+          href="/references/refs.cgi/Westzynthius31">Westzynthius31</a>]
+        proved that</p>
+
+      <p class="ml-4">lim sup g(<i>n</i>)/log <i>p<sub>n</sub></i> = infinity</p>
+
+      <p>which means that for every <i>&szlig;</i> &gt; 0 there are infinitely many
+        primes <i>p</i> with g(<i>p</i>) &gt; <i>&szlig;</i> log <i>p</i>.&nbsp; Before
+        we say more we should look at some numerical evidence. </p>
+
+      <h3 id="table"> <a href="#contents"><img src="../gifs/up1.gif" alt=up width="20" height="20"></a>3. A Table and
+        Graph of Record Gaps</h3>
+
+      <p>In the following table we list the <b>maximal gaps</b> through 381.&nbsp; These
+        are the first occurrences of gaps of <i>at least of this length</i>. For
+        example, there is a gap of 879 composites after the prime 277900416100927.&nbsp; This
+        is the first occurrence of a gap of this length, but still is not a
+        maximal gap since 905 composites follow the smaller prime 218209405436543
+        [<a href="/references/refs.cgi/Nicely99">Nicely99</a>].
+      </p>
+
+      <center>
+        <table border="0" cellpadding="4">
+          <caption>
+            <a NAME="table1"></a><b>Table 1. First Occurrence of Gaps</b>
+            (<a href="GapsTable.html">longer table available</a>.)
+          </caption>
+          <thead class="blue lighten-4">
+            <tr>
+              <th align="right">Gap</th>
+              <th>After</th>
+              <th align="right">Gap</th>
+              <th>After</th>
+              <th align="right">Gap</th>
+              <th>After</th>
+              <th>Gap</th>
+              <th>After</th>
+            </tr>
+          </thead>
+          <tr>
+            <td align="right">0 </td>
+            <td bgcolor="#EEF">2 </td>
+            <td align="right">33 </td>
+            <td bgcolor="#EEF">1327</td>
+            <td align="right">117</td>
+            <td bgcolor="#EEF">1349533</td>
+            <td align="right">247</td>
+            <td bgcolor="#EEF">191912783</td>
+          </tr>
+          <tr>
+            <td align="right">1</td>
+            <td bgcolor="#EEF">3</td>
+            <td align="right">35</td>
+            <td bgcolor="#EEF">9551</td>
+            <td align="right">131</td>
+            <td bgcolor="#EEF">1357201</td>
+            <td align="right">249</td>
+            <td bgcolor="#EEF">387096133</td>
+          </tr>
+          <tr>
+            <td align="right">3</td>
+            <td bgcolor="#EEF">7</td>
+            <td align="right">43</td>
+            <td bgcolor="#EEF">15683</td>
+            <td align="right">147</td>
+            <td bgcolor="#EEF">2010733</td>
+            <td align="right">281</td>
+            <td bgcolor="#EEF">436273009</td>
+          </tr>
+          <tr>
+            <td align="right">5</td>
+            <td bgcolor="#EEF">23</td>
+            <td align="right">51</td>
+            <td bgcolor="#EEF">19609</td>
+            <td align="right">153</td>
+            <td bgcolor="#EEF">4652353</td>
+            <td align="right">287</td>
+            <td bgcolor="#EEF">1294268491</td>
+          </tr>
+          <tr>
+            <td align="right">7</td>
+            <td bgcolor="#EEF">89</td>
+            <td align="right">71</td>
+            <td bgcolor="#EEF">31397</td>
+            <td align="right">179</td>
+            <td bgcolor="#EEF">17051707</td>
+            <td align="right">291</td>
+            <td bgcolor="#EEF">1453168141</td>
+          </tr>
+          <tr>
+            <td align="right">13</td>
+            <td bgcolor="#EEF">113</td>
+            <td align="right">85</td>
+            <td bgcolor="#EEF">155921</td>
+            <td align="right">209</td>
+            <td bgcolor="#EEF">20831323</td>
+            <td align="right">319</td>
+            <td bgcolor="#EEF">2300942549</td>
+          </tr>
+          <tr>
+            <td align="right">17</td>
+            <td bgcolor="#EEF">523</td>
+            <td align="right">95</td>
+            <td bgcolor="#EEF">360653</td>
+            <td align="right">219</td>
+            <td bgcolor="#EEF">47326693</td>
+            <td align="right">335</td>
+            <td bgcolor="#EEF">3842610773</td>
+          </tr>
+          <tr>
+            <td align="right">19</td>
+            <td bgcolor="#EEF">887</td>
+            <td align="right">111</td>
+            <td bgcolor="#EEF">370261</td>
+            <td align="right">221</td>
+            <td bgcolor="#EEF">122164747</td>
+            <td align="right">353</td>
+            <td bgcolor="#EEF">4302407359</td>
+          </tr>
+          <tr>
+            <td align="right">21</td>
+            <td bgcolor="#EEF">1129</td>
+            <td align="right">113</td>
+            <td bgcolor="#EEF">492113</td>
+            <td align="right">233</td>
+            <td bgcolor="#EEF">189695659</td>
+            <td align="right">381</td>
+            <td bgcolor="#EEF">10726904659</td>
+          </tr>
+        </table>
+      </center>
+
+      <p>For each non-negative integer <i>g</i> let <b><i>p</i>(<i>g</i>)</b>
+        be the smallest prime that is followed by at least <i>g</i> composites.&nbsp; This
+        table tells us <i>p</i>(148) = <i>p</i>(149) = ... = <i>p</i>(153)
+        = 4652353.&nbsp; See [<a href="/references/refs.cgi/Nicely99">Nicely99</a>] and [<a
+          href="/references/refs.cgi/NN99">NN99</a>] for information
+        on searches which extended this table to maximal gaps through 1132.
+        We give a more complete <a href="GapsTable.html">list of maximal gaps on a separate page</a>.&nbsp; See also
+        Jens
+        Kruse Andersen's page of <a href="http://primerecords.dk/primegaps/gaps20.htm">top
+          twenty gaps</a>.</p>
+      <p><img SRC="../gifs/gaps.gif" align="right" width="225" height="176"> For
+        the values in the table above we have graphed ln <i>p</i>(<i>g</i>) (the
+        natural log) versus <i>g</i> in the graph on the right.&nbsp; Perhaps you can
+        begin to see why Shanks conjectured in 1964 that</p>
+      <p class="ml-4"> ln <i>p</i>(<i>g</i>) ~ sqrt(<i>g</i>),</p>
+      <p>and Weintraub estimated in 1991 that</p>
+      <p class="ml-4">
+        ln <i>p</i>(<i>g</i>) ~ sqrt(1.165746<i>g</i>).
+      </p>
+      <a name=bounds></a>
+      <h3><a href="#contents"><img SRC="../gifs/up1.gif" alt=up width="20" height="20"></a>4. Bounds on g(<i>p</i>)</h3>
+      It is possible to put an upper limit on g(<i>p</i>) given <i>p</i>.&nbsp; By the
+      <a href="/howmany.html#pnt">prime number theorem</a>we
+      can show that for every real number <i>e</i> &gt; 0 and there is some integer
+      <i>m</i><sub>0</sub> such that there is always a prime <i>p</i> satisfying
+      <p class="ml-4"><i>m</i> &lt; <i>p</i> &lt; (1 + <i>e</i>)<i>m</i> (for every
+        <i>m</i> &gt; <i>m</i><sub>0</sub>)
+      </p>
+      <p>This shows that g(<i>p</i>) &lt; <i>ep</i> for all <i>p</i> &gt; max(<i>m</i><sub>0</sub>,1+1/<i>e</i>).&nbsp;
+        Or more succinctly, g(<i>p<sub>n</sub></i>) &lt; <i>ep<sub>n</sub></i> for
+        <i>n</i> &gt; <i>n</i><sub>0</sub>.&nbsp; Here are several specific pairs <i>e</i>,
+        <i>n</i><sub>0</sub> quoted from [<a href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>p252-253]:
+      </p>
+      <ul>
+        <li> g(<i>p<sub>n</sub></i>) &lt; (1/5)<i>p<sub>n</sub></i> for <i>n</i>
+          &gt; 9 (Nagura 1952)</li>
+        <li> g(<i>p<sub>n</sub></i>) &lt; (1/13)<i>p<sub>n</sub></i> for <i>n</i>
+          &gt; 118 (Rohrbach &amp; Weis 1964)</li>
+        <li> g(<i>p<sub>n</sub></i>) &lt; (1/16597)<i>p<sub>n</sub></i> for <i>n</i>
+          &gt; 2010760 (Schoenfeld 1976)</li>
+      </ul>
+      <p> In 1937 Ingham refined pioneering work of Hoheisel to show that g(<i>p</i>)
+        is bounded by a constant times <i>p</i><sup>5/8+eps</sup> (for every eps>0).&nbsp; Many folk have improved on
+        the 5/8, the most recent record that I know of
+        is 0.535 due to R. Baker and G. Harman [<a href="/references/refs.cgi/BH96">BH96</a>] (but surely this has been
+        improved on by now).</p>
+
+      <h3 id="log"> <a href="#contents"><img src="../gifs/up1.gif" alt="up" width="20" height="20"></a>5. What about
+        g(<i>p</i>)/log
+        <i>p</i>, g(<i>p</i>)/(log <i>p</i>)<sup>2</sup> ?
+      </h3>
+
+      <p>Again, the prime number theorem proves that the average value of g(<i>p</i>)/log
+        <i>p</i> is one, but what do we know of the sequence {g(<i>p</i>)/log<i>p</i>}?
+        Ricci [<a href="/references/refs.cgi/Ricci56">Ricci56</a>] showed that set
+        of limit points of this set has positive Lebesgue measure, but so far the
+        only proven limit point is infinity (mentioned above) [see <a href="/references/refs.cgi/EE85">EE85</a>, p22].
+      </p>
+
+      <p>Various upper bounds for lim inf g(<i>p</i>)/log<i>p</i> have been found,
+        including 0.248 [<a href="/references/refs.cgi/Maier85">Maier85</a>] (of course,
+        both the twin prime conjecture and the prime k-tuple conjectures require
+        that the limit inferior be zero).&nbsp; In a related conjecture Cram&eacute;r
+        [<a href="/references/refs.cgi/Cramer36">Cram&eacute;r36</a>]
+        conjectured that </p>
+
+      <p class="ml-4">lim sup g(<i>p</i>)/(log <i>p</i>)<sup>2</sup> = 1.</p>
+
+      <p>Granville
+        altered Cramer's conjecture, suggesting that it underestimates the size
+        of the gaps.&nbsp; Granville conjectures that for any constant <i>c</i> less
+        than Euler's gamma: </p>
+
+      <p class="ml-4">g(<i>p</i>) <u>&gt;</u> 2 e<sup>-<i>c</i></sup> log<sup>2</sup> <i>p</i> </p>
+
+      <p>infinitely often.&nbsp; Here the constant comes from analogy with Merten's
+        theorem.</p>
+
+      <p>Can this be proven?&nbsp; Not yet, but Cram&eacute;r did show that <strong>if</strong> the <a
+          href="/notes/rh.html">Riemann Hypothesis</a> holds, then
+        we would have the far weaker result:</p>
+
+      <p class="ml-4">g(<i>p</i>) &lt; <i>k</i> <i>p</i><sup>1/2</sup> log <i>p.</i></p>
+
+      <p>There is a lot more to say concerning conjectures and theorems on both the
+        size of these gaps and how often a given gap occurs...&nbsp; Why not just spend
+        an evening with section 4.2 ("The <i>n</i>th Prime and Gaps") of [<a
+          href="/references/refs.cgi/Ribenboim95">Ribenboim95</a>]. </p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

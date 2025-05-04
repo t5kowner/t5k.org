@@ -1,0 +1,334 @@
+#!/usr/bin/perl -w
+
+use warnings;
+use strict;
+use open ':std', ':encoding(UTF-8)';
+use Time::HiRes qw(time);
+my $time_start = time;	# just for timing the routines
+
+# The routine rebuilds the list of codes from the lists of provers. The only
+# difficulty here is in recognizing the program used to prove primality. Ideally
+# this routine should never do anything--as all should be built as the new codes
+# are created in the php pages. But this can be run now and then to check things
+# out... Note an established code shoul have the prover program (code.progam_id)
+# set in the databse.  The default value is 560 (the person.id = 560 is the
+# 'unknown' database entry).  When set to zero (e.g., in x-codes) it means we
+# know there is no program to cite.
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;		# now add $Bin to the library path
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use GetCodes;		# Get the list of codes from the person table
+
+getopts('hsdc:');
+our($opt_h, $opt_s, $opt_d, $opt_c);
+
+$opt_s or print "This routine rebuilds the list of codes from the lists of
+   provers trying not to change things if possible.  The only difficulty here
+   is in recognizing the program used to prove primality.\n\n";
+
+$opt_s or $opt_h or print "Use $0 -h to see the options.\n\n";
+
+$opt_s or $opt_h and print "\nusage: reweight [options]; where the options are
+
+	-s	silent -- only errors printed.
+	-c m	rebuild the code with name = m.
+	-d	print debug messages.
+	-h	print this help and exit
+";
+
+$opt_s or ($opt_c and print "Will just rebuild code with id '$opt_c'.");
+$opt_h and exit;
+$opt_d and print "Noisey -d option turned on!\n";
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# Get a list of the prover 'id's, 'surname's (%Id), 'type's (%Type) and program
+# prefixes (%Prefix)
+
+my %Id;		# key = id, value = surname
+my %Type; 	# key = id, value = type (person, program, project...)
+my %Prefix;	# key = program prefix, value = id
+my %Proves;	# key = id, value = what the program does (if it proves)
+my %Order;      # key = id; value = order (1 1st, 2 2nd, ...) for sorting credit
+		# strings
+
+# The order is esssentially set by this query (and controlled by the order of the
+# enum fields in the database person table). Non-wild codes first (includes all
+# persons, projects... only progams have wild codes). Type (so its order is)
+# enum('person','program','project','other'). Below we will try to force the
+# proof progam to be the last in the code description strings.
+
+my $query = "SELECT id, surname, name, type, prog_prefix, program_does
+	FROM person
+	ORDER BY IF(wild_codes IS NULL,0,1) ASC, type+0 ASC, id DESC";
+# was: 	ORDER BY IF(wild_codes IS NULL,0,1) ASC, type+0 ASC, created DESC, id ASC";
+# should do the same (except very old backdated entries).  Simplifying to find the error.
+my $sth;
+$sth = $dbh->prepare($query) || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+
+# Put this list of is into %Id, %Type, %Prefix, %order (need %order because
+# hash arrays are unordered--and sorted differently on my two machines)
+# The orderby 'if' pushes wild code holders to the end (major proving programs)
+# then sorts by type ('person','program','project', then 'other'), oldest
+# first and uses id only if all else tie (many were created exact at
+# 2000-01-18 12:50:53).  Maybe that was when the database was first moved to
+# MySQL?
+
+my $order = 0;
+while (my $p = $sth->fetchrow_hashref) {
+  $Id{$$p{'id'}} = $$p{'surname'};	# The names used in the display strings
+  $Type{$$p{'id'}} = $$p{'type'};	# To decide who goes in display_short
+  $Prefix{$$p{'prog_prefix'}} = $$p{'id'} if $$p{'prog_prefix'};
+  $Order{$$p{'id'}} = ++$order;		# Decide the order (based on ORDER BY
+					# in the query above)
+  if ($$p{'prog_prefix'} and $$p{'prog_prefix'} =~ /\s/) {
+     warn("$$p{'id'} ($$p{'surname'}) has bad wild_code '$$p{'prog_prefix'}'");
+  }
+  ## print  "$$p{'surname'} $$p{'id'} [$$p{'prog_prefix'}]\n" if $$p{'prog_prefix'};
+  $Proves{$$p{'id'}} = $$p{'program_does'}
+	if ($$p{'program_does'} =~ /(special|plus|minus|classical|general)/o);
+}
+# Special Cases:
+$Prefix{'GF'} = 411;
+
+$sth->finish;
+$opt_s or print "Have selected all $order of the bio names \t(".
+	sprintf('%.2f',time-$time_start)." seconds)\n";
+
+# Get the list of codes--note that this routine decides the order of the names
+# as they appear in the display strings (should match bios/newcode.inc). For
+# each code (key) this array will have a comma delimited list of prover ids
+# belonging to that code--except that the comma separating the humans from the
+# non-humans is replaced with a semicolon
+
+my $time = time;
+my %Codes = &GetCodes::LoadCodes;
+my $number = keys %Codes;
+$opt_s or print "Got a list of $number codes \t\t\t(".sprintf('%.2f',time-$time).
+	" seconds)\n";
+
+# Now process this list.  We will rebuild all the code entries, but only update
+# if something actually changed.  (MySQL's REPLACE does a delete followed by an
+# insert if it exists--this zeros out the counts... so I avoid that here when
+# possible)
+
+$time = time;
+my $sth_get = $dbh->prepare('SELECT display_text, display_html, display_short,
+	persons, program_id FROM code WHERE name=?');
+my $sth_put = $dbh->prepare('UPDATE code SET display_text=?, display_html=?,
+	display_short=?, persons=?, program_id=? WHERE name =?');
+my $sth_new = $dbh->prepare('REPLACE code (display_text, display_html,
+	display_short, persons, program_id, name) VALUES (?,?,?,?,?,?)');
+
+my $modified = 0;
+foreach my $item (sort keys %Codes) {	# this sort just makes output searchable
+  my $delim = '';
+  my $display_text = '';
+  my $display_html = '';
+  my $display_short = '';	# Persons only (linked to code entry for html)
+  my $program_id = 560;		# The 'unknown' database entry, code default
+  my $persons;			# just a count
+  my $person_list;		# list of ids
+  my $p;			# pointed to the code info (or 0 if a new entry)
+
+  # we will look at the old entry in the database mainly to see if the program
+  # (used for proving 'program_id') was already set there.  It goes last in
+  # in the display strings
+
+  $sth_get->execute($item);
+  if (not $p = $sth_get->fetchrow_hashref) {	# No matching entry?
+     warn "$0 error 162: New item ('\$item -> \$Codes{'\$item'}' is '$item -> $Codes{'$item'}') (manually altered in database?)\n";
+  } else {
+    $program_id = $$p{'program_id'};		# default value is 560 'uknown'
+  }
+
+  # If using $opt_c, ignore the non-matches
+  next if ($opt_c and $item ne $opt_c);
+
+  # Form list of humans and count them.
+  ($person_list = $Codes{$item}) =~ s/;.*$//o;	# ';' separates humans from non
+  $persons = $person_list;			# protect $person_list
+  $persons = ($persons =~ s/,//go)+1;		# Now count the humans
+  $opt_d and print "\tcodes: $Codes{$item}\n";
+  $opt_d and print "\t$persons persons: $person_list\n";
+
+  # If there is only one non-person, store it
+  (my $non_persons = ($Codes{$item} =~ /;/o ? $Codes{$item} : '')) =~ s/^.*;//o;
+  $opt_d and print "\tnon-persons: $non_persons\n";
+
+  # Form output display strings (text, linked html and short (just humans))
+  foreach my $id (sort {$Order{$a}<=>$Order{$b}} split(/[,;]/,$Codes{$item})) {
+    next if $id == $program_id;	# make it last
+    $display_text  .= $delim.$Id{$id};
+    $display_html  .= $delim.'<a href="/bios/page.php?id='.$id."\">$Id{$id}</a>";
+    $display_short .= ($display_short ? $delim : '').$Id{$id} if $Type{$id} eq 'person';
+    $delim = ', ';
+  }
+  if ($program_id) {  # Note program_id=560, 'unknow', explicitly listed
+    unless (defined($Id{$program_id})) { 
+	warn "Error buildcodes188: person.$program_id is has no defined surname (\$Id{\$program_id} is undefined.\n";
+	$Id{$program_id} = '';
+    }
+    $display_text .= $delim.$Id{$program_id};
+    $display_html .= $delim.'<a href="/bios/page.php?id='.$program_id."\">$Id{$program_id}</a>";
+  }
+  # For the short list of persons, turn the last comma into an '&'.
+  $display_short =~ s/, ([^,]+)$/ & $1/o;
+
+  $opt_d and print "$item is:\n\t$display_text\n\t$display_html".
+		"\n\t$display_short\n";
+
+  # If program_id is unknown, try to guess it (leave program_id=0 alone!
+  # these are so specified for x-codes with descriptions for example)
+  if ($program_id == 560) {
+    foreach my $prefix (keys %Prefix) {
+      if ($item =~ /^$prefix\d+$/) {
+        $program_id = $Prefix{$prefix};
+      }
+    }
+  }
+
+  if ($p) {  	# Not a new database entry
+    # Can we set the program_id for this entry?
+    my $prog_changed = 0;
+    if ($$p{'program_id'} != 560) {
+      $program_id = $$p{'program_id'};  # If program_id is set, don't alter it
+    } elsif ($program_id != $$p{'program_id'}) { # Guessed it from the prefix
+      warn "For code '$item' prefix implies the program is $Id{$program_id} ".
+		"with id $program_id\n";
+      $prog_changed = 1;
+    } elsif (($non_persons =~ /^\d+$/o) and defined($Proves{$non_persons})
+	and $item !~ /^x\d+$/) {
+      		# If only one proving non-person, must be the program
+      $program_id = $non_persons;
+      warn "Code '$item' (non x-code) has one non-person, whis must be the ".
+  		"program: $Id{$program_id} (id $program_id) which does ".
+		"$Proves{$non_persons}\n";
+      $prog_changed = 1;
+    } elsif ($item !~ /^x\d+$/) {			     # No clue
+      $opt_s or print "For code '$item' ($display_text) the program id is ".
+		"unknown (add it manually in the database?)\n";
+    }
+
+    # Have anthing else (other than counts) changed?
+    unless (($$p{'display_text'} eq $display_text) and ($$p{'display_short'} eq
+	$display_short) and ($$p{'display_html'} eq $display_html) and
+	($$p{'persons'} eq $persons) and not $prog_changed) {
+			# Something changed!  Let's update
+      $modified++;
+      $sth_put->execute($display_text, $display_html, $display_short, $persons,
+			$program_id, $item);
+
+      my $notes = "code $item rebuilt:
+	 is: ($persons persons: $display_short) $display_text
+	was: ($$p{'persons'} persons: $$p{'display_short'}) ".
+	"$$p{'display_text'}\n";
+      $opt_s or print $notes;
+      &connect_db::log_action($dbh,'SYSTEM','modified',"code.name=$item",
+			$notes);
+    }
+
+
+  } else {				# Brand new entry--should not happen
+					# unless manually altered in mysql
+    my $notes = "new code '$item' built; ($persons persons) $display_text\n";
+    if (not $item) {
+      warn "Whoa! buildcodes is trying to make a code with no name!\n$notes";
+      &connect_db::log_action($dbh,'SYSTEM','error',"no code.name",$notes);
+    } else {
+      $modified++;
+      $sth_new->execute($display_text, $display_html, $display_short, $persons,
+			$program_id, $item);
+      $opt_s or print $notes;
+      &connect_db::log_action($dbh,'SYSTEM','created',"code.name=$item",$notes);
+    }
+  }
+}
+
+$sth_get->finish;
+$sth_put->finish;
+
+$opt_s or print "$modified code entries (re)built \t\t\t(".
+	sprintf('%.2f',time-$time)." seconds)\n";
+
+# Now let's adjust the number of projects for each code, if necessary.
+# The plan is to first see if any need to be set, and if so, just set that one.
+# The less we update the databse needlessly, the more it can use cached queries.
+
+$time = time;
+$opt_s or print "Updating numbers of projects\n";
+
+# note we do not need to use '[0-9]+' here as the + is already in the wild code
+$sth = $dbh->prepare("/* buildcodes */ SELECT name FROM code WHERE projects !=
+	(SELECT count(*) as count_ FROM person WHERE type='project' AND
+           (BINARY codes RLIKE BINARY CONCAT('\\\\b',code.name,'\\\\b') OR
+              BINARY code.name RLIKE BINARY CONCAT('(',
+                REPLACE(REPLACE(wild_codes,',','|'),'\\\\d','[0-9]'),')')
+           )
+        )") || die $sth->errstr;
+$sth->execute() || die $sth->errstr;
+my $count = $sth->rows;
+
+if ($count > 0) {  # Need to make this only change the new ones!
+# while (my $hash_ref = $sth->fetchrow_hashref) {
+  $sth = $dbh->prepare("/* buildcodes */ UPDATE code SET projects=
+	(SELECT count(*) as count_ FROM person WHERE type='project' AND
+           (BINARY codes RLIKE CONCAT('\\\\b',code.name,'\\\\b') OR
+              BINARY code.name RLIKE BINARY CONCAT('(',
+                REPLACE(REPLACE(wild_codes,',','|'),'\\\\d','[0-9]'),')')
+           )
+        )") || die $sth->errstr;
+  $sth->execute() || die $sth->errstr;
+}
+
+$opt_s or print "$count codes' number of projects (re)set \t\t(".
+	sprintf('%.2f',time-$time)." seconds)\n";
+
+
+
+# Now that codes are canonically ordered, we can look for duplicates
+# Here is the complication:
+#
+#	name    id      primes  display_text
+#	-----	-----	------	---------------------
+#	p44     1       423     Broadhurst, OpenPFGW
+#	x29     1166    7       Broadhurst, OpenPFGW
+# and
+#	x14     229     140     Steward, OpenPFGW, Primo
+#	c13     469     3       Steward, OpenPFGW, Primo
+#	-----	-----	------	---------------------
+#
+# these are different despite the identical display_text.
+
+$time = time;
+$opt_s or print "Seeking duplicate codes (silent if none)";
+$query = "SELECT name, id, code.display_text, PrimesTotal
+        FROM code, ( SELECT display_text, count(*) AS num FROM code GROUP BY
+                display_text ORDER BY num desc LIMIT 5 ) AS t1
+        WHERE num > 1 AND code.display_text = t1.display_text
+        ORDER BY code.display_text";
+$sth = $dbh->prepare($query);
+$sth->execute();
+my $delim = "\n$0 Found duplicates:\n\nname\tid\tprimes\tdisplay_text\n";
+# my $temp_space = '';
+while (my $p = $sth->fetchrow_hashref) {
+  next if !$opt_d and $$p{'name'} =~ /^(p44|x29)$/;	# discussed above
+  next if !$opt_d and $$p{'name'} =~ /^(x14|c13)$/;	# discussed above
+  next if !$opt_d and $$p{'name'} =~ /^(G13|G14)$/;   	# different unamed additional partners credited on code page
+  next if !$opt_d and $$p{'name'} =~ /^(L1387|L3047)$/;	# these are two different anonymous codes
+  print $delim.$$p{'name'}."\t".$$p{'id'}."\t".$$p{'PrimesTotal'}."\t".$$p{'display_text'}."\n";
+  $delim = '';
+  # $temp_space = "\t\t\t\t\t\t";
+}
+$opt_s or printf("\t(%.2f seconds)\n",time-$time);
+
+# That's all folks!
+
+$opt_s or print "Done \t\t\t\t\t\t(".sprintf('%.2f',time-$time_start)." seconds total)\n";

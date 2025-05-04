@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>Proof of Fermat's Little Theorem</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="On this page we give the proof of Fermat's Little Theorem (a variant 
+        of Lagrange's theorem). This is one of the many proof pages from the Prime Page's 
+        site.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="../index.html">Notes</a></li>
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Proofs</a></li>
+          <li class="breadcrumb-item active">Fermat's Little Theorem</li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->Proof
+        of Fermat's Little Theorem<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" -->
+
+      <p>Fermat's "biggest", and also his "last" theorem states that <i>x<sup>n</sup> +
+          y<sup>n</sup> = z<sup>n</sup></i> has no solutions in positive integers <i>x, y, z</i> with <i>n</i> &gt; 2.
+        This has finally been proven by Wiles
+        in 1995. Here we are concerned with his "little" but perhaps his most
+        used theorem which he stated in a letter to Fre'nicle on 18 October 1640:</p>
+      <dl>
+        <dt><b>Fermat's Little Theorem.</b></dt>
+        <dd>Let <i>p</i> be a prime which does not divide the integer <i>a</i>,
+          then <i>a</i><sup><i>p</i>-1</sup> ≡ 1 (mod&nbsp;<i>p</i>).</dd>
+      </dl>
+      <p> It is so easy to calculate <i>a</i><sup><i>p</i>-1</sup> quickly modulo <i>p</i> that most <a
+          href="/prove/prove2_3.html">elementary primality tests</a> are built
+        using a version of Fermat's Little Theorem rather than <a href="Wilsons.html">Wilson's Theorem</a>.</p>
+      <p>As usual Fermat did not provide a proof (this time saying "I would send
+        you the demonstration, if I did not fear its being too long"
+        [<a href="/references/refs.cgi/Burton80">Burton80</a>, p79]).
+        Euler first published a proof in 1736, but Leibniz left virtually
+        the same proof in an unpublished manuscript from sometime before 1683.</p>
+      <dl>
+        <dt><b>Proof.</b></dt>
+        <dd>
+          <p>Start by listing the first <i>p</i>-1 positive multiples of <i>a</i>:</p>
+          <p class="ml-3"> <i>a</i>, 2<i>a</i>, 3<i>a</i>, ... (<i>p</i> -1)<i>a</i> </p>
+          <p>Suppose that <i>ra</i> and <i>sa</i> are the
+            same modulo <i>p</i>, then we have <i>r</i> = <i>s</i> (mod <i>p</i>), so the <i>p</i>-1 multiples of
+            <i>a</i> above are distinct and nonzero; that is,
+            they must be congruent to 1, 2, 3, ..., <i>p</i>-1 in some order.
+            Multiply all these congruences together and we find
+          </p>
+          <p class="ml-3"> <i>a</i> (2<i>a</i>) (3<i>a</i>) ... ((<i>p</i>-1)<i>a</i>) ≡
+            1<sup>.</sup>2<sup>.</sup>3<sup>.</sup>...<sup>.</sup>(<i>p</i>-1) (mod <i>p</i>) </p>
+          <p>which is, <i>a</i><sup>(<i>p</i>-1)</sup>(<i>p</i>-1)! ≡ (<i>p</i>-1)! (mod <i>p</i>).
+            &nbsp; Divide both side by (<i>p</i>-1)! to complete the proof.
+            <span class="float-right" title="Q.E.D.">∎</span>
+          </p>
+        </dd>
+      </dl>
+      <p>Sometimes Fermat's Little Theorem is presented in the following form:</p>
+      <dl>
+        <dt><b>Corollary.</b></dt>
+        <dd>Let <i>p</i> be a prime and <i>a</i> any integer,
+          then <i>a</i><sup><i>p</i></sup> ≡ <i>a</i> (mod&nbsp;<i>p</i>).<br>
+        </dd>
+        <dt><b>Proof.</b></dt>
+        <dd> The result is trival (both sides are zero) if <i>p</i> divides <i>a</i>. If <i>p</i> does not divide
+          <i>a</i>, then we need only
+          multiply the congruence in Fermat's Little Theorem by <i>a</i> to
+          complete the proof.
+          <span class="float-right" title="Q.E.D.">∎</span>
+        </dd>
+      </dl>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="../privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>

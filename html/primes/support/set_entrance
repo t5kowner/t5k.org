@@ -1,0 +1,193 @@
+#!/usr/bin/perl -w
+
+use warnings;
+use strict;
+
+# This routine finds the starting dates and exit dates of primes
+# (Well, just for those without comments--need to finish this off!)
+# Why can't we at least do entrance dates for those?
+
+# Changes
+
+use FindBin qw($Bin);   # Where is this script stored?  Put full path into $Bin
+use lib $Bin;
+
+use DBI;		# Generic database interface
+use Getopt::Std;	# Allow for command line options
+use Time::HiRes 'time'; # More accurate timming
+my $time = time;
+
+getopts('hsdt');
+our($opt_h, $opt_s, $opt_d, $opt_t);
+
+$opt_s or $opt_h or print "usage: set_entrance [options].  Use rerank -h to see the options.\n\n";
+
+$opt_h and print "The routine (re)sets the entrance rank of, and exit date of, all primes (well,
+currently just those without comments--need to finish this off!)
+
+usage: set_entrance [options]    where the options are
+
+	-s	silent -- only errors printed.
+	-d	debug, a verbose mode
+	-t	test only (do not write changes)
+	-h	print this help and exit
+
+";
+$opt_h and exit;
+$opt_t and print "Will not write changes to database.\n";
+
+# Open database handle
+
+use connect_db;
+my $dbh = &connect_db::connect();
+$opt_s or print "Connected to database.\n";
+
+# redo the whole list (well, at least those verified)
+
+my $select = 'id, e_rank, digits, digit_rank, submitted, removed, comment, credit';
+$opt_d and $select .= ',description';
+# Note: prime.prime is enum('Composite','Untested','InProcess','PRP','Proven','External')
+# so currently only ranks those that have been tested.
+# Also was " ... ORDER BY submitted ASC, digits DESC, digit_rank ASC";  but when we have a large
+# list which are all submitted at the same time, that we add the smallest first--but if this ties
+# also, use the id to pick the "earlier."  Part of the order choice is historic (arn't smaller
+# found first by same prover?) and current: when submitting for TPS, should the bulk submitter
+# need to know the best submission startegy?
+my $query = "/* set_entranc */ SELECT $select FROM prime WHERE prime > 3 ORDER BY submitted ASC, log10 ASC, id ASC";
+
+my $sth;
+$sth = $dbh->prepare($query);
+$sth->execute();
+$opt_s or printf("Have selected the entire set of primes.  Used %7.4f seconds.\n",time-$time);
+
+# Loop through this list of primes
+# The modified = modified is an attempt to keep this value from
+# being updated when setting the rank; I do not consider this "modification"
+# when called from search routines (e.g., what's new?)
+
+my $sth_enter = $dbh->prepare("UPDATE prime SET e_rank = ?, modified=modified WHERE id = ?") or die;
+my $sth_exit  = $dbh->prepare("UPDATE prime SET removed = ?, modified=modified WHERE id = ?") or die;
+
+my $primes = 0;		# Lets count a couple things
+my $adjusted_entrance = 0;
+my $entrance_increased = 0;
+my $adjusted_exit = 0;
+
+my %max_by_code;	# For codes, want min/max/avg e_rank
+my %min_by_code;	# takes to long to calcualte (0.2 second) on bio/page.php
+my %sum_by_code;
+my %num_by_code;
+my %ids;
+my %removed;
+my %comment;
+my @array;
+
+$opt_d and print "Will show what it is doing for the oldist 100 primes.  First number is e_rank.\n";
+
+while (my $p = $sth->fetchrow_hashref) {
+  my $id = $$p{'id'};  $primes++;
+  # Note that $size must be unique!  That is why the digit_rank is included, but of
+  # course digit_rank gets bigger for smaller primes, hence the reciprocal
+  my $size = $$p{'digits'} + 0.9/$$p{'digit_rank'};
+  my $e_rank = &SortAdd($size);		# adds the size to @array, returns current rank
+
+  $ids{$size} = $id; 	# Store the id by size for spotting what is pushed off the list
+  $removed{$size} = $$p{'removed'};	# To see if push off date agrees
+  $comment{$size} = $$p{'comment'};	# Store, will not be removed later
+  $comment{$size} =~ s/(Cyclotomy|Binomial|Tetradic|Triadic|Strobogrammatic|Illegal prime|APR-CL assisted|Generalized Fermat)[ ,;]*//ig;
+  # all but "generalized Fermat" are tolerated, so do not matter.  I am hoping the generalized Fermat are large enough...
+
+  if ($opt_d) {
+    if ($primes % 10000 == 0) { print "At prime $primes\n"; }
+    if ($primes < 100) { print "$e_rank $$p{'description'} $$p{'submitted'} $size\n"; }
+  }
+  if (!$$p{'e_rank'} or $e_rank != $$p{'e_rank'}) {
+    $opt_t or $sth_enter->execute($e_rank,$id) or die;
+    $opt_s or print "Entrance rank ($e_rank ne ".($$p{'e_rank'}||'NULL').") id $id}\n";
+    $opt_d and print "\t$$p{'description'} $$p{'digits'} $$p{'submitted'} $$p{'credit'}\n";
+    if ($$p{'e_rank'} and $e_rank > $$p{'e_rank'}) { $entrance_increased++; }  # made bigger?
+    $adjusted_entrance++;
+  }
+
+  # Now set the info to update the code table
+  my $credit = $$p{'credit'};
+  if (defined($num_by_code{$credit})) {
+    $num_by_code{$credit}++;
+    $sum_by_code{$credit} += $e_rank;
+    if ($e_rank > $max_by_code{$credit}) {
+      $max_by_code{$credit} = $e_rank;
+    } elsif ($e_rank < $min_by_code{$credit}) {
+      $min_by_code{$credit} = $e_rank;
+    }
+  } else {
+    $num_by_code{$credit}=1;
+    $sum_by_code{$credit} = $max_by_code{$credit} = $min_by_code{$credit} = $e_rank;
+  }
+
+  # Now what prime is pushed off the list? Set an exit date?
+
+  next if @array <= 5000;	# in this case, did not push one off
+
+  # If entering rank > 5000, and there is no comment, then the exit date is entrance date
+
+  if ($e_rank > 5000) {
+    next if $$p{'comment'};	# Need code for primes with comments!  For now, just skip
+    if (!$$p{'removed'} or ($$p{'submitted'} ne $$p{'removed'})) {
+      $opt_t or $sth_exit->execute($$p{'submitted'},$id) or die;
+      $opt_s or print "exit date ($$p{'submitted'} ne ".($removed{'removed'}||'NULL').") id $id\n";
+      $adjusted_exit++;
+    } # else all is fine.
+  }
+
+  # Okay, the 5000th is pushed off (so it is in 5001st spot).  @array[5000] gives its size
+  # so used as the key in %removed gives old removed date, and in %ids gives its id
+
+# if ($ids{$array[5000]} eq 102874) { print "here\n"; }
+
+  elsif (!$removed{$array[5000]} or ($$p{'submitted'} ne $removed{$array[5000]})) {
+    next if $comment{$array[5000]}; # Need code for primes with comments!  For now, just skip
+    $opt_t or $sth_exit->execute($$p{'submitted'},$ids{$array[5000]}) or die;
+    $opt_s or print "Exit Date ($$p{'submitted'} ne ".($removed{$array[5000]}||'NULL').") id $ids{$array[5000]}\n";
+    $adjusted_exit++;
+  }
+}
+$opt_s or printf("Used %7.4f seconds to set $adjusted_entrance entrance ranks ($entrance_increased increased) and
+	$adjusted_exit exit dates for the $primes primes in the prime table.\n",time-$time);
+$opt_t and print("Did not write changes to the database.\n");
+
+exit;
+
+
+
+
+# SortAdd(item) will add item to the global array @array, keeping it sorted from largest
+# to smallest numerically, and each time returning the rank of the new item (insert index + 1
+# so an item added before the old first item returns rank 1).
+
+sub SortAdd {
+  my $item = shift;
+
+  # Only item?  New first item?  Or new last item?
+  if (!@array) { push(@array,$item); return 1; }
+  if ($item >= $array[0]) { unshift(@array,$item); return 1; }
+  if ($item <= $array[@array-1]) { push(@array,$item); return @array+0; }
+
+  # So we have a list with at least two items, our new one goes between
+  # Let's do the traditional binary search for where to insert $item
+
+  my $high = @array -1;
+  my $low = 0;
+
+  # Recall the low index refers to the larger number in array
+
+  while ($high - $low > 1) {
+    my $next = ($high + $low) >> 1;
+    ($array[$next] > $item) ? $low = $next : $high = $next;
+  }
+
+  # Now the new item equals $high or belongs between, so insert at
+  # $array[$high]'s location.  The rank is the index plus one.
+
+  splice(@array,$high,0,$item);
+  return $high+1;
+}

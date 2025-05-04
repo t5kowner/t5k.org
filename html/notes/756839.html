@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en"><!-- #BeginTemplate "/Templates/secondary2.dwt" --><!-- DW6 -->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="Author" content="Chris K. Caldwell">
+  <!-- #BeginEditable "doctitle" -->
+  <title>The finding of the 32nd Mersenne prime</title>
+  <!-- #EndEditable --> <!-- #BeginEditable "description" -->
+  <meta name="description" content="Another page about Prime Numbers and related topics.">
+  <!-- #EndEditable -->
+  <!-- PrimePage icon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <!-- Font Awesome ((used anywhere?))-->
+  <!-- rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" -->
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <!-- link rel="stylesheet" href="mdb/css/bootstrap.min.css" -->
+  <link href="../css/bootstrap-4.3.1.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="../mdb/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="../mdb/css/mystyle.css">
+  <!-- link rel="stylesheet" media="print" href="print.css" / -->
+</head>
+
+<body>
+
+  <!--Main Navigation-->
+  <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo darken-3">
+
+      <!-- Additional container -->
+      <div class="container">
+
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="/">PrimePages</a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation"> <span
+            class="navbar-toggler-icon"></span> </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Links -->
+          <ul class="navbar-nav mr-auto">
+            <!-- Dropdown -->
+            <li class="nav-item active dropdown"> <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">5000 Largest</a>
+              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/primes/">5000 Largest</a>
+                <a class="dropdown-item" href="/top20/">Top 20 Primes</a>
+                <a class="dropdown-item" href="/bios/">Prover Bios</a>
+                <a class="dropdown-item" href="/primes/search.php">Search Primes</a>
+              </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" href="/notes/faq/">FAQ</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/curios/">Curios!</a></li>
+            <li class="nav-item"> <a class="nav-link" href="/glossary/">Glossary</a></li>
+          </ul>
+          <!-- Links -->
+          <script> <!-- w3.org claims this is unnecessary:  type="text/javascript" -->
+            function Gsitesearch(curobj) {
+              curobj.q.value = "site:t5k.org " + curobj.qfront.value
+            }
+          </script>
+          <form class="form-inline" action="https://www.google.com/search" onSubmit="Gsitesearch(this)">
+            <div class="md-form my-0">
+              <input name="q" type="hidden">
+              <input name="qfront" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+          </form>
+        </div>
+        <!-- Collapsible content -->
+
+      </div>
+      <!-- Additional container -->
+
+    </nav>
+    <!--/.Navbar-->
+  </header>
+  <!--Main Navigation-->
+  <header class="page-footer black p-0">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb black p-1">
+          <li class="breadcrumb-item"><a class="white-text" href="/">Home</a></li>
+          <!-- #BeginEditable "path" -->
+          <li class="breadcrumb-item"><a class="white-text" href="./index.html">Notes</a></li>
+          <li class="breadcrumb-item active">M<sub>756839</sub></li>
+          <!-- #EndEditable -->
+        </ol>
+      </nav>
+    </div>
+  </header>
+  <!--Main layout-->
+  <main class="mt-5">
+    <!-- <div class="m-5 mt-n5 alert alert-danger flex-center" role="alert">  </div>  -->
+    <!--Main container-->
+    <div class="container">
+      <h1 class="mt-n4 mb-4 rounded blue lighten-2 p-2 pl-4 z-depth-2"> <!-- #BeginEditable "title" -->The
+        finding of the 32<i>nd</i> Mersenne<!-- #EndEditable --></h1>
+      <h3 class="mt-n3 mb-3 p-2 pl-4 rounded blue lighten-4">By Chris Caldwell</h3>
+      <!-- #BeginEditable "content" --><!-- #BeginLibraryItem "/Library/No Longer Largest.lbi" -->
+      <div class="d-flex flex-row-reverse">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert"> This is a historical page on an old
+          record prime. See the <a href="/largest.html" class="alert link">Largest Known Primes</a> for current records.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+              aria-hidden="true">&times;</span></button>
+        </div>
+      </div><!-- #EndLibraryItem -->
+      <h2>Adrian Powell recalls the discovery of the 32<i>nd</i> Mersenne</h2>
+      <p>It was roughly 7 pm on Wednesday 19th
+        February 1992, when a Cray Research Analyst at Harwell Lab in Didcot,
+        Oxfordshire, UK was just about to start a regular software maintenance
+        slot on the research Labs Cray-2 supercomputer.</p>
+      <p>It had been a busy
+        few days with one thing and another in preparation to test the very
+        latest and greatest Unicos operating system, which was released to the
+        field on a regular basis.&nbsp; Over the last couple of days the analyst had
+        been busy building and configuring this latest software release, leaving
+        little time for the kind of system checks that need to be carried
+        out on a weekly basis. </p>
+      <p>On the Monday of that week though, he had briefly
+        displayed a logfile which was being produced by a special program called
+        <code>mprime</code>.&nbsp; <code>mprime</code> had been installed onto the machine a few weeks back by
+        the analyst, and consisted of a program which ran when the system was
+        completely idle which had been written to find very large prime numbers
+        called Mersenne primes.&nbsp; In the course of finding these numbers, the
+        program also ran cross checks which high lighted any potential problems
+        with the machine. Something which needed to be detected and isolated
+        very
+        quickly when dealing with a machine whose primary job was run computer
+        programs used for simulations and analysis in the nuclear industry.
+      </p>
+      <p>Mersenne primes numbers were not only very long, but notoriously difficult
+        to find.&nbsp;The program <code>mprime</code> had been written by a well respected computer scientist
+        at Cray Research Inc in the USA called David Slowinski. Working with
+        another computer scientist called Paul Gage, David ran an unofficial
+        project in house at Cray to find large and large Mersenne Prime numbers,
+        making use of small amounts of idle time on Cray supercomputers housed
+        within the company, again with the upshot of being used to ensure that
+        systems performed flawlessly.</p>
+      <p>Some years earlier, the site analyst at Harwell lab remembered seeing
+        a
+        large red poster hung on a wall of a UK Cray Research facility. &nbsp;The
+        poster contained an almost never ending number of digits, entitled the
+        29th Mersenne prime.&nbsp; Although the analyst was familiar with large prime
+        numbers and had spent time in the past producing fast computer programs
+        in order to find large prime numbers, this relatively huge number looked
+        absolutely incredible.&nbsp; Thus the analyst decided to contact the author
+        of the program, David Slowinski in order to see if the program could
+        run on the Cray-2 Supercomputer housed at Harwell.</p>
+      <p>David Slowinski showing his usual enthusiasm for such things, happily
+        obliged by providing the analyst with the program.&nbsp; The analyst
+        spent the next week modifying the way in which the program was run in
+        his spare time,
+        eventually coming up with the finished article. In late January 1992,
+        the
+        program was set to work; starting up when the system was completely idle,
+        then going into hibernation when users started up programs on the machine.</p>
+      <p>On
+        Monday 17th February, the analyst had noticed a strange entry in the
+        <code>mprime</code> logfile.&nbsp; Before he could investigate further the phone rang.&nbsp;
+        Immediately changing his attention to the nature of the call, the analyst
+        completely forgot about the logfile entry; that was until just before
+        the start of his software test slot on Wednesday.&nbsp; In a brief period
+        just before the beginning of his test slot, the analyst decided to take
+        another look at the logfile.&nbsp; The logfile contained reams and reams
+        of entries, but near
+        the end an entry '756839 prime' stood out. Surely it couldn't have been
+        that easy to find a Mersenne prime the analyst thought.&nbsp; The previous
+        Mersenne Prime number had been found back in 1985.&nbsp; This must be
+        some kind of malfunction of the software or spoof entry.&nbsp; The analyst
+        called into his office a couple of customer staff who were due to work
+        with him that
+        evening.&nbsp; As they peered at the screen, they appeared less skeptical
+        about the find, and prompted the analyst to make a call to whomever
+        had supplied the program.&nbsp; Cautiously the analyst rang David Slowinski
+        at Cray
+        in the USA, and told him about the entry.&nbsp; The entry actually referred
+        to
+        2 to the power 756839 being a prime number, something that was impossible
+        to prove unless the Mersenne proving theorem was used.&nbsp; To the analyst's
+        surprise David Slowinski actually responded with a &quot;well done&quot;,
+        and that he would get back after the number had been verified.
+      </p>
+      <p>David Slowinski proceeded to use Cray's latest and greatest machine
+        to verify the find; the brand new Cray C90 super computer, housed at
+        Chippewa
+        Falls in Cray's Wisconsin facility.&nbsp; It took 19 hours of cpu time
+        for the
+        Cray-2 supercomputer to test 2<sup>756839</sup>-1, but the same test ran in only
+        just over 3 hours of the new 16 cpu Cray C90.&nbsp; Slowinski
+        must have practically dedicated the C90 to the task as later on that
+        evening, the analyst received an email to the effect that the number
+        had indeed been verified on the C90. In the days that followed the new
+        find was also verified by Richard Crandall, Chief Scientist at NEXT computer,
+        as it was important to retest using a different computer architecture
+        and software.</p>
+      <p>On March 25th 1992, the new discovery was announced to the world by
+        both Cray and Harwell Lab, and large amounts of press coverage followed;
+        some
+        good and some bad.&nbsp; The biggest problem was that although finding
+        the new
+        prime appeared to be a momentous, if not incomprehensible task, the fact
+        that the number could not actually be used for anything, being just too
+        big seemed to annoy many people.&nbsp; The press often forgot to mention that
+        the program provided a critical role in ensuring machine integrity.&nbsp; The
+        press coverable culminated in the UK TV show 'Tomorrows World' giving
+        a slot to the find, where a presenter was seen running through a huge
+        printout which was provided by the Cray analyst who discovered the number.</p>
+      <p>The discovery was actually officially credited to Harwell Lab, as they
+        owned
+        the Cray-2 on which the number had been found.&nbsp; A little later that year
+        David Slowinski actually visited the Harwell Site, which was seen as
+        a good publicity exercise.&nbsp; Internally within Cray special badges were
+        produced to commemorate the find, and Harwell commissioned their official
+        photographer to take pictures of the site people who were involved.</p>
+      <p>I do have photo's and press cuttings of the occasion, but I'm not sure
+        that we can make the public on an internet site as I have lost contact
+        with other
+        people in the pictures.&nbsp; I've also just found the video from Tomorrows
+        World TV show!</p>
+      <p align="right">Written by Adrian Powell, February 2006. <br>
+      </p>
+      <!-- #EndEditable -->
+    </div>
+    <!-- For print copies only -->
+    <div class="d-none d-print-block mt-5 pl-3">Printed from the PrimePages &lt;t5k.org&gt; &copy; Reginald McLean.
+    </div>
+  </main>
+  <!--Main container-->
+
+  <footer class="page-footer font-small indigo darken-3 pt-4 mt-4">
+
+    <!-- Footer Links -->
+    <div class="container text-center">
+
+      <!-- Grid row -->
+      <div class="row">
+
+
+        <!-- hr class="clearfix w-100 d-md-none pb-3" -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mt-md-0 mt-3 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold" id="cc_more">Collections</h5>
+          <ul class="list-unstyled">
+            <li><a href="/glossary/">Prime Glossary</a></li>
+            <li><a href="/curios/">Prime Curios!</a></li>
+            <li><a href="/prove/">Proving Primality</a></li>
+            <li><a href="/notes/faq/">Frequently Asked Questions</a></li>
+            <li><a href="/notes/proofs/">Proofs</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Prime Lists</h5>
+          <ul class="list-unstyled">
+            <li><a href="/largest.html">Largest Known Primes</a></li>
+            <li><a href="/primes/">Top 5000 List</a></li>
+            <li><a href="/lists/">Lists of Small Primes</a></li>
+            <li><a href="/top20/">Records for Different Types</a></li>
+            <li><a href="/mersenne/">Mersenne Primes</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-sm-4 mb-md-0 mb-3">
+          <!-- Links -->
+          <h5 class="font-weight-bold">Pages</h5>
+          <ul class="list-unstyled">
+            <li> <a href="/donate.php">Donate</a></li>
+            <li> <a href="/notes/by_year.html">Largest Known by Year</a></li>
+            <li> <a href="/bios/">Prover Bios</a></li>
+            <li> <a href="/bios/top20.php">Top 20 Provers</a></li>
+            <li> <a href="/primes/includes/mail.php">Contact Us</a></li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+
+    <div class="footer-copyright text-center py-3"><!-- #BeginLibraryItem "/Library/copyright.lbi" -->
+      Copyright © 2021 &nbsp; <a href="https://t5k.org/">PrimePages</a>.&nbsp; (<a href="privacy.html">Privacy
+        notice</a>)<!-- #EndLibraryItem --></div>
+  </footer>
+  <!-- Footer -->
+
+  <!-- THIS WAS NOT IN MD5:  jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <!-- XX script src="../js/jquery-3.3.1.min.js"></script -->
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <!-- XX script src="../js/popper.min.js"></script -->
+  <!-- XX script src="../js/bootstrap-4.3.1.js"></script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+<!-- #EndTemplate -->
+
+</html>
