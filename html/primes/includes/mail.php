@@ -179,7 +179,7 @@ HERE;
 	hundreds of individual like you that take the time to make comments, submit suggestions and
 	especially to point out errors. Thank-you for taking time to write.</p>\n\n<p class=\"mb-4\">
 	Note: If you are pointing out an error, it helps us if you can be very specific about what
-	the error is and where it is located.</p>\n";
+	the error is and where it is located. You can also create an issue/discussion on our <a href="https://github.com/t5kowner/t5k.org/issues">GitHub</a>.</p>\n";
     }
 
     $temp1 = "State your e-mail address (so that we may respond).";
