@@ -32,6 +32,7 @@ MAILTO=admin@t5k.org
 59 * * * * php /var/www/html/primes/admin/status.php
 
 30 02 * * * /var/www/backup.sh
+40 03 4 * * /var/www/publishSql.sh
 
 # Prime list (ranks, scores... updated twice an hour)
 01 * * * * /var/www/html/primes/support/adjust_blobs -s
