@@ -154,7 +154,7 @@ if (empty($t_text)) { # main index page needs comments
     $header_ = <<< HERE
 <p>The "Prime Glossary" is an attempt to collect the most basic definitions about
 primes, and make them accessible to students and seekers of all ages. Feel
-free <a href="/glossary/includes/mail.php">to comment</a>. New definitions are
+free <a href="/primes/includes/mail.php">to comment</a>. New definitions are
 added regularly, be sure to let us know of any that should be added, and
 especially of any you would like to write.</p>
 HERE;

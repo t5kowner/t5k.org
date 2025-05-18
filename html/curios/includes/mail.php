@@ -1,6 +1,6 @@
 <?php
 
-include('../bin/basic.inc');
+require_once '../bin/basic.inc';
 require_once "../../../library/constants/environment.inc";
 $t_submenu =  "mail";
 
@@ -12,15 +12,7 @@ $config->set('HTML.TidyLevel', 'heavy');
 $config->set('HTML.Doctype', 'HTML 4.01 Transitional');
 $purifier = new HTMLPurifier($config);
 
-if (basic_DatabaseName() == 'primes') {
-    include_once('../bin/http_auth.inc');
-    if (my_is_ip_blocked()) {
-        lib_die('You may not submit entries while your IP is blocked.', 'warning');
-    }
-}
-
 $t_adjust_path = '../';
-# $t_limit_lang = 'en_US';
 $t_meta['add_lines'] = "<script async src='https://www.google.com/recaptcha/api.js'></script>
 <script>
    var RecaptchaOptions = { theme : 'white', tabindex : 2 };
@@ -108,8 +100,6 @@ if ($sendmail) {
 
         $extra = "\r\n\r\n----------------------------------------" .   # \r\n because this will be viewed in Windows
         "\n Referring page:\t\t " . $from_url .
-        "\n Working directory:\t " . getcwd() .
-        "\n Script location:\t\t /primes/includes/mail.php" .
         "\n Connected from:\t " . $_SERVER["REMOTE_ADDR"] .
         "\n Reply-to:\t\t " . $mail_from .
         "\n Via:\t\t\t $_SERVER[HTTP_USER_AGENT]" .
@@ -155,8 +145,7 @@ function default_text($no_intro = '')
     global $mail_text, $mail_from, $mail_who, $mail_anyway, $from_url;
     global $publickey, $send_mail, $clear_form, $send_anyway;
 
-    if (basic_DatabaseName() === 'curios') {
-        $intro = <<< HERE
+    $intro = <<< HERE
 
   <p>The Prime Curios! web site currently has two editors with very
   different responsibilities:</p>
@@ -171,16 +160,13 @@ function default_text($no_intro = '')
   <p><b>Reginald McLean, the technical editor</b>, runs the server; manages the
   database; and
   does the PHP, MySQL, perl and HTML programming.&nbsp;  If an index fails, or you get
-  strange error messages, or a search does something odd, then you need to talk to Reginald.</p>
+  strange error messages, or a search does something odd, then you need to talk to Reginald.
+  Note that if you merely wish to report a bug or request a new feature, we encourage you
+  to open an issue or discussion on <a href="https://github.com/t5kowner/t5k.org">our GitHub repository</a> instead.
+  This contact form is intended for more sensitive issues, such as an error with your account.</p>
   </blockquote>
 HERE;
-    } else {
-        $intro = "<p class=\"mt-4\">The Largest Known Primes database is only possible because of the help of
-	hundreds of individual like you that take the time to make comments, submit suggestions and
-	especially to point out errors. Thank-you for taking time to write.</p>\n\n<p class=\"mb-4\">
-	Note: If you are pointing out an error, it helps us if you can be very specific about what
-	the error is and where it is located.</p>\n";
-    }
+
 
     $temp1 = "State your e-mail address (so that we may respond).";
     $temp2 = "Follow the instructions below.";
