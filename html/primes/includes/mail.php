@@ -1,6 +1,6 @@
 <?php
 
-include('../bin/basic.inc');
+require_once '../bin/basic.inc';
 require_once "../../../library/constants/environment.inc";
 $t_submenu =  "mail";
 
@@ -12,15 +12,8 @@ $config->set('HTML.TidyLevel', 'heavy');
 $config->set('HTML.Doctype', 'HTML 4.01 Transitional');
 $purifier = new HTMLPurifier($config);
 
-if (basic_DatabaseName() == 'primes') {
-    include_once('../bin/http_auth.inc');
-    if (my_is_ip_blocked()) {
-        lib_die('You may not submit entries while your IP is blocked.', 'warning');
-    }
-}
 
 $t_adjust_path = '../';
-# $t_limit_lang = 'en_US';
 $t_meta['add_lines'] = "<script async src='https://www.google.com/recaptcha/api.js'></script>
 <script>
    var RecaptchaOptions = { theme : 'white', tabindex : 2 };
@@ -55,7 +48,7 @@ $send_anyway = "Send Anyway";
 if ($sendmail) {
     $mail_headers  = "MIME-Version: 1.0\n";
     $mail_headers .= "Content-type: text/html; charset=iso-8859-1\n";
-    $mail_headers  = "From: website@t5k.org\n";
+    $mail_headers  = "From: admin@t5k.org\n";
     $mail_headers  = "Reply-to: $mail_from\n";
 
     $mail_subject = "About the " . basic_CollectionName() . " (to the $mail_who editor)";
@@ -108,8 +101,6 @@ if ($sendmail) {
 
         $extra = "\r\n\r\n----------------------------------------" .   # \r\n because this will be viewed in Windows
         "\n Referring page:\t\t " . $from_url .
-        "\n Working directory:\t " . getcwd() .
-        "\n Script location:\t\t /primes/includes/mail.php" .
         "\n Connected from:\t " . $_SERVER["REMOTE_ADDR"] .
         "\n Reply-to:\t\t " . $mail_from .
         "\n Via:\t\t\t $_SERVER[HTTP_USER_AGENT]" .
@@ -155,32 +146,12 @@ function default_text($no_intro = '')
     global $mail_text, $mail_from, $mail_who, $mail_anyway, $from_url;
     global $publickey, $send_mail, $clear_form, $send_anyway;
 
-    if (basic_DatabaseName() === 'curios') {
-        $intro = <<< HERE
 
-  <p>The Prime Curios! web site currently has two editors with very
-  different responsibilities:</p>
-
-  <blockquote>
-
-  <p><b>G. L. Honaker, Jr., the content editor</b>, came up with the idea of this
-  collection.&nbsp;  He makes all final decisions on content and writes most of the
-  curios.&nbsp; If you would like to praise the collection, suggest a rewording, or have a
-  question about the content, then you want to talk to G. L.</p>
-
-  <p><b>Reginald McLean, the technical editor</b>, runs the server; manages the
-  database; and
-  does the PHP, MySQL, perl and HTML programming.&nbsp;  If an index fails, or you get
-  strange error messages, or a search does something odd, then you need to talk to Reginald.</p>
-  </blockquote>
-HERE;
-    } else {
         $intro = "<p class=\"mt-4\">The Largest Known Primes database is only possible because of the help of
 	hundreds of individual like you that take the time to make comments, submit suggestions and
-	especially to point out errors. Thank-you for taking time to write.</p>\n\n<p class=\"mb-4\">
+	especially to point out errors. Thank you for taking time to write.</p>\n\n<p class=\"mb-4\">
 	Note: If you are pointing out an error, it helps us if you can be very specific about what
 	the error is and where it is located.</p>\n";
-    }
 
     $temp1 = "State your e-mail address (so that we may respond).";
     $temp2 = "Follow the instructions below.";
@@ -190,46 +161,6 @@ HERE;
 <form action="$_SERVER[PHP_SELF]" method=post>
 <table class="md2 mx-auto $GLOBALS[mdbltcolor]" dir=ltr>
 HERE;
-
-    if (basic_DatabaseName() === 'curios') {
-      # Allow to select who they are mailing to
-        $form .= <<< HERE
-    <tr>
-      <td colspan="2" class="p-3 font-weight-bold">
-        Send mail to:
-      </td>
-    </tr><tr>
-      <td colspan="2" class="ml-2">
-        &nbsp;  &nbsp; <input type="radio" name="mail_who" value="content" class="p-3 ml-2"
-          title="&nbsp; About content matters"
-
-HERE;
-
-        if (empty($mail_who) or $mail_who == 'content') {
-            $form .= 'checked';
-        }
-
-        $form .= <<< HERE
-        >  the content editor: G. L. Honaker, Jr.
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="ml-2">
-        &nbsp;  &nbsp; <input type="radio" name="mail_who" value="technical" class="p-3 ml-2"
-          title="&nbsp; About technical issues"
-
-HERE;
-
-        if (!empty($mail_who) and $mail_who != 'content') {
-            $form .= 'checked';
-        }
-
-        $form .= <<< HERE
-        > the technical editor: Reginald McLean
-      </td>
-    </tr>
-HERE;
-    }
 
     $form .= <<< HERE
     <tr>
