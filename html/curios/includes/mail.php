@@ -160,7 +160,10 @@ function default_text($no_intro = '')
   <p><b>Reginald McLean, the technical editor</b>, runs the server; manages the
   database; and
   does the PHP, MySQL, perl and HTML programming.&nbsp;  If an index fails, or you get
-  strange error messages, or a search does something odd, then you need to talk to Reginald.</p>
+  strange error messages, or a search does something odd, then you need to talk to Reginald.
+  Note that if you merely wish to report a bug or request a new feature, we encourage you
+  to open an issue or discussion on <a href="https://github.com/t5kowner/t5k.org">our GitHub repository</a> instead.
+  This contact form is intended for more sensitive issues, such as an error with your account.</p>
   </blockquote>
 HERE;
 

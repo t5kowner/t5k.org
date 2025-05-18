@@ -150,8 +150,10 @@ function default_text($no_intro = '')
         $intro = "<p class=\"mt-4\">The Largest Known Primes database is only possible because of the help of
 	hundreds of individual like you that take the time to make comments, submit suggestions and
 	especially to point out errors. Thank you for taking time to write.</p>\n\n<p class=\"mb-4\">
-	Note: If you are pointing out an error, it helps us if you can be very specific about what
-	the error is and where it is located.</p>\n";
+	Note: If you wish to report a bug or typo or request a new feature, we encourage you
+  to open an issue or discussion on <a href=\"https://github.com/t5kowner/t5k.org\">our GitHub repository</a>
+  instead of contacting us here. This contact form is intended for more sensitive issues,
+  such as an error with your account.</p>\n";
 
     $temp1 = "State your e-mail address (so that we may respond).";
     $temp2 = "Follow the instructions below.";
