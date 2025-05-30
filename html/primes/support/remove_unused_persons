@@ -49,7 +49,7 @@ if ($opt_n and  $opt_n =~ /^\d+$/) {
 # Open database handle
 
 use connect_db;
-my $dbh = &connect_db::connect();
+my $dbh = &connect_db::connect_admin(); #deleting rows is more dangerous, therefore needs more security
 $opt_s or print "Connected to database.\n";
 
 # Get a list of the persons to remove (display_html will be used when logging the deletion)

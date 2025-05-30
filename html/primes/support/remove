@@ -31,7 +31,7 @@ $opt_t and print "Test mode: will not alter the database, mail written to ".
 
 # Open database handle
 
-my $dbh = &connect_db::connect();
+my $dbh = &connect_db::connect_admin(); #deleting rows is more dangerous, therefore needs more security
 
 # First, for the log and to email, make a list of the id's being removed
 
