@@ -3,6 +3,7 @@ package connect_db;
 # Connects to the primes database.  Functions:
 #
 # connect([{database=>$database, user=>$user, password=>$password}])
+# connect_admin([{database=>$database}])
 #	Connects and returns a database handle (uses old one if previously connected)
 #	Note: we can not switch between bases
 #
@@ -57,6 +58,13 @@ sub connect {
 
 #  }
   return $dbh;
+}
+
+sub connect_admin {
+  my $s = shift || {};
+  $$s{'user'} = 'primes_admin';
+  $$s{'password'} = environment::T5K_DB_PRIMES_ADMIN_PASSWORD;
+  return &connect_db::connect($s);
 }
 
 sub UpdateRow {
