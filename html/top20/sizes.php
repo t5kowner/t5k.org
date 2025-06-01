@@ -63,6 +63,11 @@ $t_text .= "<blockquote>
     </tr>\n";
 while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
     $subcat = $row['subcategory'];
+    //some categories use the subcategory field for no reason... let's avoid duplicating that here
+    if ($subcat != $row['name']) {
+        $subcat = $row['name'] . ': ' . $subcat;
+    }
+
     if ($row['visible'] == 'yes') {
         $subcat = "<a href=\"page.php?id=$row[id]\">$subcat</a>";
     }
