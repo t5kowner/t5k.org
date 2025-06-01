@@ -112,7 +112,9 @@ if (empty($row['visible_subcat'])) {
 }
 
 $subcats = lib_mysql_query("SELECT DISTINCT subcategory FROM archival_tag 
-    WHERE category_id = $row[id] AND subcategory REGEXP '$row[visible_subcat]'", $db);
+    WHERE category_id = $row[id] AND subcategory REGEXP '$row[visible_subcat]' 
+    ORDER BY LENGTH(subcategory) ASC, subcategory ASC", $db);
+    //weird sort here, but likely helpful for AP-10 to sort after AP-9 (once we have AP-10s)
 
 $subcat = $subcats->fetch(PDO::FETCH_ASSOC);
 
