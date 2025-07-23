@@ -13,9 +13,9 @@ if (isset($_REQUEST['hours']) and preg_match('/(\d+)/', $_REQUEST['hours'], $tem
 
 $t_title = "Prime Verification Status";
 $t_text = "<p>Before primes are added to the List of Largest Known Primes, they
-  must be first be verified, comments must be checked and they must meet the
+  must be first be verified, comments must be checked, and they must meet the
   <a href=\"../top20/sizes.php\">size requirements</a>.&nbsp;  Below we show the
-  status of these primes (if any) that are awaiting verificiation (of any age)";
+  status of these primes (if any) that are awaiting verification (of any age)";
 if (!empty($hours)) {
     $t_text .= " as well as those
   modified (for any reason) in the last $hours hours";
