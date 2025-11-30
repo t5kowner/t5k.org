@@ -1,12 +1,5 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteRule xpage/(.*?).html?$ https://t5k.org/curios/page.php?sort=$1 [QSA,R=301,L]
-  RewriteRule cpage/(.*?).html?$ https://t5k.org/curios/page.php?curio_id=$1 [QSA,R=301,L]
-  RewriteRule cpage/includes/(.*?)$ https://t5k.org/curios/includes/$1 [QSA,L]
-  RewriteRule includes/puzzio.php$ https://t5k.org/curios/puzzios/puzzio.php [R=301]
-
-  RewriteCond %{HTTPS} !on
-  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
-</IfModule>
+RedirectMatch Permanent cpage/(.*?).html?$ https://t5k.org/curios/page.php?curio_id=$1
+RedirectMatch Permanent cpage/includes/(.*?)$ https://t5k.org/curios/includes/$1
+RedirectMatch Permanent includes/puzzio.php$ https://t5k.org/curios/puzzios/puzzio.php
 
 ErrorDocument 404 /curios/includes/error404.php
