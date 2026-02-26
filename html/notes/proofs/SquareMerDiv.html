@@ -134,10 +134,9 @@
         </dd>
       </dl>
       <p><b>Comment.</b> The only Wieferich primes less than 2<sup>64</sup> (<a href="https://www.primegrid.com/forum_thread.php?id=10037&nowrap=true#157823">the search limit as of February 2026</a>)
-        are 1093 and 3511. The first of these does not satisfy the full force
-        of theorem and the second never divides an M<sub><i>q</i></sub> (with <i>q</i> prime), so M<sub><i>q</i></sub>
-        is square-free for all prime <i>q</i> less than 128. This isn't very helpful - M<sub><i>q</i></sub> has been completely factored for all prime <i>q</i>
-        less than 1213 (<a href="https://homes.cerias.purdue.edu/~ssw/cun/pmain126.txt">as of February 2026</a>), giving a much larger bound.</p>
+        are 1093 and 3511. A short calculation shows that the squares of these primes divide no M<sub><i>q</i></sub>.  The next possible <i>p</i> with <i>p</i><sup>2</sup> dividing some M<sub><i>q</i></sub> is the next possible Wieferich prime, which means <i>p</i> &gt; 2<sup>64</sup>.
+        Since <i>p</i><sup>2</sup> divides M<sub><i>q</i></sub>, we have (2<sup>64</sup>)<sup>2</sup> &lt; <i>p</i><sup>2</sup> &le; M<sub><i>q</i></sub> = 2<sup><i>q</i></sup>-1, so 2<sup>128</sup> &lt; 2<sup><i>q</i></sup>-1 and <i>q</i> &gt; 128, that is, M<sub><i>q</i></sub> is square-free for all <i>q</i> &lt; 128.
+        This is not very helpful.  For <i>q</i> somewhat larger than 128, M<sub><i>q</i></sub> has been factored completely.  One can look at the factors and see that no prime is repeated. This works for all <i>q</i> &lt; 1213 (<a href="https://homes.cerias.purdue.edu/~ssw/cun/pmain126.txt">as of February 2026</a>), so M<sub><i>q</i></sub> is square-free for all <i>q</i> &lt; 1213.
       <p>If we allow <a href="/glossary/page.php?sort=Composite" class="glossary">composite</a> exponents, then every
         odd square <i>n</i><sup>2</sup> divides infinitely
         many "Mersennes" 2<sup><i>m</i></sup>-1; just make <i>m</i> any multiple
@@ -234,3 +233,4 @@
 
 
 </html>
+
