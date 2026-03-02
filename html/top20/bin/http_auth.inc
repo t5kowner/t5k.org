@@ -205,7 +205,7 @@ function my_auth($id, $log_errors = false)
       // This routine does only basic authorization.
         if (
             isset($_SERVER['HTTP_AUTHORIZATION']) &&
-            ! ereg("^Basic ", $_SERVER['HTTP_AUTHORIZATION'])
+            !str_starts_with($_SERVER['HTTP_AUTHORIZATION'], "Basic ")
         ) {
             echo "Error: this routine can only handle basic HTTP authorization.<br>\n";
             return false;
