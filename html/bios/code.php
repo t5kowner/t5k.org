@@ -193,10 +193,13 @@ if ($where) {
 	<input type=hidden name=Style value=HTML>
         <input type=\"submit\" class=\"btn btn-primary p-2 mb-4\" name=all value=\"This Code's Current Primes\">
         </form></td>
-        <td><form method=post action=\"../primes/search.php\">
+        <td><form method=post action=\"../primes/search.php?Advanced=1\">
         <input type=hidden name=Discoverer value=\"$name\">
         <input type=hidden name=Number value=\"$row[PrimesTotal]\">
         <input type=hidden name=OnList value=all>
+		<input type=hidden name=\"PrimeStatus[]\" value=4>
+        <input type=hidden name=\"PrimeStatus[]\" value=5>
+        <input type=hidden name=\"PrimeStatus[]\" value=6>
 	<input type=hidden name=Style value=HTML>
         <input type=\"submit\" class=\"btn btn-primary p-2 mb-4\" name=all value=\"All of This Code's Primes\">
         </form></td>";
