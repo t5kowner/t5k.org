@@ -28,15 +28,16 @@ use parser;
 
 use Getopt::Std;  # Allow for command line options
 
-getopts('e:sc:hf:');
-our($opt_e, $opt_s, $opt_c, $opt_h, $opt_f);
+getopts('e:sc:hf:p:');
+our($opt_e, $opt_s, $opt_c, $opt_h, $opt_f, $opt_p);
 
-if ( $opt_h or not($opt_s or $opt_e or $opt_f or defined($opt_c)) ) {
+if ( $opt_h or not($opt_s or $opt_e or $opt_f or $opt_p or defined($opt_c)) ) {
   print "Usage: $0 [options] [parser] \nwhere the options are
 
 	-e \"number\"	log:  evaluate the given number, return log (only) or NaN
 	-c \"number\"	sign: evaluate the given number, return -1, 0, or 1 for <0, 0, >0
-	-f \"number\"	full: evaluate the given number, return full digitial expansion of NaN
+	-f \"number\"	full: evaluate the given number, return full digital expansion of NaN
+	-p file         full: read an expression from passed file, return full digital expansion of NaN
 	-s		silent except for errors
   \nand the parsers are
 
@@ -51,6 +52,13 @@ my $expression;
 $opt_e and $expression = $opt_e;
 defined($opt_c) and $expression = $opt_c;
 $opt_f and $expression = $opt_f;
+if (defined $opt_p) {
+    open my $fh, '<', $opt_p or die "Cannot open file $opt_p: $!";
+    $expression = do { local $/; <$fh> };
+    close $fh;
+    $opt_f = 1;
+}
+
 # if ( (defined($opt_e) or defined($opt_c) or defined($opt_f)) and !$expression)
 #  { die("The options c, e and f require an expression\n"); }
 
