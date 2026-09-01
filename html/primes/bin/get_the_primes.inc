@@ -16,6 +16,9 @@
 # to re-edit the field.  They also append information necessary for submit2.php
 # to the global $carry_forward.
 
+use function Top20\lintAll;
+
+require_once "/var/www/library/top20/lint/lint.inc";
 
 ##### GET A LIST OF PRIMES
 #
@@ -48,8 +51,6 @@ function get_the_primes($error_message = '')
     global $The5000thDigits,  $The5000thLog10;  # set in submit.php
     global $basic_database_connection;  # database handle defined in basic.inc
 
-    $AllowHistoric = false;  # Set to true to allow primes < 1000 digits
-
     $canonicalizer_url = '/primes/support/modules/canonical.cgi';
 
   # Grab the info from the form--it is either in primes or encoded in primes_enc.
@@ -74,7 +75,7 @@ function get_the_primes($error_message = '')
         $error_message = '<div class="alert alert-danger m-5" role="alert">ERROR: ' . "$error_message</div>\n";
     }
     $out .= $error_message;
-
+    $all_primes = [];
     if (empty($error_message) and !empty($primes)) {  # Got some primes?
       # Allow backquotes as continuation characters (need to quote \\\n)
         $primes = preg_replace('/\\\\\\s+/s', '', $primes);
@@ -85,28 +86,28 @@ function get_the_primes($error_message = '')
                 continue;    # Skip blank lines
             }
 
-          # remove unnecessary space in line
+            # remove unnecessary space in line
 
-          # leading/trailing
+            # leading/trailing
             $Line = preg_replace('/(^\s+|\s+$)/', '', $Line);
-          # Space around binary operators:  - / ^ + *
+            # Space around binary operators:  - / ^ + *
             $Line = preg_replace('/\s*([\-\/\^+*])\s*/', '$1', $Line);
-          # space before postfix operators: ) # !
+            # space before postfix operators: ) # !
             $Line = preg_replace('/\s+([\)#!])/', '$1', $Line);
-          # Space after prefix operators:   ( -
+            # Space after prefix operators:   ( -
             $Line = preg_replace('/([\(\-]+)\s+/', '$1', $Line);
-          # $Line =~ s/([RpUV])\s*\(\s*/$1(/go;  # Functions : R p U V
-          # Change . to *  (??cause trouble???)
+            # $Line =~ s/([RpUV])\s*\(\s*/$1(/go;  # Functions : R p U V
+            # Change . to *  (??cause trouble???)
             $Line = preg_replace('/\./', '*', $Line);
-          # folks have used . for * in submission.  Tricked my routines.
+            # folks have used . for * in submission.  Tricked my routines.
 
-          # Split line into description and comment
+            # Split line into description and comment
 
             preg_match('/(\S+)\s*(.*)/', $Line, $Matches);
             $old_desc = $Matches[1];
             $comment = $Matches[2];
 
-          # Use the external routine canonical on the description
+            # Use the external routine canonical on the description
 
             $desc = shell_exec(
                 '/var/www/html/primes/support/modules/canonical -e ' .
@@ -116,9 +117,13 @@ function get_the_primes($error_message = '')
                 $Warn[] = "The description \"$old_desc\" was
 	modified to \"$desc\" in accordance with our
 	<a href=\"$canonicalizer_url?string=" . rawurlencode($old_desc) .
-                "\" class=none>canonicalization procedures</a>.";
+                    "\" class=none>canonicalization procedures</a>.";
             }
-
+            $all_primes[] = new \Top20\SubmittedPrime($basic_database_connection, $desc, $comment);
+        }
+        foreach ($all_primes as $prime) {
+            $desc = $prime->prime;
+            $comment = $prime->comment;
           # Now parse to see the size (also tests syntax!)  First we get the natural
           # log.  Two cases: either a string like 'prime_blob_94' where 94 is the
           # blob database id or a parsable string like '2*3^1000+3^7-1'.
@@ -138,7 +143,7 @@ function get_the_primes($error_message = '')
                           $log10 = 'NaN';
                 } else {
                     if ($temp['prime_id'] > 0) {
-                            $Warn[] = "Isn't this prime \"$desc\" already in the database?";
+                            $Error[] = "Isn't this prime \"$desc\" already in the database?";
                     }
                     $log10 = $temp['log10'] * log(10);  # parser returns ln, not log_10
                     $desc = "$temp[description] [blob_id $blob_id]";
@@ -158,18 +163,16 @@ function get_the_primes($error_message = '')
           parser so it is being ignored.  If it is a valid prime please
           <a href=\"mailto:admin\@t5k.org\">let the admin know</a>! The
 	  parser returned: <blockquote>$log10</blockquote>\n";
-                $BadPrimes[] = "Not parsable: $Line";
+                $BadPrimes[] = "Not parsable: $desc $comment";
                 continue;
             } else {
                 $log10 = $log10 / log(10);
                 $digits = floor(1 + $log10);
             }
 
-          # Is this prime too big? (Will check too small later)  Note that I allow
-          # myself alot more room when submitting.  So when a user is bounced,
-          # prehaps I can on the test pages.
+            # Is this prime too big? (Will check too small later)
 
-            $multiplier = file_exists("/var/www/html/TESTSITE") ? 200 : 20;
+            $multiplier = 20;
             if (!empty($desc) and $digits > $multiplier * $The5000thDigits) {
                 $Error[] = "The prime \"$desc\" is unusually large.  Primes this
 	  size require must be submitted manually by e-mailing
@@ -215,48 +218,30 @@ function get_the_primes($error_message = '')
 
           # Now finish
 
-            $always_upper = '(ECPP|APR-CL|NSW|GF\()';
-            $always_first_upper = '(Fermat|Woodall|Cullen|Sophie|Germain|Lucas|' .
-            'Lehmer|Cunningham|Aurifeuillian|Fibonacci|Mersenne|Euler|Carmichael|' .
-            'Gaussian|Wagstaff|Mills|Phi\(|F\()';
 
-            if ($comment) {    # If there is a comment, should it be adjusted?
-              # Remove Proth's comments like : "Is prime! (P = 1, Q =-1) [10005
-          # digits]" or "Is prime! (a = 3)" (often just part of this comment is
-          # included)
-
-                $comment_was = $comment;
-                $patterns = array('/Is prime\!/', '/\s*\(P = \d+, Q =\s*\-?\d+\)/',
-                '/\s*\(a = \d+\)/', '/\s*\[\d+ digits\]/');
-                $comment = preg_replace($patterns, '', $comment);
-                if ($comment != $comment_was) {
-                    $Warn[] = "Proth.exe comments like
-		'Is prime!', '(P = 1, Q =-1)', '[10005 digits]' and '(a = 3)'
-		should not be included, remove them please.";
+            //now, is it a valid comment?
+            $lintResults = lintAll($basic_database_connection, $prime, $all_primes);
+            $newComment = ucfirst(implode(", ", array_map(fn($x) => $x->officialComment, $lintResults)));
+            if ($newComment !== $comment) {
+                if($comment !== ""){
+                    $Warn[] = "The comment \"" . htmlspecialchars($comment) .
+                        "\" was changed to \"" . htmlspecialchars($newComment) . "\" to match top20 standards.";
                 }
-      #### Problem... credits like [BR] should not be messed with!!!!
-                $comment = ucfirst(strtolower($comment)); # First character uppercased
-                $comment = preg_replace_callback(
-                    "/$always_upper/i",
-                    function ($matches) {
-                        #print_r($matches);
-                        return strtoupper($matches[0]);
-                    },
-                    $comment
-                );
-                $comment = preg_replace_callback(
-                    "/$always_first_upper/i",
-                    function ($matches) {
-                          #print_r($matches);
-                          return ucfirst($matches[0]);
-                    },
-                    $comment
-                );
+                else{
+                    $Warn[] = "The comment was set to \"" . htmlspecialchars($newComment) . "\" to match top20 standards.";
+                }
+                $comment = $newComment;
+            }
+            $commentOnList = false;
+            foreach ($lintResults as $lintResult) {
+                if ($lintResult->onlist($basic_database_connection, $desc)) {
+                    $commentOnList = true;
+                    break;
+                }
             }
 
             if (
-                $log10 >= $The5000thLog10 - 0.00000001 or (!empty($comment) and
-                $digits >= 1000) or $AllowHistoric
+                $log10 >= $The5000thLog10 - 0.00000001 or ($commentOnList and $digits >= 1000)
             ) {
                 $GoodPrimes[] = "$desc $comment";  # Add the prime
                 $GoodPrimes2[] = $log10;  # The size of the prime
@@ -273,23 +258,12 @@ function get_the_primes($error_message = '')
                         if ($log10 <= $The5000thLog10 + 0.0000001) {
                                 $Warn[] = "The prime \"$desc\" is very very close to the 5000th
 		prime.  I will add it temporarily to the list and use the more
-		powerful sorting algorithms to see.";
+		powerful sorting algorithms to see."; //TODO better check
                         } else {
                             $Warn[] = "At the rate at which primes have been added to this
 		list in the past, the $digits digit prime \"$desc\" may only
 		be on the list for about $lifetime weeks.";
                         }
-                    } elseif ($digits < $The5000thDigits) {
-            # Only makes it because of the comment
-                        $Warn[] = "The prime \"$desc\" does not make the top 5000, so
-		must be one of the <a href=\"/lists/top20/\"
-		class=none>twenty largest</a> of
-		one of the <a href=\"/lists/top20/archivable.html\"
-		class=none>archivable forms</a> to remain in the database.&nbsp;
-		See our <a href=\"/lists/top20/sizes.html\" class=none>list
-		of sizes</a> of the
-		twentieth for each form.&nbsp; This prime will be removed later
-		if the comment is not valid.";
                     }
                 }
             } else {  # Nope, not big enough!  reject it.
