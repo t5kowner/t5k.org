@@ -10,6 +10,10 @@ html/lists/small/millions/primes*.zip
 html/primes/admin/mysql-adminer.php
 html/balance
 
+# php things
+vendor/*
+.phpunit.cache/*
+
 html/nthprime/booker/*.o
 html/nthprime/booker/nthprime
 html/nthprime/booker/piofx
