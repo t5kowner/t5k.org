@@ -21,6 +21,20 @@ class CunninghamChain extends BaseLinter
      */
     public function lint(PDO $db, SubmittedPrime $prime, array $others = []): array
     {
+        $found = false;
+        foreach ($prime->singleComment as $comment) {
+            if (
+                str_starts_with($comment, "cunningham chain (") ||
+                str_starts_with($comment, "cunningham chain 2nd kind (") ||
+                str_starts_with($comment, "sophie germain (")
+            ) {
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
+            return [];
+        }
         foreach (["+", "-"] as $sign) {
             $prev = $this->getChainLengthBackward($db, $prime, $others, $sign);
             $next = $this->getChainLengthForward($db, $prime, $others, $sign);

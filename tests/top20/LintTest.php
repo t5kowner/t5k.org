@@ -23,10 +23,10 @@ class LintTest extends TestCase
             ["3*2^1234-1 twin (p)", [], Category::Twin, true, 0],
             ["3*2^1234-1 twin (p)", ["3*2^1234+5"], Category::Twin, true, 0],
 
-            ["3*2^1234-1", ["3*2^1235-1"], Category::SophieGermain, false, 1],
-            ["3*2^1235-1", ["3*2^1234-1"], Category::SophieGermain, false, 1],
-            ["3*2^1234-1", [], Category::SophieGermain, true, 0],
-            ["3*2^1234-1", ["3*2^1234+5"], Category::SophieGermain, true, 0],
+            ["3*2^1234-1 sophie germain (p)", ["3*2^1235-1"], Category::SophieGermain, false, 1],
+            ["3*2^1235-1 sophie germain (2p+1)", ["3*2^1234-1"], Category::SophieGermain, false, 1],
+            ["3*2^1234-1 sophie germain (p)", [], Category::SophieGermain, true, 0],
+            ["3*2^1234-1 sophie germain (p)", ["3*2^1234+5"], Category::SophieGermain, true, 0],
 
             ["2^1234-1", [], Category::Mersenne, false, 1],
             ["2^1234-3", [], Category::Mersenne, true, 0],
