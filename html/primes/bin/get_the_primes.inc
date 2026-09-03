@@ -143,32 +143,14 @@ function get_the_primes($error_message = '')
                           $log10 = 'NaN';
                 } else {
                     if ($temp['prime_id'] > 0) {
-                            $Error[] = "Isn't this prime \"$desc\" already in the database?";
+                        $Error[] = "Isn't this prime \"$desc\" already in the database?";
                     }
-                    $log10 = $temp['log10'] * log(10);  # parser returns ln, not log_10
                     $desc = "$temp[description] [blob_id $blob_id]";
-            # Note that the last part of this description is for submit2.php
+                    # Note that the last part of this description is for submit2.php
                 }
-
-              # case two: a parsable string
-            } else {
-                $log10 = shell_exec(
-                    '/var/www/html/primes/support/math/parser -e ' .
-                    escapeshellarg($desc) . ' b 2>&1'
-                );
             }
-
-            if (!is_numeric($log10)) {
-                $Error[] = "The number \"$desc\" was not recognized by our
-          parser so it is being ignored.  If it is a valid prime please
-          <a href=\"mailto:admin\@t5k.org\">let the admin know</a>! The
-	  parser returned: <blockquote>$log10</blockquote>\n";
-                $BadPrimes[] = "Not parsable: $desc $comment";
-                continue;
-            } else {
-                $log10 = $log10 / log(10);
-                $digits = floor(1 + $log10);
-            }
+            $log10 = $prime->number->getLog10();
+            $digits = $prime->number->getDigits();
 
             # Is this prime too big? (Will check too small later)
 

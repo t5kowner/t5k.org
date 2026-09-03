@@ -79,19 +79,8 @@ if ($opt_e) {
   print &parser::parse($expression,'log only');
 } elsif (defined($opt_c)) {
   print &parser::parse($expression,'sign only');
+} elsif (defined($opt_p)) {
+  print &parser::parse($expression,'full and log');
 } elsif ($opt_f) {
   print &parser::parse($expression);
-} else { # Interactive mode
-  while (1) {
-    print "expression: ";
-    my $parse_string= <>;
-    chop $parse_string;
-    exit if ($parse_string =~ /^[qr ]+/o);
-    my $time = time;
-    print "Returns:\n".&parser::parse($parse_string,'internal too')."\n";
-#    print "Returns:\n".&parser::parse($parse_string,'log only')."\n";
-#    $parser::GlobalString = $parse_string;
-#    print "Returns:\n".&math::show(&parser::get_term(18))."\n";
-    printf("\t(%9.6f seconds)\n",time-$time);
-  }
-};
+}

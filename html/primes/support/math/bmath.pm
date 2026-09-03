@@ -185,6 +185,8 @@ sub show {
     length(&Math::Pari::pari2pv($z));
   } elsif ($style eq 'log only') {
     &Math::Pari::pari2num(log($z));
+  } elsif ($style eq 'full and log') {
+    $z . " " . &Math::Pari::pari2num(log($z));
   } else {
     $z
   }
