@@ -30,6 +30,19 @@ class Number
      * @var ?string full decimal expansion of a number
      */
     private ?string $decimalExpansion = null;
+    /**
+     * @var ?float log10 of the number
+     */
+    private ?float $log10 = null;
+
+    public function getLog10(): float
+    {
+        if ($this->log10) {
+            return $this->log10;
+        }
+        $this->populateLog10AndDigits();
+        return $this->log10;
+    }
 
     /**
      * @return int number of digits in the number
@@ -39,21 +52,29 @@ class Number
         if ($this->digits) {
             return $this->digits;
         }
+        $this->populateLog10AndDigits();
+        return $this->digits;
+    }
+
+    private function populateLog10AndDigits(): void
+    {
         if ($this->blobId) {
-            $result = $this->db->query("SELECT digits, full_digit FROM prime_blob WHERE id=$this->blobId");
+            $result = $this->db->query("SELECT digits, full_digit, log10 FROM prime_blob WHERE id=$this->blobId");
             $this->digits = $result[0];
             $this->decimalExpansion = str_replace(" ", "", $result[1]);
+            $this->log10 = $result[2];
         } elseif ($this->id) {
-            $result = $this->db->query("SELECT digits, blob_id FROM prime WHERE id=$this->id");
+            $result = $this->db->query("SELECT digits, log10, blob_id FROM prime WHERE id=$this->id");
             $this->digits = $result[0];
-            if (!empty($result[1])) {
-                $this->blobId = $result[1];
+            $this->log10 = $result[1];
+            if (!empty($result[2])) {
+                $this->blobId = $result[2];
             }
         } else {
-            $this->decimalExpansion = getDecimalExpansion($this->desc);
+            $this->decimalExpansion = getDecimalExpansion($this->desc, $this->log10);
+            $this->log10 /= log(10);
             $this->digits = strlen($this->decimalExpansion);
         }
-        return $this->digits;
     }
 
     /**
@@ -65,17 +86,19 @@ class Number
             return $this->decimalExpansion;
         }
         if ($this->blobId) {
-            $result = $this->db->query("SELECT digits, full_digit FROM prime_blob WHERE id=$this->blobId");
+            $result = $this->db->query("SELECT digits, full_digit, log10 FROM prime_blob WHERE id=$this->blobId");
             $this->digits = $result[0];
             $this->decimalExpansion = str_replace(" ", "", $result[1]);
+            $this->log10 = $result[2];
         } elseif ($this->desc) {
             $this->decimalExpansion = getDecimalExpansion($this->desc);
             $this->digits = strlen($this->decimalExpansion);
         } else {
-            $result = $this->db->query("SELECT prime.digits, prime.blob_id, prime.description, prime_blob.full_digit 
+            $result = $this->db->query("SELECT prime.digits, prime.blob_id, prime.description, prime_blob.full_digit, prime.log10  
                 FROM prime LEFT JOIN prime_blob ON prime.id=prime_blob.prime_id WHERE id=$this->id");
             $this->digits = $result[0];
             $this->desc = $result[2];
+            $this->log10 = $result[4];
             if (!empty($result[1])) {
                 $this->blobId = $result[1];
                 $this->decimalExpansion = str_replace(" ", "", $result[3]);
