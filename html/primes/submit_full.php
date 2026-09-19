@@ -275,10 +275,8 @@ function get_the_number($error_message = '')
 
       # Set digits and log10
         $digits = strlen($new_long);
-        if ($digits < 64) {
-            return get_the_number("Numbers with less than 64 digits (yours has $digits)
-	can be entered directly in the prime database where the description is the full number.
-	But of course these short numbers will be rejected as too short!.\n");
+        if ($digits < 1000) {
+            return get_the_number("Numbers with less than 1000 digits (yours has $digits) are too small.\n");
         }
 
         if (preg_match("/^\d{16}/", $new_long, $match)) {
@@ -295,19 +293,7 @@ function get_the_number($error_message = '')
 
       # Here we should have a valid form.  Reformat and preform some checks
 
-        $full_digits = '';
-      # note $digits = strlen($new_long);
-        $length_lead_block = 10 - ($digits % 10);
-        for ($i = 0; $i < $digits; $i++) {
-            $full_digits .= $new_long[$i];
-            if ((($i + 1 + $length_lead_block) % 10) == 0) {
-                if ($i + 1 < $digits) {
-                    $full_digits .= ' ';  # avoid a trailing space
-                }
-            }
-        }
-
-      # ? checks ?
+        $full_digits = $new_long;
 
       # Now have the number, lets print it and move on
         return get_the_number(); # Recycle--print reformated number with log10 and move on
@@ -478,7 +464,17 @@ function basic_create_blob($description, $text, $digits, $log10, $full_digits, $
     if ($blob_id > 0) {
         return(-$blob_id);
     }
-
+    //eventually, the database shouldn't store formatted data...
+    $formatted = '';
+    $length_lead_block = 10 - ($digits % 10);
+    for ($i = 0; $i < $digits; $i++) {
+        $formatted .= $full_digits[$i];
+        if ((($i + 1 + $length_lead_block) % 10) == 0) {
+            if ($i + 1 < $digits) {
+                $formatted .= ' ';  # avoid a trailing space
+            }
+        }
+    }
   # Form the $query, do the work.
     $query = "INSERT prime_blob (text,description,digits,log10,full_digit,person_id,modified,created,id)
         VALUES(:text,:description,:digits,:log10,:full_digits,:person_id,NOW(),NOW(),NULL)";
@@ -488,7 +484,7 @@ function basic_create_blob($description, $text, $digits, $log10, $full_digits, $
         $sth->bindValue(':text', $text);
         $sth->bindValue(':digits', $digits);
         $sth->bindValue(':log10', $log10);
-        $sth->bindValue(':full_digits', $full_digits);
+        $sth->bindValue(':full_digits', $formatted);
         $sth->bindValue(':person_id', $xx_person_id);
         $success = $sth->execute();
         $insert_id = $GLOBALS['db']->lastInsertId();
