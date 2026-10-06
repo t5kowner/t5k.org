@@ -91,8 +91,9 @@ class Number
             $this->decimalExpansion = str_replace(" ", "", $result[1]);
             $this->log10 = $result[2];
         } elseif ($this->desc) {
-            $this->decimalExpansion = getDecimalExpansion($this->desc);
+            $this->decimalExpansion = getDecimalExpansion($this->desc, $this->log10);
             $this->digits = strlen($this->decimalExpansion);
+            $this->log10 /= log(10);
         } else {
             $result = $this->db->query("SELECT prime.digits, prime.blob_id, prime.description, prime_blob.full_digit, prime.log10  
                 FROM prime LEFT JOIN prime_blob ON prime.id=prime_blob.prime_id WHERE id=$this->id");
