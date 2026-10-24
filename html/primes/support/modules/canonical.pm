@@ -134,22 +134,6 @@ sub adjust {
   # Rule 1b: Remove all white space
   &change('1b',"removed white space ($n characters)") if ($n = ($desc =~ s/\s//go));
 
-  # Rule 1c: Exponent bases should be minimal ("256^10" should be "2^80")
-
-  $a_left  = '[(,+\\-*\\/#^!]';	# Those with equal or lower precidence
-  $a_right = '[),+\\-*\\/]';	# Omit postfix operators and ^ (right associative)
-
-  $desc =~ s/(^|$a_left)(\d+)\^(\d+)($a_right|$)/
-      $left = $1; $a = $2; $b = $3; $right = $4; $out = $&;
-      if (($exp = &is_power($a, $n)) > 1) {
-		  $newExp = &parser::parse($b.'*'.$exp);
-		if (&is_int($a) and &is_int($newExp) and &is_int($n)) {
-		  $out = &change('1c',$out,"$left$n^".($newExp).$right);
-		}
-      }
-      $out;
-  /eog;
-
   ### Main loop 
   # Some things might take mulitple passes: "2*((3)*5)*2^10" should be "15*2^11"
 
@@ -161,6 +145,22 @@ sub adjust {
     last if $number_loops > 100;	# Should never happen--indicates programming error!
 
     # Rules 2: Arithmetical simplification:
+    # Rule 2aa: Exponent bases should be minimal ("256^10" should be "2^80")
+
+      $a_left  = '[(,+\\-*\\/#^!]';	# Those with equal or lower precedence
+      $a_right = '[),+\\-*\\/]';	# Omit postfix operators and ^ (right associative)
+
+      $desc =~ s/(^|$a_left)(\d+)\^(\d+)($a_right|$)/
+          $left = $1; $a = $2; $b = $3; $right = $4; $out = $&;
+          if (($exp = &is_power($a,$n)) > 1) {
+    		  $newExp = &parser::parse($b.'*'.$exp);
+    		if (&is_int($a) and &is_int($newExp) and &is_int($n)) {
+    		  $out = &change('2aa',$out,"$left$n^".($newExp).$right);
+    		}
+          }
+          $out;
+      /eog;
+
     # Rule 2a: No double negatives or unary addition ("^+3+-+2" is "3-2")
     $desc =~ s/([+\-])([+\-])/
       &change('2a',$&,$1 eq $2 ? '+' : '-');
@@ -707,17 +707,18 @@ sub is_int {
 }
 
 sub is_power {
-   # If this a perfect power on a positive integer greater than one? 
-   # If so, return the exponent; else return 1.  (O for non-integers)
-   return 0 if ((my $n = shift) < 2);	# Not power of an integer greater than one
-   return 0 if not &is_int($n);
-   my $exp = 1;	# Let's try some exponents
-   while ($exp++) {
-    my $root = &parser::parse('['.$n.'^(1/'.$exp.')+0.5]');
-    $_[0] = $root;
-    return $exp*is_power($root) if $n == &parser::parse($root.'^'.$exp);
-    return 1 if $root < 2;  # seeking positive integer greater than one!
-  }
+    my $n = shift;
+    return 0 if $n < 2;
+    return 0 if not &is_int($n);
+    my $exp = 1;
+    while ($exp++) {
+        my $root = &parser::parse('['.$n.'^(1/'.$exp.')+0.5]');
+        if ($n == &parser::parse($root.'^'.$exp)) {
+            $_[0] = $root if @_ > 0;  #ugly hack to allow a second parameter to work. Will clean up when moving to PHP
+            return $exp;
+        }
+        return 1 if $root < 2;
+    }
 }
 
 1;
