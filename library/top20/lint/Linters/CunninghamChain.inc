@@ -68,14 +68,14 @@ class CunninghamChain extends BaseLinter
     }
 
     /**
-     * Determines how long a cunningham chain goes "forward" (increasing multiplier)
+     * Determines how long a cunningham chain goes "backward" (decreasing multiplier)
      * @param PDO $db database handle
-     * @param SubmittedPrime $prime Prime to look forward from
+     * @param SubmittedPrime $prime Prime to look backward from
      * @param array $others Other primes that might be part of the chain
      * @param string $sign "+" for cunningham chains of 1st kind, "-" for second kind
      * @return int Number of primes that continue this chain
      */
-    private function getChainLengthForward(PDO $db, SubmittedPrime $prime, array $others, string $sign): int
+    private function getChainLengthBackward(PDO $db, SubmittedPrime $prime, array $others, string $sign): int
     {
         $ret = 0;
         $mult = 2;
@@ -95,15 +95,16 @@ class CunninghamChain extends BaseLinter
         return $ret;
     }
 
+
     /**
-     * Determines how long a cunningham chain goes "backward" (decreasing multiplier)
+     * Determines how long a cunningham chain goes "forward" (increasing multiplier)
      * @param PDO $db database handle
-     * @param SubmittedPrime $prime Prime to look backward from
+     * @param SubmittedPrime $prime Prime to look forward from
      * @param array $others Other primes that might be part of the chain
      * @param string $sign "+" for cunningham chains of 1st kind, "-" for second kind
      * @return int Number of primes that continue this chain
      */
-    private function getChainLengthBackward(PDO $db, SubmittedPrime $prime, array $others, string $sign): int
+    private function getChainLengthForward(PDO $db, SubmittedPrime $prime, array $others, string $sign): int
     {
         $ret = 0;
         $mult = 2;
