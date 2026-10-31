@@ -50,9 +50,11 @@ class CunninghamChain extends BaseLinter
                 $category = Category::SophieGermain;
                 $threshold = ARCHIVABLE_COUNT;
             }
+            $subcategory = $comment . " ($next more)";
             switch ($category) {
                 case Category::SophieGermain:
                     $comment = "Sophie Germain " . $comment;
+                    $subcategory = $comment;
                     break;
                 case Category::CunninghamChain:
                     $comment = "Cunningham chain " . $comment;
@@ -62,7 +64,7 @@ class CunninghamChain extends BaseLinter
                     break;
                 default: //unreachable
             }
-            return [new LintResult($category, true, $comment, $comment, $threshold)];
+            return [new LintResult($category, true, $comment, $subcategory, $threshold)];
         }
         return [];
     }
