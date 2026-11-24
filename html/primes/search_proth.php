@@ -108,11 +108,11 @@ function UnTaint()
   # ?? $match = (delete($In[$key]) =~ /(.+)/o ? $1 : $Match);
 
   # Number of primes to find:
-    $number = (preg_match('/(\d+)/', $_REQUEST['number'], $temp) ? $temp[1] : 20);
+    $number = (preg_match('/^(\d+)$/', $_REQUEST['number'], $temp) ? $temp[1] : 20);
     $criteria = "Find $number primes ";
 
   # base for these primes
-    $base = (preg_match('/(\d+)/', $_REQUEST['base'], $temp) ? $temp[1] : 2);
+    $base = (preg_match('/^(\d+)$/', $_REQUEST['base'], $temp) ? $temp[1] : 2);
     $criteria .= "of the form: k*$base^n";
 
   # sign(s) to seek
@@ -131,19 +131,19 @@ function UnTaint()
   # min or max limits on the variables?
     $extra_criteria = '';
     $extra_tests = '';
-    if (isset($_REQUEST['min_k']) and preg_match('/(\d+)/', $_REQUEST['min_k'], $temp)) {
+    if (isset($_REQUEST['min_k']) and preg_match('/^(\d+)$/', $_REQUEST['min_k'], $temp)) {
         $extra_criteria .= "k >= $_REQUEST[min_k]";
         $extra_tests .= "\$k >= $_REQUEST[min_k]";
     }
-    if (isset($_REQUEST['max_k']) and preg_match('/(\d+)/', $_REQUEST['max_k'], $temp)) {
+    if (isset($_REQUEST['max_k']) and preg_match('/^(\d+)$/', $_REQUEST['max_k'], $temp)) {
         $extra_criteria .= (empty($extra_criteria) ? '' : ', ') . "k <= $_REQUEST[max_k]";
         $extra_tests    .= (empty($extra_tests) ? '' : ' && ') . "\$k <= $_REQUEST[max_k]";
     }
-    if (isset($_REQUEST['min_n']) and preg_match('/(\d+)/', $_REQUEST['min_n'], $temp)) {
+    if (isset($_REQUEST['min_n']) and preg_match('/^(\d+)$/', $_REQUEST['min_n'], $temp)) {
         $extra_criteria .= (empty($extra_criteria) ? '' : ', ') . "n >= $_REQUEST[min_n]";
         $extra_tests    .= (empty($extra_tests) ? '' : ' && ') . "\$n >= $_REQUEST[min_n]";
     }
-    if (isset($_REQUEST['max_n']) and preg_match('/(\d+)/', $_REQUEST['max_n'], $temp)) {
+    if (isset($_REQUEST['max_n']) and preg_match('/^(\d+)$/', $_REQUEST['max_n'], $temp)) {
         $extra_criteria .= (empty($extra_criteria) ? '' : ', ') . "n <= $_REQUEST[max_n]";
         $extra_tests    .= (empty($extra_tests) ? '' : ' && ') . "\$n <= $_REQUEST[max_n]";
     }

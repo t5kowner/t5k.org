@@ -152,12 +152,12 @@ function UnTaint()
 
     #  Load and check rank limits
 
-    if (isset($_REQUEST['MinRank']) and preg_match('/(\d+)/', $_REQUEST['MinRank'], $Matches)) {
+    if (isset($_REQUEST['MinRank']) and preg_match('/^(\d+)$/', $_REQUEST['MinRank'], $Matches)) {
         $Criteria .= "\nMinimum rank =$Matches[0].&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "prime.rank >= $Matches[0]";
         $ToRefine .= hidden('MinRank', $Matches[0]);
     }
-    if (isset($_REQUEST['MaxRank']) and preg_match('/(\d+)/', $_REQUEST['MaxRank'], $Matches)) {
+    if (isset($_REQUEST['MaxRank']) and preg_match('/^(\d+)$/', $_REQUEST['MaxRank'], $Matches)) {
         $Criteria .= "\nMaximum rank =$Matches[0].&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "prime.rank <= $Matches[0]";
         $ToRefine .= hidden('MaxRank', $Matches[0]);
@@ -165,12 +165,12 @@ function UnTaint()
 
     #  Load and check entrance rank limits
 
-    if (isset($_REQUEST['MinERank']) and preg_match('/(\d+)/', $_REQUEST['MinERank'], $Matches)) {
+    if (isset($_REQUEST['MinERank']) and preg_match('/^(\d+)$/', $_REQUEST['MinERank'], $Matches)) {
         $Criteria .= "\nMinimum entrance rank =$Matches[0].&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "prime.e_rank >= $Matches[0]";
         $ToRefine .= hidden('MinERank', $Matches[0]);
     }
-    if (isset($_REQUEST['MaxERank']) and preg_match('/(\d+)/', $_REQUEST['MaxERank'], $Matches)) {
+    if (isset($_REQUEST['MaxERank']) and preg_match('/^(\d+)$/', $_REQUEST['MaxERank'], $Matches)) {
         $Criteria .= "\nMaximum entrance rank =$Matches[0].&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "prime.e_rank <= $Matches[0]";
         $ToRefine .= hidden('MaxERank', $Matches[0]);
@@ -178,12 +178,12 @@ function UnTaint()
 
     #  Load and check digit limits
 
-    if (isset($_REQUEST['MinDigits']) and preg_match('/(\d+)/', $_REQUEST['MinDigits'], $Matches)) {
+    if (isset($_REQUEST['MinDigits']) and preg_match('/^(\d+)$/', $_REQUEST['MinDigits'], $Matches)) {
         $Criteria .= "\nMinimum digits =$Matches[0].&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "prime.digits >= $Matches[0]";
         $ToRefine .= hidden('MinDigits', $Matches[0]);
     }
-    if (isset($_REQUEST['MaxDigits']) and preg_match('/(\d+)/', $_REQUEST['MaxDigits'], $Matches)) {
+    if (isset($_REQUEST['MaxDigits']) and preg_match('/^(\d+)$/', $_REQUEST['MaxDigits'], $Matches)) {
         $Criteria .= "\nMaximum digits =$Matches[0].&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "prime.digits <= $Matches[0]";
         $ToRefine .= hidden('MaxDigits', $Matches[0]);
@@ -301,12 +301,12 @@ function UnTaint()
 
     #  Check Age limits
 
-    if (isset($_REQUEST['MinAge']) and preg_match('/(\d+)/', $_REQUEST['MinAge'], $Matches)) {
+    if (isset($_REQUEST['MinAge']) and preg_match('/^(\d+)$/', $_REQUEST['MinAge'], $Matches)) {
         $Criteria .= "\nMinimum age =$Matches[1] days.&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "TO_DAYS(prime.submitted) <= TO_DAYS(NOW())-$Matches[1]";
         $ToRefine .= hidden('MinAge', $Matches[1]);
     }
-    if (isset($_REQUEST['MaxAge']) and preg_match('/(\d+)/', $_REQUEST['MaxAge'], $Matches)) {
+    if (isset($_REQUEST['MaxAge']) and preg_match('/^(\d+)$/', $_REQUEST['MaxAge'], $Matches)) {
         $Criteria .= "\nMaximum age =$Matches[1] days.&nbsp; ";
         $Where .= (empty($Where) ? '' : ' AND ') . "TO_DAYS(prime.submitted) >= TO_DAYS(NOW())-$Matches[1]";
         $ToRefine .= hidden('MaxAge', $Matches[1]);
@@ -320,7 +320,7 @@ function UnTaint()
     # Number of primes to get
 
     $Number = 20;
-    if (isset($_REQUEST['Number']) and preg_match('/(\d+)/', $_REQUEST['Number'], $Matches)) {
+    if (isset($_REQUEST['Number']) and preg_match('/^(\d+)$/', $_REQUEST['Number'], $Matches)) {
         $Number = $Matches[1];
         $ToRefine .= hidden('Number', $Matches[1]);
     }
@@ -380,12 +380,12 @@ function UnTaint()
 
       #  Check Age limits on user comments
 
-        if (preg_match('/(\d+)/', $_REQUEST['UserMinAge'], $Matches)) {
+        if (preg_match('/^(\d+)$/', $_REQUEST['UserMinAge'], $Matches)) {
             $Criteria .= "\nUser comment minimum age =$Matches[1] days.&nbsp; ";
             $Where .= (empty($Where) ? '' : ' AND ') . "TO_DAYS(comment.modified) <= TO_DAYS(NOW())-$Matches[1]";
             $ToRefine .= hidden('UserMinAge', $Matches[1]);
         }
-        if (preg_match('/(\d+)/', $_REQUEST['UserMaxAge'], $Matches)) {
+        if (preg_match('/^(\d+)$/', $_REQUEST['UserMaxAge'], $Matches)) {
             $Criteria .= "\nUser comment maximum age =$Matches[1] days.&nbsp; ";
             $Where .= (empty($Where) ? '' : ' AND ') . "TO_DAYS(comment.modified) >= TO_DAYS(NOW())-$Matches[1]";
             $ToRefine .= hidden('UserMaxAge', $Matches[1]);
